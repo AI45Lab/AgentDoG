@@ -38,6 +38,21 @@ For more details, please refer to our [Technical Report](https://github.com//blo
 
 ### Task Definition
 
+Prior works (e.g., LlamaGuard, Qwen3Guard) formulate safety moderation as classifying whether the **final output** in a multi-turn chat is safe. In contrast, **AgentGuard** defines a different task: **diagnosing an entire agent trajectory** to determine whether the agent exhibits any unsafe behavior at **any point** during execution.
+
+The input prompt consists of four components:
+
+| Component | Description |
+|-----------|-------------|
+| **Task Definition** | Instructs the model to evaluate the trajectory for unsafe actions |
+| **Safety Taxonomy** | Provides risk sources/triggers and failure modes as an analytical framework |
+| **Agent Trajectory** | The multi-turn execution trace including user, agent, and environment interactions |
+| **Output Specification** | Requires the model to output `safe` or `unsafe`, with fine-grained subtype labels for unsafe cases |
+
+<p align="center">
+  <img src="figures/agentguard_eg.png" width="80%" alt="AgentGuard Task Example"/>
+</p>
+<p align="center"><em>Figure: Example task input for AgentGuard. The model analyzes the full trajectory and outputs a safety label with fine-grained categorization.</em></p>
 
 ###  Data Synthesis and Collection
 
