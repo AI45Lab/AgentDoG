@@ -160,6 +160,69 @@ Supported datasets:
 
 ---
 
+## Agentic XAI Attribution
+We also introduce a novel hierarchical framework for Agentic Attribution, designed to unveil the internal drivers behind agent actions beyond simple failure localization. By decomposing interaction trajectories into pivotal components and fine-grained textual evidence, our approach explains why an agent makes specific decisions regardless of the outcome. This framework enhances the transparency and accountability of autonomous systems by identifying key factors such as memory biases and tool outputs.
+### Case Study
+To evaluate the effectiveness of the proposed agentic attribution framework, we conducted several case studies across diverse scenarios. The figure illustrates how our framework localizes decision drivers across four representative cases. The highlighted regions denote the historical components and fine-grained sentences identified by our framework as the primary decision drivers.
+
+<p align="center">
+  <img src="figures/agent_xai_example" width="95%" alt="Data Synthesis Pipeline"/>
+</p>
+<p align="center"><em>Figure: Illustration of attribution results across four representative scenarios.</em></p>
+
+
+
+### Quick Start
+#### Data Preparation
+Ensure your input data is a JSON file containing a trajectory (or trace) list:
+```json
+{
+  "trajectory": [
+    {"role": "system", "content": "System prompt..."},
+    {"role": "user", "content": "User query..."},
+    {"role": "assistant", "content": "Agent response..."},
+    {"role": "tool", "content": "Tool output..."}
+  ]
+}
+```
+#### Run Analysis Pipeline
+You can run the analysis in three steps:
+
+**Step 1: Trajectory-Level Attribution** \
+Analyze the contribution of each conversation step.
+```bash
+python component_attri.py \
+  --model_id meta-llama/Meta-Llama-3.1-70B-Instruct \
+  --data_dir ./data \
+  --output_dir ./results
+```
+**Step 2: Sentence-Level Attribution** \
+Perform fine-grained analysis on the top-K most influential steps.
+```bash
+python sentence_attri.py \
+  --model_id meta-llama/Meta-Llama-3.1-70B-Instruct \
+  --attr_file ./results/case1_attr.json \
+  --traj_file ./data/case1.json \
+  --top_k 3
+```
+
+
+**Step 3: Generate Visualization** \
+Create an interactive HTML heatmap.
+```bash
+python case_plot_html.py \
+  --traj_attr_file ./results/case_attr.json \
+  --sent_attr_file ./results/case_attr_sentence.json \
+  --original_traj_file ./data/case.json \
+  --output_file ./results/visualization.html
+```
+
+**One-Click Execution** \
+To run the complete pipeline automatically, configure and run the shell script:
+```bash
+bash run_all_pipeline.sh
+```
+
 
 ## 📁 Repository Structure
 
@@ -175,7 +238,7 @@ AgentGuard/
 │   └── preprocess.py
 ├── benchmarks/
 ├── README.md
-└── requirements.txt
+└──requirements.txt
 ```
 
 ---
