@@ -188,7 +188,7 @@ Ensure your input data is a JSON file containing a trajectory (or trace) list:
 #### Run Analysis Pipeline
 You can run the analysis in three steps:
 
-**Step 1: Trajectory-Level Attribution** \
+##### Step 1: Trajectory-Level Attribution \
 Analyze the contribution of each conversation step.
 ```bash
 python component_attri.py \
@@ -196,7 +196,7 @@ python component_attri.py \
   --data_dir ./data \
   --output_dir ./results
 ```
-**Step 2: Sentence-Level Attribution** \
+##### Step 2: Sentence-Level Attribution \
 Perform fine-grained analysis on the top-K most influential steps.
 ```bash
 python sentence_attri.py \
@@ -207,7 +207,7 @@ python sentence_attri.py \
 ```
 
 
-**Step 3: Generate Visualization** \
+##### Step 3: Generate Visualization \
 Create an interactive HTML heatmap.
 ```bash
 python case_plot_html.py \
@@ -217,7 +217,7 @@ python case_plot_html.py \
   --output_file ./results/visualization.html
 ```
 
-**One-Click Execution** \
+##### One-Click Execution \
 To run the complete pipeline automatically, configure and run the shell script:
 ```bash
 bash run_all_pipeline.sh
