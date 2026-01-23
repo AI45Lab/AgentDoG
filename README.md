@@ -14,21 +14,13 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 
 # AgentDog
 
-**AgentDog** is a risk-aware evaluation and guarding framework for autonomous agents. It focuses on *trajectory-level risk assessment*, aiming to determine whether an agent’s execution trajectory contains safety risks under diverse application scenarios.
+## Introduction
 
----
+**AgentDog** is a risk-aware evaluation and guarding framework for autonomous agents. It focuses on *trajectory-level risk assessment*, aiming to determine whether an agent’s execution trajectory contains safety risks under diverse application scenarios. Unlike single-step content moderation or final-output filtering, AgentDog analyzes the full execution trace of tool-using agents to detect risks that emerge mid-trajectory.
 
-## 🔍 Overview
-
-Autonomous agents (e.g., tool-using LLM agents, mobile agents, web agents) often execute multi-step trajectories consisting of observations, reasoning, and actions. Existing safety mechanisms mainly focus on **single-step content moderation** or **final-output filtering**, which are insufficient for capturing risks emerging *during execution*.
-
-**AgentDog** addresses this gap by providing **trajectory-level safety assessment** that monitors the entire execution process, not just final outputs.
-
-AgentDog can be used as:
-
-* A **benchmark** for agent safety evaluation
-* A **risk classifier** for agent trajectories
-* A **guard module** integrated into agent systems
+- 🧭 **Trajectory-Level Monitoring:** evaluates multi-step agent executions spanning observations, reasoning, and actions.
+- 🧩 **Taxonomy-Guided Diagnosis:** provides fine-grained risk labels (risk source, failure mode, and risk consequence) to explain why unsafe behavior occurs.
+- 🛡️ **Flexible Use Cases:** can serve as a benchmark, a risk classifier for trajectories, or a guard module in agent systems.
 
 ---
 
