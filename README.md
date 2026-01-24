@@ -1,24 +1,24 @@
 <p align="center">
-  <img src="figures/welcome.png" width="80%" alt="AgentDog Welcome"/>
+  <img src="figures/welcome.png" width="80%" alt="AgentDoG Welcome"/>
 </p>
 
 <p align="center">
   🤗 <a href="https://huggingface.co/AI45Research/AgentGuard"><b>Hugging Face</b></a>&nbsp&nbsp | &nbsp&nbsp
-  🤖 <a href="https://modelscope.cn/collections/AgentDog-000000000000000000000000">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp
-  📄 <a href="https://github.com/AI45Lab/AgentGuard/blob/main/AgentDog_Technical_Report.pdf">Technical Report</a>&nbsp&nbsp | &nbsp&nbsp
-  🌐 <a href="https://example.com/agentdog-demo">Demo</a>&nbsp&nbsp | &nbsp&nbsp
-  📘 <a href="https://example.com/agentdog-docs">Documentation</a>
+  🤖 <a href="https://modelscope.cn/collections/AgentDoG-000000000000000000000000">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp
+  📄 <a href="https://github.com/AI45Lab/AgentGuard/blob/main/AgentDoG_Technical_Report.pdf">Technical Report</a>&nbsp&nbsp | &nbsp&nbsp
+  🌐 <a href="https://example.com/AgentDoG-demo">Demo</a>&nbsp&nbsp | &nbsp&nbsp
+  📘 <a href="https://example.com/AgentDoG-docs">Documentation</a>
 </p>
 
 Visit our Hugging Face or ModelScope organization (click links above), search checkpoints with names starting with `AgentDoG-`, and you will find all you need! Enjoy!
 
-# AgentDog
+# AgentDoG
 
 ---
 
 ## Introduction
 
-**AgentDog** is a risk-aware evaluation and guarding framework for autonomous agents. It focuses on *trajectory-level risk assessment*, aiming to determine whether an agent’s execution trajectory contains safety risks under diverse application scenarios. Unlike single-step content moderation or final-output filtering, AgentDog analyzes the full execution trace of tool-using agents to detect risks that emerge mid-trajectory.
+**AgentDoG** is a risk-aware evaluation and guarding framework for autonomous agents. It focuses on *trajectory-level risk assessment*, aiming to determine whether an agent’s execution trajectory contains safety risks under diverse application scenarios. Unlike single-step content moderation or final-output filtering, AgentDoG analyzes the full execution trace of tool-using agents to detect risks that emerge mid-trajectory.
 
 - 🧭 **Trajectory-Level Monitoring:** evaluates multi-step agent executions spanning observations, reasoning, and actions.
 - 🧩 **Taxonomy-Guided Diagnosis:** provides fine-grained risk labels (risk source, failure mode, and risk consequence) to explain why unsafe behavior occurs.
@@ -38,12 +38,12 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 
 | Name | Type | Download |
 |------|------|----------|
-| AgentDog-Gen-0.6B | Generative Guard | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentGuard) |
-| AgentDog-Gen-4B | Generative Guard | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentGuard) |
-| AgentDog-Gen-8B | Generative Guard | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentGuard) |
-| AgentDog-Stream-0.6B | Stream Guard | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentGuard) |
+| AgentDoG-Gen-0.6B | Generative Guard | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentGuard) |
+| AgentDoG-Gen-4B | Generative Guard | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentGuard) |
+| AgentDoG-Gen-8B | Generative Guard | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentGuard) |
+| AgentDoG-Stream-0.6B | Stream Guard | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentGuard) |
 
-For more details, please refer to our [blog](https://example.com/agentdog-blog) and [Technical Report](https://example.com/agentdog-technical-report).
+For more details, please refer to our [blog](https://example.com/AgentDoG-blog) and [Technical Report](https://example.com/AgentDoG-technical-report).
 
 ---
 
@@ -66,11 +66,11 @@ In the current release, the taxonomy includes 8 risk-source categories, 14 failu
 ### Task Definition
 
 <p align="center">
-  <img src="figures/agentguard_eg.png" width="80%" alt="AgentDog Task Example"/>
+  <img src="figures/agentguard_eg.png" width="80%" alt="AgentDoG Task Example"/>
 </p>
-<p align="center"><em>Figure: Example task input for AgentDog. The model analyzes the full trajectory and outputs a safety label with fine-grained categorization.</em></p>
+<p align="center"><em>Figure: Example task input for AgentDoG. The model analyzes the full trajectory and outputs a safety label with fine-grained categorization.</em></p>
 
-Prior works (e.g., LlamaGuard, Qwen3Guard) formulate safety moderation as classifying whether the **final output** in a multi-turn chat is safe. In contrast, **AgentDog** defines a different task: **diagnosing an entire agent trajectory** to determine whether the agent exhibits any unsafe behavior at **any point** during execution.
+Prior works (e.g., LlamaGuard, Qwen3Guard) formulate safety moderation as classifying whether the **final output** in a multi-turn chat is safe. In contrast, **AgentDoG** defines a different task: **diagnosing an entire agent trajectory** to determine whether the agent exhibits any unsafe behavior at **any point** during execution.
 
 The input prompt consists of four components:
 
@@ -125,7 +125,7 @@ Accuracy comparison (ours + baselines):
 
 | Model                          | Type          | R-Judge | ASSE-Safety | GooDoG |
 | ----------------------------- | ------------- | ------- | ----------- | ------ |
-| **AgentDog (Ours)**           | Guard         | **90.4** | **81.1**    | **85.6** |
+| **AgentDoG (Ours)**           | Guard         | **90.4** | **81.1**    | **85.6** |
 | GPT-5.2                       | General       | 83.5    | 79.5        | 89.2   |
 | Gemini-3-Flash                | General       | 93.6    | 81.5        | 94.4   |
 | Gemini-3-Pro                  | General       | 93.8    | 81.1        | 95.2   |
