@@ -25,9 +25,9 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 - 🛡️ **Flexible Use Cases:** can serve as a benchmark, a risk classifier for trajectories, or a guard module in agent systems.
 - 🥇 **State-of-the-Art Performance:** Outperforms existing approaches on R-Judge, ASSE-Safety, and GooDoG.
 <p align="center">
-  <img src="figures/R-Judge.png" width="30%">
-  <img src="figures/asse.png" width="30%">
-  <img src="figures/GooDoG.png" width="30%">
+  <img src="figures/R-Judge.png" width="33%">
+  <img src="figures/asse.png" width="33%">
+  <img src="figures/GooDoG.png" width="33%">
 </p>
 
 
