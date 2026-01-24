@@ -14,7 +14,6 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 
 # AgentDog
 
----
 
 ## Introduction
 
@@ -111,22 +110,37 @@ We also track the coverage of the three taxonomy dimensions (risk source, failur
 
   * Different agent frameworks
   * Different LLM backbones
-* Fine-grained accuracy on GooDoG: Risk Source **80.8%**, Harm Type **60.0%**
+* Fine-grained label accuracy on GooDoG (best of our FG models): Risk Source **82.0%**, Failure Mode **32.4%**, Harm Type **59.2%**
 
 Accuracy comparison (ours + baselines):
 
 | Model                          | Type          | R-Judge | ASSE-Safety | GooDoG |
 | ----------------------------- | ------------- | ------- | ----------- | ------ |
-| **AgentDog (Ours)**           | Guard         | **90.4** | **81.1**    | **85.6** |
-| GPT-5.2                       | General       | 83.5    | 79.5        | 89.2   |
-| Gemini-3-Flash                | General       | 93.6    | 81.5        | 94.4   |
-| Gemini-3-Pro                  | General       | 93.8    | 81.1        | 95.2   |
-| QwQ-32B                       | General       | 86.9    | 75.3        | 80.2   |
-| Qwen3-235B-A22B-Instruct       | General       | 75.5    | 79.0        | 91.0   |
+| **AgentDoG-4B (Ours)**        | Guard         | **91.8** | **80.4**    | **92.8** |
+| **AgentDoG-7B (Ours)**        | Guard         | **91.7** | **79.8**    | **87.4** |
+| **AgentDoG-8B (Ours)**        | Guard         | **78.2** | **81.1**    | **87.6** |
+| GPT-5.2                       | General       | 90.8    | 77.4        | 90.0   |
+| Gemini-3-Flash                | General       | 95.2    | 75.9        | 75.6   |
+| Gemini-3-Pro                  | General       | 94.3    | 78.5        | 87.2   |
+| QwQ-32B                       | General       | 89.5    | 68.2        | 63.0   |
+| Qwen3-235B-A22B-Instruct       | General       | 85.1    | 77.6        | 84.6   |
 | LlamaGuard3-8B                | Guard         | 61.2    | 54.5        | 53.3   |
 | LlamaGuard4-12B               | Guard         | 63.8    | 56.3        | 58.1   |
 | Qwen3-Guard                   | Guard         | 40.6    | 48.2        | 55.3   |
 | ShieldAgent                   | Guard         | 81.0    | 79.6        | 76.0   |
+
+Fine-grained label accuracy on GooDoG (unsafe trajectories only):
+
+| Model                               | Risk Source Acc | Failure Mode Acc | Harm Type Acc |
+| ---------------------------------- | --------------- | ---------------- | ------------- |
+| **AgentDoG-FG-4B (Ours)**          | **82.0**        | **32.4**         | **58.4**      |
+| **AgentDoG-FG-8B (Ours)**          | **81.6**        | **31.6**         | **57.6**      |
+| **AgentDoG-FG-7B (Ours)**          | **81.2**        | **28.8**         | **59.2**      |
+| GPT-5.2                            | 38.0            | 22.4             | 34.8          |
+| Gemini-3-Flash                     | 41.6            | 20.4             | 30.8          |
+| Gemini-3-Pro                       | 36.8            | 17.6             | 32.0          |
+| Qwen3-235B-A22B-Instruct-2507      | 19.6            | 17.2             | 38.0          |
+| QwQ-32B                            | 23.2            | 14.4             | 34.8          |
 
 ---
 
