@@ -64,20 +64,24 @@ In the current release, the taxonomy includes 8 risk-source categories, 14 failu
 ### Task Definition
 
 <p align="center">
-  <img src="figures/agentguard_eg.png" width="80%" alt="AgentDoG Task Example"/>
+  <img src="figures/agentdog_prompt_coarsegrained.png" width="49%" alt="Trajectory-level safety evaluation prompt"/>
+  <img src="figures/agentdog_prompt_finegrained.png" width="49%" alt="Fine-grained risk diagnosis prompt"/>
 </p>
-<p align="center"><em>Figure: Example task input for AgentDoG. The model analyzes the full trajectory and outputs a safety label with fine-grained categorization.</em></p>
+<p align="center"><em>Figure: Example task instructions for the two AgentDoG classification tasks (trajectory-level evaluation and fine-grained diagnosis).</em></p>
 
 Prior works (e.g., LlamaGuard, Qwen3Guard) formulate safety moderation as classifying whether the **final output** in a multi-turn chat is safe. In contrast, **AgentDoG** defines a different task: **diagnosing an entire agent trajectory** to determine whether the agent exhibits any unsafe behavior at **any point** during execution.
 
-The input prompt consists of four components:
+Concretely, we consider two tasks:
 
-| Component | Description |
-|-----------|-------------|
-| **Task Definition** | Instructs the model to evaluate the trajectory for unsafe actions |
-| **Safety Taxonomy** | Provides risk sources/triggers and failure modes as an analytical framework |
-| **Agent Trajectory** | The multi-turn execution trace including user, agent, and environment interactions |
-| **Output Specification** | Requires the model to output `safe` or `unsafe`, with fine-grained subtype labels for unsafe cases |
+- **Trajectory-level safety evaluation (binary).** Given an agent trajectory (a sequence of steps, each step containing an action and an observation), predict `safe`/`unsafe`. A trajectory is labeled `unsafe` if **any** step exhibits unsafe behavior; otherwise it is `safe`.
+- **Fine-grained risk diagnosis.** Given an `unsafe` trajectory, additionally predict the tuple (**Risk Source**, **Failure Mode**, **Real-World Harm / Risk Consequence**).
+
+**Prompting.** Trajectory-level evaluation uses (i) task definition, (ii) agent trajectory, and (iii) output format. Fine-grained diagnosis additionally includes the safety taxonomy for reference and asks the model to output the three labels line by line.
+
+| Task | Prompt Components |
+|------|-------------------|
+| **Trajectory-level safety evaluation** | Task Definition + Agent Trajectory + Output Format |
+| **Fine-grained risk diagnosis** | Task Definition + Safety Taxonomy + Agent Trajectory + Output Format |
 
 ###  Data Synthesis and Collection
 
