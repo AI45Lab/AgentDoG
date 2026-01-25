@@ -5,7 +5,7 @@
 <p align="center">
   🤗 <a href="https://huggingface.co/collections/AI45Research/agentdog"><b>Hugging Face</b></a>&nbsp&nbsp | &nbsp&nbsp
   🤖 <a href="https://modelscope.cn/collections/AgentDoG-000000000000000000000000">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp
-  📄 <a href="https://github.com/AI45Lab/AgentGuard/blob/main/AgentDoG_Technical_Report.pdf">Technical Report</a>&nbsp&nbsp | &nbsp&nbsp
+  📄 <a href="https://github.com/AI45Lab/AgentDoG/blob/main/AgentDoG_Technical_Report.pdf">Technical Report</a>&nbsp&nbsp | &nbsp&nbsp
   🌐 <a href="https://example.com/AgentDoG-demo">Demo</a>&nbsp&nbsp | &nbsp&nbsp
   📘 <a href="https://example.com/AgentDoG-docs">Documentation</a>
 </p>
@@ -287,26 +287,24 @@ bash run_all_pipeline.sh
 
 ```text
 AgentGuard/
-├── agentguard/
-│   ├── models/
-│   ├── data/
-│   ├── taxonomy/
-│   └── guard.py
-├── scripts/
-│   ├── evaluate.py
-│   └── preprocess.py
-├── benchmarks/
 ├── README.md
-└── requirements.txt
+├── figures/
+├── prompts/
+│   ├── trajectory_binary.txt
+│   ├── trajectory_finegrained.txt
+│   └── taxonomy_finegrained.txt
+└── examples/
+    ├── run_openai_moderation.py
+    └── trajectory_sample.json
 ```
 
 ---
 
 ## 🛠️ Customization
 
-* **Add new risk types**: `taxonomy/`
-* **Support new agent formats**: implement a trajectory parser
-* **Plug in new models**: follow `models/base.py`
+* **Edit prompt templates**: `prompts/trajectory_binary.txt`, `prompts/trajectory_finegrained.txt`
+* **Update taxonomy labels**: `prompts/taxonomy_finegrained.txt`
+* **Change runtime integration**: `examples/run_openai_moderation.py`
 
 ---
 
@@ -318,11 +316,11 @@ This project is released under the **Apache 2.0 License**.
 
 ## 📖 Citation
 
-If you use AgentGuard in your research, please cite:
+If you use AgentDoG in your research, please cite:
 
 ```bibtex
-@article{agentguard,
-  title={AgentGuard: Trajectory-Level Risk Assessment for Autonomous Agents},
+@article{agentdog,
+  title={AgentDoG: Trajectory-Level Risk Assessment for Autonomous Agents},
   author={Anonymous},
   year={2025}
 }
