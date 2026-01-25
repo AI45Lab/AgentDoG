@@ -40,6 +40,9 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 | AgentDoG-Qwen3-4B | 4B |  Qwen3-4B-Instruct-2507 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-Qwen3-4B) |
 | AgentDoG-Qwen2.5-7B | 7B |  Qwen2.5-7B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-Qwen2.5-7B) |
 | AgentDoG-Llama3.1-8B | 8B | Llama3.1-8B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-Llama3.1-8B) |
+| AgentDoG-FG-Qwen3-4B | 4B | Qwen3-4B-Instruct-2507 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-FG-Qwen3-4B) |
+| AgentDoG-FG-Qwen2.5-7B | 7B | Qwen2.5-7B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-FG-Qwen2.5-7B) |
+| AgentDoG-FG-Llama3.1-8B | 8B | Llama3.1-8B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-FG-Llama3.1-8B) |
 
 For more details, please refer to our [blog](https://example.com/AgentDoG-blog) and [Technical Report](https://example.com/AgentDoG-technical-report).
 
@@ -170,13 +173,13 @@ For deployment, you can use `sglang>=0.4.6` or `vllm>=0.10.0` to create an OpenA
 **SGLang**
 ```bash
 python -m sglang.launch_server --model-path AI45Research/AgentDoG-Qwen3-4B --port 30000 --context-length 16384
-python -m sglang.launch_server --model-path AI45Research/AgentDoG-Qwen3-FG-4B --port 30001 --context-length 16384
+python -m sglang.launch_server --model-path AI45Research/AgentDoG-FG-Qwen3-4B --port 30001 --context-length 16384
 ```
 
 **vLLM**
 ```bash
 vllm serve AI45Research/AgentDoG-Qwen3-4B --port 8000 --max-model-len 16384
-vllm serve AI45Research/AgentDoG-Qwen3-FG-4B --port 8001 --max-model-len 16384
+vllm serve AI45Research/AgentDoG-FG-Qwen3-4B --port 8001 --max-model-len 16384
 ```
 
 ### Examples
@@ -196,7 +199,7 @@ python examples/run_openai_moderation.py \
 ```bash
 python examples/run_openai_moderation.py \
   --base-url http://localhost:8000/v1 \
-  --model AI45Research/AgentDoG-Qwen3-FG-4B \
+  --model AI45Research/AgentDoG-FG-Qwen3-4B \
   --trajectory examples/trajectory_sample.json \
   --prompt prompts/trajectory_finegrained.txt \
   --taxonomy prompts/taxonomy_finegrained.txt
