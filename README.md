@@ -22,7 +22,7 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 - 🧭 **Trajectory-Level Monitoring:** evaluates multi-step agent executions spanning observations, reasoning, and actions.
 - 🧩 **Taxonomy-Guided Diagnosis:** provides fine-grained risk labels (risk source, failure mode, and real-world harm) to explain why unsafe behavior occurs.
 - 🛡️ **Flexible Use Cases:** can serve as a benchmark, a risk classifier for trajectories, or a guard module in agent systems.
-- 🥇 **State-of-the-Art Performance:** Outperforms existing approaches on R-Judge, ASSE-Safety, and GooDoG.
+- 🥇 **State-of-the-Art Performance:** Outperforms existing approaches on R-Judge, ASSE-Safety, and ATBench.
 <p align="center">
   <img src="figures/binary_performance.png" width="95%">
 </p>
@@ -132,7 +132,7 @@ We fine-tuned multiple base models: **Qwen3-4B-Instruct-2507**, **Qwen2.5-7B-Ins
 
 ## 📊 Performance Highlights
 
-* Evaluated on **R-Judge**, **ASSE-Safety**, and **GooDoG**
+* Evaluated on **R-Judge**, **ASSE-Safety**, and **ATBench**
 * Outperforms step-level baselines in detecting:
 
   * Long-horizon instruction hijacking
@@ -141,11 +141,11 @@ We fine-tuned multiple base models: **Qwen3-4B-Instruct-2507**, **Qwen2.5-7B-Ins
 
   * Different agent frameworks
   * Different LLM backbones
-* Fine-grained label accuracy on GooDoG (best of our FG models): Risk Source 82.0%, Failure Mode 32.4%, Harm Type 59.2%
+* Fine-grained label accuracy on ATBench (best of our FG models): Risk Source 82.0%, Failure Mode 32.4%, Harm Type 59.2%
 
 Accuracy comparison (ours + baselines):
 
-| Model                          | Type          | R-Judge | ASSE-Safety | GooDoG |
+| Model                          | Type          | R-Judge | ASSE-Safety | ATBench |
 | ----------------------------- | ------------- | ------- | ----------- | ------ |
 | GPT-5.2                       | General       | 90.8    | 77.4        | 90.0   |
 | Gemini-3-Flash                | General       | 95.2    | 75.9        | 75.6   |
@@ -160,7 +160,7 @@ Accuracy comparison (ours + baselines):
 | **AgentDoG-7B (Ours)**        | Guard         | 91.7    | 79.8        | 87.4   |
 | **AgentDoG-8B (Ours)**        | Guard         | 78.2    | 81.1        | 87.6   |
 
-Fine-grained label accuracy on GooDoG (unsafe trajectories only):
+Fine-grained label accuracy on ATBench (unsafe trajectories only):
 
 | Model                               | Risk Source Acc | Failure Mode Acc | Harm Type Acc |
 | ---------------------------------- | --------------- | ---------------- | ------------- |
