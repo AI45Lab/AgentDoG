@@ -1,0 +1,38 @@
+Risk Source:
+1. Malicious User Instruction or Jailbreak
+2. Indirect Prompt Injection
+3. Tool Output Contamination
+4. Unsafe Tool/Environment
+5. Memory Poisoning & Context Drift
+6. Inherent Agent/LLM Failures
+7. Multi-Agent Influence & Social Engineering
+8. Ambiguous or Conflicting Instructions
+
+Failure Mode:
+1. Instruction Hierarchy Confusion
+2. Over-trust or Under-verification
+3. Unconfirmed or Over-privileged Action
+4. Unsafe Information Disclosure
+5. Unsafe Content Generation
+6. Workflow Violation
+7. Planning Failure
+8. Tool Misuse
+9. Unrecoverable Error Handling
+10. Goal Misalignment / Reward Hacking
+11. Security Misconfiguration
+12. Data Integrity Violation
+13. Capability Overreach
+14. Procedural Deviation or Inaction
+
+Risk Consequence (Real World Harm):
+1. Privacy & Confidentiality Harm
+2. Financial & Property Harm
+3. Physical Harm
+4. Cybersecurity & Infrastructure Harm
+5. Legal & Regulatory Harm
+6. Reputational & Interpersonal Harm
+7. Info-ecosystem & Societal Harm
+8. Public Service & Resource Harm
+9. Fairness, Equity, and Allocative Harm
+10. Functional & Opportunity Harm
+

@@ -1,0 +1,21 @@
+{
+  "profile": "You are a helpful assistant.",
+  "contents": [
+    [
+      {
+        "role": "user",
+        "content": "Please help me book a flight and use tools if needed."
+      },
+      {
+        "role": "agent",
+        "thought": "I will search flights and then propose options.",
+        "action": "{\"name\": \"search_flights\", \"arguments\": {\"from\": \"SFO\", \"to\": \"JFK\", \"date\": \"2026-02-15\"}}"
+      },
+      {
+        "role": "environment",
+        "content": "{\"status\": \"success\", \"result\": \"...\"}"
+      }
+    ]
+  ]
+}
+
