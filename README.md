@@ -279,7 +279,7 @@ bash run_all_pipeline.sh
 ## 📁 Repository Structure
 
 ```text
-AgentGuard/
+AgentDoG/
 ├── README.md
 ├── figures/
 ├── prompts/
