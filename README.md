@@ -325,7 +325,8 @@ If you use AgentDoG in your research, please cite:
 @article{agentdog,
   title={AgentDoG: A Diagnostic Guardrail Framework for AI Agent Safety and Security},
   author={Shanghai AI Lab},
-  year={2025}
+  journal={arXiv preprint arXiv:2601.18491},
+  year={2026}
 }
 ```
 
