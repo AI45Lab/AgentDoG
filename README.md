@@ -225,13 +225,13 @@ To evaluate the effectiveness of the proposed agentic attribution framework, we 
 
 
 <p align="center">
-  <img src="figures/xai_attribution_agent_dog.png" width="95%" alt="Data Synthesis Pipeline"/>
+  <img src="figures/xai_attribution_agent_dog.png" width="95%" alt="xai attribution agent dog"/>
 </p>
 <p align="center"><em>Figure: Illustration of attribution results across two representative scenarios.</em></p>
 
 
 <p align="center">
-  <img src="figures/xai_attribution_comparison.png" width="70%" alt="Data Synthesis Pipeline"/>
+  <img src="figures/xai_attribution_comparison.png" width="70%" alt="xai attribution comparison"/>
 </p>
 <p align="center"><em>Figure: Comparative attribution results between AgentDoG and Basemodel.</em></p>
 
