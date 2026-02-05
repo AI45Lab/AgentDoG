@@ -177,19 +177,21 @@
         We use a taxonomy-guided synthesis pipeline to generate realistic, multi-step agent trajectories. Each trajectory is conditioned on a sampled risk tuple (risk source, failure mode, real-world harm), then expanded into a coherent tool-augmented execution and filtered by quality checks.
       </p>
 
-      <div class="synthesis-main-image media-85">
+      <div class="synthesis-main-image">
         <img src="./figures/data_synthesis_main.png" alt="Data Synthesis Pipeline" loading="lazy">
         <p class="image-caption" data-en="Three-stage pipeline for multi-step agent safety trajectory synthesis" data-zh="多步智能体安全轨迹合成的三阶段流水线">Three-stage pipeline for multi-step agent safety trajectory synthesis</p>
       </div>
 
-      <div class="synthesis-distribution media-85">
-        <img src="./figures/distribution_comparison.png" alt="Distribution comparison" loading="lazy">
-        <p class="image-caption" data-en="Distribution over risk source, failure mode, and harm type categories" data-zh="风险来源、失效模式和危害类型类别的分布">Distribution over risk source, failure mode, and harm type categories</p>
-      </div>
+      <div class="synthesis-pair">
+        <div class="synthesis-distribution">
+          <img src="./figures/distribution_comparison.png" alt="Distribution comparison" loading="lazy">
+          <p class="image-caption" data-en="Distribution over risk source, failure mode, and harm type categories" data-zh="风险来源、失效模式和危害类型类别的分布">Distribution over risk source, failure mode, and harm type categories</p>
+        </div>
 
-      <div class="synthesis-comparison media-40">
-        <img src="./figures/tool_comparison.png" alt="Tool library size comparison" loading="lazy">
-        <p class="image-caption" data-en="Tool library size compared to existing agent safety benchmarks (86x larger than R-Judge)" data-zh="工具库规模与现有智能体安全基准对比（比 R-Judge 大 86 倍）">Tool library size compared to existing agent safety benchmarks (86x larger than R-Judge)</p>
+        <div class="synthesis-comparison">
+          <img src="./figures/tool_comparison.png" alt="Tool library size comparison" loading="lazy">
+          <p class="image-caption" data-en="Tool library size compared to existing agent safety benchmarks (86x larger than R-Judge)" data-zh="工具库规模与现有智能体安全基准对比（比 R-Judge 大 86 倍）">Tool library size compared to existing agent safety benchmarks (86x larger than R-Judge)</p>
+        </div>
       </div>
     </div>
   </section>
