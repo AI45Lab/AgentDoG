@@ -226,7 +226,7 @@ img {
 }
 
 .hero-logo img {
-  max-width: 400px;
+  max-width: 135px;
   height: auto;
   border-radius: 12px;
   border: 1px solid var(--border-color);
@@ -884,7 +884,7 @@ tr:hover {
   }
 
   .hero-logo img {
-    max-width: 300px;
+    max-width: 100px;
   }
 
   .btn-group {
