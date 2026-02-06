@@ -235,6 +235,11 @@ To evaluate the effectiveness of the proposed agentic attribution framework, we 
 </p>
 <p align="center"><em>Figure: Comparative attribution results between AgentDoG and Basemodel.</em></p>
 
+<p align="center">
+  <img src="figures/attribution_maker.gif" width="70%" alt="xai attribution maker demo"/>
+</p>
+<p align="center"><em>Figure: Demo of the dynamic attribution process in agentic XAI.</em></p>
+
 ### Quick Start for Agentic Attribution
 
 You can run the analysis in three steps:
