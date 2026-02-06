@@ -6,7 +6,7 @@
   🤗 <a href="https://huggingface.co/collections/AI45Research/agentdog"><b>Hugging Face</b></a>&nbsp&nbsp | &nbsp&nbsp
   🤖 <a href="https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp
   📄 <a href="https://arxiv.org/pdf/2601.18491">Technical Report</a>&nbsp&nbsp | &nbsp&nbsp
-  🌐 <a href="https://ai45lab.github.io/AgentDoG/">Demo</a>&nbsp&nbsp | &nbsp&nbsp
+  🌐 <a href="https://ai45lab.github.io/AgentDoG/">Project Page</a>&nbsp&nbsp | &nbsp&nbsp
   📘 <a href="https://example.com/AgentDoG-docs">Documentation</a>
 </p>
 
@@ -236,9 +236,9 @@ To evaluate the effectiveness of the proposed agentic attribution framework, we 
 <p align="center"><em>Figure: Comparative attribution results between AgentDoG and Basemodel.</em></p>
 
 <p align="center">
-  <img src="figures/attribution_maker.gif" width="70%" alt="xai attribution maker demo"/>
+  <img src="figures/attribution_marker_v2.gif" width="90%" alt="attribution marker v2"/>
 </p>
-<p align="center"><em>Figure: Demo of the dynamic attribution process in agentic XAI.</em></p>
+<p align="center"><em>Figure: Demo of dynamic attribution.</em></p>
 
 ### Quick Start for Agentic Attribution
 
