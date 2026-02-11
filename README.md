@@ -334,11 +334,11 @@ If you use AgentDoG in your research, please cite:
       journal={arXiv preprint arXiv:2601.18491} 
 }
 
-@article{qian2026behind,
+@misc{qian2026behind,
       title={The Why Behind the Action: Unveiling Internal Drivers via Agentic Attribution},
-      author={Qian, Chen and Wang, Peng and Liu, Dongrui and Yang, Junyao and Guo, Dadi and Tang, Ling and Mei, Jilin and Ren, Qihan and Shao, Shuai and Liu, Yong and others},
-      journal={arXiv preprint arXiv:2601.15075},
-      year={2026}
+      author={Chen Qian and Peng Wang and Dongrui Liu and Junyao Yang and Dadi Guo and Ling Tang and Jilin Mei and Qihan Ren and Shuai Shao and Yong Liu and Jie Fu and Jing Shao and Xia Hu},
+      year={2026},
+      journal={arXiv preprint arXiv:2601.15075}
 }
 ```
 
