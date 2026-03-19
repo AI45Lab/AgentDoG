@@ -1,35 +1,67 @@
-Risk Source:
-1. Malicious User Instruction or Jailbreak
-2. Indirect Prompt Injection
-3. Tool Output Contamination
-4. Unsafe Tool/Environment
-5. Memory Poisoning & Context Drift
-6. Inherent Agent/LLM Failures
-7. Multi-Agent Influence & Social Engineering
-8. Ambiguous or Conflicting Instructions
+========================
+Risk Source
+========================
+--------------------------------
+1. User Input
+--------------------------------
+Risks originating from the user's direct interaction with the agent.
+1.1 Malicious User Instruction or Jailbreak
+1.2 Direct Prompt Injection
 
-Failure Mode:
-1. Instruction Hierarchy Confusion
-2. Over-trust or Under-verification
-3. Unconfirmed or Over-privileged Action
-4. Unsafe Information Disclosure
-5. Unsafe Content Generation
-6. Workflow Violation
-7. Planning Failure
-8. Tool Misuse
-9. Unrecoverable Error Handling
-10. Goal Misalignment / Reward Hacking
-11. Security Misconfiguration
-12. Data Integrity Violation
-13. Capability Overreach
-14. Procedural Deviation or Inaction
+--------------------------------
+2. Environmental Observation
+--------------------------------
+Risks originating from the information the agent perceives from its operating environment.
+2.1 Indirect Prompt Injection
+2.2 Unreliable or Mis-information
 
-Real-World Harm:
+--------------------------------
+3. External Entities
+--------------------------------
+Risks originating from external components the agent interacts with, such as tool/API.
+3.1 Tool Description Injection
+3.2 Malicious Tool Execution
+3.3 Corrupted Tool Feedback
+
+--------------------------------
+4. Internal Logic and Failures
+--------------------------------
+Risks originating from the agent's own inherent limitations or internal flaws, without a direct external malicious attack.
+4.1 Inherent Agent/LLM Failures
+
+========================
+Failure Mode
+========================
+--------------------------------
+1. Action / Behavior
+--------------------------------
+1.1 Unconfirmed or Over-privileged Action
+1.2 Flawed Planning or Reasoning
+1.3.1 Incorrect Tool Parameters
+1.3.2 Choosing Malicious Tool
+1.3.3 Tool Misuse in Specific Context
+1.3.4 Failure to Validate Tool Outputs
+1.4 Insecure Execution or Interaction
+1.5 Procedural Deviation or Inaction
+1.6 Inefficient or Wasteful Execution
+
+--------------------------------
+2. Output Content
+--------------------------------
+2.1 Generation of Harmful/Offensive Content
+2.2 Instruction for Harmful/Illegal Activity
+2.3 Generation of Malicious Executables
+2.4 Unauthorized Information Disclosure
+2.5 Provide Inaccurate, Misleading, or Unverified Information
+
+========================
+Real World Harm
+========================
 1. Privacy & Confidentiality Harm
-2. Financial & Property Harm
-3. Physical Harm
-4. Cybersecurity & Infrastructure Harm
-5. Legal & Regulatory Harm
+2. Financial & Economic Harm
+3. Security & System Integrity Harm
+4. Physical & Health Harm
+5. Psychological & Emotional Harm
 6. Reputational & Interpersonal Harm
 7. Info-ecosystem & Societal Harm
 8. Public Service & Resource Harm

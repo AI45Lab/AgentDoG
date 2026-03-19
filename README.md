@@ -195,6 +195,8 @@ vllm serve AI45Research/AgentDoG-FG-Qwen3-4B --port 8001 --max-model-len 16384
 
 ### Examples
 
+#### Option 1: OpenAI-Compatible API (SGLang / vLLM)
+
 Recommended: use prompt templates in `prompts/` and run the example script in `examples/`.
 
 **Binary trajectory moderation**
@@ -214,6 +216,97 @@ python examples/run_openai_moderation.py \
   --trajectory examples/trajectory_sample.json \
   --prompt prompts/trajectory_finegrained.txt \
   --taxonomy prompts/taxonomy_finegrained.txt
+```
+
+#### Option 2: Transformers Direct Inference
+
+You can also run inference directly using `transformers` without deploying a server:
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from typing import Dict
+import json
+
+model_name = "AI45Research/AgentDoG-Qwen3-FG-4B"
+# load the tokenizer and the model
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    torch_dtype="auto",
+    device_map="auto"
+)
+
+def format_conversation_history(example: Dict) -> str:
+    """
+    Format the entire conversation history as a single text block.
+    """
+    history_parts = []
+
+    # Add profile/context
+    if "profile" in example and example["profile"]:
+        history_parts.append(f"=== Agent Profile ===\n{example['profile']}\n")
+
+    history_parts.append("=== Conversation History ===")
+
+    # Format each round of conversation
+    for round_idx, round in enumerate(example["contents"], 1):
+        for turn in round:
+            role = turn["role"]
+
+            if role == "user":
+                if turn.get("content"):
+                    history_parts.append(f"\n[USER]: {turn['content']}")
+
+            elif role == "agent":
+                # Format agent thought and action
+                agent_parts = []
+                for k, v in turn.items():
+                    if k != "role" and v:
+                        agent_parts.append(f"[{k.upper()}]: {v.strip()}")
+                if agent_parts:
+                    history_parts.append(f"\n[AGENT]:\n" + "\n".join(agent_parts))
+
+            elif role == "environment":
+                if turn.get("content"):
+                    history_parts.append(f"\n[ENVIRONMENT]: {turn['content']}")
+
+    return "\n".join(history_parts)
+
+# load taxonomy and prompt template
+with open("prompts/taxonomy_finegrained.txt", "r") as f:
+    CATEGORY_FINEGRAINED = f.read()
+
+with open("prompts/trajectory_finegrained.txt", "r") as f:
+    chat_template = f.read()
+
+# load your trajectory
+with open("examples/trajectory_sample.json", "r") as f:
+    trajectory = json.load(f)
+
+# prepare the model input
+formatted_trajectory = format_conversation_history(trajectory)
+messages = [
+    {"role": "user", "content": chat_template.format(trajectory=formatted_trajectory, taxonomy=CATEGORY_FINEGRAINED)}
+]
+text = tokenizer.apply_chat_template(
+    messages,
+    tokenize=False
+)
+model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+
+# conduct text completion
+generated_ids = model.generate(
+    **model_inputs,
+    max_new_tokens=128
+)
+output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
+content = tokenizer.decode(output_ids, skip_special_tokens=True)
+print(content)
+# Example output:
+# unsafe
+# Risk Source: Inherent Agent/LLM Failures
+# Failure Mode: Procedural Deviation or Inaction
+# Real World Harm: Reputational & Interpersonal Harm
 ```
 
 ---
