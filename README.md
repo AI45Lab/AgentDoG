@@ -417,14 +417,21 @@ This project is released under the **Apache 2.0 License**.
 
 ## 📖 Citation
 
-If you use AgentDoG in your research, please cite:
+If you use AgentDoG or ATBench in your research, please cite:
 
 ```bibtex
-@misc{liu2026agentdogdiagnosticguardrailframework,
-      title={AgentDoG: A Diagnostic Guardrail Framework for AI Agent Safety and Security}, 
-      author={Dongrui Liu and Qihan Ren and Chen Qian and Shuai Shao and Yuejin Xie and Yu Li and Zhonghao Yang and Haoyu Luo and Peng Wang and Qingyu Liu and Binxin Hu and Ling Tang and Jilin Mei and Dadi Guo and Leitao Yuan and Junyao Yang and Guanxu Chen and Qihao Lin and Yi Yu and Bo Zhang and Jiaxuan Guo and Jie Zhang and Wenqi Shao and Huiqi Deng and Zhiheng Xi and Wenjie Wang and Wenxuan Wang and Wen Shen and Zhikai Chen and Haoyu Xie and Jialing Tao and Juntao Dai and Jiaming Ji and Zhongjie Ba and Linfeng Zhang and Yong Liu and Quanshi Zhang and Lei Zhu and Zhihua Wei and Hui Xue and Chaochao Lu and Jing Shao and Xia Hu},
-      year={2026},
-      journal={arXiv preprint arXiv:2601.18491} 
+@article{liu2026agentdog,
+  title={AgentDoG: A Diagnostic Guardrail Framework for AI Agent Safety and Security},
+  author={Liu, Dongrui and Ren, Qihan and Qian, Chen and Shao, Shuai and Xie, Yuejin and Li, Yu and Yang, Zhonghao and Luo, Haoyu and Wang, Peng and Liu, Qingyu and others},
+  journal={arXiv preprint arXiv:2601.18491},
+  year={2026}
+}
+
+@article{li2026atbench,
+  title={ATBench: A Diverse and Realistic Trajectory Benchmark for Long-Horizon Agent Safety},
+  author={Li, Yu and Luo, Haoyu and Xie, Yuejin and Fu, Yuqian and Yang, Zhonghao and Shao, Shuai and Ren, Qihan and Qu, Wanying and Fu, Yanwei and Yang, Yujiu and others},
+  journal={arXiv preprint arXiv:2604.02022},
+  year={2026}
 }
 
 @misc{qian2026behind,
