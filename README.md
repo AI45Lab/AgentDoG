@@ -3,17 +3,22 @@
 </p>
 
 <p align="center">
-  🤗 <a href="https://huggingface.co/collections/AI45Research/agentdog"><b>Hugging Face</b></a>&nbsp&nbsp | &nbsp&nbsp
-  🤖 <a href="https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG">ModelScope</a>&nbsp&nbsp | &nbsp&nbsp
-  📄 <a href="https://arxiv.org/pdf/2601.18491">Technical Report</a>&nbsp&nbsp | &nbsp&nbsp
-  🌐 <a href="https://ai45lab.github.io/AgentDoG/">Project Page</a>&nbsp&nbsp | &nbsp&nbsp
-  📘 <a href="https://example.com/AgentDoG-docs">Documentation</a>
+  🤗 <a href="https://huggingface.co/collections/AI45Research/agentdog"><b>Hugging Face</b></a>&nbsp;&nbsp; | &nbsp;&nbsp;
+  🤖 <a href="https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG">ModelScope</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+  📄 <a href="https://arxiv.org/pdf/2601.18491">AgentDoG 1.0 Technical Report</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+  📄 <a href="#">AgentDoG 1.5 Technical Report</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+  🌐 <a href="https://ai45lab.github.io/AgentDoG/">Project Page</a>
 </p>
 
 Visit our Hugging Face or ModelScope organization (click links above), search checkpoints with names starting with `AgentDoG-`, and you will find all you need! Enjoy!
 
-# AgentDoG
+# AgentDoG 1.5
 
+## News
+
+- `2026/xx/xx`: AgentDoG 1.5 is coming soon, introducing lightweight and scalable guardrail models for trajectory-level agent safety.
+- `2026/xx/xx`: We extend ATBench into the ATBench Family, covering general tool-use agents, OpenClaw-style stateful agents, and Codex-style repository agents.
+- `2026/xx/xx`: AgentDoG 1.5 supports two application settings: safety agentic SFT/RL and online agent safety guardrails.
 
 ## Introduction
 
@@ -23,6 +28,7 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 - 🧩 **Taxonomy-Guided Diagnosis:** provides fine-grained risk labels (risk source, failure mode, and real-world harm) to explain why unsafe behavior occurs. More crucially, AgentDoG diagnoses the root cause of a specific action, tracing it to specific planning steps or tool selections.
 - 🛡️ **Flexible Use Cases:** can serve as a benchmark, a risk classifier for trajectories, or a guard module in agent systems.
 - 🥇 **State-of-the-Art Performance:** Outperforms existing approaches on R-Judge, ASSE-Safety, and ATBench.
+
 <p align="center">
   <img src="figures/binary_performance.png" width="95%">
 </p>
@@ -33,33 +39,37 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 
 ---
 
-## Basic Information
+## Model Zoo
 
-| Name | Parameters | BaseModel | Download |
-|------|------------|-----------|----------|
-| AgentDoG-Qwen3-4B | 4B |  Qwen3-4B-Instruct-2507 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-Qwen3-4B) |
-| AgentDoG-Qwen2.5-7B | 7B |  Qwen2.5-7B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-Qwen2.5-7B) |
-| AgentDoG-Llama3.1-8B | 8B | Llama3.1-8B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-Llama3.1-8B) |
-| AgentDoG-FG-Qwen3-4B | 4B | Qwen3-4B-Instruct-2507 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-FG-Qwen3-4B) |
-| AgentDoG-FG-Qwen2.5-7B | 7B | Qwen2.5-7B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-FG-Qwen2.5-7B) |
-| AgentDoG-FG-Llama3.1-8B | 8B | Llama3.1-8B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-FG-Llama3.1-8B) |
+### AgentDoG 1.5
 
-For more details, please refer to [Technical Report](https://arxiv.org/pdf/2601.18491).
+| Name | Parameters | Base Model | HF Link | ModelScope Link |
+|------|------------|------------|---------|-----------------|
+| AgentDoG1.5-unified-Qwen3.5-4B | 4B | Qwen3.5 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-unified-Qwen3.5-4B) | Coming soon |
+| AgentDoG1.5-Qwen3.5-0.8B | 0.8B | Qwen3.5 | Coming soon | Coming soon |
+| AgentDoG1.5-Qwen3.5-2B | 2B | Qwen3.5 | Coming soon | Coming soon |
+| AgentDoG1.5-Qwen3.5-4B | 4B | Qwen3.5 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-1.5-Qwen3.5-4B) | Coming soon |
+| AgentDoG1.5-FG-Qwen3.5-0.8B | 0.8B | Qwen3.5 | Coming soon | Coming soon |
+| AgentDoG1.5-FG-Qwen3.5-2B | 2B | Qwen3.5 | Coming soon | Coming soon |
+| AgentDoG1.5-FG-Qwen3.5-4B | 4B | Qwen3.5 | Coming soon | Coming soon |
 
----
+### AgentDoG 1.0
 
-## 📚 Dataset: ATBench
+| Name | Parameters | Base Model | HF Link | ModelScope Link |
+|------|------------|------------|---------|-----------------|
+| AgentDoG-Qwen3-4B | 4B | Qwen3-4B-Instruct-2507 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-Qwen3-4B) | 🤖 [ModelScope](https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG) |
+| AgentDoG-Qwen2.5-7B | 7B | Qwen2.5-7B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-Qwen2.5-7B) | 🤖 [ModelScope](https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG) |
+| AgentDoG-Llama3.1-8B | 8B | Llama3.1-8B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-Llama3.1-8B) | 🤖 [ModelScope](https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG) |
+| AgentDoG-FG-Qwen3-4B | 4B | Qwen3-4B-Instruct-2507 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-FG-Qwen3-4B) | 🤖 [ModelScope](https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG) |
+| AgentDoG-FG-Qwen2.5-7B | 7B | Qwen2.5-7B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-FG-Qwen2.5-7B) | 🤖 [ModelScope](https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG) |
+| AgentDoG-FG-Llama3.1-8B | 8B | Llama3.1-8B-Instruct | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-FG-Llama3.1-8B) | 🤖 [ModelScope](https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG) |
 
-We release **ATBench (Agent Trajectory Safety and Security Benchmark)** for trajectory-level safety evaluation and fine-grained risk diagnosis.
-
-- **Download**: 🤗 [Hugging Face Datasets](https://huggingface.co/datasets/AI45Research/ATBench)
-- **Scale**: 500 trajectories (250 safe / 250 unsafe), ~8.97 turns per trajectory (~4486 turn interactions)
-- **Tools**: 1575 unique tools appearing in trajectories; an independent unseen-tools library with 2292 tool definitions (no overlap with training tools)
-- **Labels**: binary `safe`/`unsafe`; unsafe trajectories additionally include fine-grained labels (Risk Source, Failure Mode, Real-World Harm)
+For more details, please refer to the AgentDoG technical reports.
 
 ---
 
 ## ✨ Safety Taxonomy
+
 We adopt a unified, three-dimensional safety taxonomy for agentic systems. It organizes risks along three orthogonal axes, answering: why a risk arises (risk source), how it manifests in behavior (failure mode), and what harm it causes (real-world harm).
 
 * **Risk Source**: where the threat originates in the agent loop, e.g., user inputs, environmental observations,
@@ -73,255 +83,105 @@ In the current release, the taxonomy includes 8 risk-source categories, 14 failu
 
 ---
 
-## 🧠 Methodology
+## ATBench Family
+
+AgentDoG 1.5 extends the original ATBench into a benchmark family for trajectory-level agent safety. The ATBench Family keeps a unified diagnostic protocol while adapting to different agent execution environments.
+
+| Benchmark | Agent Setting | Description | Download |
+|-----------|---------------|-------------|----------|
+| **ATBench** | General tool-use agents | The base trajectory-level safety benchmark inherited from AgentDoG 1.0. | 🤗 [Hugging Face](https://huggingface.co/datasets/AI45Research/ATBench) |
+| **ATBench-Claw** | OpenClaw agents with stateful tool/skill execution | Extends the benchmark to persistent sessions, accumulated traces, and stateful tool execution. | Coming soon |
+| **ATBench-Codex** | Codex-style repository and command execution agents | Extends the benchmark to repository modification, shell commands, file operations, and code-execution risks. | Coming soon |
+
+ATBench Family is designed to evaluate whether a guardrail can generalize from general tool-use trajectories to specialized agent environments. It also demonstrates how the three-dimensional taxonomy can be customized for new settings while preserving the same diagnostic interface.
+
+---
+
+## AgentDoG 1.5
+
+AgentDoG 1.5 is a lightweight and scalable alignment framework for AI agent safety and security. It builds on the trajectory-level diagnostic formulation of AgentDoG 1.0 and further emphasizes extensibility, cost-effective deployment, and application-level integration.
 
 ### Task Definition
 
-<p align="center">
-  <img src="figures/agentdog_prompt_coarsegrained.png" width="49%" alt="Trajectory-level safety evaluation prompt"/>
-  <img src="figures/agentdog_prompt_finegrained.png" width="49%" alt="Fine-grained risk diagnosis prompt"/>
-</p>
-<p align="center"><em>Figure: Example task instructions for the two AgentDoG classification tasks (trajectory-level evaluation and fine-grained diagnosis).</em></p>
+Given a complete or partial agent trajectory, AgentDoG 1.5 predicts whether the trajectory is safe or unsafe. For unsafe trajectories, it can further provide fine-grained diagnostic labels along the three taxonomy dimensions: Risk Source, Failure Mode, and Real-World Harm.
 
-Prior works (e.g., LlamaGuard, Qwen3Guard) formulate safety moderation as classifying whether the **final output** in a multi-turn chat is safe. In contrast, **AgentDoG** defines a different task: **diagnosing an entire agent trajectory** to determine whether the agent exhibits any unsafe behavior at **any point** during execution.
+### Data Preparation
 
-Concretely, we consider two tasks:
-
-- **Trajectory-level safety evaluation (binary).** Given an agent trajectory (a sequence of steps, each step containing an action and an observation), predict `safe`/`unsafe`. A trajectory is labeled `unsafe` if **any** step exhibits unsafe behavior; otherwise it is `safe`.
-- **Fine-grained risk diagnosis.** Given an `unsafe` trajectory, additionally predict the tuple (**Risk Source**, **Failure Mode**, **Real-World Harm**).
-
-**Prompting.** Trajectory-level evaluation uses (i) task definition, (ii) agent trajectory, and (iii) output format. Fine-grained diagnosis additionally includes the safety taxonomy for reference and asks the model to output the three labels line by line.
-
-| Task | Prompt Components |
-|------|-------------------|
-| **Trajectory-level safety evaluation** | Task Definition + Agent Trajectory + Output Format |
-| **Fine-grained risk diagnosis** | Task Definition + Safety Taxonomy + Agent Trajectory + Output Format |
-
-###  Data Synthesis and Collection
-
-We use a **taxonomy-guided** synthesis pipeline to generate realistic, multi-step agent trajectories. Each trajectory is conditioned on a sampled risk tuple (risk source, failure mode, real-world harm), then expanded into a coherent tool-augmented execution and filtered by quality checks.
-
-<p align="center">
-  <img src="figures/data_synthesis_main.png" width="95%" alt="Data Synthesis Pipeline"/>
-</p>
-<p align="center"><em>Figure: Three-stage pipeline for multi-step agent safety trajectory synthesis.</em></p>
-
-To reflect realistic agent tool use, our tool library is orders of magnitude larger than prior benchmarks. For example, it is about 86x, 55x, and 41x larger than R-Judge, ASSE-Safety, and ASSE-Security, respectively.
-
-<p align="center">
-  <img src="figures/tool_comparison.png" width="90%" alt="Tool library size comparison"/>
-</p>
-<p align="center"><em>Figure: Tool library size compared to existing agent safety benchmarks.</em></p>
-
-We also track the coverage of the three taxonomy dimensions (risk source, failure mode, and harm type) to ensure balanced and diverse risk distributions in our synthesized data.
-
-<p align="center">
-  <img src="figures/distribution_comparison.png" width="90%" alt="Taxonomy distribution comparison"/>
-</p>
-<p align="center"><em>Figure: Distribution over risk source, failure mode, and harm type categories.</em></p>
+AgentDoG 1.5 uses a taxonomy-guided data preparation pipeline to construct diverse agent safety trajectories. The pipeline includes data collection, reasoning chain-of-thought augmentation, data purification, and fine-grained data selection and balancing.
 
 ### Training
 
-Our guard models are trained with standard **supervised fine-tuning (SFT)** on trajectory demonstrations. Given a training set $\mathcal{D}_{\mathrm{train}}=\lbrace(x_i, y_i)\rbrace _{i=1}^n$, where $x_i$ is an agent trajectory and $y_i$ is the target output (binary `safe`/`unsafe`, and optionally fine-grained labels), we minimize the negative log-likelihood:
+AgentDoG 1.5 models are trained with supervised fine-tuning and reinforcement learning. The training process aims to improve trajectory-level safety detection, fine-grained diagnosis, and robustness across different agent execution environments.
 
-$$\mathcal{L}=-\sum_{(x_i,y_i)\in\mathcal{D}_{\text{train}}}\log p_{\theta}(y_i\mid x_i).$$
+### Evaluation
 
-We fine-tuned multiple base models: **Qwen3-4B-Instruct-2507**, **Qwen2.5-7B-Instruct**, and **Llama3.1-8B-Instruct**.
+AgentDoG 1.5 is evaluated on both general safety benchmarks and agent-specific trajectory benchmarks, including R-Judge, ATBench-Pro, ATBench-Codex, and ATBench-Claw.
 
----
+| Model | R-Judge | ATBench-Pro | ATBench-Codex | ATBench-Claw |
+|-------|---------|-------------|---------------|--------------|
+| AgentDoG 1.5-0.8B-Qwen3.5 | 75.7 | 60.3 | 70.2 | 78.4 |
+| AgentDoG 1.5-2B-Qwen3.5 | 71.5 | 69.0 | 75.6 | 74.8 |
+| AgentDoG 1.5-4B-Qwen3.5 | 92.2 | 72.4 | 80.0 | 84.0 |
+| AgentDoG 1.5-8B-Llama-3.1 | 75.5 | 70.9 | 79.2 | 78.1 |
 
-## 📊 Performance Highlights
+Fine-grained diagnostic accuracy is reported along the three taxonomy dimensions:
 
-* Evaluated on **R-Judge**, **ASSE-Safety**, and **ATBench**
-* Outperforms step-level baselines in detecting:
-
-  * Long-horizon instruction hijacking
-  * Tool misuse after benign prefixes
-* Strong generalization across:
-
-  * Different agent frameworks
-  * Different LLM backbones
-* Fine-grained label accuracy on ATBench (best of our FG models): Risk Source 82.0%, Failure Mode 32.4%, Harm Type 59.2%
-
-Accuracy comparison (ours + baselines):
-
-| Model                          | Type          | R-Judge | ASSE-Safety | ATBench |
-| ----------------------------- | ------------- | ------- | ----------- | ------ |
-| GPT-5.2                       | General       | 90.8    | 77.4        | 90.0   |
-| Gemini-3-Flash                | General       | 95.2    | 75.9        | 75.6   |
-| Gemini-3-Pro                  | General       | 94.3    | 78.5        | 87.2   |
-| QwQ-32B                       | General       | 89.5    | 68.2        | 63.0   |
-| Qwen3-235B-A22B-Instruct       | General       | 85.1    | 77.6        | 84.6   |
-| LlamaGuard3-8B                | Guard         | 61.2    | 54.5        | 53.3   |
-| LlamaGuard4-12B               | Guard         | 63.8    | 56.3        | 58.1   |
-| Qwen3-Guard                   | Guard         | 40.6    | 48.2        | 55.3   |
-| ShieldAgent                   | Guard         | 81.0    | 79.6        | 76.0   |
-| **AgentDoG-4B (Ours)**        | Guard         | 91.8    | 80.4        | 92.8   |
-| **AgentDoG-7B (Ours)**        | Guard         | 91.7    | 79.8        | 87.4   |
-| **AgentDoG-8B (Ours)**        | Guard         | 78.2    | 81.1        | 87.6   |
-
-Fine-grained label accuracy on ATBench (unsafe trajectories only):
-
-| Model                               | Risk Source Acc | Failure Mode Acc | Harm Type Acc |
-| ---------------------------------- | --------------- | ---------------- | ------------- |
-| Gemini-3-Flash                     | 38.0            | 22.4             | 34.8          |
-| GPT-5.2                            | 41.6            | 20.4             | 30.8          |
-| Gemini-3-Pro                       | 36.8            | 17.6             | 32.0          |
-| Qwen3-235B-A22B-Instruct-2507      | 19.6            | 17.2             | 38.0          |
-| QwQ-32B                            | 23.2            | 14.4             | 34.8          |
-| **AgentDoG-FG-4B (Ours)**          | 82.0            | 32.4             | 58.4          |
-| **AgentDoG-FG-8B (Ours)**          | 81.6            | 31.6             | 57.6          |
-| **AgentDoG-FG-7B (Ours)**          | 81.2            | 28.8             | 59.2          |
+| Model | Risk Source | Failure Mode | Real-World Harm |
+|-------|-------------|--------------|-----------------|
+| AgentDoG 1.5-0.8B-Qwen3.5 | 65.7 | 18.4 | 44.9 |
+| AgentDoG 1.5-2B-Qwen3.5 | 68.0 | 24.0 | 53.8 |
+| AgentDoG 1.5-4B-Qwen3.5 | 75.2 | 27.5 | 62.9 |
 
 ---
 
-## 🚀 Getting Started
+## Application 1: Safety Agentic SFT & RL with AgentDoG 1.5
 
-### Deployment (SGLang / vLLM)
+AgentDoG 1.5 can serve as a trajectory-level diagnostic evaluator for improving agent safety through supervised fine-tuning and reinforcement learning.
 
-For deployment, you can use `sglang>=0.4.6` or `vllm>=0.10.0` to create an OpenAI-compatible API endpoint:
+### Evaluation Setup
 
-**SGLang**
-```bash
-python -m sglang.launch_server --model-path AI45Research/AgentDoG-Qwen3-4B --port 30000 --context-length 16384
-python -m sglang.launch_server --model-path AI45Research/AgentDoG-FG-Qwen3-4B --port 30001 --context-length 16384
-```
+AgentDoG 1.5 is used to evaluate safety behavior across multiple agentic benchmarks and environments, including harmful instruction following, tool-use safety, refusal behavior, and multi-step agent execution.
 
-**vLLM**
-```bash
-vllm serve AI45Research/AgentDoG-Qwen3-4B --port 8000 --max-model-len 16384
-vllm serve AI45Research/AgentDoG-FG-Qwen3-4B --port 8001 --max-model-len 16384
-```
+### Agentic SFT
 
-### Examples
+AgentDoG 1.5 can filter and select high-quality safety data for agentic supervised fine-tuning. By evaluating generated trajectories, it helps construct a mixture of safety-critical and benign agentic data.
 
-#### Option 1: OpenAI-Compatible API (SGLang / vLLM)
+### Agentic RL
 
-Recommended: use prompt templates in `prompts/` and run the example script in `examples/`.
+AgentDoG 1.5 can be integrated as an external safety evaluator in agentic reinforcement learning. It provides safety feedback for harmful behavior, unsafe tool usage, and safe refusal behavior.
 
-**Binary trajectory moderation**
-```bash
-python examples/run_openai_moderation.py \
-  --base-url http://localhost:8000/v1 \
-  --model AI45Research/AgentDoG-Qwen3-4B \
-  --trajectory examples/trajectory_sample.json \
-  --prompt prompts/trajectory_binary.txt
-```
+---
 
-**Fine-grained risk diagnosis**
-```bash
-python examples/run_openai_moderation.py \
-  --base-url http://localhost:8000/v1 \
-  --model AI45Research/AgentDoG-FG-Qwen3-4B \
-  --trajectory examples/trajectory_sample.json \
-  --prompt prompts/trajectory_finegrained.txt \
-  --taxonomy prompts/taxonomy_finegrained.txt
-```
+## Application 2: AgentDoG 1.5 as Online Agent Safety Guardrail
 
-#### Option 2: Transformers Direct Inference
+AgentDoG 1.5 can also be deployed as an online agent safety guardrail. During agent execution, it can inspect accumulated trajectories before pending actions or final visible responses and flag unsafe behavior before it reaches the user or environment.
 
-You can also run inference directly using `transformers` without deploying a server:
+### Why Online Agent Guardrails Matter
 
-```python
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from typing import Dict
-import json
+Agent risks often emerge during intermediate execution rather than only in final responses. Online guardrails are therefore important for detecting unsafe tool calls, prompt leakage, unauthorized actions, and harmful multi-step plans.
 
-model_name = "AI45Research/AgentDoG-Qwen3-FG-4B"
-# load the tokenizer and the model
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(
-    model_name,
-    torch_dtype="auto",
-    device_map="auto"
-)
+### Guardrail Design
 
-def format_conversation_history(example: Dict) -> str:
-    """
-    Format the entire conversation history as a single text block.
-    """
-    history_parts = []
+AgentDoG 1.5 can be placed before high-risk actions or final replies. It takes the accumulated trajectory as input and returns a safety judgment, optionally with fine-grained diagnostic labels.
 
-    # Add profile/context
-    if "profile" in example and example["profile"]:
-        history_parts.append(f"=== Agent Profile ===\n{example['profile']}\n")
+### Evaluation
 
-    history_parts.append("=== Conversation History ===")
-
-    # Format each round of conversation
-    for round_idx, round in enumerate(example["contents"], 1):
-        for turn in round:
-            role = turn["role"]
-
-            if role == "user":
-                if turn.get("content"):
-                    history_parts.append(f"\n[USER]: {turn['content']}")
-
-            elif role == "agent":
-                # Format agent thought and action
-                agent_parts = []
-                for k, v in turn.items():
-                    if k != "role" and v:
-                        agent_parts.append(f"[{k.upper()}]: {v.strip()}")
-                if agent_parts:
-                    history_parts.append(f"\n[AGENT]:\n" + "\n".join(agent_parts))
-
-            elif role == "environment":
-                if turn.get("content"):
-                    history_parts.append(f"\n[ENVIRONMENT]: {turn['content']}")
-
-    return "\n".join(history_parts)
-
-# load taxonomy and prompt template
-with open("prompts/taxonomy_finegrained.txt", "r") as f:
-    CATEGORY_FINEGRAINED = f.read()
-
-with open("prompts/trajectory_finegrained.txt", "r") as f:
-    chat_template = f.read()
-
-# load your trajectory
-with open("examples/trajectory_sample.json", "r") as f:
-    trajectory = json.load(f)
-
-# prepare the model input
-formatted_trajectory = format_conversation_history(trajectory)
-messages = [
-    {"role": "user", "content": chat_template.format(trajectory=formatted_trajectory, taxonomy=CATEGORY_FINEGRAINED)}
-]
-text = tokenizer.apply_chat_template(
-    messages,
-    tokenize=False
-)
-model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-
-# conduct text completion
-generated_ids = model.generate(
-    **model_inputs,
-    max_new_tokens=128
-)
-output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
-content = tokenizer.decode(output_ids, skip_special_tokens=True)
-print(content)
-# Example output:
-# unsafe
-# Risk Source: Inherent Agent/LLM Failures
-# Failure Mode: Procedural Deviation or Inaction
-# Real World Harm: Reputational & Interpersonal Harm
-```
+The online guardrail setting evaluates both safety improvement and deployment cost, including detection rate, attack reduction, runtime latency, and integration overhead.
 
 ---
 
 ## 🔍 Agentic XAI Attribution
-We also introduce a novel hierarchical framework for Agentic Attribution, designed to unveil the internal drivers behind agent actions beyond simple failure localization. By decomposing interaction trajectories into pivotal components and fine-grained textual evidence, our approach explains why an agent makes specific decisions regardless of the outcome. This framework enhances the transparency and accountability of autonomous systems by identifying key factors such as memory biases and tool outputs.
-### Case Study
-To evaluate the effectiveness of the proposed agentic attribution framework, we conducted several case studies across diverse scenarios. The figure illustrates how our framework localizes decision drivers across four representative cases. The highlighted regions denote the historical components and fine-grained sentences identified by our framework as the primary decision drivers.
 
+We also introduce a novel hierarchical framework for Agentic Attribution, designed to unveil the internal drivers behind agent actions beyond simple failure localization. By decomposing interaction trajectories into pivotal components and fine-grained textual evidence, our approach explains why an agent makes specific decisions regardless of the outcome. This framework enhances the transparency and accountability of autonomous systems by identifying key factors such as memory biases and tool outputs.
+
+### Case Study
+
+To evaluate the effectiveness of the proposed agentic attribution framework, we conducted several case studies across diverse scenarios. The figure illustrates how our framework localizes decision drivers across four representative cases. The highlighted regions denote the historical components and fine-grained sentences identified by our framework as the primary decision drivers.
 
 <p align="center">
   <img src="figures/xai_attribution_agent_dog.png" width="95%" alt="xai attribution agent dog"/>
 </p>
 <p align="center"><em>Figure: Illustration of attribution results across two representative scenarios.</em></p>
-
 
 <p align="center">
   <img src="figures/xai_attribution_comparison.png" width="70%" alt="xai attribution comparison"/>
@@ -338,7 +198,9 @@ To evaluate the effectiveness of the proposed agentic attribution framework, we 
 You can run the analysis in three steps:
 
 #### Step 1: Trajectory-Level Attribution
+
 Analyze the contribution of each conversation step.
+
 ```bash
 python component_attri.py \
   --model_id "your_model_path" \
@@ -347,7 +209,9 @@ python component_attri.py \
 ```
 
 #### Step 2: Sentence-Level Attribution
+
 Perform fine-grained analysis on the top-K most influential steps.
+
 ```bash
 python sentence_attri.py \
   --model_id "your_model_path" \
@@ -358,7 +222,9 @@ python sentence_attri.py \
 ```
 
 #### Step 3: Generate Visualization
+
 Create an interactive HTML heatmap.
+
 ```bash
 python case_plot_html.py \
   --original_traj_file ./samples/xx.json \
@@ -368,11 +234,23 @@ python case_plot_html.py \
 ```
 
 ##### One-Click Execution
+
 To run the complete pipeline automatically, configure and run the shell script:
+
 ```bash
 bash run_all_pipeline.sh
 ```
 
+---
+
+## 🚀 Getting Started
+
+AgentDoG 1.0 and AgentDoG 1.5 use different model checkpoints and prompt formats, so their deployment and inference instructions are maintained separately:
+
+- [AgentDoG 1.5 Getting Started](docs/getting_started_v1_5.md)
+- [AgentDoG 1.0 Getting Started](docs/getting_started_v1.md)
+
+---
 
 ## 📁 Repository Structure
 
@@ -381,9 +259,13 @@ AgentDoG/
 ├── README.md
 ├── figures/
 ├── prompts/
-│   ├── trajectory_binary.txt
-│   ├── trajectory_finegrained.txt
-│   └── taxonomy_finegrained.txt
+│   ├── v1.0/
+│   │   ├── trajectory_binary.txt
+│   │   ├── trajectory_finegrained.txt
+│   │   └── taxonomy_finegrained.txt
+│   └── v1.5/
+│       ├── coarse_grained_moderation.txt
+│       └── unified_safety_classification.txt
 ├── examples/
 │   ├── run_openai_moderation.py
 │   └── trajectory_sample.json
@@ -403,8 +285,8 @@ AgentDoG/
 
 ## 🛠️ Customization
 
-* **Edit prompt templates**: `prompts/trajectory_binary.txt`, `prompts/trajectory_finegrained.txt`
-* **Update taxonomy labels**: `prompts/taxonomy_finegrained.txt`
+* **Edit prompt templates**: `prompts/v1.0/trajectory_binary.txt`, `prompts/v1.0/trajectory_finegrained.txt`, `prompts/v1.5/coarse_grained_moderation.txt`, `prompts/v1.5/unified_safety_classification.txt`
+* **Update taxonomy labels**: `prompts/v1.0/taxonomy_finegrained.txt`
 * **Change runtime integration**: `examples/run_openai_moderation.py`
 
 ---
