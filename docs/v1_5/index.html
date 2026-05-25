@@ -345,7 +345,7 @@
         <!-- Binary Classification Table -->
         <div class="perf-block">
           <h3 data-en="Trajectory-Level Safety Evaluation" data-zh="轨迹级安全评估">Trajectory-Level Safety Evaluation</h3>
-          <p class="table-desc" data-en="AgentDoG 1.5 is evaluated on R-Judge and ATBench using Accuracy, Precision, Recall, and F1-score. AgentDoG-series models only." data-zh="AgentDoG 1.5 在 R-Judge 和 ATBench 上使用 Accuracy、Precision、Recall 和 F1-score 进行评估。这里只展示 AgentDoG 系列模型。">AgentDoG 1.5 is evaluated on R-Judge and ATBench using Accuracy, Precision, Recall, and F1-score. AgentDoG-series models only.</p>
+          <p class="table-desc" data-en="AgentDoG 1.5 is evaluated on R-Judge and ATBench using Accuracy, Precision, Recall, and F1-score." data-zh="AgentDoG 1.5 在 R-Judge 和 ATBench 上使用 Accuracy、Precision、Recall 和 F1-score 进行评估。">AgentDoG 1.5 is evaluated on R-Judge and ATBench using Accuracy, Precision, Recall, and F1-score.</p>
           <div class="table-container">
             <table>
               <thead>
@@ -362,19 +362,74 @@
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <td>GPT-5.4</td>
+                  <td>93.3</td>
+                  <td>93.1</td>
+                  <td>94.3</td>
+                  <td>93.7</td>
+                  <td>73.7</td>
+                  <td>68.5</td>
+                  <td>87.1</td>
+                  <td>76.7</td>
+                </tr>
+                <tr>
+                  <td>Qwen3.5-397B-A17B</td>
+                  <td>85.6</td>
+                  <td>81.3</td>
+                  <td>94.5</td>
+                  <td>87.4</td>
+                  <td>66.8</td>
+                  <td>65.5</td>
+                  <td>70.2</td>
+                  <td>67.8</td>
+                </tr>
+                <tr>
+                  <td>Qwen3.5-4B</td>
+                  <td>81.0</td>
+                  <td>82.1</td>
+                  <td>81.9</td>
+                  <td>82.0</td>
+                  <td>45.9</td>
+                  <td>41.2</td>
+                  <td>20.7</td>
+                  <td>27.6</td>
+                </tr>
+                <tr>
+                  <td>LlamaGuard4-12B</td>
+                  <td>63.8</td>
+                  <td>68.3</td>
+                  <td>58.8</td>
+                  <td>63.2</td>
+                  <td>58.1</td>
+                  <td>63.8</td>
+                  <td>30.9</td>
+                  <td>41.7</td>
+                </tr>
+                <tr>
+                  <td>Qwen3-Guard</td>
+                  <td>40.6</td>
+                  <td>23.6</td>
+                  <td>5.6</td>
+                  <td>9.0</td>
+                  <td>51.5</td>
+                  <td>40.0</td>
+                  <td>0.4</td>
+                  <td>0.8</td>
+                </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-1.0-Qwen3-4B</strong></td>
-                  <td><strong>91.8</strong></td>
+                  <td>AgentDoG-1.0-Qwen3-4B</td>
+                  <td>91.8</td>
                   <td>87.5</td>
                   <td>98.5</td>
-                  <td><strong>92.7</strong></td>
+                  <td>92.7</td>
                   <td>64.0</td>
                   <td>59.2</td>
                   <td>88.9</td>
                   <td>71.1</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-1.5-Qwen3.5-0.8B</strong></td>
+                  <td>AgentDoG-1.5-Qwen3.5-0.8B</td>
                   <td>75.7</td>
                   <td>83.3</td>
                   <td>67.5</td>
@@ -385,7 +440,7 @@
                   <td>63.2</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-1.5-Qwen3.5-2B</strong></td>
+                  <td>AgentDoG-1.5-Qwen3.5-2B</td>
                   <td>71.5</td>
                   <td>78.0</td>
                   <td>64.1</td>
@@ -396,7 +451,7 @@
                   <td>67.8</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-1.5-Llama3.1-8B</strong></td>
+                  <td>AgentDoG-1.5-Llama3.1-8B</td>
                   <td>75.5</td>
                   <td>68.6</td>
                   <td>98.8</td>
@@ -407,15 +462,26 @@
                   <td>73.5</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-1.5-Qwen3.5-4B</strong></td>
-                  <td><strong>92.2</strong></td>
-                  <td><strong>91.7</strong></td>
+                  <td>AgentDoG-1.5-Qwen3.5-4B</td>
+                  <td>92.2</td>
+                  <td>91.7</td>
                   <td>93.7</td>
-                  <td><strong>92.7</strong></td>
-                  <td><strong>72.4</strong></td>
+                  <td>92.7</td>
+                  <td>72.4</td>
                   <td>69.2</td>
                   <td>80.3</td>
-                  <td><strong>74.3</strong></td>
+                  <td>74.3</td>
+                </tr>
+                <tr class="row-highlight">
+                  <td>AgentDoG-1.5-Qwen3.5-4B-U</td>
+                  <td>90.4</td>
+                  <td>93.9</td>
+                  <td>87.6</td>
+                  <td>90.6</td>
+                  <td>78.4</td>
+                  <td>79.8</td>
+                  <td>75.7</td>
+                  <td>77.7</td>
                 </tr>
               </tbody>
             </table>
@@ -425,7 +491,7 @@
         <!-- Fine-grained Classification Table -->
         <div class="perf-block">
           <h3 data-en="Fine-Grained Risk Diagnosis" data-zh="细粒度风险诊断">Fine-Grained Risk Diagnosis</h3>
-          <p class="table-desc" data-en="Fine-grained diagnostic accuracy on ATBench across Risk Source, Failure Mode, and Real-world Harm. Avg. is the mean score across the three dimensions." data-zh="ATBench 上沿 Risk Source、Failure Mode 和 Real-world Harm 三个维度报告细粒度诊断准确率。Avg. 为三个维度的平均分。">Fine-grained diagnostic accuracy on ATBench across Risk Source, Failure Mode, and Real-world Harm. Avg. is the mean score across the three dimensions.</p>
+          <p class="table-desc" data-en="Fine-grained diagnostic accuracy on ATBench across Risk Source, Failure Mode, and Real-world Harm. Guard models are excluded because they only output binary labels." data-zh="ATBench 上沿 Risk Source、Failure Mode 和 Real-world Harm 三个维度报告细粒度诊断准确率。Guard 模型只输出二分类标签，因此不纳入该表。">Fine-grained diagnostic accuracy on ATBench across Risk Source, Failure Mode, and Real-world Harm. Guard models are excluded because they only output binary labels.</p>
           <div class="table-container">
             <table>
               <thead>
@@ -434,44 +500,74 @@
                   <th data-en="Risk Source" data-zh="风险来源">Risk Source</th>
                   <th data-en="Failure Mode" data-zh="失效模式">Failure Mode</th>
                   <th data-en="Real-world Harm" data-zh="现实危害">Real-world Harm</th>
-                  <th>Avg.</th>
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <td>GPT-5.4</td>
+                  <td>33.6</td>
+                  <td>13.5</td>
+                  <td>30.2</td>
+                </tr>
+                <tr>
+                  <td>GPT-5.2</td>
+                  <td>29.5</td>
+                  <td>12.0</td>
+                  <td>26.8</td>
+                </tr>
+                <tr>
+                  <td>Gemini-3-Flash</td>
+                  <td>18.4</td>
+                  <td>8.3</td>
+                  <td>15.0</td>
+                </tr>
+                <tr>
+                  <td>Gemini-3.1-Pro</td>
+                  <td>24.8</td>
+                  <td>12.6</td>
+                  <td>18.5</td>
+                </tr>
+                <tr>
+                  <td>Qwen3.5-397B</td>
+                  <td>7.7</td>
+                  <td>3.6</td>
+                  <td>6.8</td>
+                </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-1.0-Qwen3-4B</strong></td>
+                  <td>AgentDoG-1.0-Qwen3-4B</td>
                   <td>46.8</td>
                   <td>16.5</td>
                   <td>40.6</td>
-                  <td>34.6</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-1.5-Qwen3.5-0.8B</strong></td>
+                  <td>AgentDoG-1.5-Qwen3.5-0.8B</td>
                   <td>65.7</td>
                   <td>18.4</td>
                   <td>44.9</td>
-                  <td>43.0</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-1.5-Qwen3.5-2B</strong></td>
+                  <td>AgentDoG-1.5-Qwen3.5-2B</td>
                   <td>68.0</td>
                   <td>24.0</td>
                   <td>53.8</td>
-                  <td>48.6</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-1.5-Llama3.1-8B</strong></td>
+                  <td>AgentDoG-1.5-Llama3.1-8B</td>
                   <td>72.9</td>
                   <td>24.6</td>
                   <td>52.5</td>
-                  <td>50.0</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-1.5-Qwen3.5-4B</strong></td>
-                  <td><strong>75.2</strong></td>
-                  <td><strong>27.5</strong></td>
-                  <td><strong>62.9</strong></td>
-                  <td><strong>55.2</strong></td>
+                  <td>AgentDoG-1.5-Qwen3.5-4B</td>
+                  <td>75.2</td>
+                  <td>27.5</td>
+                  <td>62.9</td>
+                </tr>
+                <tr class="row-highlight">
+                  <td>AgentDoG-1.5-Qwen3.5-4B-U</td>
+                  <td>24.1</td>
+                  <td>9.5</td>
+                  <td>28.4</td>
                 </tr>
               </tbody>
             </table>

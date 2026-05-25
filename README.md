@@ -119,12 +119,12 @@ AgentDoG 1.5 is evaluated on R-Judge and ATBench using Accuracy, Precision, Reca
 | Qwen3.5-4B | 81.0 | 82.1 | 81.9 | 82.0 | 45.9 | 41.2 | 20.7 | 27.6 |
 | LlamaGuard4-12B | 63.8 | 68.3 | 58.8 | 63.2 | 58.1 | 63.8 | 30.9 | 41.7 |
 | Qwen3-Guard | 40.6 | 23.6 | 5.6 | 9.0 | 51.5 | 40.0 | 0.4 | 0.8 |
-| **AgentDoG-1.0-Qwen3-4B** | 91.8 | 87.5 | 98.5 | **92.7** | 64.0 | 59.2 | 88.9 | 71.1 |
-| **AgentDoG-1.5-Qwen3.5-0.8B** | 75.7 | 83.3 | 67.5 | 74.6 | 60.3 | 58.6 | 68.6 | 63.2 |
-| **AgentDoG-1.5-Qwen3.5-2B** | 71.5 | 78.0 | 64.1 | 70.4 | 69.0 | 70.1 | 65.7 | 67.8 |
-| **AgentDoG-1.5-Llama3.1-8B** | 75.5 | 68.6 | 98.8 | 81.0 | 70.9 | 67.1 | 81.2 | 73.5 |
-| **AgentDoG-1.5-Qwen3.5-4B** | **92.2** | 91.7 | 93.7 | **92.7** | 72.4 | 69.2 | 80.3 | 74.3 |
-| **AgentDoG-1.5-Qwen3.5-4B-U** | 90.4 | 93.9 | 87.6 | 90.6 | **78.4** | **79.8** | 75.7 | **77.7** |
+| AgentDoG-1.0-Qwen3-4B | 91.8 | 87.5 | 98.5 | 92.7 | 64.0 | 59.2 | 88.9 | 71.1 |
+| AgentDoG-1.5-Qwen3.5-0.8B | 75.7 | 83.3 | 67.5 | 74.6 | 60.3 | 58.6 | 68.6 | 63.2 |
+| AgentDoG-1.5-Qwen3.5-2B | 71.5 | 78.0 | 64.1 | 70.4 | 69.0 | 70.1 | 65.7 | 67.8 |
+| AgentDoG-1.5-Llama3.1-8B | 75.5 | 68.6 | 98.8 | 81.0 | 70.9 | 67.1 | 81.2 | 73.5 |
+| AgentDoG-1.5-Qwen3.5-4B | 92.2 | 91.7 | 93.7 | 92.7 | 72.4 | 69.2 | 80.3 | 74.3 |
+| AgentDoG-1.5-Qwen3.5-4B-U | 90.4 | 93.9 | 87.6 | 90.6 | 78.4 | 79.8 | 75.7 | 77.7 |
 
 Fine-grained diagnostic accuracy on ATBench is reported along the three taxonomy dimensions. Guard models are excluded because they only output binary labels.
 
@@ -135,20 +135,12 @@ Fine-grained diagnostic accuracy on ATBench is reported along the three taxonomy
 | Gemini-3-Flash | 18.4 | 8.3 | 15.0 |
 | Gemini-3.1-Pro | 24.8 | 12.6 | 18.5 |
 | Qwen3.5-397B | 7.7 | 3.6 | 6.8 |
-| Qwen3.5-0.8B | 1.3 | 2.9 | 4.7 |
-| Qwen3.5-2B | 7.7 | 6.6 | 11.1 |
-| Qwen3.5-4B | 6.6 | 3.0 | 8.2 |
-| QwQ-32B | 15.8 | 9.4 | 22.9 |
-| Qwen3-235B | 7.0 | 11.6 | 26.6 |
-| Qwen3-4B-Instruct | 1.0 | 9.6 | 21.2 |
-| Qwen2.5-7B-Instruct | 5.3 | 6.0 | 15.5 |
-| Llama3.1-8B-Instruct | 6.2 | 5.8 | 15.5 |
-| **AgentDoG-1.0-Qwen3-4B** | 46.8 | 16.5 | 40.6 |
-| **AgentDoG-1.5-Qwen3.5-0.8B** | 65.7 | 18.4 | 44.9 |
-| **AgentDoG-1.5-Qwen3.5-2B** | 68.0 | 24.0 | 53.8 |
-| **AgentDoG-1.5-Llama3.1-8B** | 72.9 | 24.6 | 52.5 |
-| **AgentDoG-1.5-Qwen3.5-4B** | **75.2** | **27.5** | **62.9** |
-| **AgentDoG-1.5-Qwen3.5-4B-U** | 24.1 | 9.5 | 28.4 |
+| AgentDoG-1.0-Qwen3-4B | 46.8 | 16.5 | 40.6 |
+| AgentDoG-1.5-Qwen3.5-0.8B | 65.7 | 18.4 | 44.9 |
+| AgentDoG-1.5-Qwen3.5-2B | 68.0 | 24.0 | 53.8 |
+| AgentDoG-1.5-Llama3.1-8B | 72.9 | 24.6 | 52.5 |
+| AgentDoG-1.5-Qwen3.5-4B | 75.2 | 27.5 | 62.9 |
+| AgentDoG-1.5-Qwen3.5-4B-U | 24.1 | 9.5 | 28.4 |
 
 Accuracy on ATBench-Codex and ATBench-Claw across model sizes. The x-axis uses dense model size and active parameters for MoE models; closed-source models are shown as high/low reference lines because their sizes are unavailable. Guard models use approximate backbone sizes with slight jitter, and Qwen3.5-0.8B/2B are omitted due to low strict-parser validity.
 
