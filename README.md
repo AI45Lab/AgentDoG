@@ -112,57 +112,57 @@ AgentDoG 1.5 models are trained with supervised fine-tuning and reinforcement le
 
 AgentDoG 1.5 is evaluated on R-Judge and ATBench using Accuracy, Precision, Recall, and F1-score. We compare against closed-source models, open-source models, guard models, and AgentDoG-series models.
 
-| Group | Model | R-Judge Acc | R-Judge Prec. | R-Judge Rec. | R-Judge F1 | ATBench Acc | ATBench Prec. | ATBench Rec. | ATBench F1 |
-|-------|-------|-------------|---------------|--------------|------------|-------------|---------------|--------------|------------|
-| Closed-Source | GPT-5.4 | 93.3 | 93.1 | 94.3 | 93.7 | 73.7 | 68.5 | 87.1 | 76.7 |
-| Closed-Source | GPT-5.2 | 90.8 | 86.8 | 97.5 | 91.8 | 69.0 | 65.6 | 79.3 | 71.8 |
-| Closed-Source | Gemini-3-Flash | 95.2 | 98.7 | 92.1 | 95.3 | 76.4 | 79.3 | 71.0 | 74.9 |
-| Closed-Source | Gemini-3.1-Pro | 97.3 | 99.1 | 95.7 | 97.4 | 75.5 | 76.1 | 73.8 | 75.0 |
-| Open-Source | Qwen3.5-397B-A17B | 85.6 | 81.3 | 94.5 | 87.4 | 66.8 | 65.5 | 70.2 | 67.8 |
-| Open-Source | Qwen3.5-4B | 81.0 | 82.1 | 81.9 | 82.0 | 45.9 | 41.2 | 20.7 | 27.6 |
-| Open-Source | Qwen3.5-2B | 54.1 | 67.6 | 25.2 | 36.7 | 59.1 | 74.3 | 19.2 | 30.5 |
-| Open-Source | Qwen3.5-0.8B | 33.7 | 27.6 | 15.8 | 20.1 | 48.6 | 66.7 | 5.9 | 10.8 |
-| Open-Source | QwQ-32B | 89.5 | 94.9 | 84.7 | 89.5 | 57.7 | 81.9 | 19.1 | 31.0 |
-| Open-Source | Qwen3-235B-A22B-Instruct-2507 | 85.1 | 80.7 | 94.4 | 87.0 | 59.2 | 58.2 | 63.8 | 60.8 |
-| Open-Source | Qwen3-4B-Instruct-2507 | 68.4 | 73.8 | 62.4 | 67.6 | 55.7 | 77.6 | 15.3 | 25.5 |
-| Open-Source | Qwen2.5-7B-Instruct | 68.4 | 77.4 | 56.8 | 65.5 | 53.4 | 73.8 | 9.7 | 17.1 |
-| Open-Source | Llama-3.1-8B-Instruct | 53.7 | 53.3 | 99.8 | 69.5 | 45.3 | 47.3 | 89.5 | 61.9 |
-| Guard | LlamaGuard3-8B | 61.2 | 69.1 | 48.1 | 56.7 | 53.1 | 85.7 | 3.8 | 7.3 |
-| Guard | LlamaGuard4-12B | 63.8 | 68.3 | 58.8 | 63.2 | 58.1 | 63.8 | 30.9 | 41.7 |
-| Guard | Qwen3-Guard | 40.6 | 23.6 | 5.6 | 9.0 | 51.5 | 40.0 | 0.4 | 0.8 |
-| Guard | ShieldAgent | 81.0 | 74.0 | 98.8 | 84.6 | 62.5 | 58.0 | 81.4 | 67.7 |
-| Guard | JoySafety | 52.5 | 57.2 | 40.2 | 47.2 | 56.9 | 61.7 | 35.0 | 44.7 |
-| Guard | NemoGuard | 54.4 | 60.1 | 40.6 | 48.5 | 49.9 | 49.5 | 41.6 | 45.2 |
-| Our Models | **AgentDoG-1.0-Qwen3-4B** | 91.8 | 87.5 | 98.5 | **92.7** | 64.0 | 59.2 | 88.9 | 71.1 |
-| Our Models | **AgentDoG-1.5-Qwen3.5-0.8B** | 75.7 | 83.3 | 67.5 | 74.6 | 60.3 | 58.6 | 68.6 | 63.2 |
-| Our Models | **AgentDoG-1.5-Qwen3.5-2B** | 71.5 | 78.0 | 64.1 | 70.4 | 69.0 | 70.1 | 65.7 | 67.8 |
-| Our Models | **AgentDoG-1.5-Llama3.1-8B** | 75.5 | 68.6 | 98.8 | 81.0 | 70.9 | 67.1 | 81.2 | 73.5 |
-| Our Models | **AgentDoG-1.5-Qwen3.5-4B** | **92.2** | 91.7 | 93.7 | **92.7** | 72.4 | 69.2 | 80.3 | 74.3 |
-| Our Models | **AgentDoG-1.5-Qwen3.5-4B-U** | 90.4 | 93.9 | 87.6 | 90.6 | **78.4** | **79.8** | 75.7 | **77.7** |
+| Model | R-Judge Acc | R-Judge Prec. | R-Judge Rec. | R-Judge F1 | ATBench Acc | ATBench Prec. | ATBench Rec. | ATBench F1 |
+|-------|-------------|---------------|--------------|------------|-------------|---------------|--------------|------------|
+| GPT-5.4 | 93.3 | 93.1 | 94.3 | 93.7 | 73.7 | 68.5 | 87.1 | 76.7 |
+| GPT-5.2 | 90.8 | 86.8 | 97.5 | 91.8 | 69.0 | 65.6 | 79.3 | 71.8 |
+| Gemini-3-Flash | 95.2 | 98.7 | 92.1 | 95.3 | 76.4 | 79.3 | 71.0 | 74.9 |
+| Gemini-3.1-Pro | 97.3 | 99.1 | 95.7 | 97.4 | 75.5 | 76.1 | 73.8 | 75.0 |
+| Qwen3.5-397B-A17B | 85.6 | 81.3 | 94.5 | 87.4 | 66.8 | 65.5 | 70.2 | 67.8 |
+| Qwen3.5-4B | 81.0 | 82.1 | 81.9 | 82.0 | 45.9 | 41.2 | 20.7 | 27.6 |
+| Qwen3.5-2B | 54.1 | 67.6 | 25.2 | 36.7 | 59.1 | 74.3 | 19.2 | 30.5 |
+| Qwen3.5-0.8B | 33.7 | 27.6 | 15.8 | 20.1 | 48.6 | 66.7 | 5.9 | 10.8 |
+| QwQ-32B | 89.5 | 94.9 | 84.7 | 89.5 | 57.7 | 81.9 | 19.1 | 31.0 |
+| Qwen3-235B-A22B-Instruct-2507 | 85.1 | 80.7 | 94.4 | 87.0 | 59.2 | 58.2 | 63.8 | 60.8 |
+| Qwen3-4B-Instruct-2507 | 68.4 | 73.8 | 62.4 | 67.6 | 55.7 | 77.6 | 15.3 | 25.5 |
+| Qwen2.5-7B-Instruct | 68.4 | 77.4 | 56.8 | 65.5 | 53.4 | 73.8 | 9.7 | 17.1 |
+| Llama-3.1-8B-Instruct | 53.7 | 53.3 | 99.8 | 69.5 | 45.3 | 47.3 | 89.5 | 61.9 |
+| LlamaGuard3-8B | 61.2 | 69.1 | 48.1 | 56.7 | 53.1 | 85.7 | 3.8 | 7.3 |
+| LlamaGuard4-12B | 63.8 | 68.3 | 58.8 | 63.2 | 58.1 | 63.8 | 30.9 | 41.7 |
+| Qwen3-Guard | 40.6 | 23.6 | 5.6 | 9.0 | 51.5 | 40.0 | 0.4 | 0.8 |
+| ShieldAgent | 81.0 | 74.0 | 98.8 | 84.6 | 62.5 | 58.0 | 81.4 | 67.7 |
+| JoySafety | 52.5 | 57.2 | 40.2 | 47.2 | 56.9 | 61.7 | 35.0 | 44.7 |
+| NemoGuard | 54.4 | 60.1 | 40.6 | 48.5 | 49.9 | 49.5 | 41.6 | 45.2 |
+| **AgentDoG-1.0-Qwen3-4B** | 91.8 | 87.5 | 98.5 | **92.7** | 64.0 | 59.2 | 88.9 | 71.1 |
+| **AgentDoG-1.5-Qwen3.5-0.8B** | 75.7 | 83.3 | 67.5 | 74.6 | 60.3 | 58.6 | 68.6 | 63.2 |
+| **AgentDoG-1.5-Qwen3.5-2B** | 71.5 | 78.0 | 64.1 | 70.4 | 69.0 | 70.1 | 65.7 | 67.8 |
+| **AgentDoG-1.5-Llama3.1-8B** | 75.5 | 68.6 | 98.8 | 81.0 | 70.9 | 67.1 | 81.2 | 73.5 |
+| **AgentDoG-1.5-Qwen3.5-4B** | **92.2** | 91.7 | 93.7 | **92.7** | 72.4 | 69.2 | 80.3 | 74.3 |
+| **AgentDoG-1.5-Qwen3.5-4B-U** | 90.4 | 93.9 | 87.6 | 90.6 | **78.4** | **79.8** | 75.7 | **77.7** |
 
-Fine-grained diagnostic accuracy on ATBench is reported along the three taxonomy dimensions. Avg. is the mean score across Risk Source, Failure Mode, and Real-world Harm. Guard models are excluded because they only output binary labels.
+Fine-grained diagnostic accuracy on ATBench is reported along the three taxonomy dimensions. Guard models are excluded because they only output binary labels.
 
-| Group | Model | Risk Source | Failure Mode | Real-world Harm | Avg. |
-|-------|-------|-------------|--------------|-----------------|------|
-| Closed-Source | GPT-5.4 | 33.6 | 13.5 | 30.2 | 25.8 |
-| Closed-Source | GPT-5.2 | 29.5 | 12.0 | 26.8 | 22.8 |
-| Closed-Source | Gemini-3-Flash | 18.4 | 8.3 | 15.0 | 13.9 |
-| Closed-Source | Gemini-3.1-Pro | 24.8 | 12.6 | 18.5 | 18.6 |
-| Open-Source | Qwen3.5-397B | 7.7 | 3.6 | 6.8 | 6.0 |
-| Open-Source | Qwen3.5-0.8B | 1.3 | 2.9 | 4.7 | 3.0 |
-| Open-Source | Qwen3.5-2B | 7.7 | 6.6 | 11.1 | 8.5 |
-| Open-Source | Qwen3.5-4B | 6.6 | 3.0 | 8.2 | 5.9 |
-| Open-Source | QwQ-32B | 15.8 | 9.4 | 22.9 | 16.0 |
-| Open-Source | Qwen3-235B | 7.0 | 11.6 | 26.6 | 15.1 |
-| Open-Source | Qwen3-4B-Instruct | 1.0 | 9.6 | 21.2 | 10.6 |
-| Open-Source | Qwen2.5-7B-Instruct | 5.3 | 6.0 | 15.5 | 8.9 |
-| Open-Source | Llama3.1-8B-Instruct | 6.2 | 5.8 | 15.5 | 9.2 |
-| Our Models | **AgentDoG-1.0-Qwen3-4B** | 46.8 | 16.5 | 40.6 | 34.6 |
-| Our Models | **AgentDoG-1.5-Qwen3.5-0.8B** | 65.7 | 18.4 | 44.9 | 43.0 |
-| Our Models | **AgentDoG-1.5-Qwen3.5-2B** | 68.0 | 24.0 | 53.8 | 48.6 |
-| Our Models | **AgentDoG-1.5-Llama3.1-8B** | 72.9 | 24.6 | 52.5 | 50.0 |
-| Our Models | **AgentDoG-1.5-Qwen3.5-4B** | **75.2** | **27.5** | **62.9** | **55.2** |
-| Our Models | **AgentDoG-1.5-Qwen3.5-4B-U** | 24.1 | 9.5 | 28.4 | 20.67 |
+| Model | Risk Source | Failure Mode | Real-world Harm |
+|-------|-------------|--------------|-----------------|
+| GPT-5.4 | 33.6 | 13.5 | 30.2 |
+| GPT-5.2 | 29.5 | 12.0 | 26.8 |
+| Gemini-3-Flash | 18.4 | 8.3 | 15.0 |
+| Gemini-3.1-Pro | 24.8 | 12.6 | 18.5 |
+| Qwen3.5-397B | 7.7 | 3.6 | 6.8 |
+| Qwen3.5-0.8B | 1.3 | 2.9 | 4.7 |
+| Qwen3.5-2B | 7.7 | 6.6 | 11.1 |
+| Qwen3.5-4B | 6.6 | 3.0 | 8.2 |
+| QwQ-32B | 15.8 | 9.4 | 22.9 |
+| Qwen3-235B | 7.0 | 11.6 | 26.6 |
+| Qwen3-4B-Instruct | 1.0 | 9.6 | 21.2 |
+| Qwen2.5-7B-Instruct | 5.3 | 6.0 | 15.5 |
+| Llama3.1-8B-Instruct | 6.2 | 5.8 | 15.5 |
+| **AgentDoG-1.0-Qwen3-4B** | 46.8 | 16.5 | 40.6 |
+| **AgentDoG-1.5-Qwen3.5-0.8B** | 65.7 | 18.4 | 44.9 |
+| **AgentDoG-1.5-Qwen3.5-2B** | 68.0 | 24.0 | 53.8 |
+| **AgentDoG-1.5-Llama3.1-8B** | 72.9 | 24.6 | 52.5 |
+| **AgentDoG-1.5-Qwen3.5-4B** | **75.2** | **27.5** | **62.9** |
+| **AgentDoG-1.5-Qwen3.5-4B-U** | 24.1 | 9.5 | 28.4 |
 
 <p align="center">
   <img src="figures/codex-claw.png" width="95%" alt="ATBench-Codex and ATBench-Claw performance by model size"/>
