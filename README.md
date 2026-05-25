@@ -35,10 +35,6 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
   <img src="figures/binary_performance.png" width="95%">
 </p>
 
-<p align="center">
-  <img src="figures/fined_performance.png" width="95%">
-</p>
-
 ---
 
 ## Model Zoo
