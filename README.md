@@ -135,6 +135,10 @@ Fine-grained diagnostic accuracy on ATBench is reported along the three taxonomy
 | AgentDoG 1.5-8B-Llama-3.1 | 72.9 | 24.6 | 52.5 | 50.0 |
 | AgentDoG 1.5-4B-Qwen3.5 | 75.2 | 27.5 | 62.9 | 55.2 |
 
+<p align="center">
+  <img src="figures/codex-claw.png" width="95%" alt="ATBench-Codex and ATBench-Claw performance by model size"/>
+</p>
+
 ---
 
 ## Application 1: Safety Agentic SFT & RL with AgentDoG 1.5
