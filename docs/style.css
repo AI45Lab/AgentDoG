@@ -497,6 +497,10 @@ section {
   background: var(--bg-card);
 }
 
+.taxonomy-caption {
+  margin-top: 12px;
+}
+
 /* ==================== Data Synthesis Section ==================== */
 .data-synthesis {
   background: var(--bg-secondary);
