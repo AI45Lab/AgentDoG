@@ -26,7 +26,8 @@
           <ul class="dropdown-menu">
             <li><a href="#taxonomy" data-en="Taxonomy" data-zh="分类体系">Taxonomy</a></li>
             <li><a href="#data-synthesis" data-en="Synthesis" data-zh="数据合成">Synthesis</a></li>
-            <li><a href="#xai" data-en="XAI" data-zh="可解释性">XAI</a></li>
+            <li><a href="#app1" data-en="APP 1" data-zh="应用 1">APP 1</a></li>
+            <li><a href="#app2" data-en="APP 2" data-zh="应用 2">APP 2</a></li>
           </ul>
         </li>
         <li><a href="#dataset" data-en="Dataset" data-zh="数据集">Dataset</a></li>
@@ -76,7 +77,7 @@
   <section class="sota-highlight">
     <div class="container">
       <h2 class="section-title" data-en="State-of-the-Art Performance" data-zh="最先进性能">State-of-the-Art Performance</h2>
-      <p class="section-subtitle" data-en="SOTA on ASSE-Safety and ATBench, outperforming several strong general models (e.g., GPT-5.2) across R-Judge, ASSE-Safety, and ATBench" data-zh="在 ASSE-Safety 与 ATBench 上达到 SOTA，并在 R-Judge、ASSE-Safety 与 ATBench 上超过多种强通用模型（例如 GPT-5.2）">SOTA on ASSE-Safety and ATBench, outperforming several strong general models (e.g., GPT-5.2) across R-Judge, ASSE-Safety, and ATBench</p>
+      <p class="section-subtitle" data-en="Strong trajectory-level safety evaluation on R-Judge and ATBench, with fine-grained diagnostic accuracy reported across the three taxonomy dimensions" data-zh="在 R-Judge 与 ATBench 上进行轨迹级安全评估，并沿三个分类维度报告细粒度诊断准确率">Strong trajectory-level safety evaluation on R-Judge and ATBench, with fine-grained diagnostic accuracy reported across the three taxonomy dimensions</p>
       <div class="sota-images-vertical">
         <div class="sota-image">
           <img src="../figures/binary_performance_v1_5.png" alt="Binary Classification Performance" loading="lazy">
@@ -92,36 +93,30 @@
   <section id="abstract" class="abstract">
     <div class="container">
       <h2 class="section-title" data-en="Abstract" data-zh="摘要">Abstract</h2>
-      <p class="abstract-text" data-en="Autonomous agents (e.g., tool-using LLM agents, mobile agents, web agents) often execute multi-step trajectories consisting of observations, reasoning, and actions. Existing safety mechanisms mainly focus on single-step content moderation or final-output filtering, which are insufficient for capturing risks emerging during execution. <strong>AgentDoG</strong> addresses this gap through trajectory-level risk assessment, enabling comprehensive evaluation and protection of autonomous agent systems across diverse application scenarios." data-zh="自主智能体（如工具调用型大语言模型智能体、移动端智能体、网页智能体）通常执行由观察、推理和行动组成的多步骤轨迹。现有的安全机制主要关注单步内容审核或最终输出过滤，不足以捕捉执行过程中出现的风险。<strong>AgentDoG</strong> 通过轨迹级风险评估填补了这一空白，为各种应用场景下的自主智能体系统提供全面的评估和保护。">
-        Autonomous agents (e.g., tool-using LLM agents, mobile agents, web agents) often execute multi-step trajectories
-        consisting of observations, reasoning, and actions. Existing safety mechanisms mainly focus on single-step content
-        moderation or final-output filtering, which are insufficient for capturing risks emerging during execution.
-        <strong>AgentDoG</strong> addresses this gap through trajectory-level risk assessment, enabling comprehensive
-        evaluation and protection of autonomous agent systems across diverse application scenarios.
+      <p class="abstract-text" data-en="<strong>AgentDoG 1.5</strong> is a cost-effective and extensible diagnostic guardrail for trajectory-level agent safety assessment, building on the foundation of AgentDoG 1.0. It expands agent safety diagnosis from fixed trajectory classification toward a scalable framework for modern agentic systems with long-horizon planning, tool-mediated execution, and complex environment interaction." data-zh="<strong>AgentDoG 1.5</strong> 是一个面向轨迹级智能体安全评估的高性价比、可扩展诊断式护栏，建立在 AgentDoG 1.0 的基础之上。它将智能体安全诊断从固定轨迹分类扩展为可伸缩框架，以适应长程规划、工具介导执行和复杂环境交互等现代智能体系统。">
+        <strong>AgentDoG 1.5</strong> is a cost-effective and extensible diagnostic guardrail for trajectory-level agent safety assessment, building on the foundation of AgentDoG 1.0. It expands agent safety diagnosis from fixed trajectory classification toward a scalable framework for modern agentic systems with long-horizon planning, tool-mediated execution, and complex environment interaction.
       </p>
 
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">🧭</div>
-          <h3 class="feature-title" data-en="Trajectory-Level Monitoring" data-zh="轨迹级监控">Trajectory-Level Monitoring</h3>
-          <p class="feature-desc" data-en="Evaluates entire execution trajectories rather than individual steps, capturing emergent risks that only manifest through sequences of actions." data-zh="评估完整的执行轨迹而非单个步骤，捕捉仅通过连续行动才显现的潜在风险。">
-            Evaluates entire execution trajectories rather than individual steps, capturing emergent risks that only
-            manifest through sequences of actions.
+          <div class="feature-icon">🧩</div>
+          <h3 class="feature-title" data-en="Extensible Taxonomy" data-zh="可扩展分类体系">Extensible Taxonomy</h3>
+          <p class="feature-desc" data-en="Expands the original safety taxonomy into a flexible framework that captures emerging risks from modern agentic AI systems, including long-horizon planning, tool-mediated execution, and complex environment interaction." data-zh="将原有安全分类体系扩展为灵活框架，覆盖现代智能体系统中长程规划、工具介导执行和复杂环境交互带来的新兴风险。">
+            Expands the original safety taxonomy into a flexible framework that captures emerging risks from modern agentic AI systems, including long-horizon planning, tool-mediated execution, and complex environment interaction.
           </p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">🧩</div>
-          <h3 class="feature-title" data-en="Taxonomy-Guided Diagnosis" data-zh="分类引导诊断">Taxonomy-Guided Diagnosis</h3>
-          <p class="feature-desc" data-en="Leverages a comprehensive three-dimensional safety taxonomy covering risk sources, failure modes, and real-world harms for precise risk classification." data-zh="利用涵盖风险来源、失效模式和现实危害的三维安全分类体系，实现精准的风险分类。">
-            Leverages a comprehensive three-dimensional safety taxonomy covering risk sources, failure modes, and
-            real-world harms for precise risk classification.
+          <div class="feature-icon">📚</div>
+          <h3 class="feature-title" data-en="ATBench Family" data-zh="ATBench 家族">ATBench Family</h3>
+          <p class="feature-desc" data-en="Refines ATBench into a trajectory-level benchmark family with 1,000 audited trajectories, 2,084 available tools, 1,954 unique invoked tools, and extensions for Codex and OpenClaw-style agents." data-zh="将 ATBench 扩展为轨迹级基准家族，包含 1,000 条审计轨迹、2,084 个可用工具、1,954 个唯一调用工具，并支持 Codex 与 OpenClaw 风格智能体扩展。">
+            Refines ATBench into a trajectory-level benchmark family with 1,000 audited trajectories, 2,084 available tools, 1,954 unique invoked tools, and extensions for Codex and OpenClaw-style agents.
           </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🛡️</div>
-          <h3 class="feature-title" data-en="Flexible Deployment" data-zh="灵活部署">Flexible Deployment</h3>
-          <p class="feature-desc" data-en="Can serve as a judge model for trajectory safety evaluation, a reward model for agent alignment, or a plug-in guard module for real-time protection." data-zh="可用作轨迹安全评估的判别模型、智能体对齐的奖励模型，或实时防护的插件式护栏模块。">
-            Can serve as a judge model for trajectory safety evaluation, a reward model for agent alignment, or a plug-in guard module for real-time protection.
+          <h3 class="feature-title" data-en="Efficient Guardrail Models" data-zh="高效护栏模型">Efficient Guardrail Models</h3>
+          <p class="feature-desc" data-en="Trains AgentDoG 1.5 through an efficient data preparation and training pipeline with around 1k SFT trajectories and several thousand RL samples, covering a high-performing 4B variant and lightweight 0.8B and 2B variants." data-zh="通过高效的数据准备和训练流程训练 AgentDoG 1.5，仅使用约 1k 条 SFT 轨迹和数千条 RL 样本，覆盖高性能 4B 版本以及轻量 0.8B、2B 版本。">
+            Trains AgentDoG 1.5 through an efficient data preparation and training pipeline with around 1k SFT trajectories and several thousand RL samples, covering a high-performing 4B variant and lightweight 0.8B and 2B variants.
           </p>
         </div>
       </div>
@@ -202,31 +197,134 @@
     </div>
   </section>
 
+  <!-- APP 1 Section -->
+  <section id="app1">
+    <div class="container">
+      <h2 class="section-title" data-en="APP 1: Safety Agentic SFT &amp; RL" data-zh="应用 1：安全智能体 SFT 与 RL">APP 1: Safety Agentic SFT &amp; RL</h2>
+      <p class="section-subtitle" data-en="Using AgentDoG 1.5 as a trajectory-level evaluator for safer agent training" data-zh="使用 AgentDoG 1.5 作为轨迹级评估器，支持更安全的智能体训练">
+        Using AgentDoG 1.5 as a trajectory-level evaluator for safer agent training
+      </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🧪</div>
+          <h3 class="feature-title" data-en="Evaluation Setup" data-zh="评估设置">Evaluation Setup</h3>
+          <p class="feature-desc" data-en="AgentDoG 1.5 evaluates safety behavior across harmful instruction following, tool-use safety, refusal behavior, and multi-step agent execution." data-zh="AgentDoG 1.5 可评估有害指令遵循、工具使用安全、拒答行为和多步智能体执行中的安全表现。">
+            AgentDoG 1.5 evaluates safety behavior across harmful instruction following, tool-use safety, refusal behavior, and multi-step agent execution.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3 class="feature-title" data-en="Agentic SFT" data-zh="智能体 SFT">Agentic SFT</h3>
+          <p class="feature-desc" data-en="By evaluating generated trajectories, AgentDoG 1.5 helps filter and select high-quality safety data for supervised fine-tuning." data-zh="通过评估生成轨迹，AgentDoG 1.5 帮助筛选高质量安全数据，用于监督微调。">
+            By evaluating generated trajectories, AgentDoG 1.5 helps filter and select high-quality safety data for supervised fine-tuning.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3 class="feature-title" data-en="Agentic RL" data-zh="智能体 RL">Agentic RL</h3>
+          <p class="feature-desc" data-en="AgentDoG 1.5 can act as an external safety evaluator in reinforcement learning, providing feedback on harmful behavior, unsafe tool usage, and safe refusal." data-zh="AgentDoG 1.5 可作为强化学习中的外部安全评估器，对有害行为、不安全工具使用和安全拒答提供反馈。">
+            AgentDoG 1.5 can act as an external safety evaluator in reinforcement learning, providing feedback on harmful behavior, unsafe tool usage, and safe refusal.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP 2 Section -->
+  <section id="app2" class="data-synthesis">
+    <div class="container">
+      <h2 class="section-title" data-en="APP 2: Online Agent Safety Guardrail" data-zh="应用 2：在线智能体安全护栏">APP 2: Online Agent Safety Guardrail</h2>
+      <p class="section-subtitle" data-en="Deploying AgentDoG 1.5 as a runtime guardrail for monitoring risky agent behaviors" data-zh="将 AgentDoG 1.5 部署为运行时护栏，用于监测高风险智能体行为">
+        Deploying AgentDoG 1.5 as a runtime guardrail for monitoring risky agent behaviors
+      </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⏱️</div>
+          <h3 class="feature-title" data-en="Why Online Guardrails Matter" data-zh="为什么需要在线护栏">Why Online Guardrails Matter</h3>
+          <p class="feature-desc" data-en="Agent risks often emerge during intermediate execution rather than only in final responses, especially around tool calls, prompt leakage, unauthorized actions, and multi-step plans." data-zh="智能体风险常出现在中间执行过程中，而不只是最终回复中，尤其涉及工具调用、提示泄露、未授权操作和多步计划。">
+            Agent risks often emerge during intermediate execution rather than only in final responses, especially around tool calls, prompt leakage, unauthorized actions, and multi-step plans.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3 class="feature-title" data-en="Guardrail Design" data-zh="护栏设计">Guardrail Design</h3>
+          <p class="feature-desc" data-en="AgentDoG 1.5 can be placed before high-risk actions or final replies, taking the accumulated trajectory as input and returning a safety judgment with optional diagnostic labels." data-zh="AgentDoG 1.5 可放置在高风险动作或最终回复之前，读取累计轨迹并返回安全判断及可选诊断标签。">
+            AgentDoG 1.5 can be placed before high-risk actions or final replies, taking the accumulated trajectory as input and returning a safety judgment with optional diagnostic labels.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3 class="feature-title" data-en="Online Evaluation" data-zh="在线评估">Online Evaluation</h3>
+          <p class="feature-desc" data-en="The online setting evaluates safety improvement and deployment cost, including detection rate, attack reduction, runtime latency, and integration overhead." data-zh="在线设置评估安全提升与部署成本，包括检测率、攻击降低、运行延迟和集成开销。">
+            The online setting evaluates safety improvement and deployment cost, including detection rate, attack reduction, runtime latency, and integration overhead.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Dataset Section -->
   <section id="dataset" class="dataset">
     <div class="container">
-      <h2 class="section-title" data-en="ATBench Dataset" data-zh="ATBench 数据集">ATBench Dataset</h2>
-      <p class="section-subtitle" data-en="A large-scale benchmark for evaluating agent trajectory safety" data-zh="用于评估智能体轨迹安全性的大规模基准测试">
-        A large-scale benchmark for evaluating agent trajectory safety
+      <h2 class="section-title" data-en="ATBench Family" data-zh="ATBench 家族">ATBench Family</h2>
+      <p class="section-subtitle" data-en="An extensible trajectory-level benchmark family for evaluating agent safety across diverse execution environments" data-zh="面向多种执行环境的可扩展轨迹级智能体安全评测基准家族">
+        An extensible trajectory-level benchmark family for evaluating agent safety across diverse execution environments
       </p>
 
       <div class="dataset-stats">
         <div class="stat-card">
-          <div class="stat-value">500</div>
+          <div class="stat-value">1,000</div>
           <p class="stat-label" data-en="Trajectories" data-zh="轨迹">Trajectories</p>
         </div>
         <div class="stat-card">
-          <div class="stat-value">1575</div>
-          <p class="stat-label" data-en="Unique Tools" data-zh="独立工具">Unique Tools</p>
+          <div class="stat-value">2,084</div>
+          <p class="stat-label" data-en="Available Tools" data-zh="可用工具">Available Tools</p>
         </div>
         <div class="stat-card">
-          <div class="stat-value">32</div>
-          <p class="stat-label" data-en="Risk Categories" data-zh="风险类别">Risk Categories</p>
+          <div class="stat-value">1,954</div>
+          <p class="stat-label" data-en="Unique Invoked Tools" data-zh="唯一调用工具">Unique Invoked Tools</p>
         </div>
         <div class="stat-card">
-          <div class="stat-value">~8.97</div>
+          <div class="stat-value">9.01</div>
           <p class="stat-label" data-en="Turns/Trajectory" data-zh="轮次/轨迹">Turns/Trajectory</p>
         </div>
+        <div class="stat-card">
+          <div class="stat-value">3.95k</div>
+          <p class="stat-label" data-en="Tokens/Trajectory" data-zh="词元/轨迹">Tokens/Trajectory</p>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th data-en="Benchmark" data-zh="基准">Benchmark</th>
+              <th data-en="Agent Setting" data-zh="智能体设置">Agent Setting</th>
+              <th data-en="Description" data-zh="描述">Description</th>
+              <th data-en="Download" data-zh="下载">Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ATBench</strong></td>
+              <td>General tool-use agents</td>
+              <td>The base trajectory-level safety benchmark inherited from AgentDoG 1.0.</td>
+              <td><a href="https://huggingface.co/datasets/AI45Research/ATBench" target="_blank" rel="noopener">Hugging Face</a></td>
+            </tr>
+            <tr>
+              <td><strong>ATBench-Claw</strong></td>
+              <td>OpenClaw agents with stateful tool/skill execution</td>
+              <td>Extends the benchmark to persistent sessions, accumulated traces, and stateful tool execution.</td>
+              <td>Coming soon</td>
+            </tr>
+            <tr>
+              <td><strong>ATBench-Codex</strong></td>
+              <td>Codex-style repository and command execution agents</td>
+              <td>Extends the benchmark to repository modification, shell commands, file operations, and code-execution risks.</td>
+              <td>Coming soon</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <div class="dataset-download">
@@ -250,102 +348,77 @@
         <!-- Binary Classification Table -->
         <div class="perf-block">
           <h3 data-en="Trajectory-Level Safety Evaluation" data-zh="轨迹级安全评估">Trajectory-Level Safety Evaluation</h3>
-          <p class="table-desc" data-en="Accuracy comparison across R-Judge, ASSE-Safety, and ATBench benchmarks" data-zh="R-Judge、ASSE-Safety 和 ATBench 基准测试上的准确率对比">Accuracy comparison across R-Judge, ASSE-Safety, and ATBench benchmarks</p>
+          <p class="table-desc" data-en="AgentDoG 1.5 is evaluated on R-Judge and ATBench using Accuracy, Precision, Recall, and F1-score. AgentDoG-series models only." data-zh="AgentDoG 1.5 在 R-Judge 和 ATBench 上使用 Accuracy、Precision、Recall 和 F1-score 进行评估。这里只展示 AgentDoG 系列模型。">AgentDoG 1.5 is evaluated on R-Judge and ATBench using Accuracy, Precision, Recall, and F1-score. AgentDoG-series models only.</p>
           <div class="table-container">
             <table>
               <thead>
                 <tr>
                   <th data-en="Model" data-zh="模型">Model</th>
-                  <th data-en="Type" data-zh="类型">Type</th>
-                  <th>R-Judge</th>
-                  <th>ASSE-Safety</th>
-                  <th>ATBench</th>
+                  <th>R-Judge Acc</th>
+                  <th>R-Judge Prec.</th>
+                  <th>R-Judge Rec.</th>
+                  <th>R-Judge F1</th>
+                  <th>ATBench Acc</th>
+                  <th>ATBench Prec.</th>
+                  <th>ATBench Rec.</th>
+                  <th>ATBench F1</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="row-closed">
-                  <td>GPT-5.2</td>
-                  <td>General</td>
-                  <td>90.8</td>
-                  <td>77.4</td>
-                  <td>90.0</td>
-                </tr>
-                <tr class="row-closed">
-                  <td>Gemini-3-Flash</td>
-                  <td>General</td>
-                  <td>95.2</td>
-                  <td>75.9</td>
-                  <td>75.6</td>
-                </tr>
-                <tr class="row-closed">
-                  <td>Gemini-3-Pro</td>
-                  <td>General</td>
-                  <td>94.3</td>
-                  <td>78.5</td>
-                  <td>87.2</td>
-                </tr>
-                <tr>
-                  <td>QwQ-32B</td>
-                  <td>General</td>
-                  <td>89.5</td>
-                  <td>68.2</td>
-                  <td>63.0</td>
-                </tr>
-                <tr>
-                  <td>Qwen3-235B-A22B-Instruct</td>
-                  <td>General</td>
-                  <td>85.1</td>
-                  <td>77.6</td>
-                  <td>84.6</td>
-                </tr>
-                <tr>
-                  <td>LlamaGuard3-8B</td>
-                  <td>Guard</td>
-                  <td>61.2</td>
-                  <td>54.5</td>
-                  <td>53.3</td>
-                </tr>
-                <tr>
-                  <td>LlamaGuard4-12B</td>
-                  <td>Guard</td>
-                  <td>63.8</td>
-                  <td>56.3</td>
-                  <td>58.1</td>
-                </tr>
-                <tr>
-                  <td>Qwen3-Guard</td>
-                  <td>Guard</td>
-                  <td>40.6</td>
-                  <td>48.2</td>
-                  <td>55.3</td>
-                </tr>
-                <tr>
-                  <td>ShieldAgent</td>
-                  <td>Guard</td>
-                  <td>81.0</td>
-                  <td>79.6</td>
-                  <td>76.0</td>
-                </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-Qwen3-4B (Ours)</strong></td>
-                  <td>Guard</td>
+                  <td><strong>AgentDoG-1.0-Qwen3-4B</strong></td>
                   <td><strong>91.8</strong></td>
-                  <td>80.4</td>
-                  <td><strong>92.8</strong></td>
+                  <td>87.5</td>
+                  <td>98.5</td>
+                  <td><strong>92.7</strong></td>
+                  <td>64.0</td>
+                  <td>59.2</td>
+                  <td>88.9</td>
+                  <td>71.1</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-Qwen2.5-7B (Ours)</strong></td>
-                  <td>Guard</td>
-                  <td>91.7</td>
-                  <td>79.8</td>
-                  <td>87.4</td>
+                  <td><strong>AgentDoG-1.5-Qwen3.5-0.8B</strong></td>
+                  <td>75.7</td>
+                  <td>83.3</td>
+                  <td>67.5</td>
+                  <td>74.6</td>
+                  <td>60.3</td>
+                  <td>58.6</td>
+                  <td>68.6</td>
+                  <td>63.2</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-Llama3.1-8B (Ours)</strong></td>
-                  <td>Guard</td>
-                  <td>78.2</td>
-                  <td><strong>81.1</strong></td>
-                  <td>87.6</td>
+                  <td><strong>AgentDoG-1.5-Qwen3.5-2B</strong></td>
+                  <td>71.5</td>
+                  <td>78.0</td>
+                  <td>64.1</td>
+                  <td>70.4</td>
+                  <td>69.0</td>
+                  <td>70.1</td>
+                  <td>65.7</td>
+                  <td>67.8</td>
+                </tr>
+                <tr class="row-highlight">
+                  <td><strong>AgentDoG-1.5-Llama3.1-8B</strong></td>
+                  <td>75.5</td>
+                  <td>68.6</td>
+                  <td>98.8</td>
+                  <td>81.0</td>
+                  <td>70.9</td>
+                  <td>67.1</td>
+                  <td>81.2</td>
+                  <td>73.5</td>
+                </tr>
+                <tr class="row-highlight">
+                  <td><strong>AgentDoG-1.5-Qwen3.5-4B</strong></td>
+                  <td><strong>92.2</strong></td>
+                  <td><strong>91.7</strong></td>
+                  <td>93.7</td>
+                  <td><strong>92.7</strong></td>
+                  <td><strong>72.4</strong></td>
+                  <td>69.2</td>
+                  <td>80.3</td>
+                  <td><strong>74.3</strong></td>
                 </tr>
               </tbody>
             </table>
@@ -355,65 +428,53 @@
         <!-- Fine-grained Classification Table -->
         <div class="perf-block">
           <h3 data-en="Fine-Grained Risk Diagnosis" data-zh="细粒度风险诊断">Fine-Grained Risk Diagnosis</h3>
-          <p class="table-desc" data-en="Fine-grained label accuracy (%) on ATBench for unsafe trajectories" data-zh="ATBench 上不安全轨迹的细粒度标签准确率（%）">Fine-grained label accuracy (%) on ATBench for unsafe trajectories</p>
+          <p class="table-desc" data-en="Fine-grained diagnostic accuracy on ATBench across Risk Source, Failure Mode, and Real-world Harm. Avg. is the mean score across the three dimensions." data-zh="ATBench 上沿 Risk Source、Failure Mode 和 Real-world Harm 三个维度报告细粒度诊断准确率。Avg. 为三个维度的平均分。">Fine-grained diagnostic accuracy on ATBench across Risk Source, Failure Mode, and Real-world Harm. Avg. is the mean score across the three dimensions.</p>
           <div class="table-container">
             <table>
               <thead>
                 <tr>
                   <th data-en="Model" data-zh="模型">Model</th>
-                  <th data-en="Risk Source Acc" data-zh="风险来源准确率">Risk Source Acc</th>
-                  <th data-en="Failure Mode Acc" data-zh="失效模式准确率">Failure Mode Acc</th>
-                  <th data-en="Harm Type Acc" data-zh="危害类型准确率">Harm Type Acc</th>
+                  <th data-en="Risk Source" data-zh="风险来源">Risk Source</th>
+                  <th data-en="Failure Mode" data-zh="失效模式">Failure Mode</th>
+                  <th data-en="Real-world Harm" data-zh="现实危害">Real-world Harm</th>
+                  <th>Avg.</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="row-closed">
-                  <td>Gemini-3-Flash</td>
-                  <td>38.0</td>
-                  <td>22.4</td>
-                  <td>34.8</td>
-                </tr>
-                <tr class="row-closed">
-                  <td>GPT-5.2</td>
-                  <td>41.6</td>
-                  <td>20.4</td>
-                  <td>30.8</td>
-                </tr>
-                <tr class="row-closed">
-                  <td>Gemini-3-Pro</td>
-                  <td>36.8</td>
-                  <td>17.6</td>
-                  <td>32.0</td>
-                </tr>
-                <tr>
-                  <td>Qwen3-235B-A22B-Instruct</td>
-                  <td>19.6</td>
-                  <td>17.2</td>
-                  <td>38.0</td>
-                </tr>
-                <tr>
-                  <td>QwQ-32B</td>
-                  <td>23.2</td>
-                  <td>14.4</td>
-                  <td>34.8</td>
+                <tr class="row-highlight">
+                  <td><strong>AgentDoG-1.0-Qwen3-4B</strong></td>
+                  <td>46.8</td>
+                  <td>16.5</td>
+                  <td>40.6</td>
+                  <td>34.6</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-FG-Qwen3-4B (Ours)</strong></td>
-                  <td><strong>82.0</strong></td>
-                  <td><strong>32.4</strong></td>
-                  <td>58.4</td>
+                  <td><strong>AgentDoG-1.5-Qwen3.5-0.8B</strong></td>
+                  <td>65.7</td>
+                  <td>18.4</td>
+                  <td>44.9</td>
+                  <td>43.0</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-FG-Llama3.1-8B (Ours)</strong></td>
-                  <td>81.6</td>
-                  <td>31.6</td>
-                  <td>57.6</td>
+                  <td><strong>AgentDoG-1.5-Qwen3.5-2B</strong></td>
+                  <td>68.0</td>
+                  <td>24.0</td>
+                  <td>53.8</td>
+                  <td>48.6</td>
                 </tr>
                 <tr class="row-highlight">
-                  <td><strong>AgentDoG-FG-Qwen2.5-7B (Ours)</strong></td>
-                  <td>81.2</td>
-                  <td>28.8</td>
-                  <td><strong>59.2</strong></td>
+                  <td><strong>AgentDoG-1.5-Llama3.1-8B</strong></td>
+                  <td>72.9</td>
+                  <td>24.6</td>
+                  <td>52.5</td>
+                  <td>50.0</td>
+                </tr>
+                <tr class="row-highlight">
+                  <td><strong>AgentDoG-1.5-Qwen3.5-4B</strong></td>
+                  <td><strong>75.2</strong></td>
+                  <td><strong>27.5</strong></td>
+                  <td><strong>62.9</strong></td>
+                  <td><strong>55.2</strong></td>
                 </tr>
               </tbody>
             </table>
@@ -427,40 +488,57 @@
   <section id="models" class="models">
     <div class="container">
       <h2 class="section-title" data-en="Model Checkpoints" data-zh="模型下载">Model Checkpoints</h2>
-      <p class="section-subtitle" data-en="Fine-tuned guard models for agent trajectory safety evaluation" data-zh="用于智能体轨迹安全评估的微调防护模型">
-        Fine-tuned guard models for agent trajectory safety evaluation
+      <p class="section-subtitle" data-en="AgentDoG 1.5 model zoo with unified, coarse-grained, and fine-grained guardrail checkpoints" data-zh="AgentDoG 1.5 模型库，包含统一、粗粒度和细粒度护栏模型">
+        AgentDoG 1.5 model zoo with unified, coarse-grained, and fine-grained guardrail checkpoints
       </p>
 
-      <!-- Binary Classification Models -->
+      <!-- Unified Classification Model -->
       <div class="model-category">
-        <h3 class="model-category-title" data-en="Binary Classification (Safe/Unsafe)" data-zh="二元分类（安全/不安全）">Binary Classification (Safe/Unsafe)</h3>
-        <p class="model-category-desc" data-en="Trajectory-level safety evaluation: determines whether an agent trajectory is safe or unsafe" data-zh="轨迹级安全评估：判断智能体轨迹是安全还是不安全">Trajectory-level safety evaluation: determines whether an agent trajectory is safe or unsafe</p>
+        <h3 class="model-category-title" data-en="Unified Safety Classification" data-zh="统一安全分类">Unified Safety Classification</h3>
+        <p class="model-category-desc" data-en="Joint safety judgment and diagnostic taxonomy classification in one prompt format" data-zh="在同一提示格式中完成安全判断与诊断分类">Joint safety judgment and diagnostic taxonomy classification in one prompt format</p>
         <div class="models-row">
           <div class="model-card">
             <div class="model-info">
-              <h4>AgentDoG-Qwen3-4B</h4>
+              <h4>AgentDoG1.5-Unified-Qwen3.5-4B</h4>
             </div>
             <div class="model-links">
-              <a href="https://huggingface.co/AI45Research/AgentDoG-Qwen3-4B" class="model-link" target="_blank" rel="noopener">HuggingFace</a>
-              <a href="https://modelscope.cn/models/AI45Research/AgentDoG-Qwen3-4B" class="model-link" target="_blank" rel="noopener">ModelScope</a>
+              <a href="https://huggingface.co/AI45Research/AgentDoG1.5-unified-Qwen3.5-4B" class="model-link" target="_blank" rel="noopener">HuggingFace</a>
+              <span class="model-link">ModelScope Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coarse-Grained Classification Models -->
+      <div class="model-category">
+        <h3 class="model-category-title" data-en="Coarse-Grained Moderation" data-zh="粗粒度审核">Coarse-Grained Moderation</h3>
+        <p class="model-category-desc" data-en="Trajectory-level safe/unsafe judgment models" data-zh="轨迹级安全/不安全判断模型">Trajectory-level safe/unsafe judgment models</p>
+        <div class="models-row">
+          <div class="model-card">
+            <div class="model-info">
+              <h4>AgentDoG1.5-Qwen3.5-0.8B</h4>
+            </div>
+            <div class="model-links">
+              <span class="model-link">HF Soon</span>
+              <span class="model-link">ModelScope Soon</span>
             </div>
           </div>
           <div class="model-card">
             <div class="model-info">
-              <h4>AgentDoG-Qwen2.5-7B</h4>
+              <h4>AgentDoG1.5-Qwen3.5-2B</h4>
             </div>
             <div class="model-links">
-              <a href="https://huggingface.co/AI45Research/AgentDoG-Qwen2.5-7B" class="model-link" target="_blank" rel="noopener">HuggingFace</a>
-              <a href="https://modelscope.cn/models/AI45Research/AgentDoG-Qwen2.5-7B" class="model-link" target="_blank" rel="noopener">ModelScope</a>
+              <span class="model-link">HF Soon</span>
+              <span class="model-link">ModelScope Soon</span>
             </div>
           </div>
           <div class="model-card">
             <div class="model-info">
-              <h4>AgentDoG-Llama3.1-8B</h4>
+              <h4>AgentDoG1.5-Qwen3.5-4B</h4>
             </div>
             <div class="model-links">
-              <a href="https://huggingface.co/AI45Research/AgentDoG-Llama3.1-8B" class="model-link" target="_blank" rel="noopener">HuggingFace</a>
-              <a href="https://modelscope.cn/models/AI45Research/AgentDoG-Llama3.1-8B" class="model-link" target="_blank" rel="noopener">ModelScope</a>
+              <a href="https://huggingface.co/AI45Research/AgentDoG-1.5-Qwen3.5-4B" class="model-link" target="_blank" rel="noopener">HuggingFace</a>
+              <span class="model-link">ModelScope Soon</span>
             </div>
           </div>
         </div>
@@ -468,71 +546,36 @@
 
       <!-- Fine-Grained Classification Models -->
       <div class="model-category">
-        <h3 class="model-category-title" data-en="Fine-Grained Classification (FG)" data-zh="细粒度分类（FG）">Fine-Grained Classification (FG)</h3>
-        <p class="model-category-desc" data-en="Risk diagnosis: classifies Risk Source, Failure Mode, and Real-World Harm for unsafe trajectories" data-zh="风险诊断：对不安全轨迹分类风险来源、失效模式和现实危害">Risk diagnosis: classifies Risk Source, Failure Mode, and Real-World Harm for unsafe trajectories</p>
+        <h3 class="model-category-title" data-en="Fine-Grained Diagnosis" data-zh="细粒度诊断">Fine-Grained Diagnosis</h3>
+        <p class="model-category-desc" data-en="Risk diagnosis models for Risk Source, Failure Mode, and Real-World Harm" data-zh="面向 Risk Source、Failure Mode 和 Real-World Harm 的风险诊断模型">Risk diagnosis models for Risk Source, Failure Mode, and Real-World Harm</p>
         <div class="models-row">
           <div class="model-card">
             <div class="model-info">
-              <h4>AgentDoG-FG-Qwen3-4B</h4>
+              <h4>AgentDoG1.5-FG-Qwen3.5-0.8B</h4>
             </div>
             <div class="model-links">
-              <a href="https://huggingface.co/AI45Research/AgentDoG-FG-Qwen3-4B" class="model-link" target="_blank" rel="noopener">HuggingFace</a>
-              <a href="https://modelscope.cn/models/AI45Research/AgentDoG-FG-Qwen3-4B" class="model-link" target="_blank" rel="noopener">ModelScope</a>
+              <span class="model-link">HF Soon</span>
+              <span class="model-link">ModelScope Soon</span>
             </div>
           </div>
           <div class="model-card">
             <div class="model-info">
-              <h4>AgentDoG-FG-Qwen2.5-7B</h4>
+              <h4>AgentDoG1.5-FG-Qwen3.5-2B</h4>
             </div>
             <div class="model-links">
-              <a href="https://huggingface.co/AI45Research/AgentDoG-FG-Qwen2.5-7B" class="model-link" target="_blank" rel="noopener">HuggingFace</a>
-              <a href="https://modelscope.cn/models/AI45Research/AgentDoG-FG-Qwen2.5-7B" class="model-link" target="_blank" rel="noopener">ModelScope</a>
+              <span class="model-link">HF Soon</span>
+              <span class="model-link">ModelScope Soon</span>
             </div>
           </div>
           <div class="model-card">
             <div class="model-info">
-              <h4>AgentDoG-FG-Llama3.1-8B</h4>
+              <h4>AgentDoG1.5-FG-Qwen3.5-4B</h4>
             </div>
             <div class="model-links">
-              <a href="https://huggingface.co/AI45Research/AgentDoG-FG-Llama3.1-8B" class="model-link" target="_blank" rel="noopener">HuggingFace</a>
-              <a href="https://modelscope.cn/models/AI45Research/AgentDoG-FG-Llama3.1-8B" class="model-link" target="_blank" rel="noopener">ModelScope</a>
+              <span class="model-link">HF Soon</span>
+              <span class="model-link">ModelScope Soon</span>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- XAI Section -->
-  <section id="xai">
-    <div class="container">
-      <h2 class="section-title" data-en="Agentic XAI Attribution" data-zh="智能体可解释归因">Agentic XAI Attribution</h2>
-      <p class="section-subtitle" data-en="A hierarchical framework for explaining agent decision drivers beyond simple failure localization" data-zh="超越简单故障定位的分层框架，用于解释智能体决策驱动因素">
-        A hierarchical framework for explaining agent decision drivers beyond simple failure localization
-      </p>
-
-      <p class="xai-intro" data-en="We introduce a novel hierarchical framework for Agentic Attribution, designed to unveil the internal drivers behind agent actions. By decomposing interaction trajectories into pivotal components and fine-grained textual evidence, our approach explains why an agent makes specific decisions regardless of the outcome. This framework enhances the transparency and accountability of autonomous systems by identifying key factors such as memory biases and tool outputs." data-zh="我们引入了一种新颖的分层智能体归因框架，旨在揭示智能体行为背后的内部驱动因素。通过将交互轨迹分解为关键组件和细粒度文本证据，我们的方法解释了智能体为何做出特定决策，无论结果如何。该框架通过识别记忆偏差和工具输出等关键因素，增强了自主系统的透明度和可问责性。">
-        We introduce a novel hierarchical framework for Agentic Attribution, designed to unveil the internal drivers behind agent actions. By decomposing interaction trajectories into pivotal components and fine-grained textual evidence, our approach explains why an agent makes specific decisions regardless of the outcome.
-      </p>
-
-      <div class="xai-images-vertical">
-        <div class="xai-image-wrapper">
-          <div class="xai-image">
-            <img src="../figures/xai_attribution_agent_dog.png" alt="XAI Attribution Results" loading="lazy">
-          </div>
-          <p class="image-caption" data-en="Attribution results across representative scenarios" data-zh="代表性场景的归因结果">Attribution results across representative scenarios</p>
-        </div>
-        <div class="xai-image-wrapper">
-          <div class="xai-image">
-            <img src="../figures/xai_attribution_comparison.png" alt="XAI Attribution Comparison" loading="lazy">
-          </div>
-          <p class="image-caption" data-en="Comparative attribution: AgentDoG vs Basemodel" data-zh="对比归因：AgentDoG vs 基线模型">Comparative attribution: AgentDoG vs Basemodel</p>
-        </div>
-        <div class="xai-image-wrapper">
-          <div class="xai-image">
-            <img src="../figures/attribution_maker.gif" alt="Case demo" loading="lazy">
-          </div>
-          <p class="image-caption" data-en="Demo of the dynamic attribution process in agentic XAI" data-zh="XAI动态归因过程演示">Demo of the dynamic attribution process in agentic XAI</p>
         </div>
       </div>
     </div>
