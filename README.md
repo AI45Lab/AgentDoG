@@ -97,7 +97,7 @@ ATBench Family is designed to evaluate whether a guardrail can generalize from g
 
 ---
 
-## AgentDoG Family: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security.
+## AgentDoG 1.5
 
 AgentDoG 1.5 is a lightweight and scalable alignment framework for AI agent safety and security. It builds on the trajectory-level diagnostic formulation of AgentDoG 1.0 and further emphasizes extensibility, cost-effective deployment, and application-level integration.
 
