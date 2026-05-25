@@ -20,7 +20,7 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 - `2026/xx/xx`: AgentDoG 1.5 is coming soon, introducing lightweight and scalable guardrail models for trajectory-level agent safety.
 - `2026/xx/xx`: We extend ATBench into the ATBench Family, covering general tool-use agents, OpenClaw-style stateful agents, and Codex-style repository agents.
 - `2026/xx/xx`: AgentDoG 1.5 supports two application settings: safety agentic SFT/RL and online agent safety guardrails.
-- `2026/01/26`: We have released [AgentDoG](docs/readme_v1.md), a diagnostic guardrail framework for AI agent safety and security.
+- `2026/01/26`: We have released [AgentDoG 1.0](docs/readme_v1.md), a diagnostic guardrail framework for AI agent safety and security.
 
 ## Introduction
 
