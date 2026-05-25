@@ -1,6 +1,6 @@
 # AgentDoG 1.0 Getting Started
 
-This page keeps the original AgentDoG 1.0 deployment and inference commands. For AgentDoG 1.5, please use [docs/getting_started_v1_5.md](getting_started_v1_5.md).
+This page keeps the original AgentDoG 1.0 deployment and inference commands. For AgentDoG 1.5, please use [getting_started_v1_5.md](getting_started_v1_5.md).
 
 ## Deployment (SGLang / vLLM)
 

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="figures/welcome.png" width="80%" alt="AgentDoG Welcome"/>
+  <img src="../figures/welcome.png" width="80%" alt="AgentDoG Welcome"/>
 </p>
 
 <p align="center">
@@ -24,11 +24,11 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 - 🛡️ **Flexible Use Cases:** can serve as a benchmark, a risk classifier for trajectories, or a guard module in agent systems.
 - 🥇 **State-of-the-Art Performance:** Outperforms existing approaches on R-Judge, ASSE-Safety, and ATBench.
 <p align="center">
-  <img src="figures/binary_performance.png" width="95%">
+  <img src="../figures/binary_performance.png" width="95%">
 </p>
 
 <p align="center">
-  <img src="figures/fined_performance.png" width="95%">
+  <img src="../figures/fined_performance.png" width="95%">
 </p>
 
 ---
@@ -78,8 +78,8 @@ In the current release, the taxonomy includes 8 risk-source categories, 14 failu
 ### Task Definition
 
 <p align="center">
-  <img src="figures/agentdog_prompt_coarsegrained.png" width="49%" alt="Trajectory-level safety evaluation prompt"/>
-  <img src="figures/agentdog_prompt_finegrained.png" width="49%" alt="Fine-grained risk diagnosis prompt"/>
+  <img src="../figures/agentdog_prompt_coarsegrained.png" width="49%" alt="Trajectory-level safety evaluation prompt"/>
+  <img src="../figures/agentdog_prompt_finegrained.png" width="49%" alt="Fine-grained risk diagnosis prompt"/>
 </p>
 <p align="center"><em>Figure: Example task instructions for the two AgentDoG classification tasks (trajectory-level evaluation and fine-grained diagnosis).</em></p>
 
@@ -102,21 +102,21 @@ Concretely, we consider two tasks:
 We use a **taxonomy-guided** synthesis pipeline to generate realistic, multi-step agent trajectories. Each trajectory is conditioned on a sampled risk tuple (risk source, failure mode, real-world harm), then expanded into a coherent tool-augmented execution and filtered by quality checks.
 
 <p align="center">
-  <img src="figures/data_synthesis_main.png" width="95%" alt="Data Synthesis Pipeline"/>
+  <img src="../figures/data_synthesis_main.png" width="95%" alt="Data Synthesis Pipeline"/>
 </p>
 <p align="center"><em>Figure: Three-stage pipeline for multi-step agent safety trajectory synthesis.</em></p>
 
 To reflect realistic agent tool use, our tool library is orders of magnitude larger than prior benchmarks. For example, it is about 86x, 55x, and 41x larger than R-Judge, ASSE-Safety, and ASSE-Security, respectively.
 
 <p align="center">
-  <img src="figures/tool_comparison.png" width="90%" alt="Tool library size comparison"/>
+  <img src="../figures/tool_comparison.png" width="90%" alt="Tool library size comparison"/>
 </p>
 <p align="center"><em>Figure: Tool library size compared to existing agent safety benchmarks.</em></p>
 
 We also track the coverage of the three taxonomy dimensions (risk source, failure mode, and harm type) to ensure balanced and diverse risk distributions in our synthesized data.
 
 <p align="center">
-  <img src="figures/distribution_comparison.png" width="90%" alt="Taxonomy distribution comparison"/>
+  <img src="../figures/distribution_comparison.png" width="90%" alt="Taxonomy distribution comparison"/>
 </p>
 <p align="center"><em>Figure: Distribution over risk source, failure mode, and harm type categories.</em></p>
 
@@ -318,18 +318,18 @@ To evaluate the effectiveness of the proposed agentic attribution framework, we 
 
 
 <p align="center">
-  <img src="figures/xai_attribution_agent_dog.png" width="95%" alt="xai attribution agent dog"/>
+  <img src="../figures/xai_attribution_agent_dog.png" width="95%" alt="xai attribution agent dog"/>
 </p>
 <p align="center"><em>Figure: Illustration of attribution results across two representative scenarios.</em></p>
 
 
 <p align="center">
-  <img src="figures/xai_attribution_comparison.png" width="70%" alt="xai attribution comparison"/>
+  <img src="../figures/xai_attribution_comparison.png" width="70%" alt="xai attribution comparison"/>
 </p>
 <p align="center"><em>Figure: Comparative attribution results between AgentDoG and Basemodel.</em></p>
 
 <p align="center">
-  <img src="figures/attribution_marker_v2.gif" width="90%" alt="attribution marker v2"/>
+  <img src="../figures/attribution_marker_v2.gif" width="90%" alt="attribution marker v2"/>
 </p>
 <p align="center"><em>Figure: Demo of dynamic attribution.</em></p>
 

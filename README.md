@@ -20,7 +20,7 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 - `2026/xx/xx`: AgentDoG 1.5 is coming soon, introducing lightweight and scalable guardrail models for trajectory-level agent safety.
 - `2026/xx/xx`: We extend ATBench into the ATBench Family, covering general tool-use agents, OpenClaw-style stateful agents, and Codex-style repository agents.
 - `2026/xx/xx`: AgentDoG 1.5 supports two application settings: safety agentic SFT/RL and online agent safety guardrails.
-- `2026/01/26`: We have released [AgentDoG 1.0](docs/readme_v1.md), a diagnostic guardrail framework for AI agent safety and security.
+- `2026/01/26`: We have released [AgentDoG 1.0](examples/readme_v1.md), a diagnostic guardrail framework for AI agent safety and security.
 
 ## Introduction
 
@@ -154,6 +154,8 @@ Accuracy on ATBench-Codex and ATBench-Claw across model sizes. The x-axis uses d
 
 AgentDoG 1.5 can serve as a trajectory-level diagnostic evaluator for improving agent safety through supervised fine-tuning and reinforcement learning.
 
+Application materials will be organized under [`Application1/`](Application1/).
+
 ### Evaluation Setup
 
 AgentDoG 1.5 is used to evaluate safety behavior across multiple agentic benchmarks and environments, including harmful instruction following, tool-use safety, refusal behavior, and multi-step agent execution.
@@ -171,6 +173,8 @@ AgentDoG 1.5 can be integrated as an external safety evaluator in agentic reinfo
 ## Application 2: AgentDoG 1.5 as Online Agent Safety Guardrail
 
 AgentDoG 1.5 can also be deployed as an online agent safety guardrail. During agent execution, it can inspect accumulated trajectories before pending actions or final visible responses and flag unsafe behavior before it reaches the user or environment.
+
+Application materials will be organized under [`Application2/`](Application2/).
 
 ### Why Online Agent Guardrails Matter
 
@@ -190,8 +194,8 @@ The online guardrail setting evaluates both safety improvement and deployment co
 
 AgentDoG 1.0 and AgentDoG 1.5 use different model checkpoints and prompt formats, so their deployment and inference instructions are maintained separately:
 
-- [AgentDoG 1.5 Getting Started](docs/getting_started_v1_5.md)
-- [AgentDoG 1.0 Getting Started](docs/getting_started_v1.md)
+- [AgentDoG 1.5 Getting Started](examples/getting_started_v1_5.md)
+- [AgentDoG 1.0 Getting Started](examples/getting_started_v1.md)
 
 ---
 
@@ -201,6 +205,14 @@ AgentDoG 1.0 and AgentDoG 1.5 use different model checkpoints and prompt formats
 AgentDoG/
 ├── README.md
 ├── figures/
+├── docs/
+│   ├── index.html
+│   ├── style.css
+│   ├── figures/
+│   ├── v1/
+│   │   └── index.html
+│   └── v1_5/
+│       └── index.html
 ├── prompts/
 │   ├── v1.0/
 │   │   ├── trajectory_binary.txt
@@ -210,8 +222,15 @@ AgentDoG/
 │       ├── coarse_grained_moderation.txt
 │       └── unified_safety_classification.txt
 ├── examples/
+│   ├── getting_started_v1.md
+│   ├── getting_started_v1_5.md
+│   ├── readme_v1.md
 │   ├── run_openai_moderation.py
 │   └── trajectory_sample.json
+├── Application1/
+│   └── README.md
+├── Application2/
+│   └── README.md
 ├── AgenticXAI
 │   ├── case_plot_html.py
 │   ├── component_attri.py
