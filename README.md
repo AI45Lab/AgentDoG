@@ -24,12 +24,12 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 
 ## Introduction
 
-**AgentDoG** is a risk-aware evaluation and guarding framework for autonomous agents. It focuses on *trajectory-level risk assessment*, aiming to determine whether an agent’s execution trajectory contains safety risks under diverse application scenarios. Unlike single-step content moderation or final-output filtering, AgentDoG analyzes the full execution trace of tool-using agents to detect risks that emerge mid-trajectory.
+**AgentDoG 1.5** is a cost-effective and extensible **Diagnostic Guardrail** for trajectory-level agent safety assessment, building on the foundation of AgentDoG 1.0. It expands agent safety diagnosis from fixed trajectory classification toward a scalable framework for modern agentic systems with long-horizon planning, tool-mediated execution, and complex environment interaction.
 
-- 🧭 **Trajectory-Level Monitoring:** evaluates multi-step agent executions spanning observations, reasoning, and actions.
-- 🧩 **Taxonomy-Guided Diagnosis:** provides fine-grained risk labels (risk source, failure mode, and real-world harm) to explain why unsafe behavior occurs. More crucially, AgentDoG diagnoses the root cause of a specific action, tracing it to specific planning steps or tool selections.
-- 🛡️ **Flexible Use Cases:** can serve as a benchmark, a risk classifier for trajectories, or a guard module in agent systems.
-- 🥇 **State-of-the-Art Performance:** Outperforms existing approaches on R-Judge, ASSE-Safety, and ATBench.
+- 🧩 **Extensible Taxonomy for Agentic Safety Diagnosis:** expands the original safety taxonomy into a flexible framework that captures emerging risks from modern agentic AI systems, including long-horizon planning, tool-mediated execution, and complex environment interaction.
+- 📚 **Extensible ATBench Family:** refines ATBench into a trajectory-level benchmark family with 1,000 audited trajectories, 2,084 available tools, 1,954 unique invoked tools, and an average of 9.01 turns and 3.95k tokens per trajectory, further instantiated by ATBench-Codex and ATBench-Claw.
+- 🛡️ **Cost-Effective Diagnostic Guardrail Models:** trains AgentDoG 1.5 through an efficient data preparation and training pipeline with around 1k SFT trajectories and several thousand RL samples, covering a high-performing 4B variant and lightweight 0.8B and 2B variants.
+- 🚀 **Practical Agent Safety Applications:** demonstrates AgentDoG 1.5 in safety-aware agentic SFT/RL and online agent safety monitoring, highlighting its use as a practical safety component for deployed agentic AI systems.
 
 <p align="center">
   <img src="figures/binary_performance.png" width="95%">
