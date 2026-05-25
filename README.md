@@ -177,10 +177,12 @@ AgentDoG 1.5 can also be deployed as an online agent safety guardrail. During ag
 Application materials will be organized under [`App2/`](App2/).
 
 <p align="center">
-  <video src="figures/app2_online_guardrail_demo.m4v" controls muted width="85%"></video>
+  <a href="docs/figures/app2_online_guardrail_demo_30s.mp4">
+    <img src="docs/figures/app2_online_guardrail_preview.gif" width="85%" alt="App 2 online guardrail demo preview"/>
+  </a>
 </p>
 <p align="center">
-  <a href="figures/app2_online_guardrail_demo.m4v">Watch the lightweight App 2 demo video</a>
+  <a href="docs/figures/app2_online_guardrail_demo_30s.mp4">Watch the 30-second App 2 demo video</a>
 </p>
 
 ### Why Online Agent Guardrails Matter
