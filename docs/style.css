@@ -527,6 +527,20 @@ section {
   border: 1px solid var(--border-color);
 }
 
+.app-video {
+  width: min(960px, 100%);
+  margin: 42px auto 0;
+  text-align: center;
+}
+
+.app-video video {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: #000;
+}
+
 .synthesis-distribution {
   text-align: center;
   margin-bottom: 48px;

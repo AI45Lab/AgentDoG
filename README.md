@@ -13,7 +13,7 @@
 Visit our Hugging Face or ModelScope organization (click links above), search checkpoints with names starting with `AgentDoG-`, and you will find all you need! Enjoy!
 
 
-# AgentDoG Family: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security.
+# AgentDoG Family: Towards Diagnostic Guardrail and Scalable Alignment for AI Agent Safety and Security
 
 ## News
 
@@ -154,7 +154,7 @@ Accuracy on ATBench-Codex and ATBench-Claw across model sizes. The x-axis uses d
 
 AgentDoG 1.5 can serve as a trajectory-level diagnostic evaluator for improving agent safety through supervised fine-tuning and reinforcement learning.
 
-Application materials will be organized under [`Application1/`](Application1/).
+Application materials will be organized under [`App1/`](App1/).
 
 ### Evaluation Setup
 
@@ -174,7 +174,14 @@ AgentDoG 1.5 can be integrated as an external safety evaluator in agentic reinfo
 
 AgentDoG 1.5 can also be deployed as an online agent safety guardrail. During agent execution, it can inspect accumulated trajectories before pending actions or final visible responses and flag unsafe behavior before it reaches the user or environment.
 
-Application materials will be organized under [`Application2/`](Application2/).
+Application materials will be organized under [`App2/`](App2/).
+
+<p align="center">
+  <video src="figures/app2_online_guardrail_demo.m4v" controls muted width="85%"></video>
+</p>
+<p align="center">
+  <a href="figures/app2_online_guardrail_demo.m4v">Watch the lightweight App 2 demo video</a>
+</p>
 
 ### Why Online Agent Guardrails Matter
 
@@ -227,9 +234,9 @@ AgentDoG/
 │   ├── readme_v1.md
 │   ├── run_openai_moderation.py
 │   └── trajectory_sample.json
-├── Application1/
+├── App1/
 │   └── README.md
-├── Application2/
+├── App2/
 │   └── README.md
 ├── AgenticXAI
 │   ├── case_plot_html.py
