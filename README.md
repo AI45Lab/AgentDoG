@@ -46,7 +46,7 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 ### AgentDoG 1.5
 | Name | Parameters | Base Model | HF Link | ModelScope Link |
 |------|------------|------------|---------|-----------------|
-| AgentDoG1.5-unified-Qwen3.5-4B | 4B | Qwen3.5 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-unified-Qwen3.5-4B) | Coming soon |
+| AgentDoG1.5-Unified-Qwen3.5-4B | 4B | Qwen3.5 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-unified-Qwen3.5-4B) | Coming soon |
 | AgentDoG1.5-Qwen3.5-0.8B | 0.8B | Qwen3.5 | Coming soon | Coming soon |
 | AgentDoG1.5-Qwen3.5-2B | 2B | Qwen3.5 | Coming soon | Coming soon |
 | AgentDoG1.5-Qwen3.5-4B | 4B | Qwen3.5 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-1.5-Qwen3.5-4B) | Coming soon |
@@ -118,21 +118,21 @@ AgentDoG 1.5 is evaluated on R-Judge and ATBench using Accuracy, Precision, Reca
 
 | Model | R-Judge Acc | R-Judge Prec. | R-Judge Rec. | R-Judge F1 | ATBench Acc | ATBench Prec. | ATBench Rec. | ATBench F1 |
 |-------|-------------|---------------|--------------|------------|-------------|---------------|--------------|------------|
-| AgentDoG 1.0-4B-Qwen3 | 91.8 | 87.5 | 98.5 | 92.7 | 64.0 | 59.2 | 88.9 | 71.1 |
-| AgentDoG 1.5-0.8B-Qwen3.5 | 75.7 | 83.3 | 67.5 | 74.6 | 60.3 | 58.6 | 68.6 | 63.2 |
-| AgentDoG 1.5-2B-Qwen3.5 | 71.5 | 78.0 | 64.1 | 70.4 | 69.0 | 70.1 | 65.7 | 67.8 |
-| AgentDoG 1.5-8B-Llama-3.1 | 75.5 | 68.6 | 98.8 | 81.0 | 70.9 | 67.1 | 81.2 | 73.5 |
-| AgentDoG 1.5-4B-Qwen3.5 | 92.2 | 91.7 | 93.7 | 92.7 | 72.4 | 69.2 | 80.3 | 74.3 |
+| AgentDoG-1.0-Qwen3-4B | 91.8 | 87.5 | 98.5 | 92.7 | 64.0 | 59.2 | 88.9 | 71.1 |
+| AgentDoG-1.5-Qwen3.5-0.8B | 75.7 | 83.3 | 67.5 | 74.6 | 60.3 | 58.6 | 68.6 | 63.2 |
+| AgentDoG-1.5-Qwen3.5-2B | 71.5 | 78.0 | 64.1 | 70.4 | 69.0 | 70.1 | 65.7 | 67.8 |
+| AgentDoG-1.5-Llama3.1-8B | 75.5 | 68.6 | 98.8 | 81.0 | 70.9 | 67.1 | 81.2 | 73.5 |
+| AgentDoG-1.5-Qwen3.5-4B | 92.2 | 91.7 | 93.7 | 92.7 | 72.4 | 69.2 | 80.3 | 74.3 |
 
 Fine-grained diagnostic accuracy on ATBench is reported along the three taxonomy dimensions. Avg. is the mean score across Risk Source, Failure Mode, and Real-world Harm.
 
 | Model | Risk Source | Failure Mode | Real-world Harm | Avg. |
 |-------|-------------|--------------|-----------------|------|
-| AgentDoG 1.0-4B-Qwen3 | 46.8 | 16.5 | 40.6 | 34.6 |
-| AgentDoG 1.5-0.8B-Qwen3.5 | 65.7 | 18.4 | 44.9 | 43.0 |
-| AgentDoG 1.5-2B-Qwen3.5 | 68.0 | 24.0 | 53.8 | 48.6 |
-| AgentDoG 1.5-8B-Llama-3.1 | 72.9 | 24.6 | 52.5 | 50.0 |
-| AgentDoG 1.5-4B-Qwen3.5 | 75.2 | 27.5 | 62.9 | 55.2 |
+| AgentDoG-1.0-Qwen3-4B | 46.8 | 16.5 | 40.6 | 34.6 |
+| AgentDoG-1.5-Qwen3.5-0.8B | 65.7 | 18.4 | 44.9 | 43.0 |
+| AgentDoG-1.5-Qwen3.5-2B | 68.0 | 24.0 | 53.8 | 48.6 |
+| AgentDoG-1.5-Llama3.1-8B | 72.9 | 24.6 | 52.5 | 50.0 |
+| AgentDoG-1.5-Qwen3.5-4B | 75.2 | 27.5 | 62.9 | 55.2 |
 
 <p align="center">
   <img src="figures/codex-claw.png" width="95%" alt="ATBench-Codex and ATBench-Claw performance by model size"/>
