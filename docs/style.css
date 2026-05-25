@@ -97,6 +97,13 @@ img {
   background-clip: text;
 }
 
+button.nav-logo {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
 .version-dropdown {
   min-width: 132px;
 }
@@ -147,7 +154,8 @@ img {
   margin-top: 8px;
 }
 
-.nav-dropdown:hover .dropdown-menu {
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown.open .dropdown-menu {
   display: block;
 }
 

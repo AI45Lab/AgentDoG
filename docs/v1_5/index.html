@@ -13,10 +13,10 @@
   <nav class="nav">
     <div class="nav-content">
       <div class="nav-dropdown version-dropdown">
-        <a href="#" class="nav-logo">AgentDoG</a>
+        <button type="button" class="nav-logo version-toggle">AgentDoG</button>
         <ul class="dropdown-menu version-menu">
-          <li><a href="/AgentDoG/v1/">AgentDoG 1.0</a></li>
-          <li><a href="/AgentDoG/v1_5/">AgentDoG 1.5</a></li>
+          <li><a href="../v1/" data-version-link>AgentDoG 1.0</a></li>
+          <li><a href="../v1_5/" data-version-link>AgentDoG 1.5</a></li>
         </ul>
       </div>
       <ul class="nav-links">
@@ -614,12 +614,27 @@
       });
     }
 
-    // Smooth scroll for navigation
+    // Version switcher
+    const versionDropdown = document.querySelector('.version-dropdown');
+    const versionToggle = document.querySelector('.version-toggle');
+    if (versionDropdown && versionToggle) {
+      versionToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        versionDropdown.classList.toggle('open');
+      });
+      document.addEventListener('click', () => {
+        versionDropdown.classList.remove('open');
+      });
+    }
+
+    // Smooth scroll for in-page navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const selector = this.getAttribute('href');
+        if (!selector || selector === '#') return;
+        const target = document.querySelector(selector);
         if (target) {
+          e.preventDefault();
           target.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
