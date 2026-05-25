@@ -12,7 +12,9 @@
 
 Visit our Hugging Face or ModelScope organization (click links above), search checkpoints with names starting with `AgentDoG-`, and you will find all you need! Enjoy!
 
-# AgentDoG 1.5
+For the AgentDoG 1.0 README, please refer to [docs/readme_v1.md](docs/readme_v1.md).
+
+# AgentDoG Family: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security.
 
 ## News
 
@@ -41,7 +43,7 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 
 ## Model Zoo
 
-### AgentDoG 1.5
+### AgentDoG Family: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security.
 
 | Name | Parameters | Base Model | HF Link | ModelScope Link |
 |------|------------|------------|---------|-----------------|
@@ -95,7 +97,7 @@ ATBench Family is designed to evaluate whether a guardrail can generalize from g
 
 ---
 
-## AgentDoG 1.5
+## AgentDoG Family: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security.
 
 AgentDoG 1.5 is a lightweight and scalable alignment framework for AI agent safety and security. It builds on the trajectory-level diagnostic formulation of AgentDoG 1.0 and further emphasizes extensibility, cost-effective deployment, and application-level integration.
 
@@ -165,79 +167,6 @@ AgentDoG 1.5 can be placed before high-risk actions or final replies. It takes t
 ### Evaluation
 
 The online guardrail setting evaluates both safety improvement and deployment cost, including detection rate, attack reduction, runtime latency, and integration overhead.
-
----
-
-## 🔍 Agentic XAI Attribution
-
-We also introduce a novel hierarchical framework for Agentic Attribution, designed to unveil the internal drivers behind agent actions beyond simple failure localization. By decomposing interaction trajectories into pivotal components and fine-grained textual evidence, our approach explains why an agent makes specific decisions regardless of the outcome. This framework enhances the transparency and accountability of autonomous systems by identifying key factors such as memory biases and tool outputs.
-
-### Case Study
-
-To evaluate the effectiveness of the proposed agentic attribution framework, we conducted several case studies across diverse scenarios. The figure illustrates how our framework localizes decision drivers across four representative cases. The highlighted regions denote the historical components and fine-grained sentences identified by our framework as the primary decision drivers.
-
-<p align="center">
-  <img src="figures/xai_attribution_agent_dog.png" width="95%" alt="xai attribution agent dog"/>
-</p>
-<p align="center"><em>Figure: Illustration of attribution results across two representative scenarios.</em></p>
-
-<p align="center">
-  <img src="figures/xai_attribution_comparison.png" width="70%" alt="xai attribution comparison"/>
-</p>
-<p align="center"><em>Figure: Comparative attribution results between AgentDoG and Basemodel.</em></p>
-
-<p align="center">
-  <img src="figures/attribution_marker_v2.gif" width="90%" alt="attribution marker v2"/>
-</p>
-<p align="center"><em>Figure: Demo of dynamic attribution.</em></p>
-
-### Quick Start for Agentic Attribution
-
-You can run the analysis in three steps:
-
-#### Step 1: Trajectory-Level Attribution
-
-Analyze the contribution of each conversation step.
-
-```bash
-python component_attri.py \
-  --model_id "your_model_path" \
-  --data_dir ./samples \
-  --output_dir ./results
-```
-
-#### Step 2: Sentence-Level Attribution
-
-Perform fine-grained analysis on the top-K most influential steps.
-
-```bash
-python sentence_attri.py \
-  --model_id "your_model_path" \
-  --traj_file ./samples/xx.json \
-  --attr_file ./results/xx_attr_trajectory.json \
-  --output_file ./results/xx_attr_sentence.json \
-  --top_k 3
-```
-
-#### Step 3: Generate Visualization
-
-Create an interactive HTML heatmap.
-
-```bash
-python case_plot_html.py \
-  --original_traj_file ./samples/xx.json \
-  --traj_attr_file ./results/xx_attr_trajectory.json \
-  --sent_attr_file ./results/xx_attr_sentence.json \
-  --output_file ./results/xx_visualization.html
-```
-
-##### One-Click Execution
-
-To run the complete pipeline automatically, configure and run the shell script:
-
-```bash
-bash run_all_pipeline.sh
-```
 
 ---
 
