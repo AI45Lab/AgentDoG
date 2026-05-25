@@ -101,10 +101,6 @@ img {
   min-width: 132px;
 }
 
-.version-dropdown .nav-logo::after {
-  content: " ▾";
-  font-size: 0.8rem;
-}
 
 .version-menu {
   left: 0;
