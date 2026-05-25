@@ -67,19 +67,17 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 For more details, please refer to the AgentDoG technical reports.
 
 ---
-
 ## ✨ Safety Taxonomy
 
-We adopt a unified, three-dimensional safety taxonomy for agentic systems. It organizes risks along three orthogonal axes, answering: why a risk arises (risk source), how it manifests in behavior (failure mode), and what harm it causes (real-world harm).
+AgentDoG adopts a three-dimensional safety taxonomy for trajectory-level agent safety diagnosis: **Risk Source**, **Failure Mode**, and **Real-world Harm**. This taxonomy separates where a risk enters the trajectory, how it manifests in the agent's behavior, and what consequence it may produce.
 
-* **Risk Source**: where the threat originates in the agent loop, e.g., user inputs, environmental observations,
-  external tools/APIs, or the agent's internal reasoning.
-* **Failure Mode**: how the unsafe behavior is realized, such as flawed planning, unsafe tool usage,
-  instruction-priority confusion, or unsafe content generation.
-* **Real-World Harm**: the real-world impact, including privacy leakage, financial loss, physical harm,
-  security compromise, or broader societal/psychological harms.
+* **Risk Source**: where the risk comes from, such as user input, environmental observations, external tools/APIs/skills, tool feedback, repository artifacts, or the agent's internal logic and failures.
+* **Failure Mode**: how the risk influences agent behavior, such as unconfirmed or over-privileged action, flawed planning or reasoning, improper tool use, insecure interaction or execution, unauthorized information disclosure, or misleading and unverified information.
+* **Real-world Harm**: what consequence the unsafe behavior may cause, including privacy and confidentiality harm, financial and economic harm, security and system integrity harm, functional and opportunity harm, reputational harm, or compliance, legal, and auditability harm.
 
-In the current release, the taxonomy includes 8 risk-source categories, 14 failure modes, and 10 real-world harm categories, and is used for fine-grained labeling during training and evaluation.
+In AgentDoG 1.5, we reinterpret the taxonomy not as a static label space, but as a **shared diagnostic scaffold** for evolving agent execution settings. The three high-level dimensions remain fixed, while new settings can be supported through setting-specific customization: adding new leaf categories when new risks emerge, and strengthening inherited categories when existing labels need more precise operational meanings.
+
+This extensible design allows AgentDoG 1.5 to adapt to modern agent systems with persistent sessions, tool and skill execution, approval boundaries, repository artifacts, shell commands, dependency/MCP interactions, workspace mutation, runtime policies, and verification claims, while preserving a consistent trajectory-level diagnostic interface.
 
 ---
 
