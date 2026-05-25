@@ -85,8 +85,8 @@ AgentDoG 1.5 extends the original ATBench into a benchmark family for trajectory
 | Benchmark | Agent Setting | Description | Download |
 |-----------|---------------|-------------|----------|
 | **ATBench** | General tool-use agents | The base trajectory-level safety benchmark inherited from AgentDoG 1.0. | 🤗 [Hugging Face](https://huggingface.co/datasets/AI45Research/ATBench) |
-| **ATBench-Claw** | OpenClaw agents with stateful tool/skill execution | Extends the benchmark to persistent sessions, accumulated traces, and stateful tool execution. | Coming soon |
-| **ATBench-Codex** | Codex-style repository and command execution agents | Extends the benchmark to repository modification, shell commands, file operations, and code-execution risks. | Coming soon |
+| **ATBench-Claw** | OpenClaw agents with stateful tool/skill execution | Extends the benchmark to persistent sessions, accumulated traces, and stateful tool execution. | 🤗 [Hugging Face](https://huggingface.co/datasets/AI45Research/ATBench-Claw) |
+| **ATBench-Codex** | Codex-style repository and command execution agents | Extends the benchmark to repository modification, shell commands, file operations, and code-execution risks. | 🤗 [Hugging Face](https://huggingface.co/datasets/AI45Research/ATBench-Codex) |
 
 ATBench Family is designed to evaluate whether a guardrail can generalize from general tool-use trajectories to specialized agent environments. It also demonstrates how the three-dimensional taxonomy can be customized for new settings while preserving the same diagnostic interface.
 
