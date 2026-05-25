@@ -12,7 +12,6 @@
 
 Visit our Hugging Face or ModelScope organization (click links above), search checkpoints with names starting with `AgentDoG-`, and you will find all you need! Enjoy!
 
-For the AgentDoG 1.0 README, please refer to [docs/readme_v1.md](docs/readme_v1.md).
 
 # AgentDoG Family: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security.
 
@@ -21,6 +20,7 @@ For the AgentDoG 1.0 README, please refer to [docs/readme_v1.md](docs/readme_v1.
 - `2026/xx/xx`: AgentDoG 1.5 is coming soon, introducing lightweight and scalable guardrail models for trajectory-level agent safety.
 - `2026/xx/xx`: We extend ATBench into the ATBench Family, covering general tool-use agents, OpenClaw-style stateful agents, and Codex-style repository agents.
 - `2026/xx/xx`: AgentDoG 1.5 supports two application settings: safety agentic SFT/RL and online agent safety guardrails.
+- `2026/01/26`: We have released [AgentDoG](docs/readme_v1.md), a diagnostic guardrail framework for AI agent safety and security.
 
 ## Introduction
 
