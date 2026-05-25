@@ -164,11 +164,11 @@ Fine-grained diagnostic accuracy on ATBench is reported along the three taxonomy
 | **AgentDoG-1.5-Qwen3.5-4B** | **75.2** | **27.5** | **62.9** |
 | **AgentDoG-1.5-Qwen3.5-4B-U** | 24.1 | 9.5 | 28.4 |
 
+Accuracy on ATBench-Codex and ATBench-Claw across model sizes. The x-axis uses dense model size and active parameters for MoE models; closed-source models are shown as high/low reference lines because their sizes are unavailable. Guard models use approximate backbone sizes with slight jitter, and Qwen3.5-0.8B/2B are omitted due to low strict-parser validity.
+
 <p align="center">
   <img src="figures/codex-claw.png" width="95%" alt="ATBench-Codex and ATBench-Claw performance by model size"/>
 </p>
-
-Accuracy on ATBench-Codex and ATBench-Claw across model sizes. The x-axis uses dense model size and active parameters for MoE models; closed-source models are shown as high/low reference lines because their sizes are unavailable. Guard models use approximate backbone sizes with slight jitter, and Qwen3.5-0.8B/2B are omitted due to low strict-parser validity.
 
 ---
 
