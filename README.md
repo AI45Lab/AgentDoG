@@ -43,8 +43,7 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 
 ## Model Zoo
 
-### AgentDoG Family: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security.
-
+### AgentDoG 1.5
 | Name | Parameters | Base Model | HF Link | ModelScope Link |
 |------|------------|------------|---------|-----------------|
 | AgentDoG1.5-unified-Qwen3.5-4B | 4B | Qwen3.5 | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-unified-Qwen3.5-4B) | Coming soon |
