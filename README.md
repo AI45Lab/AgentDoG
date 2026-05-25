@@ -115,22 +115,25 @@ AgentDoG 1.5 models are trained with supervised fine-tuning and reinforcement le
 
 ### Evaluation
 
-AgentDoG 1.5 is evaluated on both general safety benchmarks and agent-specific trajectory benchmarks, including R-Judge, ATBench-Pro, ATBench-Codex, and ATBench-Claw.
+AgentDoG 1.5 is evaluated on R-Judge and ATBench using Accuracy, Precision, Recall, and F1-score. We report AgentDoG-series models only.
 
-| Model | R-Judge | ATBench-Pro | ATBench-Codex | ATBench-Claw |
-|-------|---------|-------------|---------------|--------------|
-| AgentDoG 1.5-0.8B-Qwen3.5 | 75.7 | 60.3 | 70.2 | 78.4 |
-| AgentDoG 1.5-2B-Qwen3.5 | 71.5 | 69.0 | 75.6 | 74.8 |
-| AgentDoG 1.5-4B-Qwen3.5 | 92.2 | 72.4 | 80.0 | 84.0 |
-| AgentDoG 1.5-8B-Llama-3.1 | 75.5 | 70.9 | 79.2 | 78.1 |
+| Model | R-Judge Acc | R-Judge Prec. | R-Judge Rec. | R-Judge F1 | ATBench Acc | ATBench Prec. | ATBench Rec. | ATBench F1 |
+|-------|-------------|---------------|--------------|------------|-------------|---------------|--------------|------------|
+| AgentDoG 1.0-4B-Qwen3 | 91.8 | 87.5 | 98.5 | 92.7 | 64.0 | 59.2 | 88.9 | 71.1 |
+| AgentDoG 1.5-0.8B-Qwen3.5 | 75.7 | 83.3 | 67.5 | 74.6 | 60.3 | 58.6 | 68.6 | 63.2 |
+| AgentDoG 1.5-2B-Qwen3.5 | 71.5 | 78.0 | 64.1 | 70.4 | 69.0 | 70.1 | 65.7 | 67.8 |
+| AgentDoG 1.5-8B-Llama-3.1 | 75.5 | 68.6 | 98.8 | 81.0 | 70.9 | 67.1 | 81.2 | 73.5 |
+| AgentDoG 1.5-4B-Qwen3.5 | 92.2 | 91.7 | 93.7 | 92.7 | 72.4 | 69.2 | 80.3 | 74.3 |
 
-Fine-grained diagnostic accuracy is reported along the three taxonomy dimensions:
+Fine-grained diagnostic accuracy on ATBench is reported along the three taxonomy dimensions. Avg. is the mean score across Risk Source, Failure Mode, and Real-world Harm.
 
-| Model | Risk Source | Failure Mode | Real-World Harm |
-|-------|-------------|--------------|-----------------|
-| AgentDoG 1.5-0.8B-Qwen3.5 | 65.7 | 18.4 | 44.9 |
-| AgentDoG 1.5-2B-Qwen3.5 | 68.0 | 24.0 | 53.8 |
-| AgentDoG 1.5-4B-Qwen3.5 | 75.2 | 27.5 | 62.9 |
+| Model | Risk Source | Failure Mode | Real-world Harm | Avg. |
+|-------|-------------|--------------|-----------------|------|
+| AgentDoG 1.0-4B-Qwen3 | 46.8 | 16.5 | 40.6 | 34.6 |
+| AgentDoG 1.5-0.8B-Qwen3.5 | 65.7 | 18.4 | 44.9 | 43.0 |
+| AgentDoG 1.5-2B-Qwen3.5 | 68.0 | 24.0 | 53.8 | 48.6 |
+| AgentDoG 1.5-8B-Llama-3.1 | 72.9 | 24.6 | 52.5 | 50.0 |
+| AgentDoG 1.5-4B-Qwen3.5 | 75.2 | 27.5 | 62.9 | 55.2 |
 
 ---
 
