@@ -97,6 +97,20 @@ img {
   background-clip: text;
 }
 
+.version-dropdown {
+  min-width: 132px;
+}
+
+.version-dropdown .nav-logo::after {
+  content: " ▾";
+  font-size: 0.8rem;
+}
+
+.version-menu {
+  left: 0;
+  transform: none;
+}
+
 .nav-links {
   display: flex;
   gap: 32px;
