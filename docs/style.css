@@ -97,10 +97,28 @@ img {
   background-clip: text;
 }
 
+button.nav-logo {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.version-dropdown {
+  min-width: 132px;
+}
+
+
+.version-menu {
+  left: 0;
+  transform: none;
+}
+
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: 24px;
   list-style: none;
+  white-space: nowrap;
 }
 
 .nav-links a {
@@ -137,7 +155,8 @@ img {
   margin-top: 8px;
 }
 
-.nav-dropdown:hover .dropdown-menu {
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown.open .dropdown-menu {
   display: block;
 }
 
@@ -410,6 +429,25 @@ section {
   line-height: 1.6;
 }
 
+.intro-features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 20px;
+}
+
+.intro-features .feature-card {
+  padding: 28px;
+}
+
+.intro-features .feature-title {
+  font-size: 1.08rem;
+}
+
+.intro-features .feature-desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
 /* ==================== Taxonomy Section ==================== */
 .taxonomy-visual {
   display: grid;
@@ -479,6 +517,10 @@ section {
   background: var(--bg-card);
 }
 
+.taxonomy-caption {
+  margin-top: 28px;
+}
+
 /* ==================== Data Synthesis Section ==================== */
 .data-synthesis {
   background: var(--bg-secondary);
@@ -503,6 +545,65 @@ section {
   max-width: 1200px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
+}
+
+.app-video {
+  width: min(960px, 100%);
+  margin: 42px auto 0;
+  text-align: center;
+}
+
+.app-video video {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: #000;
+}
+
+.app-video img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: #000;
+}
+
+.app1-figures {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 0.95fr);
+  gap: 24px;
+  align-items: stretch;
+  margin: 42px auto 48px;
+}
+
+.app1-figures figure {
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.app1-figures img {
+  width: 100%;
+  height: 380px;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: #fff;
+}
+
+.app1-figures figure:first-child img {
+  object-fit: fill;
+}
+
+.app1-figures figcaption {
+  margin-top: 12px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-style: italic;
 }
 
 .synthesis-distribution {
@@ -893,6 +994,12 @@ tr:hover {
 }
 
 /* ==================== Responsive Design ==================== */
+@media (max-width: 1100px) {
+  .intro-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -953,6 +1060,14 @@ tr:hover {
   .synthesis-pair {
     grid-template-columns: 1fr;
     max-width: 100%;
+  }
+
+  .app1-figures {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-features {
+    grid-template-columns: 1fr;
   }
 
   .synthesis-pair .synthesis-distribution img,

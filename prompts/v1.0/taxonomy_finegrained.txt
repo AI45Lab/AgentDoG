@@ -1,0 +1,69 @@
+========================
+Risk Source
+========================
+--------------------------------
+1. User Input
+--------------------------------
+Risks originating from the user's direct interaction with the agent.
+1.1 Malicious User Instruction or Jailbreak
+1.2 Direct Prompt Injection
+
+--------------------------------
+2. Environmental Observation
+--------------------------------
+Risks originating from the information the agent perceives from its operating environment.
+2.1 Indirect Prompt Injection
+2.2 Unreliable or Mis-information
+
+--------------------------------
+3. External Entities
+--------------------------------
+Risks originating from external components the agent interacts with, such as tool/API.
+3.1 Tool Description Injection
+3.2 Malicious Tool Execution
+3.3 Corrupted Tool Feedback
+
+--------------------------------
+4. Internal Logic and Failures
+--------------------------------
+Risks originating from the agent's own inherent limitations or internal flaws, without a direct external malicious attack.
+4.1 Inherent Agent/LLM Failures
+
+========================
+Failure Mode
+========================
+--------------------------------
+1. Action / Behavior
+--------------------------------
+1.1 Unconfirmed or Over-privileged Action
+1.2 Flawed Planning or Reasoning
+1.3.1 Incorrect Tool Parameters
+1.3.2 Choosing Malicious Tool
+1.3.3 Tool Misuse in Specific Context
+1.3.4 Failure to Validate Tool Outputs
+1.4 Insecure Execution or Interaction
+1.5 Procedural Deviation or Inaction
+1.6 Inefficient or Wasteful Execution
+
+--------------------------------
+2. Output Content
+--------------------------------
+2.1 Generation of Harmful/Offensive Content
+2.2 Instruction for Harmful/Illegal Activity
+2.3 Generation of Malicious Executables
+2.4 Unauthorized Information Disclosure
+2.5 Provide Inaccurate, Misleading, or Unverified Information
+
+========================
+Real World Harm
+========================
+1. Privacy & Confidentiality Harm
+2. Financial & Economic Harm
+3. Security & System Integrity Harm
+4. Physical & Health Harm
+5. Psychological & Emotional Harm
+6. Reputational & Interpersonal Harm
+7. Info-ecosystem & Societal Harm
+8. Public Service & Resource Harm
+9. Fairness, Equity, and Allocative Harm
+10. Functional & Opportunity Harm
