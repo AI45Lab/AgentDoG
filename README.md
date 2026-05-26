@@ -146,7 +146,7 @@ Accuracy on ATBench-Codex and ATBench-Claw across model sizes. The x-axis uses d
 
 ---
 
-## Application 1: Safety Agentic SFT & RL with AgentDoG 1.5
+## Application 1: Agentic Safety SFT & RL with AgentDoG 1.5
 
 AgentDoG 1.5 can serve as a trajectory-level diagnostic evaluator for improving agent safety through supervised fine-tuning and reinforcement learning.
 
@@ -166,7 +166,7 @@ AgentDoG 1.5 can be integrated as an external safety evaluator in agentic reinfo
 
 ---
 
-## Application 2: AgentDoG 1.5 as Online Agent Safety Guardrail
+## Application 2: AgentDoG 1.5 as Online Agentic Safety Guardrail
 
 AgentDoG 1.5 can also be deployed as an online agent safety guardrail. During agent execution, it can inspect accumulated trajectories before pending actions or final visible responses and flag unsafe behavior before it reaches the user or environment.
 
