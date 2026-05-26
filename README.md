@@ -184,7 +184,7 @@ Application materials will be organized under [`App2/`](App2/).
   </a>
 </p>
 <p align="center">
-  <a href="docs/figures/app2_online_guardrail_demo_30s.mp4">Watch the 30-second App 2 demo video</a>
+  <a href="docs/figures/app2_online_guardrail_demo_30s.mp4">Lightweight demo of AgentDoG 1.5 as an online agent safety guardrail.</a>
 </p>
 
 ---
