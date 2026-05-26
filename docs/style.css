@@ -544,19 +544,24 @@ section {
 
 .app1-figures {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.38fr) minmax(0, 1fr);
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
   margin: 42px auto 48px;
 }
 
 .app1-figures figure {
   margin: 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .app1-figures img {
   width: 100%;
+  height: 360px;
+  object-fit: contain;
   border-radius: 12px;
   border: 1px solid var(--border-color);
   background: #fff;

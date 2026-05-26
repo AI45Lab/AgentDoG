@@ -158,13 +158,13 @@ AgentDoG 1.5 can serve as a trajectory-level diagnostic evaluator for improving 
 
 <table>
   <tr>
-    <td align="center" width="50%">
-      <img src="figures/app1_safety_env.png" alt="The dual-scenario environment synthesis pipeline for agentic safety RL"/>
+    <td align="center" width="58%" style="vertical-align:bottom;">
+      <img src="figures/app1_safety_env.png" height="300" alt="The dual-scenario environment synthesis pipeline for agentic safety RL"/>
       <br/>
       <em>The dual-scenario environment synthesis pipeline for agentic safety RL.</em>
     </td>
-    <td align="center" width="50%">
-      <img src="figures/app1_performance_radar.png" alt="Performance comparison on utility and safety metrics"/>
+    <td align="center" width="42%" style="vertical-align:bottom;">
+      <img src="figures/app1_performance_radar.png" height="300" alt="Performance comparison on utility and safety metrics"/>
       <br/>
       <em>Performance comparison on utility and safety metrics.</em>
     </td>
