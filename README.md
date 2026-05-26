@@ -40,17 +40,17 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 ## Model Zoo
 
 ### AgentDoG 1.5
-| Model | Task | Parameters | Base model | Download |
-|-------|------|------------|------------|----------|
-| AgentDoG1.5-Unified-Qwen3.5-4B | Unified safety + diagnosis | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-unified-Qwen3.5-4B) |
-| AgentDoG1.5-Qwen3.5-0.8B | Coarse-grained moderation | 0.8B | Qwen3.5-0.8B | Coming soon |
-| AgentDoG1.5-Qwen3.5-2B | Coarse-grained moderation | 2B | Qwen3.5-2B | Coming soon |
-| AgentDoG1.5-Qwen3.5-4B | Coarse-grained moderation | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-1.5-Qwen3.5-4B) |
-| AgentDoG1.5-Llama3.1-8B | Coarse-grained moderation | 8B | Llama3.1-8B | Coming soon |
-| AgentDoG1.5-FG-Qwen3.5-0.8B | Fine-grained diagnosis | 0.8B | Qwen3.5-0.8B | Coming soon |
-| AgentDoG1.5-FG-Qwen3.5-2B | Fine-grained diagnosis | 2B | Qwen3.5-2B | Coming soon |
-| AgentDoG1.5-FG-Qwen3.5-4B | Fine-grained diagnosis | 4B | Qwen3.5-4B | Coming soon |
-| AgentDoG1.5-FG-Llama3.1-8B | Fine-grained diagnosis | 8B | Llama3.1-8B | Coming soon |
+| Model | Task | Parameters | Base model | HF Link | ModelScope Link |
+|-------|------|------------|------------|---------|-----------------|
+| AgentDoG1.5-Unified-Qwen3.5-4B | Unified safety + diagnosis | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-unified-Qwen3.5-4B) | Coming soon |
+| AgentDoG1.5-Qwen3.5-0.8B | Coarse-grained moderation | 0.8B | Qwen3.5-0.8B | Coming soon | Coming soon |
+| AgentDoG1.5-Qwen3.5-2B | Coarse-grained moderation | 2B | Qwen3.5-2B | Coming soon | Coming soon |
+| AgentDoG1.5-Qwen3.5-4B | Coarse-grained moderation | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG-1.5-Qwen3.5-4B) | Coming soon |
+| AgentDoG1.5-Llama3.1-8B | Coarse-grained moderation | 8B | Llama3.1-8B | Coming soon | Coming soon |
+| AgentDoG1.5-FG-Qwen3.5-0.8B | Fine-grained diagnosis | 0.8B | Qwen3.5-0.8B | Coming soon | Coming soon |
+| AgentDoG1.5-FG-Qwen3.5-2B | Fine-grained diagnosis | 2B | Qwen3.5-2B | Coming soon | Coming soon |
+| AgentDoG1.5-FG-Qwen3.5-4B | Fine-grained diagnosis | 4B | Qwen3.5-4B | Coming soon | Coming soon |
+| AgentDoG1.5-FG-Llama3.1-8B | Fine-grained diagnosis | 8B | Llama3.1-8B | Coming soon | Coming soon |
 
 ### AgentDoG 1.0
 
