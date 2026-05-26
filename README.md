@@ -170,7 +170,13 @@ AgentDoG 1.5 can be integrated as an external safety evaluator in agentic reinfo
 
 AgentDoG 1.5 can also be deployed as an online agent safety guardrail. During agent execution, it can inspect accumulated trajectories before pending actions or final visible responses and flag unsafe behavior before it reaches the user or environment.
 
+**Guardrail Design.** AgentDoG 1.5 can be placed before high-risk actions or final replies. It takes the accumulated trajectory as input and returns a safety judgment, optionally with fine-grained diagnostic labels.
+
 Application materials will be organized under [`App2/`](App2/).
+
+<p align="center">
+  <img src="figures/app2_online_guardrail_framework.png" width="95%" alt="App 2 online guardrail framework"/>
+</p>
 
 <p align="center">
   <a href="docs/figures/app2_online_guardrail_demo_30s.mp4">
@@ -180,18 +186,6 @@ Application materials will be organized under [`App2/`](App2/).
 <p align="center">
   <a href="docs/figures/app2_online_guardrail_demo_30s.mp4">Watch the 30-second App 2 demo video</a>
 </p>
-
-### Why Online Agent Guardrails Matter
-
-Agent risks often emerge during intermediate execution rather than only in final responses. Online guardrails are therefore important for detecting unsafe tool calls, prompt leakage, unauthorized actions, and harmful multi-step plans.
-
-### Guardrail Design
-
-AgentDoG 1.5 can be placed before high-risk actions or final replies. It takes the accumulated trajectory as input and returns a safety judgment, optionally with fine-grained diagnostic labels.
-
-### Evaluation
-
-The online guardrail setting evaluates both safety improvement and deployment cost, including detection rate, attack reduction, runtime latency, and integration overhead.
 
 ---
 
