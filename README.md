@@ -96,19 +96,13 @@ ATBench Family is designed to evaluate whether a guardrail can generalize from g
 
 ## AgentDoG 1.5
 
-AgentDoG 1.5 is a lightweight and scalable alignment framework for AI agent safety and security. It builds on the trajectory-level diagnostic formulation of AgentDoG 1.0 and further emphasizes extensibility, cost-effective deployment, and application-level integration.
+In response to the risks introduced by emerging agentic AI systems, we develop a rationale-enhanced and cost-efficient construction framework, equipping AgentDoG 1.5 with rationale-generation capability, improving its safety judgment accuracy, and supporting low-cost deployment.
 
-### Task Definition
+### Building Pipeline
 
-Given a complete or partial agent trajectory, AgentDoG 1.5 predicts whether the trajectory is safe or unsafe. For unsafe trajectories, it can further provide fine-grained diagnostic labels along the three taxonomy dimensions: Risk Source, Failure Mode, and Real-World Harm.
-
-### Data Preparation
-
-AgentDoG 1.5 uses a taxonomy-guided data preparation pipeline to construct diverse agent safety trajectories. The pipeline includes data collection, reasoning chain-of-thought augmentation, data purification, and fine-grained data selection and balancing.
-
-### Training
-
-AgentDoG 1.5 models are trained with supervised fine-tuning and reinforcement learning. The training process aims to improve trajectory-level safety detection, fine-grained diagnosis, and robustness across different agent execution environments.
+<p align="center">
+  <img src="figures/building_pipeline_v1_5.png" width="95%" alt="AgentDoG 1.5 building pipeline"/>
+</p>
 
 ### Evaluation
 
