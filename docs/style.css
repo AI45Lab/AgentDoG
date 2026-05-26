@@ -116,8 +116,9 @@ button.nav-logo {
 
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: 24px;
   list-style: none;
+  white-space: nowrap;
 }
 
 .nav-links a {
