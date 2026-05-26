@@ -95,37 +95,37 @@
   <section id="introduction" class="abstract">
     <div class="container">
       <h2 class="section-title" data-en="Introduction" data-zh="介绍">Introduction</h2>
-      <p class="abstract-text" data-en="AgentDoG 1.5 is <strong>a lightweight and scalable agent safety alignment framework</strong>, building on the foundation of AgentDoG 1.0. It extends agent safety diagnosis and alignment from fixed trajectory classification toward a practical framework for modern agentic systems with long-horizon planning, tool-mediated execution, complex environment interaction, and deployable runtime safety monitoring." data-zh="AgentDoG 1.5 是一个<strong>轻量且可扩展的智能体安全对齐框架</strong>，建立在 AgentDoG 1.0 的基础之上。它将智能体安全诊断与对齐从固定轨迹分类扩展为面向现代智能体系统的实用框架，覆盖长程规划、工具介导执行、复杂环境交互以及可部署的运行时安全监控。">
-        AgentDoG 1.5 is <strong>a lightweight and scalable agent safety alignment framework</strong>, building on the foundation of AgentDoG 1.0. It extends agent safety diagnosis and alignment from fixed trajectory classification toward a practical framework for modern agentic systems with long-horizon planning, tool-mediated execution, complex environment interaction, and deployable runtime safety monitoring.
+      <p class="abstract-text" data-en="AgentDoG 1.5 is a lightweight and scalable agent safety alignment framework." data-zh="AgentDoG 1.5 是一个轻量且可扩展的智能体安全对齐框架。">
+        AgentDoG 1.5 is a lightweight and scalable agent safety alignment framework.
       </p>
 
-      <div class="features-grid">
+      <div class="features-grid intro-features">
         <div class="feature-card">
           <div class="feature-icon">🧩</div>
           <h3 class="feature-title" data-en="Updated Agent Safety Taxonomy and ATBench Family" data-zh="更新的智能体安全分类体系与 ATBench 家族">Updated Agent Safety Taxonomy and ATBench Family</h3>
-          <p class="feature-desc" data-en="Revises the original three-dimensional safety taxonomy and supplements new risk types for Codex and OpenClaw agents, further extending ATBench into a broader benchmark family for trajectory-level agent safety diagnosis." data-zh="修订原有三维安全分类体系，并为 Codex 和 OpenClaw 智能体补充新的风险类型，进一步将 ATBench 扩展为面向轨迹级智能体安全诊断的更广泛基准家族。">
-            Revises the original three-dimensional safety taxonomy and supplements new risk types for Codex and OpenClaw agents, further extending ATBench into a broader benchmark family for trajectory-level agent safety diagnosis.
+          <p class="feature-desc" data-en="Updates the three-dimensional taxonomy with Codex/OpenClaw risks and extends ATBench for trajectory-level diagnosis." data-zh="补充 Codex/OpenClaw 风险类型，并扩展 ATBench 以支持轨迹级安全诊断。">
+            Updates the three-dimensional taxonomy with Codex/OpenClaw risks and extends ATBench for trajectory-level diagnosis.
           </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🛡️</div>
           <h3 class="feature-title" data-en="Lightweight AgentDoG 1.5" data-zh="轻量级 AgentDoG 1.5">Lightweight AgentDoG 1.5</h3>
-          <p class="feature-desc" data-en="Proposes a taxonomy-guided data engine to train AgentDoG 1.5 with only around 1k training samples, achieving comparable performance with frontier open-source and closed-source models while maintaining lightweight deployment." data-zh="提出分类体系引导的数据引擎，仅使用约 1k 训练样本训练 AgentDoG 1.5，在保持轻量部署的同时达到与前沿开源和闭源模型相当的性能。">
-            Proposes a taxonomy-guided data engine to train AgentDoG 1.5 with only around 1k training samples, achieving comparable performance with frontier open-source and closed-source models while maintaining lightweight deployment.
+          <p class="feature-desc" data-en="Uses a taxonomy-guided data engine and around 1k samples for strong, lightweight deployment." data-zh="基于分类体系引导的数据引擎，以约 1k 样本实现强性能和轻量部署。">
+            Uses a taxonomy-guided data engine and around 1k samples for strong, lightweight deployment.
           </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🚀</div>
           <h3 class="feature-title" data-en="Scalable Lightweight Agentic Training Pipeline" data-zh="可扩展轻量级智能体训练流水线">Scalable Lightweight Agentic Training Pipeline</h3>
-          <p class="feature-desc" data-en="Builds a dedicated agentic SFT and RL training environment compatible with the proposed data engine, enabling low-cost and scalable safety-aware agent training, with a standard 8-core machine supporting over 10,000 concurrent agentic environments." data-zh="构建与所提出数据引擎兼容的专用智能体 SFT 与 RL 训练环境，支持低成本、可扩展的安全感知智能体训练，标准 8 核机器可支持超过 10,000 个并发智能体环境。">
-            Builds a dedicated agentic SFT and RL training environment compatible with the proposed data engine, enabling low-cost and scalable safety-aware agent training, with a standard 8-core machine supporting over 10,000 concurrent agentic environments.
+          <p class="feature-desc" data-en="Supports low-cost safety-aware SFT/RL, scaling to 10,000+ concurrent agentic environments on an 8-core machine." data-zh="支持低成本安全感知 SFT/RL，在 8 核机器上可扩展到 10,000+ 并发智能体环境。">
+            Supports low-cost safety-aware SFT/RL, scaling to 10,000+ concurrent agentic environments on an 8-core machine.
           </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🧱</div>
           <h3 class="feature-title" data-en="Online Agent Safety Guardrail" data-zh="在线智能体安全护栏">Online Agent Safety Guardrail</h3>
-          <p class="feature-desc" data-en="Implements a practical runtime guardrail system based on AgentDoG 1.5 for real-world OpenClaw agent deployment, supporting online safety monitoring and intervention in deployed agentic workflows." data-zh="基于 AgentDoG 1.5 为真实 OpenClaw 智能体部署实现实用运行时护栏系统，支持已部署智能体工作流中的在线安全监控与干预。">
-            Implements a practical runtime guardrail system based on AgentDoG 1.5 for real-world OpenClaw agent deployment, supporting online safety monitoring and intervention in deployed agentic workflows.
+          <p class="feature-desc" data-en="Provides runtime monitoring and intervention for deployed OpenClaw agent workflows." data-zh="为已部署的 OpenClaw 智能体工作流提供运行时监控与干预。">
+            Provides runtime monitoring and intervention for deployed OpenClaw agent workflows.
           </p>
         </div>
       </div>

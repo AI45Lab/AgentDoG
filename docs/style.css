@@ -429,6 +429,24 @@ section {
   line-height: 1.6;
 }
 
+.intro-features {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.intro-features .feature-card {
+  padding: 28px;
+}
+
+.intro-features .feature-title {
+  font-size: 1.08rem;
+}
+
+.intro-features .feature-desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
 /* ==================== Taxonomy Section ==================== */
 .taxonomy-visual {
   display: grid;
@@ -544,7 +562,7 @@ section {
 
 .app1-figures {
   display: grid;
-  grid-template-columns: minmax(0, 1.38fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 0.95fr);
   gap: 24px;
   align-items: stretch;
   margin: 42px auto 48px;
@@ -560,11 +578,15 @@ section {
 
 .app1-figures img {
   width: 100%;
-  height: 360px;
+  height: 380px;
   object-fit: contain;
   border-radius: 12px;
   border: 1px solid var(--border-color);
   background: #fff;
+}
+
+.app1-figures figure:first-child img {
+  object-fit: fill;
 }
 
 .app1-figures figcaption {
@@ -963,6 +985,12 @@ tr:hover {
 }
 
 /* ==================== Responsive Design ==================== */
+@media (max-width: 1100px) {
+  .intro-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -1026,6 +1054,10 @@ tr:hover {
   }
 
   .app1-figures {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-features {
     grid-template-columns: 1fr;
   }
 
