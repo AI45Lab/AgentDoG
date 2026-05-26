@@ -103,7 +103,7 @@ In response to the risks introduced by emerging agentic AI systems, we develop a
 ### Building Pipeline
 
 <p align="center">
-  <img src="figures/building_pipeline_v1_5.png" width="95%" alt="AgentDoG 1.5 building pipeline"/>
+  <img src="figures/building_pipeline_v1_5.jpg" width="95%" alt="AgentDoG 1.5 building pipeline"/>
 </p>
 
 ### Evaluation
@@ -147,6 +147,10 @@ Accuracy on ATBench-Codex and ATBench-Claw across model sizes. The x-axis uses d
 </p>
 
 ---
+
+<p align="center">
+  <img src="figures/application_overview_v1_5.png" width="95%" alt="AgentDoG 1.5 application overview"/>
+</p>
 
 ## Application 1: Agentic Safety SFT & RL with AgentDoG 1.5
 
