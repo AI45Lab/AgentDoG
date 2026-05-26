@@ -199,131 +199,6 @@
     </div>
   </section>
 
-  <!-- APP 1 Section -->
-  <section id="app1">
-    <div class="container">
-      <h2 class="section-title" data-en="APP 1: Agentic Safety SFT &amp; RL" data-zh="应用 1：智能体安全 SFT 与 RL">APP 1: Agentic Safety SFT &amp; RL</h2>
-      <p class="section-subtitle" data-en="Using AgentDoG 1.5 as a trajectory-level evaluator for safer agent training" data-zh="使用 AgentDoG 1.5 作为轨迹级评估器，支持更安全的智能体训练">
-        Using AgentDoG 1.5 as a trajectory-level evaluator for safer agent training
-      </p>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🧪</div>
-          <h3 class="feature-title" data-en="Evaluation Setup" data-zh="评估设置">Evaluation Setup</h3>
-          <p class="feature-desc" data-en="AgentDoG 1.5 evaluates safety behavior across harmful instruction following, tool-use safety, refusal behavior, and multi-step agent execution." data-zh="AgentDoG 1.5 可评估有害指令遵循、工具使用安全、拒答行为和多步智能体执行中的安全表现。">
-            AgentDoG 1.5 evaluates safety behavior across harmful instruction following, tool-use safety, refusal behavior, and multi-step agent execution.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📦</div>
-          <h3 class="feature-title" data-en="Agentic SFT" data-zh="智能体 SFT">Agentic SFT</h3>
-          <p class="feature-desc" data-en="By evaluating generated trajectories, AgentDoG 1.5 helps filter and select high-quality safety data for supervised fine-tuning." data-zh="通过评估生成轨迹，AgentDoG 1.5 帮助筛选高质量安全数据，用于监督微调。">
-            By evaluating generated trajectories, AgentDoG 1.5 helps filter and select high-quality safety data for supervised fine-tuning.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <h3 class="feature-title" data-en="Agentic RL" data-zh="智能体 RL">Agentic RL</h3>
-          <p class="feature-desc" data-en="AgentDoG 1.5 can act as an external safety evaluator in reinforcement learning, providing feedback on harmful behavior, unsafe tool usage, and safe refusal." data-zh="AgentDoG 1.5 可作为强化学习中的外部安全评估器，对有害行为、不安全工具使用和安全拒答提供反馈。">
-            AgentDoG 1.5 can act as an external safety evaluator in reinforcement learning, providing feedback on harmful behavior, unsafe tool usage, and safe refusal.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- APP 2 Section -->
-  <section id="app2" class="data-synthesis">
-    <div class="container">
-      <h2 class="section-title" data-en="APP 2: Online Agentic Safety Guardrail" data-zh="应用 2：在线智能体安全护栏">APP 2: Online Agentic Safety Guardrail</h2>
-      <p class="section-subtitle" data-en="Deploying AgentDoG 1.5 as a runtime guardrail for monitoring risky agent behaviors" data-zh="将 AgentDoG 1.5 部署为运行时护栏，用于监测高风险智能体行为">
-        Deploying AgentDoG 1.5 as a runtime guardrail for monitoring risky agent behaviors
-      </p>
-      <div class="synthesis-main-image">
-        <img src="../figures/app2_online_guardrail_framework.png" alt="App 2 online agentic safety guardrail framework" loading="lazy">
-      </div>
-      <div class="app-video">
-        <video src="../figures/app2_online_guardrail_demo_30s.mp4" controls muted preload="metadata" playsinline></video>
-        <p class="figure-caption" data-en="Lightweight demo of AgentDoG 1.5 as an online agent safety guardrail." data-zh="AgentDoG 1.5 作为在线智能体安全护栏的轻量演示。">
-          Lightweight demo of AgentDoG 1.5 as an online agent safety guardrail.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Dataset Section -->
-  <section id="dataset" class="dataset">
-    <div class="container">
-      <h2 class="section-title" data-en="ATBench Family" data-zh="ATBench 家族">ATBench Family</h2>
-      <p class="section-subtitle" data-en="An extensible trajectory-level benchmark family for evaluating agent safety across diverse execution environments" data-zh="面向多种执行环境的可扩展轨迹级智能体安全评测基准家族">
-        An extensible trajectory-level benchmark family for evaluating agent safety across diverse execution environments
-      </p>
-
-      <div class="dataset-stats">
-        <div class="stat-card">
-          <div class="stat-value">1,000</div>
-          <p class="stat-label" data-en="Trajectories" data-zh="轨迹">Trajectories</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">2,084</div>
-          <p class="stat-label" data-en="Available Tools" data-zh="可用工具">Available Tools</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">1,954</div>
-          <p class="stat-label" data-en="Unique Invoked Tools" data-zh="唯一调用工具">Unique Invoked Tools</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">9.01</div>
-          <p class="stat-label" data-en="Turns/Trajectory" data-zh="轮次/轨迹">Turns/Trajectory</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">3.95k</div>
-          <p class="stat-label" data-en="Tokens/Trajectory" data-zh="词元/轨迹">Tokens/Trajectory</p>
-        </div>
-      </div>
-
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th data-en="Benchmark" data-zh="基准">Benchmark</th>
-              <th data-en="Agent Setting" data-zh="智能体设置">Agent Setting</th>
-              <th data-en="Description" data-zh="描述">Description</th>
-              <th data-en="Download" data-zh="下载">Download</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>ATBench</strong></td>
-              <td>General tool-use agents</td>
-              <td>The base trajectory-level safety benchmark inherited from AgentDoG 1.0.</td>
-              <td><a href="https://huggingface.co/datasets/AI45Research/ATBench" target="_blank" rel="noopener">Hugging Face</a></td>
-            </tr>
-            <tr>
-              <td><strong>ATBench-Claw</strong></td>
-              <td>OpenClaw agents with stateful tool/skill execution</td>
-              <td>Extends the benchmark to persistent sessions, accumulated traces, and stateful tool execution.</td>
-              <td><a href="https://huggingface.co/datasets/AI45Research/ATBench-Claw" target="_blank" rel="noopener">Hugging Face</a></td>
-            </tr>
-            <tr>
-              <td><strong>ATBench-Codex</strong></td>
-              <td>Codex-style repository and command execution agents</td>
-              <td>Extends the benchmark to repository modification, shell commands, file operations, and code-execution risks.</td>
-              <td><a href="https://huggingface.co/datasets/AI45Research/ATBench-Codex" target="_blank" rel="noopener">Hugging Face</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="dataset-download">
-        <a href="https://huggingface.co/datasets/AI45Research/ATBench" class="btn btn-primary" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-          <span data-en="Download from HuggingFace" data-zh="从 HuggingFace 下载">Download from HuggingFace</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- Performance Section -->
   <section id="performance">
     <div class="container">
@@ -564,6 +439,131 @@
             </table>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP 1 Section -->
+  <section id="app1">
+    <div class="container">
+      <h2 class="section-title" data-en="APP 1: Agentic Safety SFT &amp; RL" data-zh="应用 1：智能体安全 SFT 与 RL">APP 1: Agentic Safety SFT &amp; RL</h2>
+      <p class="section-subtitle" data-en="Using AgentDoG 1.5 as a trajectory-level evaluator for safer agent training" data-zh="使用 AgentDoG 1.5 作为轨迹级评估器，支持更安全的智能体训练">
+        Using AgentDoG 1.5 as a trajectory-level evaluator for safer agent training
+      </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🧪</div>
+          <h3 class="feature-title" data-en="Evaluation Setup" data-zh="评估设置">Evaluation Setup</h3>
+          <p class="feature-desc" data-en="AgentDoG 1.5 evaluates safety behavior across harmful instruction following, tool-use safety, refusal behavior, and multi-step agent execution." data-zh="AgentDoG 1.5 可评估有害指令遵循、工具使用安全、拒答行为和多步智能体执行中的安全表现。">
+            AgentDoG 1.5 evaluates safety behavior across harmful instruction following, tool-use safety, refusal behavior, and multi-step agent execution.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3 class="feature-title" data-en="Agentic SFT" data-zh="智能体 SFT">Agentic SFT</h3>
+          <p class="feature-desc" data-en="By evaluating generated trajectories, AgentDoG 1.5 helps filter and select high-quality safety data for supervised fine-tuning." data-zh="通过评估生成轨迹，AgentDoG 1.5 帮助筛选高质量安全数据，用于监督微调。">
+            By evaluating generated trajectories, AgentDoG 1.5 helps filter and select high-quality safety data for supervised fine-tuning.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3 class="feature-title" data-en="Agentic RL" data-zh="智能体 RL">Agentic RL</h3>
+          <p class="feature-desc" data-en="AgentDoG 1.5 can act as an external safety evaluator in reinforcement learning, providing feedback on harmful behavior, unsafe tool usage, and safe refusal." data-zh="AgentDoG 1.5 可作为强化学习中的外部安全评估器，对有害行为、不安全工具使用和安全拒答提供反馈。">
+            AgentDoG 1.5 can act as an external safety evaluator in reinforcement learning, providing feedback on harmful behavior, unsafe tool usage, and safe refusal.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP 2 Section -->
+  <section id="app2" class="data-synthesis">
+    <div class="container">
+      <h2 class="section-title" data-en="APP 2: Online Agentic Safety Guardrail" data-zh="应用 2：在线智能体安全护栏">APP 2: Online Agentic Safety Guardrail</h2>
+      <p class="section-subtitle" data-en="Deploying AgentDoG 1.5 as a runtime guardrail for monitoring risky agent behaviors" data-zh="将 AgentDoG 1.5 部署为运行时护栏，用于监测高风险智能体行为">
+        Deploying AgentDoG 1.5 as a runtime guardrail for monitoring risky agent behaviors
+      </p>
+      <div class="synthesis-main-image">
+        <img src="../figures/app2_online_guardrail_framework.png" alt="App 2 online agentic safety guardrail framework" loading="lazy">
+      </div>
+      <div class="app-video">
+        <video src="../figures/app2_online_guardrail_demo_30s.mp4" controls muted preload="metadata" playsinline></video>
+        <p class="figure-caption" data-en="Lightweight demo of AgentDoG 1.5 as an online agent safety guardrail." data-zh="AgentDoG 1.5 作为在线智能体安全护栏的轻量演示。">
+          Lightweight demo of AgentDoG 1.5 as an online agent safety guardrail.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dataset Section -->
+  <section id="dataset" class="dataset">
+    <div class="container">
+      <h2 class="section-title" data-en="ATBench Family" data-zh="ATBench 家族">ATBench Family</h2>
+      <p class="section-subtitle" data-en="An extensible trajectory-level benchmark family for evaluating agent safety across diverse execution environments" data-zh="面向多种执行环境的可扩展轨迹级智能体安全评测基准家族">
+        An extensible trajectory-level benchmark family for evaluating agent safety across diverse execution environments
+      </p>
+
+      <div class="dataset-stats">
+        <div class="stat-card">
+          <div class="stat-value">1,000</div>
+          <p class="stat-label" data-en="Trajectories" data-zh="轨迹">Trajectories</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">2,084</div>
+          <p class="stat-label" data-en="Available Tools" data-zh="可用工具">Available Tools</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">1,954</div>
+          <p class="stat-label" data-en="Unique Invoked Tools" data-zh="唯一调用工具">Unique Invoked Tools</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">9.01</div>
+          <p class="stat-label" data-en="Turns/Trajectory" data-zh="轮次/轨迹">Turns/Trajectory</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">3.95k</div>
+          <p class="stat-label" data-en="Tokens/Trajectory" data-zh="词元/轨迹">Tokens/Trajectory</p>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th data-en="Benchmark" data-zh="基准">Benchmark</th>
+              <th data-en="Agent Setting" data-zh="智能体设置">Agent Setting</th>
+              <th data-en="Description" data-zh="描述">Description</th>
+              <th data-en="Download" data-zh="下载">Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ATBench</strong></td>
+              <td>General tool-use agents</td>
+              <td>The base trajectory-level safety benchmark inherited from AgentDoG 1.0.</td>
+              <td><a href="https://huggingface.co/datasets/AI45Research/ATBench" target="_blank" rel="noopener">Hugging Face</a></td>
+            </tr>
+            <tr>
+              <td><strong>ATBench-Claw</strong></td>
+              <td>OpenClaw agents with stateful tool/skill execution</td>
+              <td>Extends the benchmark to persistent sessions, accumulated traces, and stateful tool execution.</td>
+              <td><a href="https://huggingface.co/datasets/AI45Research/ATBench-Claw" target="_blank" rel="noopener">Hugging Face</a></td>
+            </tr>
+            <tr>
+              <td><strong>ATBench-Codex</strong></td>
+              <td>Codex-style repository and command execution agents</td>
+              <td>Extends the benchmark to repository modification, shell commands, file operations, and code-execution risks.</td>
+              <td><a href="https://huggingface.co/datasets/AI45Research/ATBench-Codex" target="_blank" rel="noopener">Hugging Face</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dataset-download">
+        <a href="https://huggingface.co/datasets/AI45Research/ATBench" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          <span data-en="Download from HuggingFace" data-zh="从 HuggingFace 下载">Download from HuggingFace</span>
+        </a>
       </div>
     </div>
   </section>
