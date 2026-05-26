@@ -173,18 +173,6 @@ AgentDoG 1.5 can serve as a trajectory-level diagnostic evaluator for improving 
 
 Application materials will be organized under [`App1/`](App1/).
 
-### Evaluation Setup
-
-AgentDoG 1.5 is used to evaluate safety behavior across multiple agentic benchmarks and environments, including harmful instruction following, tool-use safety, refusal behavior, and multi-step agent execution.
-
-### Agentic SFT
-
-AgentDoG 1.5 can filter and select high-quality safety data for agentic supervised fine-tuning. By evaluating generated trajectories, it helps construct a mixture of safety-critical and benign agentic data.
-
-### Agentic RL
-
-AgentDoG 1.5 can be integrated as an external safety evaluator in agentic reinforcement learning. It provides safety feedback for harmful behavior, unsafe tool usage, and safe refusal behavior.
-
 ---
 
 ## Application 2: AgentDoG 1.5 as Online Agentic Safety Guardrail
