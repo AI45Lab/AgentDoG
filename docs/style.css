@@ -542,6 +542,34 @@ section {
   background: #000;
 }
 
+.app1-figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+  margin: 42px auto 48px;
+}
+
+.app1-figures figure {
+  margin: 0;
+  text-align: center;
+}
+
+.app1-figures img {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: #fff;
+}
+
+.app1-figures figcaption {
+  margin-top: 12px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
 .synthesis-distribution {
   text-align: center;
   margin-bottom: 48px;
@@ -990,6 +1018,10 @@ tr:hover {
   .synthesis-pair {
     grid-template-columns: 1fr;
     max-width: 100%;
+  }
+
+  .app1-figures {
+    grid-template-columns: 1fr;
   }
 
   .synthesis-pair .synthesis-distribution img,

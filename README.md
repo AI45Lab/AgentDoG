@@ -156,6 +156,21 @@ Accuracy on ATBench-Codex and ATBench-Claw across model sizes. The x-axis uses d
 
 AgentDoG 1.5 can serve as a trajectory-level diagnostic evaluator for improving agent safety through supervised fine-tuning and reinforcement learning.
 
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="figures/app1_safety_env.png" alt="The dual-scenario environment synthesis pipeline for agentic safety RL"/>
+      <br/>
+      <em>The dual-scenario environment synthesis pipeline for agentic safety RL.</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="figures/app1_performance_radar.png" alt="Performance comparison on utility and safety metrics"/>
+      <br/>
+      <em>Performance comparison on utility and safety metrics.</em>
+    </td>
+  </tr>
+</table>
+
 Application materials will be organized under [`App1/`](App1/).
 
 ### Evaluation Setup
