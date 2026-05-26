@@ -24,12 +24,12 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 
 ## Introduction
 
-**AgentDoG 1.5** is a cost-effective and extensible **Diagnostic Guardrail** for trajectory-level agent safety assessment, building on the foundation of AgentDoG 1.0. It expands agent safety diagnosis from fixed trajectory classification toward a scalable framework for modern agentic systems with long-horizon planning, tool-mediated execution, and complex environment interaction.
+AgentDoG 1.5 is **a lightweight and scalable agent safety alignment framework**, building on the foundation of AgentDoG 1.0. It extends agent safety diagnosis and alignment from fixed trajectory classification toward a practical framework for modern agentic systems with long-horizon planning, tool-mediated execution, complex environment interaction, and deployable runtime safety monitoring.
 
-- 🧩 **Extensible Taxonomy for Agentic Safety Diagnosis:** expands the original safety taxonomy into a flexible framework that captures emerging risks from modern agentic AI systems, including long-horizon planning, tool-mediated execution, and complex environment interaction.
-- 📚 **Extensible ATBench Family:** refines ATBench into a trajectory-level benchmark family with 1,000 audited trajectories, 2,084 available tools, 1,954 unique invoked tools, and an average of 9.01 turns and 3.95k tokens per trajectory, further instantiated by ATBench-Codex and ATBench-Claw.
-- 🛡️ **Cost-Effective Diagnostic Guardrail Models:** trains AgentDoG 1.5 through an efficient data preparation and training pipeline with around 1k SFT trajectories and several thousand RL samples, covering a high-performing 4B variant and lightweight 0.8B and 2B variants.
-- 🚀 **Practical Agent Safety Applications:** demonstrates AgentDoG 1.5 in safety-aware agentic SFT/RL and online agent safety monitoring, highlighting its use as a practical safety component for deployed agentic AI systems.
+- 🧩 **Updated Agent Safety Taxonomy and ATBench Family:** revises the original three-dimensional safety taxonomy and supplements new risk types for Codex and OpenClaw agents, further extending ATBench into a broader benchmark family for trajectory-level agent safety diagnosis.
+- 🛡️ **Lightweight AgentDoG 1.5:** proposes a taxonomy-guided data engine to train AgentDoG 1.5 with only around 1k training samples, achieving comparable performance with frontier open-source and closed-source models while maintaining lightweight deployment.
+- 🚀 **Scalable Lightweight Agentic Training Pipeline:** builds a dedicated agentic SFT and RL training environment compatible with the proposed data engine, enabling low-cost and scalable safety-aware agent training, with a standard 8-core machine supporting over 10,000 concurrent agentic environments.
+- 🧱 **Online Agent Safety Guardrail:** implements a practical runtime guardrail system based on AgentDoG 1.5 for real-world OpenClaw agent deployment, supporting online safety monitoring and intervention in deployed agentic workflows.
 
 <p align="center">
   <img src="figures/binary_performance.png" width="95%">

@@ -20,7 +20,7 @@
         </ul>
       </div>
       <ul class="nav-links">
-        <li><a href="#abstract" data-en="Abstract" data-zh="摘要">Abstract</a></li>
+        <li><a href="#introduction" data-en="Introduction" data-zh="介绍">Introduction</a></li>
         <li><a href="#taxonomy" data-en="Taxonomy" data-zh="分类体系">Taxonomy</a></li>
         <li class="nav-dropdown">
           <a href="#data-synthesis" data-en="AgentDoG1.5" data-zh="AgentDoG1.5">AgentDoG1.5</a>
@@ -78,7 +78,7 @@
     </div>
   </section>
 
-  <!-- SOTA Performance Highlight (before Abstract) -->
+  <!-- SOTA Performance Highlight (before Introduction) -->
   <section class="sota-highlight">
     <div class="container">
       <h2 class="section-title" data-en="State-of-the-Art Performance" data-zh="最先进性能">State-of-the-Art Performance</h2>
@@ -91,34 +91,41 @@
     </div>
   </section>
 
-  <!-- Abstract Section -->
-  <section id="abstract" class="abstract">
+  <!-- Introduction Section -->
+  <section id="introduction" class="abstract">
     <div class="container">
-      <h2 class="section-title" data-en="Abstract" data-zh="摘要">Abstract</h2>
-      <p class="abstract-text" data-en="<strong>AgentDoG 1.5</strong> is a cost-effective and extensible diagnostic guardrail for trajectory-level agent safety assessment, building on the foundation of AgentDoG 1.0. It expands agent safety diagnosis from fixed trajectory classification toward a scalable framework for modern agentic systems with long-horizon planning, tool-mediated execution, and complex environment interaction." data-zh="<strong>AgentDoG 1.5</strong> 是一个面向轨迹级智能体安全评估的高性价比、可扩展诊断式护栏，建立在 AgentDoG 1.0 的基础之上。它将智能体安全诊断从固定轨迹分类扩展为可伸缩框架，以适应长程规划、工具介导执行和复杂环境交互等现代智能体系统。">
-        <strong>AgentDoG 1.5</strong> is a cost-effective and extensible diagnostic guardrail for trajectory-level agent safety assessment, building on the foundation of AgentDoG 1.0. It expands agent safety diagnosis from fixed trajectory classification toward a scalable framework for modern agentic systems with long-horizon planning, tool-mediated execution, and complex environment interaction.
+      <h2 class="section-title" data-en="Introduction" data-zh="介绍">Introduction</h2>
+      <p class="abstract-text" data-en="AgentDoG 1.5 is <strong>a lightweight and scalable agent safety alignment framework</strong>, building on the foundation of AgentDoG 1.0. It extends agent safety diagnosis and alignment from fixed trajectory classification toward a practical framework for modern agentic systems with long-horizon planning, tool-mediated execution, complex environment interaction, and deployable runtime safety monitoring." data-zh="AgentDoG 1.5 是一个<strong>轻量且可扩展的智能体安全对齐框架</strong>，建立在 AgentDoG 1.0 的基础之上。它将智能体安全诊断与对齐从固定轨迹分类扩展为面向现代智能体系统的实用框架，覆盖长程规划、工具介导执行、复杂环境交互以及可部署的运行时安全监控。">
+        AgentDoG 1.5 is <strong>a lightweight and scalable agent safety alignment framework</strong>, building on the foundation of AgentDoG 1.0. It extends agent safety diagnosis and alignment from fixed trajectory classification toward a practical framework for modern agentic systems with long-horizon planning, tool-mediated execution, complex environment interaction, and deployable runtime safety monitoring.
       </p>
 
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">🧩</div>
-          <h3 class="feature-title" data-en="Extensible Taxonomy" data-zh="可扩展分类体系">Extensible Taxonomy</h3>
-          <p class="feature-desc" data-en="Expands the original safety taxonomy into a flexible framework that captures emerging risks from modern agentic AI systems, including long-horizon planning, tool-mediated execution, and complex environment interaction." data-zh="将原有安全分类体系扩展为灵活框架，覆盖现代智能体系统中长程规划、工具介导执行和复杂环境交互带来的新兴风险。">
-            Expands the original safety taxonomy into a flexible framework that captures emerging risks from modern agentic AI systems, including long-horizon planning, tool-mediated execution, and complex environment interaction.
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📚</div>
-          <h3 class="feature-title" data-en="ATBench Family" data-zh="ATBench 家族">ATBench Family</h3>
-          <p class="feature-desc" data-en="Refines ATBench into a trajectory-level benchmark family with 1,000 audited trajectories, 2,084 available tools, 1,954 unique invoked tools, and extensions for Codex and OpenClaw-style agents." data-zh="将 ATBench 扩展为轨迹级基准家族，包含 1,000 条审计轨迹、2,084 个可用工具、1,954 个唯一调用工具，并支持 Codex 与 OpenClaw 风格智能体扩展。">
-            Refines ATBench into a trajectory-level benchmark family with 1,000 audited trajectories, 2,084 available tools, 1,954 unique invoked tools, and extensions for Codex and OpenClaw-style agents.
+          <h3 class="feature-title" data-en="Updated Agent Safety Taxonomy and ATBench Family" data-zh="更新的智能体安全分类体系与 ATBench 家族">Updated Agent Safety Taxonomy and ATBench Family</h3>
+          <p class="feature-desc" data-en="Revises the original three-dimensional safety taxonomy and supplements new risk types for Codex and OpenClaw agents, further extending ATBench into a broader benchmark family for trajectory-level agent safety diagnosis." data-zh="修订原有三维安全分类体系，并为 Codex 和 OpenClaw 智能体补充新的风险类型，进一步将 ATBench 扩展为面向轨迹级智能体安全诊断的更广泛基准家族。">
+            Revises the original three-dimensional safety taxonomy and supplements new risk types for Codex and OpenClaw agents, further extending ATBench into a broader benchmark family for trajectory-level agent safety diagnosis.
           </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🛡️</div>
-          <h3 class="feature-title" data-en="Efficient Guardrail Models" data-zh="高效护栏模型">Efficient Guardrail Models</h3>
-          <p class="feature-desc" data-en="Trains AgentDoG 1.5 through an efficient data preparation and training pipeline with around 1k SFT trajectories and several thousand RL samples, covering a high-performing 4B variant and lightweight 0.8B and 2B variants." data-zh="通过高效的数据准备和训练流程训练 AgentDoG 1.5，仅使用约 1k 条 SFT 轨迹和数千条 RL 样本，覆盖高性能 4B 版本以及轻量 0.8B、2B 版本。">
-            Trains AgentDoG 1.5 through an efficient data preparation and training pipeline with around 1k SFT trajectories and several thousand RL samples, covering a high-performing 4B variant and lightweight 0.8B and 2B variants.
+          <h3 class="feature-title" data-en="Lightweight AgentDoG 1.5" data-zh="轻量级 AgentDoG 1.5">Lightweight AgentDoG 1.5</h3>
+          <p class="feature-desc" data-en="Proposes a taxonomy-guided data engine to train AgentDoG 1.5 with only around 1k training samples, achieving comparable performance with frontier open-source and closed-source models while maintaining lightweight deployment." data-zh="提出分类体系引导的数据引擎，仅使用约 1k 训练样本训练 AgentDoG 1.5，在保持轻量部署的同时达到与前沿开源和闭源模型相当的性能。">
+            Proposes a taxonomy-guided data engine to train AgentDoG 1.5 with only around 1k training samples, achieving comparable performance with frontier open-source and closed-source models while maintaining lightweight deployment.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3 class="feature-title" data-en="Scalable Lightweight Agentic Training Pipeline" data-zh="可扩展轻量级智能体训练流水线">Scalable Lightweight Agentic Training Pipeline</h3>
+          <p class="feature-desc" data-en="Builds a dedicated agentic SFT and RL training environment compatible with the proposed data engine, enabling low-cost and scalable safety-aware agent training, with a standard 8-core machine supporting over 10,000 concurrent agentic environments." data-zh="构建与所提出数据引擎兼容的专用智能体 SFT 与 RL 训练环境，支持低成本、可扩展的安全感知智能体训练，标准 8 核机器可支持超过 10,000 个并发智能体环境。">
+            Builds a dedicated agentic SFT and RL training environment compatible with the proposed data engine, enabling low-cost and scalable safety-aware agent training, with a standard 8-core machine supporting over 10,000 concurrent agentic environments.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧱</div>
+          <h3 class="feature-title" data-en="Online Agent Safety Guardrail" data-zh="在线智能体安全护栏">Online Agent Safety Guardrail</h3>
+          <p class="feature-desc" data-en="Implements a practical runtime guardrail system based on AgentDoG 1.5 for real-world OpenClaw agent deployment, supporting online safety monitoring and intervention in deployed agentic workflows." data-zh="基于 AgentDoG 1.5 为真实 OpenClaw 智能体部署实现实用运行时护栏系统，支持已部署智能体工作流中的在线安全监控与干预。">
+            Implements a practical runtime guardrail system based on AgentDoG 1.5 for real-world OpenClaw agent deployment, supporting online safety monitoring and intervention in deployed agentic workflows.
           </p>
         </div>
       </div>
