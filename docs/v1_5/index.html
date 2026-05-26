@@ -576,91 +576,83 @@
         AgentDoG 1.5 model zoo with unified, coarse-grained, and fine-grained guardrail checkpoints
       </p>
 
-      <!-- Unified Classification Model -->
-      <div class="model-category">
-        <h3 class="model-category-title" data-en="Unified Safety Classification" data-zh="统一安全分类">Unified Safety Classification</h3>
-        <p class="model-category-desc" data-en="Joint safety judgment and diagnostic taxonomy classification in one prompt format" data-zh="在同一提示格式中完成安全判断与诊断分类">Joint safety judgment and diagnostic taxonomy classification in one prompt format</p>
-        <div class="models-row">
-          <div class="model-card">
-            <div class="model-info">
-              <h4>AgentDoG1.5-Unified-Qwen3.5-4B</h4>
-            </div>
-            <div class="model-links">
-              <a href="https://huggingface.co/AI45Research/AgentDoG1.5-unified-Qwen3.5-4B" class="model-link" target="_blank" rel="noopener">HuggingFace</a>
-              <span class="model-link">ModelScope Soon</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Coarse-Grained Classification Models -->
-      <div class="model-category">
-        <h3 class="model-category-title" data-en="Coarse-Grained Moderation" data-zh="粗粒度审核">Coarse-Grained Moderation</h3>
-        <p class="model-category-desc" data-en="Trajectory-level safe/unsafe judgment models" data-zh="轨迹级安全/不安全判断模型">Trajectory-level safe/unsafe judgment models</p>
-        <div class="models-row">
-          <div class="model-card">
-            <div class="model-info">
-              <h4>AgentDoG1.5-Qwen3.5-0.8B</h4>
-            </div>
-            <div class="model-links">
-              <span class="model-link">HF Soon</span>
-              <span class="model-link">ModelScope Soon</span>
-            </div>
-          </div>
-          <div class="model-card">
-            <div class="model-info">
-              <h4>AgentDoG1.5-Qwen3.5-2B</h4>
-            </div>
-            <div class="model-links">
-              <span class="model-link">HF Soon</span>
-              <span class="model-link">ModelScope Soon</span>
-            </div>
-          </div>
-          <div class="model-card">
-            <div class="model-info">
-              <h4>AgentDoG1.5-Qwen3.5-4B</h4>
-            </div>
-            <div class="model-links">
-              <a href="https://huggingface.co/AI45Research/AgentDoG-1.5-Qwen3.5-4B" class="model-link" target="_blank" rel="noopener">HuggingFace</a>
-              <span class="model-link">ModelScope Soon</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fine-Grained Classification Models -->
-      <div class="model-category">
-        <h3 class="model-category-title" data-en="Fine-Grained Diagnosis" data-zh="细粒度诊断">Fine-Grained Diagnosis</h3>
-        <p class="model-category-desc" data-en="Risk diagnosis models for Risk Source, Failure Mode, and Real-World Harm" data-zh="面向 Risk Source、Failure Mode 和 Real-World Harm 的风险诊断模型">Risk diagnosis models for Risk Source, Failure Mode, and Real-World Harm</p>
-        <div class="models-row">
-          <div class="model-card">
-            <div class="model-info">
-              <h4>AgentDoG1.5-FG-Qwen3.5-0.8B</h4>
-            </div>
-            <div class="model-links">
-              <span class="model-link">HF Soon</span>
-              <span class="model-link">ModelScope Soon</span>
-            </div>
-          </div>
-          <div class="model-card">
-            <div class="model-info">
-              <h4>AgentDoG1.5-FG-Qwen3.5-2B</h4>
-            </div>
-            <div class="model-links">
-              <span class="model-link">HF Soon</span>
-              <span class="model-link">ModelScope Soon</span>
-            </div>
-          </div>
-          <div class="model-card">
-            <div class="model-info">
-              <h4>AgentDoG1.5-FG-Qwen3.5-4B</h4>
-            </div>
-            <div class="model-links">
-              <span class="model-link">HF Soon</span>
-              <span class="model-link">ModelScope Soon</span>
-            </div>
-          </div>
-        </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th data-en="Model" data-zh="模型">Model</th>
+              <th data-en="Task" data-zh="任务">Task</th>
+              <th data-en="Parameters" data-zh="参数量">Parameters</th>
+              <th data-en="Base model" data-zh="基座模型">Base model</th>
+              <th data-en="Download" data-zh="下载">Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AgentDoG1.5-Unified-Qwen3.5-4B</td>
+              <td>Unified safety + diagnosis</td>
+              <td>4B</td>
+              <td>Qwen3.5-4B</td>
+              <td><a href="https://huggingface.co/AI45Research/AgentDoG1.5-unified-Qwen3.5-4B" target="_blank" rel="noopener">Hugging Face</a></td>
+            </tr>
+            <tr>
+              <td>AgentDoG1.5-Qwen3.5-0.8B</td>
+              <td>Coarse-grained moderation</td>
+              <td>0.8B</td>
+              <td>Qwen3.5-0.8B</td>
+              <td>Coming soon</td>
+            </tr>
+            <tr>
+              <td>AgentDoG1.5-Qwen3.5-2B</td>
+              <td>Coarse-grained moderation</td>
+              <td>2B</td>
+              <td>Qwen3.5-2B</td>
+              <td>Coming soon</td>
+            </tr>
+            <tr>
+              <td>AgentDoG1.5-Qwen3.5-4B</td>
+              <td>Coarse-grained moderation</td>
+              <td>4B</td>
+              <td>Qwen3.5-4B</td>
+              <td><a href="https://huggingface.co/AI45Research/AgentDoG-1.5-Qwen3.5-4B" target="_blank" rel="noopener">Hugging Face</a></td>
+            </tr>
+            <tr>
+              <td>AgentDoG1.5-Llama3.1-8B</td>
+              <td>Coarse-grained moderation</td>
+              <td>8B</td>
+              <td>Llama3.1-8B</td>
+              <td>Coming soon</td>
+            </tr>
+            <tr>
+              <td>AgentDoG1.5-FG-Qwen3.5-0.8B</td>
+              <td>Fine-grained diagnosis</td>
+              <td>0.8B</td>
+              <td>Qwen3.5-0.8B</td>
+              <td>Coming soon</td>
+            </tr>
+            <tr>
+              <td>AgentDoG1.5-FG-Qwen3.5-2B</td>
+              <td>Fine-grained diagnosis</td>
+              <td>2B</td>
+              <td>Qwen3.5-2B</td>
+              <td>Coming soon</td>
+            </tr>
+            <tr>
+              <td>AgentDoG1.5-FG-Qwen3.5-4B</td>
+              <td>Fine-grained diagnosis</td>
+              <td>4B</td>
+              <td>Qwen3.5-4B</td>
+              <td>Coming soon</td>
+            </tr>
+            <tr>
+              <td>AgentDoG1.5-FG-Llama3.1-8B</td>
+              <td>Fine-grained diagnosis</td>
+              <td>8B</td>
+              <td>Llama3.1-8B</td>
+              <td>Coming soon</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
