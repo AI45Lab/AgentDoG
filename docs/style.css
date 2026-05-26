@@ -561,6 +561,14 @@ section {
   background: #000;
 }
 
+.app-video img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: #000;
+}
+
 .app1-figures {
   display: grid;
   grid-template-columns: minmax(0, 1.7fr) minmax(0, 0.95fr);

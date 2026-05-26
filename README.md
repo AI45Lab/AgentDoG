@@ -17,9 +17,9 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 
 ## News
 
-- `2026/xx/xx`: AgentDoG 1.5 is coming soon, introducing lightweight and scalable guardrail models for trajectory-level agent safety.
-- `2026/xx/xx`: We extend ATBench into the ATBench Family, covering general tool-use agents, OpenClaw-style stateful agents, and Codex-style repository agents.
-- `2026/xx/xx`: AgentDoG 1.5 supports two application settings: safety agentic SFT/RL and online agent safety guardrails.
+- `2026/05/26`: We have released AgentDoG 1.5, a lightweight and scalable agent safety alignment framework.
+- `2026/04/16`: We have released [Benchmarks for Trajectory Safety Evaluation and Diagnosis in OpenClaw](https://arxiv.org/abs/2604.14858).
+- `2026/04/02`: We have released [ATBench: A Diverse and Realistic Agent Trajectory Benchmark for Safety Evaluation and Diagnosis](https://arxiv.org/abs/2604.02022).
 - `2026/01/26`: We have released [AgentDoG 1.0](examples/readme_v1.md), a diagnostic guardrail framework for AI agent safety and security.
 
 ## Introduction
@@ -188,12 +188,12 @@ Application materials will be organized under [`App2/`](App2/).
 </p>
 
 <p align="center">
-  <a href="docs/figures/app2_online_guardrail_demo_30s.mp4">
-    <img src="docs/figures/app2_online_guardrail_preview.gif" width="85%" alt="App 2 online guardrail demo preview"/>
+  <a href="docs/figures/app2_online_guardrail_demo_60s.mp4">
+    <img src="docs/figures/app2_online_guardrail_demo_60s.gif" width="85%" alt="App 2 online guardrail demo preview"/>
   </a>
 </p>
 <p align="center">
-  <a href="docs/figures/app2_online_guardrail_demo_30s.mp4">Lightweight demo of AgentDoG 1.5 as an online agent safety guardrail.</a>
+  <a href="docs/figures/app2_online_guardrail_demo_60s.mp4">Lightweight demo of AgentDoG 1.5 as an online agent safety guardrail.</a>
 </p>
 
 ---
