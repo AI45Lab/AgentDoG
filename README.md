@@ -42,15 +42,15 @@ AgentDoG 1.5 is **a lightweight and scalable agent safety alignment framework**,
 ### AgentDoG 1.5
 | Model | Task | Parameters | Base model | HF Link | ModelScope Link |
 |-------|------|------------|------------|---------|-----------------|
-| AgentDoG1.5-Unified-Qwen3.5-4B | Unified safety + diagnosis | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Unified-Qwen3.5-4B) | Coming soon |
-| AgentDoG1.5-Qwen3.5-0.8B | Coarse-grained moderation | 0.8B | Qwen3.5-0.8B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Qwen3.5-0.8b) | Coming soon |
-| AgentDoG1.5-Qwen3.5-2B | Coarse-grained moderation | 2B | Qwen3.5-2B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Qwen3.5-2b) | Coming soon |
-| AgentDoG1.5-Qwen3.5-4B | Coarse-grained moderation | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Qwen3.5-4B) | Coming soon |
-| AgentDoG1.5-Llama3.1-8B | Coarse-grained moderation | 8B | Llama3.1-8B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-LLamma-3.1-8B) | Coming soon |
-| AgentDoG1.5-FG-Qwen3.5-0.8B | Fine-grained diagnosis | 0.8B | Qwen3.5-0.8B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-FG-Qwen3.5-0.8b) | Coming soon |
-| AgentDoG1.5-FG-Qwen3.5-2B | Fine-grained diagnosis | 2B | Qwen3.5-2B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-FG-Qwen3.5-2b) | Coming soon |
-| AgentDoG1.5-FG-Qwen3.5-4B | Fine-grained diagnosis | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-FG-Qwen3.5-4b) | Coming soon |
-| AgentDoG1.5-FG-Llama3.1-8B | Fine-grained diagnosis | 8B | Llama3.1-8B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-FG-LLamma-3.1-8B) | Coming soon |
+| AgentDoG1.5-Unified-Qwen3.5-4B | Unified safety + diagnosis | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Unified-Qwen3.5-4B) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-Unified-Qwen3.5-4B) |
+| AgentDoG1.5-Qwen3.5-0.8B | Coarse-grained moderation | 0.8B | Qwen3.5-0.8B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Qwen3.5-0.8b) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-Qwen3.5-0.8B) |
+| AgentDoG1.5-Qwen3.5-2B | Coarse-grained moderation | 2B | Qwen3.5-2B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Qwen3.5-2b) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-Qwen3.5-2B) |
+| AgentDoG1.5-Qwen3.5-4B | Coarse-grained moderation | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Qwen3.5-4B) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-Qwen3.5-4B) |
+| AgentDoG1.5-Llama3.1-8B | Coarse-grained moderation | 8B | Llama3.1-8B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-LLamma-3.1-8B) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-Llama3.1-8B) |
+| AgentDoG1.5-FG-Qwen3.5-0.8B | Fine-grained diagnosis | 0.8B | Qwen3.5-0.8B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-FG-Qwen3.5-0.8b) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-FG-Qwen3.5-0.8B) |
+| AgentDoG1.5-FG-Qwen3.5-2B | Fine-grained diagnosis | 2B | Qwen3.5-2B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-FG-Qwen3.5-2b) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-FG-Qwen3.5-2B) |
+| AgentDoG1.5-FG-Qwen3.5-4B | Fine-grained diagnosis | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-FG-Qwen3.5-4b) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-FG-Qwen3.5-4B) |
+| AgentDoG1.5-FG-Llama3.1-8B | Fine-grained diagnosis | 8B | Llama3.1-8B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-FG-LLamma-3.1-8B) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-FG-Llama-3.1-8B) |
 
 ### AgentDoG 1.0
 
