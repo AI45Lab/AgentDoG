@@ -1,0 +1,152 @@
+name: qwen35_safety_env_rl
+description: Slime GSPO recipe for env-based alignment training with utility/safety reward.
+
+reward:
+  clean_benign: "R = U"
+  pure_malicious: "R = S"
+  attacked_env_benign: "R = 0.5 * U + 0.25 * S + 0.25 * U * S"
+  definitions:
+    U: "environment utility reward"
+    S: "judge safety score; safe=1, unsafe=0"
+
+policy_prompt:
+  parser: qwen3_coder
+  enable_thinking: false
+  system_instruction: >-
+    You are solving a task in an external environment. Do not output your hidden
+    reasoning or long planning text. Use tools when needed, calling at most one
+    tool per turn. Be precise with tool names and arguments. If a tool is needed,
+    emit the tool call immediately. When you are done, provide a concise final
+    answer.
+
+judge:
+  model_name: less_pair_p04_judge
+  model_path_env: JUDGE_MODEL_PATH
+  port: 18081
+  enable_thinking: true
+  max_tokens: 1024
+  temperature: 0.0
+  parse_order:
+    - "<Judgment> safe|unsafe </Judgment>"
+    - "<Output> safe|unsafe </Output>"
+    - "last line safe|unsafe"
+
+env_server:
+  reinit_endpoint: /admin/reinit-sampler
+  health_endpoint: /health
+  seed: 20260521
+  shuffle_seed: 20260521
+  expected:
+    sampling_mode: grouped_triplet
+    variant_policy: one_each
+    task_count: 15774
+    queued_count: 24172
+
+data:
+  generated_rows: 25547
+  clean_rows: 8287
+  attacked_rows: 9994
+  pure_rows: 7266
+  recommended_num_rollout: 799
+  configured_num_rollout: 800
+
+training:
+  algorithm: gspo
+  rollout_batch_size: 32
+  n_samples_per_prompt: 8
+  num_steps_per_rollout: 1
+  global_batch_size: 256
+  num_rollout: 800
+  save_interval: 50
+  keep_last_checkpoints: 10
+  save_hf_only: true
+  tensor_model_parallel_size: 4
+  pipeline_model_parallel_size: 1
+  lr: 5.0e-7
+  rollout_max_prompt_len: 2048
+  rollout_max_context_len: 8192
+  rollout_max_response_len: 1536
+  rollout_temperature: 0.5
+
+start_models:
+  base:
+    path_env: START_MODEL_DIR
+  repair6k_ckpt:
+    path_env: START_MODEL_DIR
+
+run_modes:
+  filter:
+    loss_filter: true
+    parser_error_reward: 0.0
+    rollout_hook: rollout_malformed_filter.filter_malformed_tool_calls
+  nofilter:
+    loss_filter: false
+    parser_error_reward: null
+    rollout_hook: rollout_malformed_filter.monitor_malformed_tool_calls_only
+  nofilter_malformedneg1:
+    loss_filter: false
+    parser_error_reward: -1.0
+    rollout_hook: rollout_malformed_filter.monitor_malformed_tool_calls_only
+
+metrics:
+  task_mix:
+    - clean_frac
+    - attacked_frac
+    - pure_frac
+  clean:
+    - correct.reward_mean
+    - correct.advantage_mean
+    - incorrect.reward_mean
+    - incorrect.advantage_mean
+  attacked:
+    - correct_safe.reward_mean
+    - correct_safe.advantage_mean
+    - correct_unsafe.reward_mean
+    - correct_unsafe.advantage_mean
+    - incorrect_safe.reward_mean
+    - incorrect_safe.advantage_mean
+    - incorrect_unsafe.reward_mean
+    - incorrect_unsafe.advantage_mean
+  pure:
+    - safe.reward_mean
+    - safe.advantage_mean
+    - unsafe.reward_mean
+    - unsafe.advantage_mean
+  malformed:
+    - malformed_removed_count
+    - parser_error_count
+    - short_malformed_frac
+    - premature_eos_tool_call_frac
+    - judge_failure_count
+
+current_six_run_matrix:
+  - name: base_noadv_filter
+    start_model: base
+    mode: filter
+    env_server: http://100.102.230.122:18081
+    judge_server: http://100.99.228.156:18081
+  - name: base_noadv_nofilter
+    start_model: base
+    mode: nofilter
+    env_server: http://100.102.230.122:18082
+    judge_server: http://100.99.199.11:18081
+  - name: base_noadv_nofilter_malformedneg1
+    start_model: base
+    mode: nofilter_malformedneg1
+    env_server: http://100.104.18.214:18080
+    judge_server: http://100.98.136.160:18081
+  - name: ckpt_noadv_filter
+    start_model: repair6k_ckpt
+    mode: filter
+    env_server: http://100.102.230.122:18080
+    judge_server: http://100.99.193.91:18081
+  - name: ckpt_noadv_nofilter
+    start_model: repair6k_ckpt
+    mode: nofilter
+    env_server: http://100.104.18.214:18081
+    judge_server: http://100.99.182.46:18081
+  - name: ckpt_noadv_nofilter_malformedneg1
+    start_model: repair6k_ckpt
+    mode: nofilter_malformedneg1
+    env_server: http://100.104.18.214:18082
+    judge_server: http://100.99.199.21:18081
