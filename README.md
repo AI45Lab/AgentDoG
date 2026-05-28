@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  🤗 <a href="https://huggingface.co/collections/AI45Research/agentdog"><b>Hugging Face</b></a>&nbsp;&nbsp; | &nbsp;&nbsp;
-  🤖 <a href="https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG">ModelScope</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+  🤗 <a href="https://huggingface.co/collections/AI45Research/agentdog15"><b>Hugging Face</b></a>&nbsp;&nbsp; | &nbsp;&nbsp;
+  🤖 <a href="https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG15">ModelScope</a>&nbsp;&nbsp; | &nbsp;&nbsp;
   📄 <a href="https://arxiv.org/pdf/2601.18491">AgentDoG 1.0 Technical Report</a>&nbsp;&nbsp; | &nbsp;&nbsp;
   📄 <a href="#">AgentDoG 1.5 Technical Report</a>&nbsp;&nbsp; | &nbsp;&nbsp;
   🌐 <a href="https://ai45lab.github.io/AgentDoG/">Project Page</a>
@@ -42,7 +42,7 @@ AgentDoG 1.5 is **a lightweight and scalable agent safety alignment framework**,
 ### AgentDoG 1.5
 | Model | Task | Parameters | Base model | HF Link | ModelScope Link |
 |-------|------|------------|------------|---------|-----------------|
-| AgentDoG1.5-Unified-Qwen3.5-4B | Unified safety + diagnosis | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Unified-Qwen3.5-4B) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-Unified-Qwen3.5-4B) |
+| AgentDoG1.5-Unified-Qwen3.5-4B | Unified safety diagnosis | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Unified-Qwen3.5-4B) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-Unified-Qwen3.5-4B) |
 | AgentDoG1.5-Qwen3.5-0.8B | Coarse-grained moderation | 0.8B | Qwen3.5-0.8B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Qwen3.5-0.8b) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-Qwen3.5-0.8B) |
 | AgentDoG1.5-Qwen3.5-2B | Coarse-grained moderation | 2B | Qwen3.5-2B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Qwen3.5-2b) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-Qwen3.5-2B) |
 | AgentDoG1.5-Qwen3.5-4B | Coarse-grained moderation | 4B | Qwen3.5-4B | 🤗 [Hugging Face](https://huggingface.co/AI45Research/AgentDoG1.5-Qwen3.5-4B) | 🤖 [ModelScope](https://modelscope.cn/models/Shanghai_AI_Laboratory/AgentDoG1.5-Qwen3.5-4B) |
