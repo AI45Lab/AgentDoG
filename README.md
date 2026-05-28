@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  🤗 <a href="https://huggingface.co/collections/AI45Research/agentdog"><b>Hugging Face</b></a>&nbsp;&nbsp; | &nbsp;&nbsp;
-  🤖 <a href="https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG">ModelScope</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+  🤗 <a href="https://huggingface.co/collections/AI45Research/agentdog15"><b>Hugging Face</b></a>&nbsp;&nbsp; | &nbsp;&nbsp;
+  🤖 <a href="https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG15">ModelScope</a>&nbsp;&nbsp; | &nbsp;&nbsp;
   📄 <a href="https://arxiv.org/pdf/2601.18491">AgentDoG 1.0 Technical Report</a>&nbsp;&nbsp; | &nbsp;&nbsp;
   📄 <a href="#">AgentDoG 1.5 Technical Report</a>&nbsp;&nbsp; | &nbsp;&nbsp;
   🌐 <a href="https://ai45lab.github.io/AgentDoG/">Project Page</a>
