@@ -17,10 +17,10 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 
 ## News
 
-- `2026/05/26`: We have released AgentDoG 1.5, a lightweight and scalable agent safety alignment framework.
-- `2026/04/16`: We have released [ATBench-Claw and ATBench-Codex](https://arxiv.org/abs/2604.14858).
-- `2026/04/02`: We have released [ATBench: A Diverse and Realistic Agent Trajectory Benchmark for Safety Evaluation and Diagnosis](https://arxiv.org/abs/2604.02022).
-- `2026/01/26`: We have released [AgentDoG 1.0](examples/readme_v1.md), a diagnostic guardrail framework for AI agent safety and security.
+- `2026/05/28`: We have released [AgentDoG 1.5](https://arxiv.org/pdf/2605.29801), a lightweight and scalable agent safety alignment framework.
+- `2026/04/16`: We have released [ATBench-Claw and ATBench-Codex](https://arxiv.org/pdf/2604.14858).
+- `2026/04/02`: We have released [ATBench: A Diverse and Realistic Agent Trajectory Benchmark for Safety Evaluation and Diagnosis](https://arxiv.org/pdf/2604.02022).
+- `2026/01/26`: We have released [AgentDoG 1.0](https://arxiv.org/pdf/2601.18491), a diagnostic guardrail framework for AI agent safety and security.
 
 ## Introduction
 
@@ -270,6 +270,13 @@ This project is released under the **Apache 2.0 License**.
 If you use AgentDoG or ATBench in your research, please cite:
 
 ```bibtex
+@article{liu2026agentdog15,
+  title={AgentDoG 1.5: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security},
+  author={Liu, Dongrui and Li, Yu and Yang, Zhonghao and Wang, Peng and Chen, Guanxu and Xie, Yuejin and Mao, Qinghua and Qu, Wanying and Zhu, Yanxu and Zhou, Tianyi and others},
+  journal={arXiv preprint arXiv:2605.29801},
+  year={2026}
+}
+
 @article{liu2026agentdog,
   title={AgentDoG: A Diagnostic Guardrail Framework for AI Agent Safety and Security},
   author={Liu, Dongrui and Ren, Qihan and Qian, Chen and Shao, Shuai and Xie, Yuejin and Li, Yu and Yang, Zhonghao and Luo, Haoyu and Wang, Peng and Liu, Qingyu and others},
