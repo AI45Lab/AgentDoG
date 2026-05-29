@@ -272,7 +272,7 @@ If you use AgentDoG or ATBench in your research, please cite:
 ```bibtex
 @article{liu2026agentdog15,
   title={AgentDoG 1.5: A Lightweight and Scalable Alignment Framework for AI Agent Safety and Security},
-  author={Liu, Dongrui and Li, Yu and Yang, Zhonghao and Wang, Peng and Chen, Guanxu and Xie, Yuejin and Mao, Qinghua and Qu, Wanying and Zhu, Yanxu and Zhou, Tianyi and Yuan, Leitao and Zheng, Zhijie and Lin, Qihao and Wang, Yimin and Luo, Haoyu and Shao, Shuai and Qian, Chen and Liu, Qingyu and Tang, Ling and Qin, Ruiyang and Ren, Qihan and others},
+  author={Liu, Dongrui and Li, Yu and Yang, Zhonghao and Wang, Peng and Chen, Guanxu and Xie, Yuejin and Mao, Qinghua and Qu, Wanying and Zhu, Yanxu and Zhou, Tianyi and others},
   journal={arXiv preprint arXiv:2605.29801},
   year={2026}
 }
