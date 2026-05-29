@@ -18,9 +18,9 @@ Visit our Hugging Face or ModelScope organization (click links above), search ch
 ## News
 
 - `2026/05/28`: We have released [AgentDoG 1.5](https://arxiv.org/pdf/2605.29801), a lightweight and scalable agent safety alignment framework.
-- `2026/04/16`: We have released [ATBench-Claw and ATBench-Codex](https://arxiv.org/abs/2604.14858).
-- `2026/04/02`: We have released [ATBench: A Diverse and Realistic Agent Trajectory Benchmark for Safety Evaluation and Diagnosis](https://arxiv.org/abs/2604.02022).
-- `2026/01/26`: We have released [AgentDoG 1.0](examples/readme_v1.md), a diagnostic guardrail framework for AI agent safety and security.
+- `2026/04/16`: We have released [ATBench-Claw and ATBench-Codex](https://arxiv.org/pdf/2604.14858).
+- `2026/04/02`: We have released [ATBench: A Diverse and Realistic Agent Trajectory Benchmark for Safety Evaluation and Diagnosis](https://arxiv.org/pdf/2604.02022).
+- `2026/01/26`: We have released [AgentDoG 1.0](https://arxiv.org/pdf/2601.18491), a diagnostic guardrail framework for AI agent safety and security.
 
 ## Introduction
 
