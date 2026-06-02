@@ -1,6 +1,8 @@
-# APP1 Open Release
+# Agentic RL Open Release
 
 This folder combines the open-source environment server release and the Slime training recipe used for APP1/Qwen3.5 safety RL.
+
+Environment data is available at [quantumfr/agentic-lightweight-envs-runtime-20260528](https://huggingface.co/datasets/quantumfr/agentic-lightweight-envs-runtime-20260528), covering lightweight runtime environments for scalable agentic safety RL experiments.
 
 ## Layout
 
