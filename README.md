@@ -152,7 +152,7 @@ Accuracy on ATBench-Codex and ATBench-Claw across model sizes. The x-axis uses d
   <img src="figures/application_overview_v1_5.png" width="95%" alt="AgentDoG 1.5 application overview"/>
 </p>
 
-## Application 1: Agentic Safety SFT & RL with AgentDoG 1.5
+## Agentic Safety Training
 
 AgentDoG 1.5 can serve as a trajectory-level diagnostic evaluator for improving agent safety through supervised fine-tuning and reinforcement learning.
 
@@ -171,17 +171,17 @@ AgentDoG 1.5 can serve as a trajectory-level diagnostic evaluator for improving 
   </tr>
 </table>
 
-Application materials will be organized under [`App1/`](App1/).
+Application materials are organized under [`Agentic Safety Training/`](Agentic%20Safety%20Training/), with current training scripts under [`Agentic Safety Training/Agentic RL/`](Agentic%20Safety%20Training/Agentic%20RL/).
 
 ---
 
-## Application 2: AgentDoG 1.5 as Online Agentic Safety Guardrail
+## Online Agentic Guardrail
 
 AgentDoG 1.5 can also be deployed as an online agent safety guardrail. During agent execution, it can inspect accumulated trajectories before pending actions or final visible responses and flag unsafe behavior before it reaches the user or environment.
 
 **Guardrail Design.** AgentDoG 1.5 can be placed before high-risk actions or final replies. It takes the accumulated trajectory as input and returns a safety judgment, optionally with fine-grained diagnostic labels.
 
-Application materials will be organized under [`App2/`](App2/).
+Application materials are organized under [`Online Agentic Guardrail/`](Online%20Agentic%20Guardrail/).
 
 <p align="center">
   <img src="figures/app2_online_guardrail_framework.png" width="95%" alt="App 2 online guardrail framework"/>
@@ -233,9 +233,11 @@ AgentDoG/
 │   ├── readme_v1.md
 │   ├── run_openai_moderation.py
 │   └── trajectory_sample.json
-├── App1/
-│   └── README.md
-├── App2/
+├── Agentic Safety Training/
+│   ├── Agentic SFT/
+│   └── Agentic RL/
+│       └── README.md
+├── Online Agentic Guardrail/
 │   └── README.md
 ├── AgenticXAI
 │   ├── case_plot_html.py
@@ -262,6 +264,18 @@ AgentDoG/
 ## 📜 License
 
 This project is released under the **Apache 2.0 License**.
+
+---
+
+## Related Projects from Our Group
+
+<p align="center">
+  <a href="https://github.com/titanwings/colleague-skill"><img src="https://cdn.simpleicons.org/github/181717" height="16" alt="GitHub"/> GitHub</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+  <a href="https://arxiv.org/pdf/2605.31264">📄 Technical Report</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+  <a href="https://titanwings.github.io/colleague-skill-site/">🌐 Project Page</a>
+</p>
+
+**colleague-skill** explores automated AI skill generation through expert knowledge distillation. It turns heterogeneous materials from a target person or role into versioned, reusable skill packages that capture both task-level capabilities and bounded communication or interaction behaviors, enabling more inspectable and portable agent customization.
 
 ---
 
