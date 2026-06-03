@@ -295,7 +295,21 @@ This project is released under the **Apache 2.0 License**.
 
 </div>
 
-**colleague-skill** explores automated AI skill generation through expert knowledge distillation. It turns heterogeneous materials from a target person or role into versioned, reusable skill packages that capture task-level capabilities, communication habits, and interaction behaviors, enabling more inspectable and portable agent customization.
+<table>
+<tr><td align="left">
+
+🧑‍💼 &nbsp;Your colleague quit, your mentor graduated, your teammate transferred — taking their whole playbook and context with them?<br>
+💞 &nbsp;Your family, old friends, partner drifting apart — and you want to hold on to the way it felt to be with them?<br>
+🌟 &nbsp;Your favorite author, idol, thinker you'll never meet — but you want to know what they'd say about your question?
+
+</td></tr>
+</table>
+
+<div align="center">
+
+### ✨ dot-skill solves all three.
+
+</div>
 
 ---
 
