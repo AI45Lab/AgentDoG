@@ -269,13 +269,47 @@ This project is released under the **Apache 2.0 License**.
 
 ## Related Projects from Our Group
 
-<p align="center">
-  <a href="https://github.com/titanwings/colleague-skill"><img src="https://cdn.simpleicons.org/github/181717" height="16" alt="GitHub"/> GitHub</a>&nbsp;&nbsp; | &nbsp;&nbsp;
-  <a href="https://arxiv.org/pdf/2605.31264">📄 Technical Report</a>&nbsp;&nbsp; | &nbsp;&nbsp;
-  <a href="https://titanwings.github.io/colleague-skill-site/">🌐 Project Page</a>
-</p>
+<div align="center">
 
-**colleague-skill** explores automated AI skill generation through expert knowledge distillation. It turns heterogeneous materials from a target person or role into versioned, reusable skill packages that capture both task-level capabilities and bounded communication or interaction behaviors, enabling more inspectable and portable agent customization.
+### 🧬 dot-skill（同事.skill）
+
+#### *"You folks building LLMs are all code-sages! Flesh is weak! Ascend to cyberspace!"*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/titanwings/colleague-skill/blob/main/LICENSE)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://python.org)
+[![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-green)](https://agentskills.io)
+[![Stars](https://img.shields.io/github/stars/titanwings/colleague-skill?style=social)](https://github.com/titanwings/colleague-skill/stargazers)
+
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
+[![Hermes](https://img.shields.io/badge/Hermes-Skill-orange)](https://github.com/titanwings/colleague-skill)
+[![OpenClaw](https://img.shields.io/badge/OpenClaw-Skill-teal)](https://github.com/titanwings/colleague-skill)
+[![Codex](https://img.shields.io/badge/Codex-Skill-black)](https://github.com/titanwings/colleague-skill)
+
+[![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white)](https://discord.gg/NVX66RxWZv)
+
+<br>
+
+<a href="https://github.com/titanwings/colleague-skill"><img src="https://cdn.simpleicons.org/github/181717" height="16" alt="GitHub"/> GitHub</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+<a href="https://arxiv.org/pdf/2605.31264">📄 Technical Report</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+<a href="https://titanwings.github.io/colleague-skill-site/">🌐 Project Page</a>
+
+</div>
+
+<table>
+<tr><td align="left">
+
+🧑‍💼 &nbsp;Your colleague quit, your mentor graduated, your teammate transferred — taking their whole playbook and context with them?<br>
+💞 &nbsp;Your family, old friends, partner drifting apart — and you want to hold on to the way it felt to be with them?<br>
+🌟 &nbsp;Your favorite author, idol, thinker you'll never meet — but you want to know what they'd say about your question?
+
+</td></tr>
+</table>
+
+<div align="center">
+
+### ✨ dot-skill solves all three.
+
+</div>
 
 ---
 
