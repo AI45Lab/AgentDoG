@@ -352,3 +352,79 @@ If you use AgentDoG or ATBench in your research, please cite:
 ## 🤝 Acknowledgements
 
 This project builds upon prior work in agent safety, trajectory evaluation, and risk-aware AI systems.
+
+## Frequently Asked Questions (FAQ)
+
+### What is AgentDoG?
+
+AgentDoG (Agent Diagnostic Guardrail) is a framework for AI agent safety and security. It provides lightweight and scalable agent safety alignment through diagnostic guardrails that can monitor and intervene in deployed agentic workflows.
+
+### What versions are available?
+
+| Version | Focus | Training Samples | Key Feature |
+|---------|-------|------------------|-------------|
+| AgentDoG 1.0 | Diagnostic guardrail | Full training | Three-dimensional safety taxonomy |
+| AgentDoG 1.5 | Lightweight alignment | ~1k samples | Scalable runtime safety monitoring |
+
+### What models does AgentDoG support?
+
+| Model | Task | Parameters | Base Model |
+|-------|------|------------|------------|
+| AgentDoG1.5-Unified-Qwen3.5-4B | Unified safety diagnosis | 4B | Qwen3.5-4B |
+| AgentDoG1.5-Qwen3.5-0.8B/2B/4B | Coarse-grained moderation | 0.8B-4B | Qwen3.5 |
+| AgentDoG1.5-Llama3.1-8B | Coarse-grained moderation | 8B | Llama3.1-8B |
+| AgentDoG1.5-FG-Qwen3.5 | Fine-grained diagnosis | 0.8B-4B | Qwen3.5 |
+| AgentDoG1.5-FG-Llama3.1-8B | Fine-grained diagnosis | 8B | Llama3.1-8B |
+
+### What is the three-dimensional safety taxonomy?
+
+| Dimension | Description | Purpose |
+|-----------|-------------|---------|
+| **Risk Source** | Where the risk enters the trajectory | Identifies entry points |
+| **Failure Mode** | How the agent fails | Diagnoses behavior patterns |
+| **Real-world Harm** | What consequence unsafe behavior causes | Predicts outcomes |
+
+### What benchmarks are available?
+
+| Benchmark | Agent Setting | Description |
+|-----------|---------------|-------------|
+| ATBench | General tool-use agents | Base trajectory-level safety benchmark |
+| ATBench-Claw | OpenClaw agents | Persistent sessions, stateful tools |
+| ATBench-Codex | Codex-style agents | Repository modification, shell commands |
+
+### How do I get started?
+
+1. Visit Hugging Face or ModelScope collections
+2. Search checkpoints starting with `AgentDoG-`
+3. Download the model for your use case
+4. Refer to technical reports for detailed usage
+
+### Where can I find the models?
+
+- 🤗 **Hugging Face**: [AI45Research collections](https://huggingface.co/collections/AI45Research/agentdog15)
+- 🤖 **ModelScope**: [Shanghai_AI_Laboratory collections](https://www.modelscope.cn/collections/Shanghai_AI_Laboratory/AgentDoG15)
+
+### What technical reports are available?
+
+| Paper | Topic | Link |
+|-------|-------|------|
+| AgentDoG 1.0 Technical Report | Diagnostic guardrail framework | [arXiv](https://arxiv.org/pdf/2601.18491) |
+| AgentDoG 1.5 Technical Report | Lightweight alignment framework | [arXiv](https://arxiv.org/pdf/2605.29801) |
+| ATBench Paper | Trajectory benchmark | [arXiv](https://arxiv.org/pdf/2604.02022) |
+| ATBench-Claw and ATBench-Codex | Extended benchmarks | [arXiv](https://arxiv.org/pdf/2604.14858) |
+
+### Is AgentDoG free to use?
+
+AgentDoG models and benchmarks are open-source and available on Hugging Face and ModelScope. Check license terms in model repositories.
+
+### How can I contribute?
+
+Contributions are welcome via GitHub issues and pull requests. See repository guidelines for contributing.
+
+### Where can I get help?
+
+| Resource | Link |
+|----------|------|
+| Project Page | [ai45lab.github.io/AgentDoG](https://ai45lab.github.io/AgentDoG/) |
+| Hugging Face | [AI45Research](https://huggingface.co/AI45Research) |
+| ModelScope | [Shanghai_AI_Laboratory](https://modelscope.cn/profiles/Shanghai_AI_Laboratory) |
