@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentdog-guardrail"
+version = "0.1.0"
+description = "PRE_REPLY safety guardrail for OpenClaw-style agent trajectories"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "websockets>=12",
+]
+
+[tool.setuptools]
+packages = ["guardrail"]
+
+[tool.setuptools.package-data]
+guardrail = [
+  "dashboard.html",
+  "inspections.html",
+  "guardrail.json",
+  "assets/*.png",
+]

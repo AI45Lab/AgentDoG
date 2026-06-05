@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "api_base": "$GUARDRAIL_API_BASE",
+  "model": "$GUARDRAIL_MODEL",
+  "api_key": "$GUARDRAIL_API_KEY",
+  "timeout_seconds": 60
+}

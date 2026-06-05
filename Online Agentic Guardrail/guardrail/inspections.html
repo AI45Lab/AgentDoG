@@ -1,0 +1,1712 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgentDog 智能护栏</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --panel: #ffffff;
+    --line: #e9e8e4;
+    --line-2: #f1f0ed;
+    --ink: #0f100d;
+    --ink-2: #3a3b36;
+    --mute: #7c7a73;
+    --mute-2: #aaa79f;
+    --chip: #f5f4f1;
+    --warn: #d9471c;
+    --warn-ink: #c2410c;
+    --warn-bg: #fff3ef;
+    --ok: #16a34a;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+  button, textarea { font: inherit; }
+  a { color: inherit; text-decoration: none; }
+
+  .page {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 92px minmax(0, 1fr);
+    background: var(--bg);
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .brand-logo {
+    width: 56px;
+    height: 62px;
+    flex: 0 0 auto;
+    object-fit: contain;
+    object-position: center;
+  }
+  .title-wrap { min-width: 0; flex: 1 1 auto; }
+  .title {
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 650;
+    letter-spacing: -.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .meta {
+    margin-top: 2px;
+    color: var(--mute);
+    font: 12px var(--mono);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .protection-summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    margin-top: 8px;
+    color: var(--mute);
+    font: 12px var(--mono);
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .protection-summary::-webkit-scrollbar { display: none; }
+  .protection-summary .summary-label {
+    color: var(--ink);
+    font-weight: 800;
+  }
+  .protection-summary .summary-chip {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    padding: 0 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--chip);
+    color: var(--ink-2);
+  }
+  .protection-summary .summary-chip strong {
+    color: var(--ink);
+    font-weight: 800;
+  }
+  .protection-summary .summary-status {
+    margin-left: 2px;
+    border-color: color-mix(in oklch, var(--ok) 34%, var(--line));
+    background: color-mix(in oklch, var(--ok) 10%, var(--panel));
+    color: var(--ok);
+    font-weight: 800;
+  }
+  .protection-summary.is-blocked .summary-status {
+    border-color: color-mix(in oklch, var(--warn) 34%, var(--line));
+    background: color-mix(in oklch, var(--warn) 10%, var(--panel));
+    color: var(--warn-ink);
+  }
+  .top-spacer { flex: 0 0 auto; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: var(--panel);
+    color: var(--ink-2);
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:hover { background: var(--chip); }
+  .btn.primary {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--panel);
+  }
+  .review {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+    padding: 32px clamp(28px, 4vw, 56px) 34px;
+  }
+  .run-shell {
+    width: min(1680px, calc(100vw - 96px));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+    height: 100%;
+    min-height: 0;
+  }
+  .side-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-self: start;
+    height: 100%;
+    min-height: 0;
+    max-height: 100%;
+    overflow: hidden;
+  }
+  .session-panel {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, .04);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    flex: 1 1 auto;
+  }
+  .session-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 14px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .session-head-title {
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 760;
+  }
+  .session-count {
+    color: var(--ink);
+    font: 700 12px var(--mono);
+  }
+  .inspection-sessions {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    overflow: auto;
+  }
+  .side-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, .04);
+    overflow: hidden;
+    flex: 0 0 auto;
+  }
+  .side-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .side-card-title {
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 820;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+  }
+  .side-card-badge {
+    height: 20px;
+    padding: 0 7px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    background: color-mix(in oklch, var(--ok) 10%, var(--panel));
+    color: var(--ok);
+    font: 800 11px var(--mono);
+  }
+  .side-card-badge.is-blocked {
+    background: color-mix(in oklch, var(--warn) 10%, var(--panel));
+    color: var(--warn-ink);
+  }
+  .side-card-body {
+    padding: 13px 14px 14px;
+  }
+  .brief-list {
+    display: grid;
+    gap: 10px;
+  }
+  .brief-row {
+    display: grid;
+    gap: 3px;
+  }
+  .brief-label {
+    color: var(--mute);
+    font: 800 10px var(--mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .brief-value {
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+  .case-session {
+    position: relative;
+    display: grid;
+    grid-template-columns: 10px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 14px;
+    border: 0;
+    border-bottom: 1px solid var(--line-2);
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+  }
+  .case-session:hover { background: var(--chip); }
+  .case-session.is-active {
+    background: color-mix(in oklch, var(--ink) 4%, var(--panel));
+  }
+  .case-session.is-active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--ink);
+  }
+  .case-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--mute-2);
+  }
+  .case-session.s-safe .case-dot { background: var(--ok); }
+  .case-session.s-blocked .case-dot { background: var(--warn); }
+  .case-id {
+    display: block;
+    color: var(--ink);
+    font: 13px var(--mono);
+    line-height: 1.35;
+    word-break: break-word;
+  }
+  .case-meta {
+    display: block;
+    margin-top: 3px;
+    color: var(--mute);
+    font: 12px var(--mono);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .case-right {
+    color: var(--mute);
+    font: 12px var(--mono);
+    text-align: right;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+  .case-right > span { display: block; }
+  .case-right .n { color: var(--ink-2); }
+  .thread {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-bottom: 24px;
+    padding-right: 8px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .msg {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+  .msg.user {
+    grid-template-columns: minmax(0, 1fr) 34px;
+    justify-items: end;
+  }
+  .msg.user .avatar { order: 2; }
+  .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    font: 800 11px var(--mono);
+    margin-top: 2px;
+    background: var(--chip);
+    color: var(--ink);
+  }
+  .msg.user .avatar {
+    background: var(--ink);
+    color: var(--panel);
+  }
+  .who {
+    margin: 0 0 7px;
+    color: var(--mute);
+    font: 800 11px var(--mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .msg.user .who { text-align: right; }
+  .bubble {
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  .msg.user .bubble {
+    max-width: 720px;
+    background: var(--ink);
+    color: var(--panel);
+    border-bottom-right-radius: 4px;
+  }
+  .msg.agent .bubble {
+    width: min(1120px, 100%);
+    border: 1px solid var(--line);
+    background: var(--panel);
+    border-bottom-left-radius: 4px;
+  }
+  .msg.agent.blocked-delivery .bubble {
+    border-color: color-mix(in oklch, var(--warn) 30%, var(--line));
+    background: color-mix(in oklch, var(--warn) 5%, var(--panel));
+  }
+  .bubble p {
+    margin: 8px 0;
+  }
+  .bubble p:first-child { margin-top: 0; }
+  .bubble p:last-child { margin-bottom: 0; }
+  .part-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 7px;
+    color: var(--mute);
+    font: 800 11px var(--mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .part-note::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: .7;
+  }
+  .part-note.reply-draft { color: var(--ink); }
+  .part-note.model-internal { color: var(--mute); }
+
+  .tool-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    margin: 8px 0;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: var(--bg);
+    color: var(--ink-2);
+    font: 13px var(--mono);
+    cursor: pointer;
+    user-select: none;
+  }
+  .tool-chip:hover { border-color: var(--mute-2); }
+  .tool-chip .icon { color: var(--mute); }
+  .tool-chip .tool {
+    color: var(--ink);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .tool-chip .arg {
+    color: var(--mute);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 320px;
+  }
+  .tool-chip .ok {
+    color: var(--ok);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .tool-chip .caret {
+    color: var(--mute-2);
+    font-size: 10px;
+    transition: transform .15s ease;
+  }
+  .tool-chip.is-open .caret { transform: rotate(90deg); }
+  .tool-detail {
+    display: none;
+    margin: 2px 0 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg);
+    font: 12px var(--mono);
+  }
+  .tool-detail.is-open { display: block; }
+  .kv {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 4px 12px;
+  }
+  .kv .k { color: var(--mute); }
+  .kv .v {
+    color: var(--ink-2);
+    word-break: break-all;
+  }
+
+  .guardrail-msg {
+    margin-top: -4px;
+  }
+  .guardrail-bubble {
+    width: min(1120px, 100%);
+    border: 1px solid color-mix(in oklch, var(--ok) 32%, var(--line));
+    border-radius: 14px;
+    background:
+      linear-gradient(135deg, color-mix(in oklch, var(--ok) 9%, transparent), transparent 38%),
+      radial-gradient(circle at 16% 14%, color-mix(in oklch, var(--ok) 16%, transparent), transparent 28%),
+      var(--panel);
+    color: var(--ink-2);
+    box-shadow: 0 18px 40px rgba(22, 163, 74, .08);
+    overflow: hidden;
+    position: relative;
+  }
+  .guardrail-bubble::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(22, 163, 74, .08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22, 163, 74, .08) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: linear-gradient(120deg, rgba(0,0,0,.35), transparent 72%);
+    pointer-events: none;
+  }
+  .guardrail-bubble.is-blocked {
+    border: 2px solid color-mix(in oklch, var(--warn) 72%, var(--line));
+    background:
+      linear-gradient(135deg, color-mix(in oklch, var(--warn) 18%, transparent), transparent 44%),
+      radial-gradient(circle at 18% 16%, color-mix(in oklch, var(--warn) 22%, transparent), transparent 32%),
+      var(--warn-bg);
+    box-shadow: 0 0 0 1px color-mix(in oklch, var(--warn) 24%, transparent),
+      0 24px 64px rgba(217, 71, 28, .24),
+      0 0 44px rgba(217, 71, 28, .10);
+  }
+  .guardrail-bubble.is-impact {
+    animation: guardImpact 1.25s ease-out 1;
+  }
+  .guardrail-bubble.is-blocked::before {
+    background-image:
+      linear-gradient(rgba(217, 71, 28, .08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(217, 71, 28, .08) 1px, transparent 1px);
+  }
+  .guard-scan {
+    position: relative;
+    display: grid;
+    grid-template-columns: 74px minmax(0, 1fr);
+    gap: 16px;
+    align-items: center;
+    min-height: 118px;
+    padding: 22px 24px;
+  }
+  .guard-scan-target {
+    grid-column: 2;
+    grid-row: 2;
+    position: relative;
+    z-index: 1;
+    padding: 11px 12px;
+    border: 1px solid color-mix(in oklch, var(--ok) 22%, var(--line));
+    border-radius: 10px;
+    background: color-mix(in oklch, var(--panel) 86%, var(--ok));
+  }
+  .guard-scan-target-label {
+    color: var(--ok);
+    font: 800 10px var(--mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .guard-scan-target-text {
+    margin-top: 5px;
+    color: var(--ink);
+    font: 13px var(--mono);
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+  .guard-scan-ring {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: center;
+    position: relative;
+    width: 62px;
+    height: 62px;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--ok) 8%, var(--panel));
+    box-shadow:
+      0 0 0 1px rgba(22, 163, 74, .12),
+      0 0 26px rgba(22, 163, 74, .24);
+  }
+  .guard-scan-ring::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: inherit;
+    background: var(--panel);
+    box-shadow: inset 0 0 18px rgba(22, 163, 74, .12);
+    z-index: 1;
+  }
+  .guard-scan-ring::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      conic-gradient(from 0deg, rgba(22, 163, 74, 0), rgba(22, 163, 74, .2), var(--ok), rgba(22, 163, 74, 0) 72%);
+    animation: guardSpin .9s linear .65s infinite;
+    z-index: 0;
+  }
+  .guard-scan-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    object-fit: cover;
+    object-position: center;
+    z-index: 2;
+    filter: drop-shadow(0 0 10px rgba(22, 163, 74, .26));
+  }
+  .guard-scan-copy {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .guard-scan-kicker {
+    color: var(--ok);
+    font: 800 11px var(--mono);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .guard-scan-title {
+    margin-top: 5px;
+    color: var(--ink);
+    font-size: 18px;
+    font-weight: 760;
+    line-height: 1.35;
+  }
+  .guard-scan-sub {
+    margin-top: 5px;
+    color: var(--mute);
+    font-size: 13px;
+  }
+  .guard-result {
+    display: none;
+    position: relative;
+    z-index: 1;
+  }
+  .guardrail-bubble.is-resolved .guard-scan { display: none; }
+  .guardrail-bubble.is-resolved .guard-result { display: block; }
+  .guard-card {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+  .guard-card.safe {
+    background: transparent;
+  }
+  .guard-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-bottom: 1px solid color-mix(in oklch, var(--warn) 20%, var(--line));
+    background: color-mix(in oklch, var(--warn) 8%, var(--panel));
+  }
+  .guard-card:not(.safe) .guard-head {
+    border-bottom-color: color-mix(in oklch, var(--warn) 42%, var(--line));
+    background: linear-gradient(90deg, color-mix(in oklch, var(--warn) 18%, var(--panel)), color-mix(in oklch, var(--warn) 8%, var(--panel)));
+  }
+  .guard-card.safe .guard-head {
+    border-bottom-color: color-mix(in oklch, var(--ok) 20%, var(--line));
+    background: color-mix(in oklch, var(--ok) 8%, var(--panel));
+  }
+  .guard-ic {
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: var(--warn);
+    color: var(--panel);
+    font: 800 14px var(--mono);
+    box-shadow: 0 0 0 7px color-mix(in oklch, var(--warn) 18%, transparent),
+      0 0 22px color-mix(in oklch, var(--warn) 24%, transparent);
+  }
+  .guard-card.safe .guard-ic {
+    background: var(--ok);
+    box-shadow: 0 0 0 5px color-mix(in oklch, var(--ok) 13%, transparent);
+  }
+  .guard-title {
+    color: var(--warn-ink);
+    font-size: 17px;
+    font-weight: 860;
+  }
+  .guard-card.safe .guard-title { color: var(--ok); }
+  .guard-sub {
+    margin-left: auto;
+    color: var(--mute);
+    font: 12px var(--mono);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .guard-body {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .guard-action {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .guard-action-item {
+    min-width: 0;
+    padding: 9px 10px;
+    border: 1px solid color-mix(in oklch, var(--ok) 24%, var(--line));
+    border-radius: 9px;
+    background: color-mix(in oklch, var(--ok) 7%, var(--panel));
+  }
+  .guard-card:not(.safe) .guard-action-item {
+    border-color: color-mix(in oklch, var(--warn) 42%, var(--line));
+    background: color-mix(in oklch, var(--warn) 10%, var(--panel));
+  }
+  .guard-action-label {
+    color: var(--mute);
+    font: 800 10px var(--mono);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .guard-action-value {
+    margin-top: 3px;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 760;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .guard-label {
+    color: var(--mute-2);
+    font: 800 10px var(--mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .attempt {
+    display: block;
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--panel);
+    color: var(--ink);
+    font: 13px var(--mono);
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .guard-attempt-primary .attempt {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font: 14px var(--mono);
+    line-height: 1.5;
+  }
+  .guard-text {
+    color: var(--ink-2);
+    font: 13px var(--mono);
+  }
+  .safe-reply {
+    margin: 2px 16px 16px;
+    padding: 11px 13px;
+    border-radius: 9px;
+    background: linear-gradient(90deg, #b91c1c, var(--warn));
+    color: var(--warn-ink);
+    font-weight: 860;
+    color: var(--panel);
+    box-shadow: 0 10px 24px rgba(185, 28, 28, .18);
+  }
+  .guard-card.safe .safe-reply {
+    background: color-mix(in oklch, var(--ok) 10%, var(--panel));
+    color: var(--ok);
+    box-shadow: 0 10px 24px rgba(22, 163, 74, .10);
+  }
+  @keyframes guardSpin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes guardImpact {
+    0% { box-shadow: 0 0 0 0 rgba(217, 71, 28, .52), 0 24px 64px rgba(217, 71, 28, .24), 0 0 44px rgba(217, 71, 28, .10); }
+    42% { box-shadow: 0 0 0 28px rgba(217, 71, 28, .20), 0 30px 78px rgba(217, 71, 28, .30), 0 0 58px rgba(217, 71, 28, .18); }
+    100% { box-shadow: 0 0 0 46px rgba(217, 71, 28, 0), 0 24px 64px rgba(217, 71, 28, .24), 0 0 44px rgba(217, 71, 28, .10); }
+  }
+  .user-sees-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 7px;
+    color: var(--mute);
+    font: 800 11px var(--mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .user-sees-note::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--mute-2);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1120px) {
+    .run-shell {
+      width: min(920px, calc(100vw - 32px));
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 18px;
+    }
+    .inspection-sessions {
+      max-height: calc(100vh - 390px);
+    }
+  }
+  @media (max-width: 900px) {
+    .topbar { gap: 10px; }
+    .title-wrap { flex: 1 1 0; }
+    .top-spacer { display: none; }
+    .btn:not(.primary) { display: none; }
+  }
+  @media (max-width: 760px) {
+    .topbar { padding: 0 12px; gap: 8px; }
+    .title { font-size: 15px; }
+    .meta { font-size: 11px; }
+    .btn:not(.primary) { display: none; }
+    .review {
+      overflow: auto;
+      padding: 24px 12px 28px;
+    }
+    .run-shell {
+      width: 100%;
+      grid-template-columns: 1fr;
+      height: auto;
+      min-height: auto;
+    }
+    .side-stack {
+      max-height: none;
+      overflow: visible;
+    }
+    .inspection-sessions { max-height: 260px; }
+    .thread {
+      overflow: visible;
+      padding-right: 0;
+    }
+    .msg, .msg.user { grid-template-columns: 1fr; }
+    .avatar, .msg.user .avatar { display: none; }
+    .msg.user { justify-items: stretch; }
+    .msg.user .bubble, .msg.agent .bubble { max-width: none; width: 100%; }
+    .tool-chip .arg { max-width: 145px; }
+    .guard-action { grid-template-columns: 1fr; }
+    .protection-summary {
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 1px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <img class="brand-logo" src="/assets/agentdog-logo.png?v=2" alt="AgentDog">
+    <div class="title-wrap">
+      <div class="title" id="page-title">AgentDog 智能护栏</div>
+      <div class="meta" id="page-meta">No replay data bundled · connect a live sessions directory to inspect trajectories</div>
+      <div class="protection-summary" id="protection-summary">本轮防护摘要</div>
+    </div>
+    <div class="top-spacer"></div>
+    <button class="btn" id="replay-btn">Replay</button>
+    <button class="btn">Share</button>
+    <a class="btn primary" id="dashboard-link" href="/">后台看板</a>
+  </header>
+
+  <main class="review" id="review">
+    <div class="run-shell">
+      <aside class="side-stack" aria-label="Inspection context">
+        <div class="side-card" id="case-brief"></div>
+        <div class="session-panel" aria-label="Session list">
+          <div class="session-head">
+            <div class="session-head-title">会话列表 <span class="session-count" id="case-count">0</span></div>
+          </div>
+          <div class="inspection-sessions" id="inspection-sessions"></div>
+        </div>
+      </aside>
+      <div class="thread" id="chat"></div>
+    </div>
+
+    <div class="visually-hidden" id="event-stream"></div>
+  </main>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+function allowGuard(check, reason = "回复内容为进度说明或安全边界说明，不包含虚假成功、凭据或危险操作结果。") {
+  return {
+    type: "guard",
+    status: "safe",
+    title: "PRE_REPLY allowed",
+    attempted: check,
+    reason,
+    next: "原回复送达用户侧。",
+    check,
+    strip: "ALLOW · 原回复送达",
+  };
+}
+
+const CASES = [];
+
+let activeCase = null;
+let sessionItems = [...CASES];
+let playTimers = [];
+let toolCounter = 0;
+const APP_TITLE = "AgentDog 智能护栏";
+const GUARDRAIL_SCAN_DELAY = 3200;
+
+function guardrailDelayLabel() {
+  return `${(GUARDRAIL_SCAN_DELAY / 1000).toFixed(1)}s`;
+}
+
+function esc(text) {
+  return String(text).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
+}
+
+function clearPlayback() {
+  playTimers.forEach((timer) => clearTimeout(timer));
+  playTimers = [];
+}
+
+function schedule(fn, delay) {
+  const timer = setTimeout(() => {
+    playTimers = playTimers.filter((item) => item !== timer);
+    fn();
+  }, delay);
+  playTimers.push(timer);
+}
+
+function scrollChatToBottom(behavior = "smooth") {
+  const chat = $("chat");
+  if (!chat) return;
+  chat.scrollTo({ top: chat.scrollHeight, behavior });
+}
+
+function resetChatScroll() {
+  const chat = $("chat");
+  if (!chat) return;
+  chat.scrollTo({ top: 0, behavior: "auto" });
+}
+
+function dashboardUrl(caseItem) {
+  const target = caseItem.dashboardSession || caseItem.source?.path || caseItem.id;
+  return `/?session=${encodeURIComponent(target)}&autoplay=1`;
+}
+
+function itemId(item) {
+  return item.kind === "session" ? `session:${item.source.path}` : item.id;
+}
+
+function sessionBasename(path) {
+  return String(path || "").split("/").pop().replace(/\.jsonl$/, "");
+}
+
+function matchesRequested(item, requested) {
+  if (!requested) return false;
+  const decoded = decodeURIComponent(requested);
+  if (item.kind === "session") {
+    const path = item.source.path;
+    return decoded === itemId(item) ||
+      decoded === path ||
+      decoded === item.source.name ||
+      decoded === sessionBasename(path) ||
+      path.endsWith("/" + decoded + ".jsonl");
+  }
+  return decoded === item.id || decoded === item.dashboardSession || decoded === itemId(item);
+}
+
+function curatedSessionNames() {
+  return new Set(CASES.map((caseItem) => caseItem.dashboardSession).filter(Boolean));
+}
+
+function makeSessionItem(session) {
+  const title = session.title || session.name || sessionBasename(session.path);
+  const verdict = session.verdict === "unsafe" ? "1 interception" :
+    session.verdict === "safe" ? "safe" : "session";
+  return {
+    kind: "session",
+    id: `session:${session.path}`,
+    title,
+    meta: `${session.agent_id || "agent"} · ${session.model || "model"} · ${session.event_count || 0} events · ${verdict}`,
+    agent: session.agent_id || "agent",
+    source: session,
+    events: [],
+    thread: [],
+  };
+}
+
+async function loadDashboardSessionItems() {
+  try {
+    const resp = await fetch("/dashboard/sessions");
+    if (!resp.ok) throw new Error(`sessions ${resp.status}`);
+    const sessions = await resp.json();
+    const curatedNames = curatedSessionNames();
+    const realItems = sessions
+      .filter((session) => !curatedNames.has(session.name) && !curatedNames.has(sessionBasename(session.path)))
+      .map(makeSessionItem);
+    sessionItems = [...realItems, ...CASES];
+    renderCaseList();
+
+    const requested = requestedCaseId();
+    const requestedItem = sessionItems.find((item) => matchesRequested(item, requested));
+    if (requestedItem && (!activeCase || itemId(requestedItem) !== itemId(activeCase))) {
+      selectCase(itemId(requestedItem), { updateUrl: false });
+    } else if (!activeCase && sessionItems.length) {
+      selectCase(itemId(sessionItems[0]), { updateUrl: false });
+    } else {
+      syncActiveCaseList();
+    }
+  } catch (error) {
+    console.warn("session list unavailable", error);
+    sessionItems = [...CASES];
+    renderCaseList();
+    if (!activeCase) renderEmptyInspection();
+    else syncActiveCaseList();
+  }
+}
+
+function requestedCaseId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("case") || params.get("session") || "";
+}
+
+function caseHasBlockedGuard(caseItem) {
+  if (caseItem.kind === "session") return caseItem.source.verdict === "unsafe";
+  return caseItem.thread.some((msg) =>
+    (msg.parts || []).some((part) => part.type === "guard" && part.status === "blocked")
+  );
+}
+
+function caseToolCount(caseItem) {
+  if (caseItem.kind === "session") return caseItem.source.tool_calls || 0;
+  return caseItem.thread.reduce((sum, msg) =>
+    sum + (msg.parts || []).filter((part) => part.type === "tool").length, 0
+  );
+}
+
+function caseEventCount(caseItem) {
+  return caseItem.kind === "session" ? caseItem.source.event_count || 0 : caseItem.events.length;
+}
+
+function caseInterceptionCount(caseItem) {
+  if (caseItem.kind === "session") return caseItem.source.verdict === "unsafe" ? 1 : 0;
+  return caseItem.thread.reduce((sum, msg) =>
+    sum + (msg.parts || []).filter((part) => part.type === "guard" && part.status === "blocked").length, 0
+  );
+}
+
+function guardForCase(caseItem) {
+  if (caseItem.kind === "session") {
+    const verdict = caseItem.source.verdict;
+    if (!verdict) return null;
+    return {
+      status: verdict === "unsafe" ? "blocked" : "safe",
+      title: caseItem.source.verdict_reason || verdict,
+      attempted: caseItem.source.title || caseItem.title,
+      reason: caseItem.source.verdict_reason || "",
+      next: verdict === "unsafe" ? "原始回复未送达，用户看到安全替代回复。" : "原回复送达用户侧。",
+      check: verdict === "unsafe" ? "R-SESSION · dashboard verdict" : "R-SESSION-ALLOW · dashboard verdict",
+      strip: verdict === "unsafe" ? "BLOCK · 原始回复未送达" : "ALLOW · 原回复送达",
+    };
+  }
+  for (const msg of caseItem.thread || []) {
+    const found = (msg.parts || []).find((part) => part.type === "guard");
+    if (found) return found;
+  }
+  return null;
+}
+
+function replacementTextForCase(caseItem) {
+  if (caseItem.kind === "session") return caseItem.source.verdict === "unsafe" ? "安全替代回复" : "原回复";
+  let seenGuard = false;
+  for (const msg of caseItem.thread || []) {
+    for (const part of msg.parts || []) {
+      if (part.type === "guard") {
+        seenGuard = true;
+        continue;
+      }
+      if (seenGuard && part.type === "text" && part.text) return part.text;
+    }
+  }
+  return guardForCase(caseItem)?.status === "blocked" ? "安全替代回复" : "原回复";
+}
+
+function renderCaseBrief(caseItem) {
+  const guard = guardForCase(caseItem);
+  const blocked = guard?.status === "blocked";
+  const check = guard?.check || "R-SESSION · dashboard verdict";
+  const risk = check.split(" · ").slice(1).join(" · ") || (blocked ? "unsafe model verdict" : "safe model verdict");
+  const impact = blocked ? "原始回复未送达，用户看到安全替代回复" : "模型判定安全，原回复送达";
+  return `
+    <div class="side-card-head">
+      <div class="side-card-title">Case Brief</div>
+      <div class="side-card-badge ${blocked ? "is-blocked" : ""}">${blocked ? "DANGEROUS" : "SAFE"}</div>
+    </div>
+    <div class="side-card-body">
+      <div class="brief-list">
+        <div class="brief-row"><div class="brief-label">当前场景</div><div class="brief-value">${esc(caseItem.title)}</div></div>
+        <div class="brief-row"><div class="brief-label">风险类型</div><div class="brief-value">${esc(risk)}</div></div>
+        <div class="brief-row"><div class="brief-label">Guardrail 阶段</div><div class="brief-value">PRE_REPLY</div></div>
+        <div class="brief-row"><div class="brief-label">用户影响</div><div class="brief-value">${esc(impact)}</div></div>
+      </div>
+    </div>
+  `;
+}
+
+function renderProtectionSummary(caseItem) {
+  const blocked = caseInterceptionCount(caseItem);
+  const status = blocked ? "已介入保护" : "安全放行";
+  const statusClass = blocked ? " is-blocked" : "";
+  return `
+    <span class="summary-label">本轮防护摘要</span>
+    <span class="summary-chip">已审计 <strong>${caseEventCount(caseItem)}</strong> events</span>
+    <span class="summary-chip">已拦截 <strong>${blocked}</strong></span>
+    <span class="summary-chip">工具调用 <strong>${caseToolCount(caseItem)}</strong></span>
+    <span class="summary-chip">Guardrail 时延 <strong>${guardrailDelayLabel()}</strong></span>
+    <span class="summary-chip summary-status">${status}</span>
+  `;
+}
+
+function renderCaseList() {
+  $("case-count").textContent = sessionItems.length;
+  const activeId = activeCase ? itemId(activeCase) : "";
+  if (!sessionItems.length) {
+    $("inspection-sessions").innerHTML = '<div class="empty-state">No OpenClaw sessions found. By default this reads ~/.openclaw/agents/*/sessions; use --sessions-dir to override.</div>';
+    return;
+  }
+  $("inspection-sessions").innerHTML = sessionItems.map((caseItem) => {
+    const blocked = caseHasBlockedGuard(caseItem);
+    const tools = caseToolCount(caseItem);
+    const verdict = blocked ? "✗" : "✓";
+    const verdictClass = blocked ? " s-blocked" : " s-safe";
+    return `
+      <button class="case-session${verdictClass}${itemId(caseItem) === activeId ? " is-active" : ""}" type="button" data-case="${esc(itemId(caseItem))}">
+        <span class="case-dot"></span>
+        <span>
+          <span class="case-id">${esc(caseItem.title)}</span>
+          <span class="case-meta">${esc(caseItem.agent)} · ${esc(caseItem.meta.split(" · ").slice(-1)[0] || "session")}</span>
+        </span>
+        <span class="case-right">
+          <span><span class="n">${caseEventCount(caseItem)}</span> ev ${verdict}</span>
+          ${tools ? `<span><span class="n">${tools}</span> tools</span>` : ""}
+        </span>
+      </button>
+    `;
+  }).join("");
+}
+
+function syncActiveCaseList() {
+  const activeId = activeCase ? itemId(activeCase) : "";
+  document.querySelectorAll(".case-session").forEach((item) => {
+    item.classList.toggle("is-active", item.dataset.case === activeId);
+  });
+}
+
+function renderEmptyInspection() {
+  clearPlayback();
+  activeCase = null;
+  $("page-title").textContent = APP_TITLE;
+  $("page-meta").textContent = "No replay data bundled · waiting for live OpenClaw sessions";
+  $("protection-summary").innerHTML = `
+    <span class="summary-label">Open-source build</span>
+    <span class="summary-chip">Replay data <strong>removed</strong></span>
+    <span class="summary-chip">Live sessions <strong>${sessionItems.length}</strong></span>
+  `;
+  $("protection-summary").classList.remove("is-blocked");
+  $("case-brief").innerHTML = `
+    <div class="side-card-head">
+      <div class="side-card-title">Case Brief</div>
+      <div class="side-card-badge">READY</div>
+    </div>
+    <div class="side-card-body">
+      <div class="brief-list">
+        <div class="brief-row"><div class="brief-label">Data policy</div><div class="brief-value">No bundled replay or benchmark sessions</div></div>
+        <div class="brief-row"><div class="brief-label">Source</div><div class="brief-value">Live OpenClaw session files only</div></div>
+        <div class="brief-row"><div class="brief-label">Guardrail stage</div><div class="brief-value">PRE_REPLY</div></div>
+      </div>
+    </div>
+  `;
+  $("dashboard-link").href = "/";
+  $("event-stream").innerHTML = "";
+  $("chat").innerHTML = `
+    <section class="msg agent">
+      <div class="avatar">AG</div>
+      <div>
+        <div class="who">AgentDog · open-source build</div>
+        <div class="bubble"><p>This build does not include replay cases. It watches <code>~/.openclaw/agents/*/sessions</code> by default; use <code>--sessions-dir</code> only when you need a custom session source.</p></div>
+      </div>
+    </section>
+  `;
+  renderCaseList();
+}
+
+function applyCaseMeta(caseItem) {
+  const blocked = caseInterceptionCount(caseItem) > 0;
+  $("page-title").textContent = APP_TITLE;
+  $("page-meta").textContent = caseItem.meta;
+  $("protection-summary").innerHTML = renderProtectionSummary(caseItem);
+  $("protection-summary").classList.toggle("is-blocked", blocked);
+  $("case-brief").innerHTML = renderCaseBrief(caseItem);
+  $("dashboard-link").href = dashboardUrl(caseItem);
+  document.title = APP_TITLE;
+  $("event-stream").innerHTML = (caseItem.events || []).map((event) => esc(typeof event === "string" ? event : JSON.stringify(event))).join("\n");
+  syncActiveCaseList();
+}
+
+function renderTool(part) {
+  const idx = ++toolCounter;
+  return `
+    <div class="tool-chip" data-target="tool-${idx}">
+      <span class="icon">✎</span>
+      <span class="tool">${esc(part.tool)}</span>
+      <span class="arg">${esc(part.arg)}</span>
+      <span class="ok">✓ cleared</span>
+      <span class="caret">▸</span>
+    </div>
+    <div class="tool-detail" id="tool-${idx}">
+      <div class="kv">
+        ${Object.entries(part.detail || {}).map(([k, v]) => `<span class="k">${esc(k)}</span><span class="v">${esc(v)}</span>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderGuard(part) {
+  const safe = part.status === "safe";
+  const title = safe ? "模型判定：安全" : "模型判定：不安全";
+  const reasonLabel = safe ? "Why it was allowed" : "Why it was stopped";
+  const action = safe ? "原回复送达" : "替换原回复";
+  const delivery = safe ? "原回复已送达" : "原始回复未送达";
+  const userSees = safe ? "原回复" : "安全替代回复";
+  const outcome = safe ? part.strip : `拦截完成 · ${delivery}`;
+  return `
+    <div class="guard-card ${safe ? "safe" : ""}"${safe ? "" : ' id="guardrail-verdict"'}>
+      <div class="guard-head">
+        <div class="guard-ic">${safe ? "✓" : "!"}</div>
+        <div class="guard-title">${esc(title)}</div>
+        <div class="guard-sub">AgentDog · PRE_REPLY</div>
+      </div>
+      <div class="guard-body">
+        <div class="guard-attempt-primary">
+          <div class="guard-label">Attempted</div>
+          <span class="attempt">${esc(part.reviewText || part.attempted)}</span>
+        </div>
+        <div class="guard-action">
+          <div class="guard-action-item">
+            <div class="guard-action-label">Model decision</div>
+            <div class="guard-action-value">${safe ? "安全" : "不安全"}</div>
+          </div>
+          <div class="guard-action-item">
+            <div class="guard-action-label">Action</div>
+            <div class="guard-action-value">${action}</div>
+          </div>
+          <div class="guard-action-item">
+            <div class="guard-action-label">User sees</div>
+            <div class="guard-action-value">${userSees}</div>
+          </div>
+        </div>
+        <div>
+          <div class="guard-label">Policy signal</div>
+          <div class="guard-text">${esc(part.title)}</div>
+        </div>
+        <div>
+          <div class="guard-label">${reasonLabel}</div>
+          <div class="guard-text">${esc(part.reason)}</div>
+        </div>
+        <div>
+          <div class="guard-label">What happened next</div>
+          <div class="guard-text">${esc(safe ? part.next : "系统已阻止原始回复送达，并替换为安全回复。")}</div>
+        </div>
+      </div>
+      <div class="safe-reply">${esc(outcome)}</div>
+    </div>
+  `;
+}
+
+function renderGuardScan(part) {
+  return `
+    <div class="guard-scan">
+      <div class="guard-scan-target">
+        <div class="guard-scan-target-label">待送审回复</div>
+        <div class="guard-scan-target-text">${esc(part.reviewText || part.attempted)}</div>
+      </div>
+      <div class="guard-scan-ring" aria-hidden="true">
+        <img class="guard-scan-logo" src="/assets/agentdog-mark.png?v=2" alt="">
+      </div>
+      <div class="guard-scan-copy">
+        <div class="guard-scan-kicker">PRE_REPLY GUARD</div>
+        <div class="guard-scan-title">Guardrail model 正在审查 Agent 即将发送的回复</div>
+        <div class="guard-scan-sub">模型会判断这条回复能否安全送达用户。</div>
+      </div>
+    </div>
+  `;
+}
+
+function partHtml(part) {
+  if (part.type === "text") return `<p>${esc(part.text)}</p>`;
+  if (part.type === "tool") return renderTool(part);
+  if (part.type === "guard") return "";
+  return "";
+}
+
+function contentText(content) {
+  if (typeof content === "string") return content;
+  if (!Array.isArray(content)) return "";
+  return content.map((item) => {
+    if (!item || typeof item !== "object") return "";
+    if (item.type === "text") return item.text || "";
+    if (item.type === "thinking") return "";
+    return "";
+  }).filter(Boolean).join("\n\n");
+}
+
+function shortArg(value, limit = 92) {
+  const clean = String(value || "").replace(/\s+/g, " ").trim();
+  if (!clean) return "";
+  return clean.length > limit ? clean.slice(0, limit - 1) + "…" : clean;
+}
+
+function rawSessionToThread(events, sessionItem) {
+  const thread = [];
+  for (const event of events) {
+    if (event.type !== "message") continue;
+    const message = event.message || {};
+    const role = message.role || "";
+    const content = message.content || [];
+
+    if (role === "user") {
+      const text = contentText(content).trim();
+      if (text) thread.push({ role: "user", text });
+      continue;
+    }
+
+    if (role === "assistant") {
+      const parts = [];
+      if (Array.isArray(content)) {
+        for (const item of content) {
+          if (!item || typeof item !== "object") continue;
+          if (item.type === "text" && item.text && item.text.trim()) {
+            parts.push({ type: "text", text: item.text.trim() });
+          } else if (item.type === "toolCall") {
+            const args = item.arguments || {};
+            const command = args.command || args.path || args.url || args.action || JSON.stringify(args);
+            parts.push({
+              type: "tool",
+              tool: item.name || "tool",
+              arg: command,
+              detail: args,
+            });
+          }
+        }
+      } else {
+        const text = contentText(content).trim();
+        if (text) parts.push({ type: "text", text });
+      }
+      if (parts.length) thread.push({ role: "agent", parts });
+      continue;
+    }
+
+    if (role === "toolResult") {
+      const text = contentText(content).trim();
+      if (!text) continue;
+      thread.push({
+        role: "agent",
+        parts: [{
+          type: "tool",
+          tool: `${message.toolName || "tool"}.result`,
+          arg: shortArg(text),
+          detail: {
+            output: text,
+            status: message.isError ? "error" : "ok",
+            toolCallId: message.toolCallId || "",
+          },
+        }],
+      });
+    }
+  }
+
+  if (!thread.length) {
+    thread.push({
+      role: "agent",
+      parts: [{ type: "text", text: "这个 session 没有可展示的 user / agent message 事件。" }],
+    });
+  }
+  return thread;
+}
+
+function messageHasGuard(parts) {
+  return parts.some((part) => part.type === "guard");
+}
+
+function isReplyDraftPart(parts, index) {
+  return parts[index]?.type === "text" && parts[index + 1]?.type === "guard";
+}
+
+function draftAlreadyShown(parts, index) {
+  return isReplyDraftPart(parts, index - 1);
+}
+
+function guardReviewText(parts, index, part) {
+  if (draftAlreadyShown(parts, index)) return parts[index - 1].text;
+  return part.reviewText || part.attempted || "";
+}
+
+function shouldHoldReplyDraftForGuard(parts, index) {
+  return isReplyDraftPart(parts, index);
+}
+
+function fetchSessionEvents(sessionItem) {
+  return new Promise((resolve, reject) => {
+    const path = sessionItem.source.path;
+    const eventSource = new EventSource(`/dashboard/events?session=${encodeURIComponent(path)}`);
+    const timeout = setTimeout(() => {
+      eventSource.close();
+      reject(new Error("session event timeout"));
+    }, 5000);
+
+    eventSource.addEventListener("init", (event) => {
+      clearTimeout(timeout);
+      eventSource.close();
+      try {
+        resolve(JSON.parse(event.data));
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    eventSource.onerror = () => {
+      clearTimeout(timeout);
+      eventSource.close();
+      reject(new Error("session event stream failed"));
+    };
+  });
+}
+
+function appendUserMessage(msg) {
+  const section = document.createElement("section");
+  section.className = "msg user";
+  section.innerHTML = `
+    <div>
+      <div class="who">you</div>
+      <div class="bubble">${esc(msg.text)}</div>
+    </div>
+    <div class="avatar">ZT</div>
+  `;
+  $("chat").appendChild(section);
+}
+
+function appendGuardrailMessage(part) {
+  const safe = part.status === "safe";
+  const section = document.createElement("section");
+  section.className = "msg agent guardrail-msg";
+  section.innerHTML = `
+    <div class="avatar">AG</div>
+    <div>
+      <div class="who">AgentDog · pre_reply guard</div>
+      <div class="guardrail-bubble">
+        ${renderGuardScan(part)}
+        <div class="guard-result">${renderGuard(part)}</div>
+      </div>
+    </div>
+  `;
+  $("chat").appendChild(section);
+  scrollChatToBottom();
+
+  const bubble = section.querySelector(".guardrail-bubble");
+  schedule(() => {
+    bubble.classList.add("is-resolved");
+    if (!safe) bubble.classList.add("is-blocked", "is-impact");
+    scrollChatToBottom();
+  }, GUARDRAIL_SCAN_DELAY);
+}
+
+function appendAgentBubble(options = {}) {
+  const section = document.createElement("section");
+  section.className = `msg agent${options.kind ? ` ${options.kind}` : ""}`;
+  const label = options.label || `${activeCase.agent} · agent`;
+  const note = options.note ? `<div class="part-note ${options.kind || ""}">${esc(options.note)}</div>` : "";
+  section.innerHTML = `
+    <div class="avatar">AG</div>
+    <div>
+      <div class="who">${esc(label)}</div>
+      ${note}
+      ${options.userSees ? '<div class="user-sees-note">USER SEES</div>' : ""}
+      <div class="bubble"></div>
+    </div>
+  `;
+  $("chat").appendChild(section);
+  return section.querySelector(".bubble");
+}
+
+function appendAgentTextBubble(text, options = {}) {
+  const kind = options.kind || "agent-reply";
+  const labels = {
+    "model-internal": `${activeCase.agent} · model internal`,
+    "reply-draft": `${activeCase.agent} · reply draft`,
+    "user-visible": `${activeCase.agent} · delivered to user`,
+    "agent-reply": `${activeCase.agent} · agent reply`,
+  };
+  const notes = {
+    "model-internal": "模型内部过程",
+    "reply-draft": "Agent 对用户回复草稿",
+  };
+  const bubble = appendAgentBubble({
+    kind: options.blockedDelivery ? `${kind} blocked-delivery` : kind,
+    label: labels[kind] || labels["agent-reply"],
+    note: notes[kind] || "",
+    userSees: kind === "user-visible",
+  });
+  bubble.insertAdjacentHTML("beforeend", `<p>${esc(text)}</p>`);
+  return bubble;
+}
+
+function appendAgentMessage(msg) {
+  const parts = msg.parts || [];
+  const hasGuard = messageHasGuard(parts);
+  let currentToolBubble = null;
+  let nextTextIsUserSees = false;
+  let delay = 0;
+  for (let index = 0; index < parts.length; index++) {
+    const part = parts[index];
+    delay += part.type === "guard" ? 780 : 420;
+    schedule(() => {
+      if (part.type === "guard") {
+        currentToolBubble = null;
+        nextTextIsUserSees = part.status !== "safe";
+        const guardPart = { ...part, reviewText: guardReviewText(parts, index, part) };
+        appendGuardrailMessage(guardPart);
+        const shouldDeliverAfterGuard = guardPart.status === "safe" && guardPart.reviewText;
+        if (shouldDeliverAfterGuard) {
+          schedule(() => {
+            appendAgentTextBubble(guardPart.reviewText, { kind: "user-visible" });
+            scrollChatToBottom();
+          }, GUARDRAIL_SCAN_DELAY + 360);
+        }
+        return;
+      }
+
+      if (part.type === "text") {
+        if (shouldHoldReplyDraftForGuard(parts, index)) return;
+        currentToolBubble = null;
+        const nextTextIsBlockedDelivery = nextTextIsUserSees;
+        const kind = nextTextIsUserSees
+          ? "user-visible"
+          : hasGuard
+            ? (isReplyDraftPart(parts, index) ? "reply-draft" : "model-internal")
+            : "agent-reply";
+        nextTextIsUserSees = false;
+        appendAgentTextBubble(part.text, { kind, blockedDelivery: nextTextIsBlockedDelivery });
+      } else {
+        if (!currentToolBubble) {
+          currentToolBubble = appendAgentBubble({
+            kind: "tool-bubble",
+            label: `${activeCase.agent} · tool calls`,
+          });
+        }
+        currentToolBubble.insertAdjacentHTML("beforeend", partHtml(part));
+      }
+      scrollChatToBottom();
+    }, delay);
+    if (part.type === "guard") delay += GUARDRAIL_SCAN_DELAY;
+  }
+}
+
+function agentPlaybackDuration(msg, fast) {
+  const parts = msg.parts || [];
+  const guardCount = parts.filter((part) => part.type === "guard").length;
+  const base = parts.length * (fast ? 160 : 500);
+  return Math.max(fast ? 520 : 1300, base + guardCount * (GUARDRAIL_SCAN_DELAY + 700));
+}
+
+function playCase(caseItem) {
+  clearPlayback();
+  activeCase = caseItem;
+  toolCounter = 0;
+  applyCaseMeta(caseItem);
+  $("chat").innerHTML = "";
+  resetChatScroll();
+
+  let delay = 180;
+  const fast = caseItem.kind === "session";
+  for (const msg of caseItem.thread) {
+    schedule(() => {
+      if (msg.role === "user") appendUserMessage(msg);
+      else appendAgentMessage(msg);
+      scrollChatToBottom();
+    }, delay);
+    delay += msg.role === "user"
+      ? (fast ? 280 : 700)
+      : agentPlaybackDuration(msg, fast);
+  }
+}
+
+async function playRawSession(sessionItem) {
+  clearPlayback();
+  activeCase = sessionItem;
+  toolCounter = 0;
+  applyCaseMeta(sessionItem);
+  $("chat").innerHTML = `
+    <section class="msg agent">
+      <div class="avatar">AG</div>
+      <div>
+        <div class="who">${esc(sessionItem.agent)} · agent</div>
+        <div class="bubble"><p>Loading original session...</p></div>
+      </div>
+    </section>
+  `;
+  resetChatScroll();
+
+  try {
+    const events = await fetchSessionEvents(sessionItem);
+    if (itemId(activeCase) !== itemId(sessionItem)) return;
+    const replayCase = {
+      ...sessionItem,
+      events,
+      thread: rawSessionToThread(events, sessionItem),
+    };
+    playCase(replayCase);
+  } catch (error) {
+    if (itemId(activeCase) !== itemId(sessionItem)) return;
+    $("chat").innerHTML = `
+      <section class="msg agent">
+        <div class="avatar">AG</div>
+        <div>
+          <div class="who">${esc(sessionItem.agent)} · agent</div>
+          <div class="bubble"><p>无法加载原始 session：${esc(error.message)}</p></div>
+        </div>
+      </section>
+    `;
+  }
+}
+
+function startReplay(item) {
+  if (!item) {
+    renderEmptyInspection();
+    return;
+  }
+  if (item.kind === "session") {
+    playRawSession(item);
+  } else {
+    playCase(item);
+  }
+}
+
+function selectCase(id, options = {}) {
+  const next = sessionItems.find((caseItem) => itemId(caseItem) === id || caseItem.id === id) ||
+    CASES.find((caseItem) => caseItem.id === id) ||
+    CASES[0] ||
+    null;
+  if (!next) {
+    renderEmptyInspection();
+    return;
+  }
+  const url = new URL(window.location.href);
+  if (next.kind === "session") {
+    url.searchParams.delete("case");
+    url.searchParams.set("session", next.source.name || sessionBasename(next.source.path));
+  } else {
+    url.searchParams.delete("session");
+    url.searchParams.set("case", next.id);
+  }
+  if (options.updateUrl !== false) history.replaceState(null, "", url);
+  startReplay(next);
+}
+
+function initialCase() {
+  const requested = requestedCaseId();
+  return CASES.find((caseItem) => caseItem.id === requested || caseItem.dashboardSession === requested) || CASES[0] || null;
+}
+
+activeCase = initialCase();
+renderCaseList();
+if (activeCase) startReplay(activeCase);
+else renderEmptyInspection();
+loadDashboardSessionItems();
+
+$("inspection-sessions").addEventListener("click", (event) => {
+  const item = event.target.closest(".case-session");
+  if (!item) return;
+  selectCase(item.dataset.case);
+});
+$("replay-btn").addEventListener("click", () => {
+  if (activeCase) startReplay(activeCase);
+  else renderEmptyInspection();
+});
+$("chat").addEventListener("click", (event) => {
+  const chip = event.target.closest(".tool-chip");
+  if (!chip) return;
+  const detail = document.getElementById(chip.dataset.target);
+  if (!detail) return;
+  const isOpen = detail.classList.toggle("is-open");
+  chip.classList.toggle("is-open", isOpen);
+});
+
+</script>
+</body>
+</html>

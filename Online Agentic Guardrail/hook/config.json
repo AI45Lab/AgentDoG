@@ -1,0 +1,5 @@
+{
+  "guardrail_url": "http://127.0.0.1:8340",
+  "sessions_dir": "~/.openclaw/agents/*/sessions",
+  "timeout_ms": 60000
+}

@@ -1,0 +1,2496 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-density="default">
+<head>
+<meta charset="utf-8">
+<title>AgentDog · 智能体安全防护</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /* ---------- tokens ---------- */
+  :root {
+    --bg:        #f5f5f3;
+    --panel:     #ffffff;
+    --panel-2:   #fafaf8;
+    --panel-3:   #f0efec;
+    --line:      #e4e3df;
+    --line-2:    #edece8;
+    --ink:       #0e0f0c;
+    --ink-2:     #2c2d29;
+    --mute:      #76746e;
+    --mute-2:    #a3a19a;
+    --accent:    #16a34a;
+    --warn:      #c2410c;
+    --info:      #1e40af;
+    --chip-bg:   #f4f3ef;
+    --hover:     #f4f3ef;
+    --selected:  #efeee9;
+    --gt-user:   #2563eb;
+    --gt-agent:  #5b5f97;
+    --gt-guard:  #13795b;
+    --gt-delivery: #0e7490;
+    --gt-block:  #b42318;
+    --gt-user-bg: #f3f7ff;
+    --gt-agent-bg: #f4f4fb;
+    --gt-guard-bg: #f0faf4;
+    --gt-delivery-bg: #eefbfc;
+    --gt-block-bg: #fff3f1;
+    --row-h:     38px;
+    --pad:       18px;
+    --radius:    8px;
+    --mono: "Geist Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+    --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+  html[data-theme="dark"] {
+    --bg:        #0c0d0b;
+    --panel:     #131411;
+    --panel-2:   #171916;
+    --panel-3:   #1a1c18;
+    --line:      #232520;
+    --line-2:    #1b1d19;
+    --ink:       #f3f1ec;
+    --ink-2:     #d8d6cf;
+    --mute:      #8a877e;
+    --mute-2:    #5d5b54;
+    --accent:    #4ade80;
+    --warn:      #fb923c;
+    --info:      #93c5fd;
+    --chip-bg:   #1c1e1a;
+    --hover:     #1a1c18;
+    --selected:  #20221d;
+    --gt-user:   #8fb7ff;
+    --gt-agent:  #b8b6ff;
+    --gt-guard:  #7ddfa1;
+    --gt-delivery: #67dce8;
+    --gt-block:  #f08a84;
+    --gt-user-bg: #131d2c;
+    --gt-agent-bg: #1f1e32;
+    --gt-guard-bg: #10251b;
+    --gt-delivery-bg: #10272b;
+    --gt-block-bg: #321719;
+  }
+  html[data-density="cozy"]  { --row-h: 44px; --pad: 22px; }
+  html[data-density="dense"] { --row-h: 32px; --pad: 14px; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  button { font-family: inherit; color: inherit; }
+
+  /* ---------- shell ---------- */
+  .app {
+    display: grid; grid-template-rows: 52px 1fr;
+    height: calc(100vh / var(--ui-scale, 1));
+    width: calc(100vw / var(--ui-scale, 1));
+    transform-origin: 0 0;
+    zoom: var(--ui-scale, 1);
+    overflow: hidden;
+  }
+
+  .topbar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; }
+  .brand-mark {
+    width: 22px; height: 22px; border-radius: 5px;
+    background: var(--ink); color: var(--panel);
+    display: grid; place-items: center;
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+  }
+  .brand-sub { color: var(--ink); font-weight: 600; font-size: 20px; margin-left: 2px; }
+  .brand-sub::before { content: "/ "; color: var(--mute-2); }
+
+  .topbar-spacer { flex: 1; }
+
+  .env-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 28px; padding: 0 12px;
+    border: 1px solid var(--line); border-radius: 999px;
+    background: var(--panel); color: var(--mute);
+    font-family: var(--mono); font-size: 13px;
+  }
+  .env-pill .dot {
+    width: 8px; height: 8px; border-radius: 999px; background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 18%, transparent);
+  }
+
+  .zoom-ctl {
+    display: inline-flex; align-items: center; gap: 2px;
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 2px 4px; background: var(--panel);
+  }
+  .zoom-btn {
+    width: 26px; height: 26px; display: grid; place-items: center;
+    border: none; border-radius: 4px; background: transparent;
+    cursor: pointer; color: var(--mute); font-size: 14px; font-weight: 600;
+    font-family: var(--mono);
+  }
+  .zoom-btn:hover { background: var(--hover); color: var(--ink); }
+  .zoom-label {
+    font-family: var(--mono); font-size: 11px; color: var(--mute);
+    min-width: 42px; text-align: center; user-select: none; cursor: default;
+  }
+
+  .icon-btn {
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    border-radius: 6px; background: transparent;
+    border: 1px solid transparent;
+    color: var(--mute); cursor: pointer;
+  }
+  .icon-btn:hover { background: var(--hover); color: var(--ink); }
+
+  /* ---------- 2-col ---------- */
+  .cols { display: grid; grid-template-columns: 320px 1fr; height: 100%; min-height: 0; }
+  .col { display: flex; flex-direction: column; min-height: 0; }
+  .col-left  { border-right: 1px solid var(--line); background: var(--panel-2); }
+  .col-mid   { background: var(--bg); min-width: 0; overflow: hidden; }
+  .col-right { border-left: 1px solid var(--line); background: var(--panel); }
+
+  .col-head {
+    display: flex; align-items: center; gap: 10px;
+    height: 42px; padding: 0 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--mute);
+    font-family: var(--mono); font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .col-head .count { color: var(--ink); font-weight: 500; }
+  .col-head-spacer { flex: 1; }
+  .col-head .mini-btn {
+    background: transparent; border: 0; color: var(--mute);
+    font-family: var(--mono); font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 4px 8px; cursor: pointer; border-radius: 4px;
+  }
+  .col-head .mini-btn:hover { background: var(--hover); color: var(--ink); }
+
+  /* ---------- sessions list ---------- */
+  .sessions { flex: 1; overflow: auto; }
+  .session {
+    display: grid; grid-template-columns: 10px 1fr auto;
+    align-items: center; gap: 12px;
+    padding: 12px 16px; border-bottom: 1px solid var(--line-2);
+    cursor: pointer; position: relative;
+  }
+  .session:hover { background: var(--hover); }
+  .session.is-active { background: var(--selected); }
+  .session.is-active::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: var(--ink);
+  }
+  .session .dot {
+    width: 8px; height: 8px; border-radius: 999px; background: var(--mute-2);
+  }
+  .session.s-safe .dot    { background: var(--accent); }
+  .session.s-blocked .dot { background: var(--warn); }
+  .session .id {
+    font-family: var(--mono); font-size: 14px; color: var(--ink);
+    white-space: normal; word-break: break-word; line-height: 1.4;
+  }
+  .session .meta {
+    font-family: var(--mono); font-size: 14px; color: var(--mute); margin-top: 3px;
+  }
+  .session .right {
+    font-family: var(--mono); font-size: 14px; color: var(--mute);
+    text-align: right; line-height: 1.4;
+  }
+  .session .right .n { color: var(--ink-2); }
+
+  /* ---------- mid: kpi row ---------- */
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--line); background: var(--panel-2);
+  }
+  .kpi {
+    padding: 16px 20px; border-right: 1px solid var(--line-2);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .kpi:last-child { border-right: 0; }
+  .kpi-label {
+    font-family: var(--mono); font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--mute);
+  }
+  .kpi-row-2 { display: flex; align-items: baseline; gap: 10px; }
+  .kpi-num {
+    font-family: var(--mono); font-size: 28px; font-weight: 500;
+    letter-spacing: -0.02em; color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi-delta { font-family: var(--mono); font-size: 13px; color: var(--mute); }
+  .kpi-delta.up   { color: var(--accent); }
+  .kpi-delta.down { color: var(--warn); }
+  .kpi.warn .kpi-num { color: var(--warn); }
+  .spark { display: flex; align-items: flex-end; gap: 3px; height: 20px; margin-top: 4px; }
+  .spark span { width: 4px; background: var(--mute-2); border-radius: 2px; opacity: 0.55; }
+  .kpi.warn .spark span { background: var(--warn); }
+  .kpi.ok   .spark span { background: var(--accent); }
+
+  /* ---------- mid: gantt timeline ---------- */
+  .gantt {
+    border-bottom: 1px solid var(--line); background: var(--panel);
+    padding: 14px 20px 10px;
+  }
+  .gantt-head {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    font-family: var(--mono); font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--mute); font-weight: 500;
+  }
+  .gantt-head .title { color: var(--ink); }
+  .gantt-head .meta { color: var(--mute-2); }
+  .gantt-head-spacer { flex: 1; }
+  .gantt-legend {
+    display: flex; align-items: center; gap: 14px;
+    font-family: var(--mono); font-size: 12px; color: var(--mute);
+    text-transform: none; letter-spacing: 0;
+  }
+  .gantt-legend .sw {
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .gantt-legend .sw-box {
+    width: 10px; height: 10px; border-radius: 2px;
+  }
+  .gantt-legend .sw-hit {
+    width: 2px; height: 14px; background: #dc2626; border-radius: 1px;
+  }
+
+  .gantt-axis {
+    display: flex; align-items: flex-end;
+    height: 18px; margin-left: 120px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .gantt-axis .tick {
+    position: absolute; bottom: 0; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 12px; color: var(--mute-2);
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .gantt-axis .tick::after {
+    content: ""; width: 1px; height: 6px;
+    border-left: 1px dashed var(--line);
+  }
+  .gantt-axis .tick.tick-now {
+    color: var(--ink); font-weight: 500;
+  }
+  .gantt-axis .tick.tick-now::after {
+    border-left: 1px solid var(--ink);
+  }
+
+  .gantt-rows { padding-top: 6px; }
+  .gantt-row {
+    display: grid; grid-template-columns: 120px 1fr;
+    align-items: center; height: 24px; cursor: pointer;
+  }
+  .gantt-row:hover .gantt-bar { filter: brightness(1.15); }
+  .gantt-row.is-active .gantt-label { color: var(--ink); font-weight: 600; }
+  .gantt-label {
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 12px; color: var(--ink-2);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .gantt-label .gdot {
+    width: 6px; height: 6px; border-radius: 999px; flex-shrink: 0;
+  }
+  .gantt-track {
+    position: relative; height: 100%; width: 100%;
+  }
+  .gantt-track .now-line {
+    position: absolute; right: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--ink); opacity: 0.2;
+  }
+  .gantt-bar {
+    position: absolute; height: 10px; top: 50%; transform: translateY(-50%);
+    border-radius: 3px; min-width: 3px;
+    transition: filter 0.15s;
+  }
+  .gantt-bar.gs-safe    { background: color-mix(in oklch, var(--accent) 35%, transparent); }
+  .gantt-bar.gs-blocked { background: color-mix(in oklch, #dc2626 35%, transparent); }
+  .gantt-bar.gs-idle    { background: color-mix(in oklch, var(--mute-2) 30%, transparent); }
+  .gantt-hit {
+    position: absolute; width: 2px; top: -3px; bottom: -3px;
+    background: #dc2626; border-radius: 1px;
+    box-shadow: 0 0 0 2px color-mix(in oklch, #dc2626 25%, transparent);
+  }
+
+  /* ---------- guard bar ---------- */
+  .guard-bar {
+    display: grid; grid-template-columns: 170px 1fr;
+    border-bottom: 2px solid var(--line); background: var(--panel);
+    height: 560px; flex-shrink: 0;
+    transition: border-color 0.4s;
+  }
+  .guard-bar.is-blocked {
+    border-bottom-color: var(--gt-block);
+  }
+  .guard-big {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px; border-right: 1px solid var(--line);
+    transition: background 0.4s, color 0.4s;
+  }
+  .guard-bar.is-blocked .guard-big {
+    background: var(--gt-block);
+  }
+  .guard-icon {
+    width: 64px; height: 64px; border-radius: 999px;
+    display: grid; place-items: center;
+    font-size: 32px; font-weight: 700;
+    background: color-mix(in oklch, var(--accent) 14%, transparent);
+    border: 2.5px solid color-mix(in oklch, var(--accent) 40%, transparent);
+    color: var(--accent);
+    transition: all 0.4s;
+  }
+  .guard-bar.is-blocked .guard-icon {
+    background: rgba(255,255,255,0.2);
+    border-color: #fff;
+    color: #fff;
+    animation: icon-pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes icon-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+  }
+  .guard-label {
+    font-size: 22px; font-weight: 700; margin-top: 8px;
+    color: var(--accent);
+    transition: color 0.4s;
+  }
+  .guard-bar.is-blocked .guard-label { color: #fff; }
+  .guard-bar.is-blocked .guard-model { color: rgba(255,255,255,0.7); }
+  .guard-model {
+    font-family: var(--mono); font-size: 11px; color: var(--mute); margin-top: 4px;
+  }
+
+  /* --- timeline area --- */
+  .guard-timeline {
+    display: flex; flex-direction: column; min-width: 0;
+    padding: 16px 18px;
+    background: var(--panel-2);
+    overflow: hidden;
+    transition: border-color 0.4s;
+  }
+  .guard-bar.is-blocked .guard-timeline {
+    border-top: 3px solid var(--gt-block);
+  }
+  .gt-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    font-family: var(--sans); font-size: 20px; font-weight: 700; color: var(--ink);
+    letter-spacing: 0;
+    margin-bottom: 12px; flex-shrink: 0;
+  }
+  .gt-lanes { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; justify-content: flex-end; }
+  .gt-lane {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 25px; padding: 0 9px; border-radius: 999px;
+    border: 1px solid currentColor;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+    color: var(--ink-2);
+    background: var(--panel);
+  }
+  .gt-lane::before {
+    content: ""; width: 8px; height: 8px; border-radius: 999px; background: currentColor;
+  }
+  .gt-lane.gt-lane-user { color: var(--gt-user); background: color-mix(in oklch, var(--gt-user) 11%, var(--panel)); }
+  .gt-lane.gt-lane-agent { color: var(--gt-agent); background: color-mix(in oklch, var(--gt-agent) 11%, var(--panel)); }
+  .gt-lane.gt-lane-guard { color: var(--gt-guard); background: color-mix(in oklch, var(--gt-guard) 11%, var(--panel)); }
+  .gt-track-shell {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg,
+        color-mix(in oklch, var(--gt-user) 7%, transparent) 0 33%,
+        color-mix(in oklch, var(--gt-agent) 7%, transparent) 33% 66%,
+        color-mix(in oklch, var(--gt-guard) 7%, transparent) 66% 100%),
+      var(--panel);
+  }
+  .gt-track {
+    height: 100%; width: calc(100% - 132px); margin-left: 132px; display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 380px;
+    grid-template-rows: repeat(3, minmax(138px, 1fr));
+    gap: 14px 20px; align-items: stretch;
+    overflow-x: auto; overflow-y: hidden;
+    position: relative;
+    padding: 18px 440px 22px 0;
+  }
+  .gt-track::before {
+    content: "";
+    position: absolute; inset: 18px 16px 22px 0;
+    background:
+      linear-gradient(180deg,
+        transparent calc(33.333% - 1px),
+        color-mix(in oklch, var(--ink) 10%, transparent) calc(33.333% - 1px) calc(33.333% + 1px),
+        transparent calc(33.333% + 1px) calc(66.666% - 1px),
+        color-mix(in oklch, var(--ink) 10%, transparent) calc(66.666% - 1px) calc(66.666% + 1px),
+        transparent calc(66.666% + 1px));
+    pointer-events: none;
+    z-index: 0;
+  }
+  .gt-track::-webkit-scrollbar { height: 4px; }
+  .gt-track::-webkit-scrollbar-thumb { background: var(--mute-2); border-radius: 2px; }
+  .gt-axis-labels {
+    position: absolute;
+    inset: 18px auto 22px 18px;
+    width: 100px;
+    display: grid;
+    grid-template-rows: repeat(3, minmax(138px, 1fr));
+    gap: 14px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .gt-axis-labels span {
+    display: flex; align-items: center; justify-content: center;
+    writing-mode: horizontal-tb; text-orientation: mixed;
+    border-radius: 8px;
+    border: 1px solid currentColor;
+    font-family: var(--sans); font-size: 20px; font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1;
+    white-space: nowrap;
+    background: color-mix(in oklch, var(--panel) 86%, transparent);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  }
+  .gt-axis-labels .gt-axis-user { color: var(--gt-user); background: color-mix(in oklch, var(--gt-user) 8%, var(--panel)); }
+  .gt-axis-labels .gt-axis-agent { color: var(--gt-agent); background: color-mix(in oklch, var(--gt-agent) 8%, var(--panel)); }
+  .gt-axis-labels .gt-axis-guard { color: var(--gt-guard); background: color-mix(in oklch, var(--gt-guard) 8%, var(--panel)); }
+
+  /* --- timeline items: role-colored conversation flow --- */
+  .gt-item {
+    --role-color: var(--ink);
+    --role-bg: var(--panel);
+    grid-column: var(--gt-col);
+    min-height: 0;
+    display: flex; flex-direction: column; gap: 7px;
+    padding: 10px 14px 12px;
+    border: 1px solid color-mix(in oklch, var(--role-color) 30%, var(--line));
+    border-left: 6px solid var(--role-color);
+    border-radius: 8px;
+    background: var(--role-bg);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: timeline-card-in 0.28s ease-out both;
+  }
+  .gt-item::after {
+    display: none;
+  }
+  .gt-item:hover { transform: translateY(-2px); box-shadow: 0 14px 26px rgba(15, 23, 42, 0.12); }
+
+  .gt-item[data-role="user"] {
+    grid-row: 1;
+    --role-color: var(--gt-user);
+    --role-bg: var(--gt-user-bg);
+  }
+  .gt-item[data-role="agent"] {
+    grid-row: 2;
+    --role-color: var(--gt-agent);
+    --role-bg: var(--gt-agent-bg);
+  }
+  .gt-item[data-role="guard"] {
+    grid-row: 3;
+    --role-color: var(--gt-guard);
+    --role-bg: var(--gt-guard-bg);
+  }
+  .gt-item[data-role="delivery"] {
+    grid-row: 3;
+    --role-color: var(--gt-delivery);
+    --role-bg: var(--gt-delivery-bg);
+  }
+  .gt-item.gt-blocked {
+    --role-color: var(--gt-block);
+    --role-bg: var(--gt-block-bg);
+  }
+
+  .gt-item .gt-ic {
+    width: 26px; height: 26px; border-radius: 8px;
+    display: grid; place-items: center; flex-shrink: 0;
+    font-family: var(--mono); font-size: 12px; font-weight: 900;
+    background: color-mix(in oklch, var(--role-color) 16%, #fff);
+    color: var(--role-color);
+    border: 1px solid color-mix(in oklch, var(--role-color) 32%, transparent);
+  }
+  .gt-item .gt-stage {
+    font-family: var(--mono); font-size: 11.5px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--role-color);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .gt-item .gt-top {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    min-width: 0;
+  }
+  .gt-item .gt-meta {
+    display: flex; align-items: center; gap: 9px;
+    min-width: 0;
+  }
+  .gt-item .gt-body {
+    display: flex; flex: 1 1 auto; flex-direction: column; gap: 5px;
+    min-width: 0; min-height: 0; overflow: hidden;
+  }
+  .gt-item .gt-head-row { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+  .gt-item .gt-title { font-size: 16px; font-weight: 800; color: var(--ink); letter-spacing: 0; line-height: 1.2; }
+  .gt-item .gt-when { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); white-space: nowrap; flex-shrink: 0; }
+  .gt-item .gt-desc {
+    font-size: 13px; color: var(--ink-2); line-height: 1.35;
+    overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  }
+  .gt-item[data-role="agent"] .gt-desc {
+    -webkit-line-clamp: 4;
+  }
+  .gt-threat-strip {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    margin-top: 2px;
+    border-radius: 7px;
+    background: var(--gt-block);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.15;
+    padding: 5px 8px;
+    letter-spacing: 0;
+    overflow: hidden;
+  }
+  .gt-threat-pill {
+    display: inline-flex;
+    align-items: center;
+    height: 19px;
+    padding: 0 6px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.16);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .gt-threat-text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* guardrail safe */
+  .gt-item.gt-safe .gt-title { color: var(--ink); }
+
+  /* guardrail blocked */
+  .gt-item.gt-blocked .gt-title { color: color-mix(in oklch, var(--gt-block) 72%, var(--ink)); }
+  .gt-item.gt-blocked .gt-ic { background: var(--panel); color: var(--gt-block); border-color: color-mix(in oklch, var(--gt-block) 35%, transparent); }
+
+  /* guardrail error */
+  .gt-item.gt-error {
+    --role-color: #1e40af;
+    --role-bg: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
+  }
+
+  /* user message */
+  .gt-item.gt-user .gt-title { color: var(--ink); }
+
+  /* agent message */
+  .gt-item.gt-agent .gt-title { color: var(--ink); }
+  @keyframes timeline-card-in {
+    from { opacity: 0; transform: translateX(16px) scale(0.98); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+  }
+  html[data-theme="dark"] .gt-track {
+    background:
+      linear-gradient(180deg,
+        color-mix(in oklch, var(--gt-user) 10%, transparent) 0 33%,
+        color-mix(in oklch, var(--gt-agent) 10%, transparent) 33% 66%,
+        color-mix(in oklch, var(--gt-guard) 10%, transparent) 66% 100%),
+      var(--panel);
+  }
+  html[data-theme="dark"] .gt-item.gt-blocked .gt-title { color: #ffd7d4; }
+
+  /* ---------- mid: filter bar ---------- */
+  .filter-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--panel-3);
+  }
+  .seg {
+    display: inline-flex; border: 1px solid var(--line);
+    border-radius: 6px; padding: 2px; background: var(--bg);
+  }
+  .seg button {
+    border: 0; background: transparent; padding: 4px 12px;
+    font-family: var(--mono); font-size: 13px; color: var(--mute);
+    border-radius: 4px; cursor: pointer; height: 28px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .seg button .c { color: var(--mute-2); font-size: 12px; }
+  .seg button.is-on {
+    background: var(--panel); color: var(--ink);
+    box-shadow: 0 0 0 1px var(--line) inset;
+  }
+  .seg button.is-on .c { color: var(--ink-2); }
+  .filter-spacer { flex: 1; }
+  .search {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 32px; padding: 0 12px;
+    border: 1px solid var(--line); border-radius: 6px;
+    background: var(--bg); color: var(--mute);
+    font-family: var(--mono); font-size: 13px; min-width: 220px;
+  }
+  .search input {
+    border: 0; outline: none; background: transparent;
+    color: var(--ink); font: inherit; width: 100%;
+  }
+  .search .kbd {
+    border: 1px solid var(--line); border-radius: 3px;
+    padding: 0 4px; color: var(--mute); font-size: 11px;
+  }
+
+  /* ---------- mid: stream ---------- */
+  .stream-wrap { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; }
+  .stream { font-family: var(--mono); font-size: 14px; padding: 6px 0 60px 0; }
+  .row {
+    display: grid; grid-template-columns: 96px 64px 1fr auto;
+    align-items: start; column-gap: 14px; padding: 0 20px;
+    min-height: var(--row-h); line-height: var(--row-h);
+    border-bottom: 1px solid var(--line-2); cursor: pointer;
+  }
+  .row:hover { background: var(--hover); }
+  .row.expanded { background: var(--selected); }
+  .row .t { color: var(--mute); font-variant-numeric: tabular-nums; font-size: 13px; }
+  .row .tag {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 22px; padding: 0 8px; margin-top: calc((var(--row-h) - 22px) / 2);
+    border-radius: 4px; font-size: 14px; font-weight: 500; letter-spacing: 0.04em;
+    background: var(--chip-bg); color: var(--ink-2); line-height: 1;
+  }
+  .row.k-llm  .tag { color: var(--info);   background: color-mix(in oklch, var(--info) 12%, var(--panel)); }
+  .row.k-file .tag { color: var(--ink-2); }
+  .row.k-exec .tag { color: var(--warn);   background: color-mix(in oklch, var(--warn) 13%, var(--panel)); }
+  .row.k-net  .tag { color: var(--accent); background: color-mix(in oklch, var(--accent) 13%, var(--panel)); }
+  .row .msg { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .row .msg .k { color: var(--ink); }
+  .row .msg .arg { color: var(--mute); }
+  .row .status {
+    font-size: 12.5px; color: var(--mute);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .row.s-blocked .status { color: #dc2626; font-weight: 600; }
+  .row.s-allow   .status { color: var(--accent); }
+  .row.s-info    .status { color: var(--mute); }
+  .row.s-blocked { background: color-mix(in oklch, #dc2626 12%, transparent); border-left: 3px solid #dc2626; }
+  .row.s-blocked:hover { background: color-mix(in oklch, #dc2626 18%, transparent); }
+  .row.s-blocked .msg { color: #dc2626; }
+  .row.s-blocked .tag { color: #dc2626; background: color-mix(in oklch, #dc2626 18%, var(--panel)); font-weight: 600; }
+  .block-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #dc2626; color: #fff; font-weight: 700;
+    padding: 2px 9px; border-radius: 4px; font-size: 12.5px;
+    letter-spacing: 0.04em; line-height: 20px; vertical-align: middle;
+  }
+
+  .row .detail {
+    grid-column: 1 / -1; padding: 6px 0 14px 174px;
+    color: var(--mute); font-size: 13px; line-height: 1.6;
+    cursor: text; border-top: 1px dashed var(--line); margin-top: 4px;
+  }
+  .row .detail pre {
+    white-space: pre-wrap; word-break: break-all; color: var(--ink-2);
+    margin: 4px 0; font-family: var(--mono); font-size: 13px;
+  }
+
+  .stream-foot {
+    position: sticky; bottom: 0;
+    background: linear-gradient(to top, var(--bg) 60%, transparent);
+    padding: 16px; display: flex; gap: 8px; align-items: center;
+    color: var(--mute); font-family: var(--mono); font-size: 13px;
+    pointer-events: none;
+  }
+  .stream-foot .live {
+    width: 8px; height: 8px; border-radius: 999px; background: var(--accent);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--accent) 50%, transparent); }
+    50%      { box-shadow: 0 0 0 6px color-mix(in oklch, var(--accent) 0%,  transparent); }
+  }
+
+  /* ---------- right panel ---------- */
+  .right-scroll { flex: 1; overflow: auto; }
+  .panel { border-bottom: 1px solid var(--line); padding: var(--pad); }
+  .panel h3 {
+    margin: 0 0 14px 0; font-family: var(--mono); font-size: 13px;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--mute); font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .panel h3 .count { color: var(--ink); font-weight: 500; }
+  .panel h3 .right-mute { margin-left: auto; color: var(--mute-2); font-weight: 400; }
+
+  .status-card { display: flex; gap: 14px; align-items: center; margin-bottom: 14px; }
+  .status-ring {
+    width: 44px; height: 44px; border-radius: 999px;
+    background: color-mix(in oklch, var(--accent) 14%, transparent);
+    border: 1px solid color-mix(in oklch, var(--accent) 40%, transparent);
+    display: grid; place-items: center;
+  }
+  .status-ring::after {
+    content: ""; width: 14px; height: 14px; border-radius: 999px; background: var(--accent);
+  }
+  .status-ring.ring-warn {
+    background: color-mix(in oklch, #dc2626 18%, transparent);
+    border-color: color-mix(in oklch, #dc2626 50%, transparent);
+  }
+  .status-ring.ring-warn::after { background: #dc2626; }
+  .status-ring.ring-mute {
+    background: color-mix(in oklch, var(--mute) 10%, transparent);
+    border-color: color-mix(in oklch, var(--mute) 20%, transparent);
+  }
+  .status-ring.ring-mute::after { background: var(--mute-2); }
+  .status-ring.ring-pulse { animation: ring-pulse 1.6s ease-in-out infinite; }
+  @keyframes ring-pulse {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+  }
+  .status-card .label { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
+  .status-card.is-blocked .label { color: #dc2626; }
+  .status-card .sub { font-family: var(--mono); font-size: 12.5px; color: var(--mute); margin-top: 3px; }
+  .panel.panel-blocked {
+    background: color-mix(in oklch, #dc2626 6%, var(--panel));
+    border-bottom-color: color-mix(in oklch, #dc2626 20%, var(--line));
+  }
+
+  .rule-list { display: flex; flex-direction: column; gap: 1px; }
+  .rule {
+    display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--line-2); font-size: 14px;
+  }
+  .rule:last-child { border-bottom: 0; }
+  .rule .name { color: var(--ink-2); }
+  .rule .name .rid { color: var(--mute); font-family: var(--mono); font-size: 12px; margin-left: 6px; }
+  .rule .v { font-family: var(--mono); font-size: 13px; color: var(--mute); display: inline-flex; align-items: center; gap: 6px; }
+  .rule .v .ok  { color: var(--accent); }
+  .rule .v .hit { color: var(--warn); }
+
+  .alert {
+    display: grid; grid-template-columns: 22px 1fr auto;
+    gap: 12px; align-items: start;
+    padding: 12px 0; border-bottom: 1px solid var(--line-2); cursor: pointer;
+  }
+  .alert:last-child { border-bottom: 0; }
+  .alert:hover { background: var(--hover); margin: 0 calc(var(--pad) * -1); padding: 10px var(--pad); border-radius: 4px; }
+  .alert .ic {
+    width: 22px; height: 22px; border-radius: 5px;
+    display: grid; place-items: center;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    background: color-mix(in oklch, var(--warn) 16%, transparent); color: var(--warn);
+    margin-top: 1px;
+  }
+  .alert.sev-blocked .ic { background: color-mix(in oklch, #dc2626 20%, transparent); color: #dc2626; }
+  .alert.sev-blocked { background: color-mix(in oklch, #dc2626 4%, transparent); border-radius: 6px; margin: 0 -4px; padding-left: 4px; padding-right: 4px; }
+  .alert.sev-blocked .body .title { color: #dc2626; }
+  .alert.sev-safe .ic { background: color-mix(in oklch, var(--accent) 16%, transparent); color: var(--accent); }
+  .alert.sev-err .ic  { background: color-mix(in oklch, var(--info) 16%, transparent); color: var(--info); }
+  .alert .body .title { font-size: 14px; color: var(--ink); font-weight: 500; }
+  .alert .body .ameta { font-family: var(--mono); font-size: 14px; color: var(--mute); margin-top: 4px; line-height: 1.5; }
+  .alert .when { font-family: var(--mono); font-size: 12.5px; color: var(--mute-2); white-space: nowrap; }
+
+  .empty-state {
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px;
+    padding: 40px 0; color: var(--mute-2); font-family: var(--mono); font-size: 14px;
+  }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, var(--mute-2) 40%, transparent);
+    border-radius: 999px; border: 2px solid transparent; background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-track { background: transparent; }
+  .hidden { display: none !important; }
+
+  /* ---------- block warning toast ---------- */
+  .block-toast {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    z-index: 9999;
+    background: #fff; border: 2px solid #dc2626; border-radius: 14px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 0 0 4px rgba(220,38,38,0.12);
+    padding: 32px 40px; text-align: center;
+    min-width: 380px; max-width: 520px;
+    opacity: 0;
+    animation: toast-in 0.35s ease-out forwards;
+  }
+  .block-toast-overlay {
+    position: fixed; inset: 0; z-index: 9998;
+    background: rgba(0,0,0,0.3);
+    opacity: 0;
+    animation: overlay-in 0.3s ease-out forwards;
+  }
+  .block-toast .bt-icon {
+    width: 56px; height: 56px; border-radius: 999px;
+    background: color-mix(in oklch, #dc2626 12%, transparent);
+    border: 2px solid color-mix(in oklch, #dc2626 30%, transparent);
+    display: inline-grid; place-items: center;
+    font-size: 28px; color: #dc2626; font-weight: 700;
+    margin-bottom: 14px;
+    animation: toast-icon-pulse 1.4s ease-in-out infinite;
+  }
+  .block-toast .bt-title {
+    font-size: 20px; font-weight: 700; color: #dc2626; margin-bottom: 8px;
+  }
+  .block-toast .bt-reason {
+    font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 20px;
+  }
+  .block-toast .bt-safe-note {
+    border-radius: 8px;
+    background: #fee2e2;
+    color: #991b1b;
+    font-size: 14px; font-weight: 700; line-height: 1.5;
+    padding: 10px 12px;
+    margin: -6px 0 18px;
+  }
+  .block-toast .bt-meta {
+    font-family: var(--mono); font-size: 12px; color: var(--mute); margin-bottom: 18px;
+  }
+  .block-toast .bt-close {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 36px; padding: 0 28px; border-radius: 8px;
+    background: #dc2626; color: #fff; border: none;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .block-toast .bt-close:hover { opacity: 0.85; }
+  @keyframes toast-in {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+  @keyframes overlay-in {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes toast-icon-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); }
+    50%      { box-shadow: 0 0 0 10px rgba(220,38,38,0); }
+  }
+  html[data-theme="dark"] .block-toast {
+    background: #1a1c18; border-color: #dc2626;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 4px rgba(220,38,38,0.2);
+  }
+
+  /* ---------- approvals queue ---------- */
+  .approval-card {
+    border: 1px solid var(--line); border-radius: 6px;
+    background: var(--bg); padding: 10px;
+    margin-bottom: 8px;
+    display: grid; grid-template-columns: 22px 1fr; gap: 10px;
+  }
+  .approval-card.ap-urgent {
+    border-color: color-mix(in oklch, #dc2626 35%, var(--line));
+    background: color-mix(in oklch, #dc2626 3%, var(--bg));
+  }
+  .approval-card .ap-ic {
+    width: 22px; height: 22px; border-radius: 5px;
+    display: grid; place-items: center;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+  }
+  .approval-card.ap-urgent .ap-ic {
+    background: color-mix(in oklch, #dc2626 16%, transparent); color: #dc2626;
+  }
+  .approval-card.ap-normal .ap-ic {
+    background: color-mix(in oklch, var(--info) 16%, transparent); color: var(--info);
+  }
+  .approval-card .ap-title {
+    font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.4;
+  }
+  .approval-card .ap-title code {
+    font-family: var(--mono); font-size: 12px;
+    background: var(--chip-bg); padding: 1px 4px; border-radius: 3px;
+  }
+  .approval-card .ap-meta {
+    font-family: var(--mono); font-size: 12px; color: var(--mute); margin-top: 4px;
+  }
+  .approval-card .ap-meta .ap-timer { font-weight: 500; }
+  .approval-card.ap-urgent .ap-meta .ap-timer { color: #dc2626; }
+  .approval-card .ap-actions {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px;
+  }
+  .approval-card .ap-btn {
+    height: 28px; border-radius: 5px; border: 1px solid var(--line);
+    font-family: var(--mono); font-size: 12px; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .approval-card .ap-btn-allow {
+    background: var(--ink); color: var(--panel); border-color: var(--ink);
+  }
+  .approval-card .ap-btn-allow:hover { opacity: 0.85; }
+  .approval-card .ap-btn-deny {
+    background: transparent; color: var(--ink-2);
+  }
+  .approval-card .ap-btn-deny:hover {
+    border-color: #dc2626; color: #dc2626;
+  }
+
+  /* ---------- activity heatmap ---------- */
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: 16px repeat(24, 1fr);
+    gap: 2px;
+  }
+  .heatmap-grid .hm-day {
+    font-family: var(--mono); font-size: 11px; color: var(--mute-2);
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+  .heatmap-grid .hm-cell {
+    aspect-ratio: 1; border-radius: 2px; position: relative; cursor: pointer;
+    background: color-mix(in oklch, var(--ink) calc(var(--v) * 1%), var(--line-2));
+  }
+  .heatmap-grid .hm-cell:hover { outline: 1px solid var(--ink); outline-offset: 1px; }
+  .hm-cell .hm-dot {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 4px; height: 4px; border-radius: 999px;
+    background: var(--warn);
+    box-shadow: 0 0 0 1px var(--panel);
+  }
+  .heatmap-axis {
+    display: grid;
+    grid-template-columns: 16px repeat(24, 1fr);
+    gap: 2px; margin-top: 2px;
+  }
+  .heatmap-axis span {
+    font-family: var(--mono); font-size: 11px; color: var(--mute-2);
+    text-align: center;
+  }
+  .heatmap-legend {
+    display: flex; align-items: center; gap: 6px; margin-top: 8px;
+    font-family: var(--mono); font-size: 12px; color: var(--mute-2);
+  }
+  .heatmap-legend .hm-grad {
+    display: inline-flex; gap: 1px;
+  }
+  .heatmap-legend .hm-grad span {
+    width: 10px; height: 10px; border-radius: 1px;
+  }
+  .heatmap-legend .hm-block-sw {
+    margin-left: auto; display: inline-flex; align-items: center; gap: 4px;
+  }
+  .heatmap-legend .hm-block-sw .mini-dot {
+    width: 5px; height: 5px; border-radius: 999px; background: var(--warn);
+  }
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <!-- ===== topbar ===== -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">🛡</span>
+      AgentDog
+      <span class="brand-sub">智能体安全防护</span>
+    </div>
+    <div class="env-pill" id="env-pill">
+      <span class="dot"></span>
+      <span id="env-label">离线</span>
+    </div>
+    <div class="topbar-spacer"></div>
+    <span style="font-family:var(--mono);font-size:13px;color:var(--mute)" id="model-info"></span>
+    <div class="zoom-ctl" id="zoom-ctl">
+      <button class="zoom-btn" id="zoom-out" title="缩小">−</button>
+      <span class="zoom-label" id="zoom-label">100%</span>
+      <button class="zoom-btn" id="zoom-in" title="放大">+</button>
+    </div>
+    <button class="icon-btn" id="theme-toggle" title="切换主题">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+  </header>
+
+  <!-- ===== body ===== -->
+  <div class="cols">
+
+    <!-- ===== left: sessions ===== -->
+    <aside class="col col-left">
+      <div class="col-head">
+        会话列表 <span class="count" id="sessions-count">0</span>
+        <div class="col-head-spacer"></div>
+        <button class="mini-btn" id="refresh-btn">刷新</button>
+      </div>
+      <div class="sessions" id="sessions"></div>
+    </aside>
+
+    <!-- ===== mid: kpi + filter + stream ===== -->
+    <main class="col col-mid">
+      <div class="kpi-row">
+        <div class="kpi ok">
+          <div class="kpi-label">已审计</div>
+          <div class="kpi-row-2">
+            <span class="kpi-num" id="kpi-audited">0</span>
+          </div>
+          <div class="spark" id="spark-a"></div>
+        </div>
+        <div class="kpi warn" id="kpi-blocked-card">
+          <div class="kpi-label">已拦截</div>
+          <div class="kpi-row-2">
+            <span class="kpi-num" id="kpi-blocked">0</span>
+          </div>
+          <div class="spark" id="spark-b"></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">工具调用</div>
+          <div class="kpi-row-2">
+            <span class="kpi-num" id="kpi-tools">0</span>
+          </div>
+          <div class="spark" id="spark-c"></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">事件总数</div>
+          <div class="kpi-row-2">
+            <span class="kpi-num" id="kpi-events">0</span>
+          </div>
+          <div class="spark" id="spark-d"></div>
+        </div>
+      </div>
+
+      <!-- ===== guard bar: status + audit timeline ===== -->
+      <div class="guard-bar" id="guard-bar">
+        <div class="guard-big" id="guard-big">
+          <div class="guard-icon" id="guard-icon">✓</div>
+          <div class="guard-label" id="guard-label">安全</div>
+          <div class="guard-model" id="guard-model" style="display:none">等待评估</div>
+        </div>
+        <div class="guard-timeline" id="guard-timeline">
+          <div class="gt-head">
+            <span>审核时间线</span>
+            <div class="gt-lanes" aria-label="Timeline role legend">
+              <span class="gt-lane gt-lane-user">User</span>
+              <span class="gt-lane gt-lane-agent">Agent</span>
+              <span class="gt-lane gt-lane-guard">Guardrail</span>
+            </div>
+          </div>
+          <div class="gt-track-shell">
+            <div class="gt-axis-labels" aria-hidden="true">
+              <span class="gt-axis-user">用户</span>
+              <span class="gt-axis-agent">智能体</span>
+              <span class="gt-axis-guard">安全护栏</span>
+            </div>
+            <div class="gt-track" id="gt-track">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- hidden: keep gantt IDs alive for JS -->
+      <div style="display:none">
+        <div id="gantt"><div id="gantt-axis"></div><div id="gantt-rows"></div><span id="gantt-meta"></span></div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="seg" id="kind-seg">
+          <button data-k="ALL" class="is-on">全部 <span class="c" id="fc-all">0</span></button>
+          <button data-k="LLM">LLM <span class="c" id="fc-llm">0</span></button>
+          <button data-k="FILE">文件 <span class="c" id="fc-file">0</span></button>
+          <button data-k="EXEC">执行 <span class="c" id="fc-exec">0</span></button>
+          <button data-k="NET">网络 <span class="c" id="fc-net">0</span></button>
+        </div>
+        <div class="seg" id="state-seg">
+          <button data-s="all" class="is-on">全部状态</button>
+          <button data-s="allow">放行</button>
+          <button data-s="blocked">已拦截</button>
+        </div>
+        <div class="filter-spacer"></div>
+        <div class="search">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="search-input" placeholder="搜索事件…">
+          <span class="kbd">/</span>
+        </div>
+      </div>
+
+      <div class="stream-wrap" id="stream-wrap">
+        <div class="stream" id="stream">
+          <div class="empty-state" id="stream-empty">请选择一个会话开始监控</div>
+        </div>
+        <div class="stream-foot">
+          <span class="live" id="live-dot"></span>
+          <span id="stream-status">等待选择会话</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== right: status & alerts ===== -->
+    <!-- hidden: keep right-col IDs alive for JS -->
+    <div style="display:none">
+      <div id="approvals-panel"><span id="approvals-count">0</span><div id="approvals-list"></div></div>
+      <div class="status-card" id="status-card"><div class="status-ring ring-mute" id="status-ring"></div><div id="status-label">等待中</div><div id="status-sub">尚未评估</div></div>
+      <div id="verdict-reason"></div>
+      <span id="alert-count">0</span><div id="alert-list"></div>
+      <div id="heatmap-grid"></div><div id="heatmap-axis"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   State
+   ═══════════════════════════════════════════════════════ */
+let eventSource = null;
+let activeSessionPath = '';
+let activeFilter = 'ALL';
+let activeStateFilter = 'all';
+let searchQuery = '';
+let eventCount = 0, toolCount = 0, evalCount = 0, blockedCount = 0;
+let blockToastTimer = null;
+const seenEventKeys = new Set();
+const filterCounts = { ALL: 0, LLM: 0, FILE: 0, EXEC: 0, NET: 0 };
+const sparkData = { a: [], b: [], c: [], d: [] };
+const BLOCK_TOAST_DELAY_MS = 1000;
+const DASHBOARD_PARAMS = new URLSearchParams(window.location.search);
+const DASHBOARD_REQUESTED_SESSION = DASHBOARD_PARAMS.get('session') || '';
+const DASHBOARD_REQUESTED_AUTOPLAY = DASHBOARD_PARAMS.get('autoplay') === '1';
+let dashboardInitialSelectionApplied = false;
+let dashboardAutoplaySessionPath = '';
+const dashboardAutoplayConsumed = new Set();
+
+const TOOL_TAG = {
+  read: 'FILE', write: 'FILE', edit: 'FILE', list_dir: 'FILE', glob: 'FILE',
+  bash: 'EXEC', exec: 'EXEC', process: 'EXEC', run: 'EXEC',
+  web_fetch: 'NET', web_search: 'NET', http: 'NET', fetch: 'NET', curl: 'NET',
+};
+
+function toolTag(name) {
+  if (!name) return 'EXEC';
+  const lower = name.toLowerCase();
+  for (const [k, v] of Object.entries(TOOL_TAG)) { if (lower.includes(k)) return v; }
+  return 'EXEC';
+}
+
+/* ═══════════════════════════════════════════════════════
+   Sparklines
+   ═══════════════════════════════════════════════════════ */
+function pushSpark(id, val) {
+  sparkData[id].push(val);
+  if (sparkData[id].length > 20) sparkData[id].shift();
+  renderSpark(id);
+}
+function renderSpark(id) {
+  const el = document.getElementById('spark-' + id);
+  const d = sparkData[id];
+  const mx = Math.max(...d, 1);
+  el.innerHTML = d.map(v => `<span style="height:${Math.max(2, (v/mx)*16)}px"></span>`).join('');
+}
+
+/* ═══════════════════════════════════════════════════════
+   Session list
+   ═══════════════════════════════════════════════════════ */
+let sessionsCache = [];
+
+let alertsRestored = false;
+
+const BUNDLED_SESSIONS = [];
+
+async function loadSessions() {
+  try {
+    const resp = await fetch('/dashboard/sessions');
+    const sessions = await resp.json();
+    sessions.push(...BUNDLED_SESSIONS);
+    sessionsCache = sessions;
+    renderSessionList(sessions);
+    renderGantt();
+    applyInitialDashboardSelection(sessions);
+    if (!alertsRestored) {
+      alertsRestored = true;
+      restoreAlertsFromCache(sessions);
+    }
+  } catch (e) { console.error('session load:', e); }
+}
+
+function sessionBasename(path) {
+  return String(path || '').split('/').pop().replace(/\.jsonl$/, '');
+}
+
+function resolveDashboardSessionTarget(sessions, target) {
+  if (!target) return null;
+  const decoded = decodeURIComponent(target);
+  return sessions.find(s =>
+    s.path === decoded ||
+    s.name === decoded ||
+    sessionBasename(s.path) === decoded ||
+    String(s.path || '').endsWith('/' + decoded + '.jsonl')
+  ) || null;
+}
+
+function applyInitialDashboardSelection(sessions) {
+  if (dashboardInitialSelectionApplied || !DASHBOARD_REQUESTED_SESSION) return;
+  const target = resolveDashboardSessionTarget(sessions, DASHBOARD_REQUESTED_SESSION);
+  if (!target) return;
+  dashboardInitialSelectionApplied = true;
+  if (DASHBOARD_REQUESTED_AUTOPLAY) dashboardAutoplaySessionPath = target.path;
+  selectSession(target.path);
+}
+
+function dashboardShouldAutoplay(path) {
+  return DASHBOARD_REQUESTED_AUTOPLAY &&
+    dashboardAutoplaySessionPath === path &&
+    !dashboardAutoplayConsumed.has(path);
+}
+
+function restoreAlertsFromCache(sessions) {
+  const allEntries = [];
+  for (const s of sessions) {
+    const history = s.eval_history || [];
+    if (history.length) {
+      for (const h of history) {
+        allEntries.push({ ...h, agent_id: s.agent_id, channel: s.channel });
+      }
+    } else if (s.verdict && s.verdict_prediction != null) {
+      allEntries.push({
+        prediction: s.verdict_prediction,
+        reason: s.verdict_reason || '',
+        model: s.verdict_model || '',
+        ts: 0,
+        agent_id: s.agent_id,
+        channel: s.channel,
+      });
+    }
+  }
+  allEntries.sort((a, b) => (a.ts || 0) - (b.ts || 0));
+  for (const e of allEntries) {
+    evalCount++;
+    if (e.prediction === 1) blockedCount++;
+    addAlertCard({
+      prediction: e.prediction,
+      reason: e.reason || '',
+      model: e.model || '',
+      error: null,
+    }, e.agent_id, e.channel);
+  }
+  updateStats();
+  pushSpark('a', evalCount);
+  pushSpark('b', blockedCount);
+}
+
+function renderSessionList(sessions) {
+  const container = document.getElementById('sessions');
+  document.getElementById('sessions-count').textContent = sessions.length;
+  if (!sessions.length) {
+    container.innerHTML = '<div class="empty-state">暂无会话</div>';
+    return;
+  }
+  const frag = document.createDocumentFragment();
+  for (const s of sessions) {
+    const el = document.createElement('div');
+    const verdictClass = s.verdict === 'safe' ? ' s-safe' : s.verdict === 'unsafe' ? ' s-blocked' : '';
+    el.className = 'session' + verdictClass + (s.path === activeSessionPath ? ' is-active' : '');
+    el.dataset.path = s.path;
+    el.addEventListener('click', () => selectSession(s.path));
+
+    const chLabel = s.channel === 'telegram' ? 'tg' : s.channel === 'tui' ? 'tui' : '—';
+    const isRecent = (Date.now() / 1000 - s.mtime) < 3600;
+    const title = s.title || s.agent_id || s.name.substring(0, 12);
+    const tc = s.tool_calls || 0;
+    const verdictLabel = s.verdict === 'safe' ? ' ✓' : s.verdict === 'unsafe' ? ' ✗' : '';
+
+    el.innerHTML = `
+      <span class="dot"></span>
+      <div>
+        <div class="id">${esc(title)}</div>
+        <div class="meta">${esc(s.agent_id)} · ${chLabel}</div>
+      </div>
+      <div class="right">
+        <div><span class="n">${s.event_count || 0}</span> ev${verdictLabel}</div>
+        ${tc ? `<div><span class="n">${tc}</span> tools</div>` : ''}
+      </div>
+    `;
+    frag.appendChild(el);
+  }
+  container.innerHTML = '';
+  container.appendChild(frag);
+}
+
+function selectSession(path) {
+  const prevPath = activeSessionPath;
+  activeSessionPath = path;
+  document.querySelectorAll('.session').forEach(c => {
+    c.classList.toggle('is-active', c.dataset.path === path);
+  });
+  connectSession(path, prevPath);
+}
+
+function timeAgo(mtime) {
+  const diff = Date.now() / 1000 - mtime;
+  if (diff < 60) return 'now';
+  if (diff < 3600) return Math.floor(diff / 60) + 'm';
+  if (diff < 86400) return Math.floor(diff / 3600) + 'h';
+  return Math.floor(diff / 86400) + 'd';
+}
+
+/* ═══════════════════════════════════════════════════════
+   Per-session state cache (persist across switches)
+   ═══════════════════════════════════════════════════════ */
+const sessionStateCache = {};
+
+function saveSessionState(path) {
+  if (!path) return;
+  const statusCard = document.getElementById('status-card');
+  const panel = statusCard ? statusCard.closest('.panel') : null;
+  sessionStateCache[path] = {
+    streamHTML: document.getElementById('stream').innerHTML,
+    alertHTML: document.getElementById('alert-list').innerHTML,
+    alertCount: document.getElementById('alert-count').textContent,
+    statusLabel: document.getElementById('status-label').textContent,
+    statusSub: document.getElementById('status-sub').textContent,
+    statusRingClass: document.getElementById('status-ring').className,
+    statusCardBlocked: statusCard ? statusCard.classList.contains('is-blocked') : false,
+    panelBlocked: panel ? panel.classList.contains('panel-blocked') : false,
+    verdictReason: document.getElementById('verdict-reason').textContent,
+    streamStatus: document.getElementById('stream-status').textContent,
+    guardBarBlocked: document.getElementById('guard-bar')?.classList.contains('is-blocked') || false,
+    guardIcon: document.getElementById('guard-icon')?.textContent || '✓',
+    guardLabel: document.getElementById('guard-label')?.textContent || '安全',
+    guardModel: document.getElementById('guard-model')?.textContent || '等待评估',
+    gtTrackHTML: document.getElementById('gt-track')?.innerHTML || '',
+    eventCount, toolCount, evalCount, blockedCount,
+    filterCounts: {...filterCounts},
+    sparkData: JSON.parse(JSON.stringify(sparkData)),
+    seenKeys: [...seenEventKeys],
+  };
+}
+
+function restoreSessionState(path) {
+  const s = sessionStateCache[path];
+  if (!s) return false;
+
+  document.getElementById('stream').innerHTML = s.streamHTML;
+  document.getElementById('alert-list').innerHTML = s.alertHTML;
+  document.getElementById('alert-count').textContent = s.alertCount;
+  document.getElementById('status-label').textContent = s.statusLabel;
+  document.getElementById('status-sub').textContent = s.statusSub;
+  document.getElementById('status-ring').className = s.statusRingClass;
+  document.getElementById('verdict-reason').textContent = s.verdictReason;
+  document.getElementById('stream-status').textContent = s.streamStatus;
+
+  const statusCard = document.getElementById('status-card');
+  const panel = statusCard ? statusCard.closest('.panel') : null;
+  if (statusCard) statusCard.classList.toggle('is-blocked', s.statusCardBlocked);
+  if (panel) panel.classList.toggle('panel-blocked', s.panelBlocked);
+
+  // Restore guard-bar state
+  const guardBar = document.getElementById('guard-bar');
+  if (guardBar) guardBar.classList.toggle('is-blocked', s.guardBarBlocked || false);
+  const guardIcon = document.getElementById('guard-icon');
+  if (guardIcon) guardIcon.textContent = s.guardIcon || '✓';
+  const guardLabel = document.getElementById('guard-label');
+  if (guardLabel) guardLabel.textContent = s.guardLabel || '安全';
+  const guardModel = document.getElementById('guard-model');
+  if (guardModel) guardModel.textContent = s.guardModel || '等待评估';
+  const gtTrack = document.getElementById('gt-track');
+  if (gtTrack) {
+    gtTrack.innerHTML = s.gtTrackHTML || '';
+    gtTrack.querySelectorAll('.gt-axis-labels').forEach(el => el.remove());
+  }
+
+  eventCount = s.eventCount;
+  toolCount = s.toolCount;
+  evalCount = s.evalCount;
+  blockedCount = s.blockedCount;
+  Object.assign(filterCounts, s.filterCounts);
+  Object.keys(sparkData).forEach(k => { sparkData[k] = [...s.sparkData[k]]; });
+  seenEventKeys.clear();
+  s.seenKeys.forEach(k => seenEventKeys.add(k));
+
+  updateStats();
+  updateFilterCounts();
+  Object.keys(sparkData).forEach(k => renderSpark(k));
+  return true;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SSE connection
+   ═══════════════════════════════════════════════════════ */
+function connectSession(sessionPath, prevPath) {
+  if (eventSource) eventSource.close();
+  clearBlockToast();
+  clearReplayTimers();
+
+  saveSessionState(prevPath || '');
+
+  if (!sessionPath) { resetUI(); return; }
+
+  const pill = document.getElementById('env-pill');
+  const envLabel = document.getElementById('env-label');
+  const src = sessionsCache.find(s => s.path === sessionPath);
+  envLabel.textContent = `实时 · ${src ? src.agent_id : '会话'}`;
+  pill.querySelector('.dot').style.background = 'var(--accent)';
+  const shouldAutoplay = dashboardShouldAutoplay(sessionPath);
+
+  const restored = restoreSessionState(sessionPath);
+  if (!restored) resetUI();
+
+  if (sessionPath.startsWith('_bundled_')) {
+    if (!restored) loadReplayEvents(sessionPath, src);
+    return;
+  }
+
+  eventSource = new EventSource(`/dashboard/events?session=${encodeURIComponent(sessionPath)}`);
+
+  eventSource.addEventListener('init', (e) => {
+    const events = JSON.parse(e.data);
+    if (shouldAutoplay && !restored) {
+      dashboardAutoplayConsumed.add(sessionPath);
+      playSessionEvents(events, src, sessionPath, () => autoEvaluate(events));
+      return;
+    }
+    events.forEach(ev => addEvent(ev));
+    document.getElementById('stream-status').textContent =
+      `实时 · 正在监控 ${src ? src.agent_id : '会话'} · ${eventCount} 个事件`;
+    if (!restored) autoEvaluate(events);
+  });
+  eventSource.addEventListener('message', (e) => addEvent(JSON.parse(e.data)));
+  eventSource.addEventListener('evaluation', (e) => {
+    const r = JSON.parse(e.data);
+    if (r.prediction === 0 || r.prediction === 1 || r.prediction === -1) addEvaluation(r);
+  });
+  eventSource.addEventListener('trajectory', (e) => {
+    showEvaluating();
+  });
+  eventSource.onerror = () => {
+    envLabel.textContent = '离线';
+    pill.querySelector('.dot').style.background = 'var(--mute-2)';
+  };
+}
+
+function resetUI() {
+  clearBlockToast();
+  document.getElementById('stream').innerHTML = '';
+  document.getElementById('alert-list').innerHTML = '<div class="empty-state" style="padding:20px 0;">暂无告警</div>';
+  document.getElementById('status-label').textContent = '等待中';
+  document.getElementById('status-sub').textContent = '尚未评估';
+  document.getElementById('status-ring').className = 'status-ring ring-mute';
+  document.getElementById('verdict-reason').textContent = '';
+  document.getElementById('alert-count').textContent = '0';
+  // Reset guard bar
+  const guardBar = document.getElementById('guard-bar');
+  if (guardBar) guardBar.classList.remove('is-blocked');
+  const guardIcon = document.getElementById('guard-icon');
+  if (guardIcon) guardIcon.textContent = '✓';
+  const guardLabel = document.getElementById('guard-label');
+  if (guardLabel) guardLabel.textContent = '安全';
+  const guardModel = document.getElementById('guard-model');
+  if (guardModel) guardModel.textContent = '等待评估';
+  const gtTrack = document.getElementById('gt-track');
+  if (gtTrack) gtTrack.innerHTML = '';
+
+  eventCount = toolCount = evalCount = blockedCount = 0;
+  Object.keys(filterCounts).forEach(k => filterCounts[k] = 0);
+  Object.keys(sparkData).forEach(k => sparkData[k] = []);
+  seenEventKeys.clear();
+  updateStats();
+}
+
+/* ═══════════════════════════════════════════════════════
+   Auto-evaluate: check cache first, only call /evaluate on miss
+   ═══════════════════════════════════════════════════════ */
+async function autoEvaluate(events) {
+  const sessionPath = activeSessionPath;
+  if (!sessionPath) return;
+
+  try {
+    const cacheResp = await fetch(`/evaluate/cache?session=${encodeURIComponent(sessionPath)}`);
+    const cacheData = await cacheResp.json();
+    if (cacheData.cached) { addEvaluation(cacheData); return; }
+  } catch (e) {}
+
+  const parts = [];
+  const tools = [];
+  for (const ev of events) {
+    if (ev.type !== 'message') continue;
+    const msg = ev.message;
+    if (!msg) continue;
+    if (msg.role === 'user') {
+      const text = extractText(msg.content);
+      if (text) parts.push('[User] ' + text.substring(0, 500));
+    } else if (msg.role === 'assistant') {
+      for (const item of (msg.content || [])) {
+        if (item.type === 'thinking' && item.thinking) parts.push('[Thinking] ' + item.thinking.substring(0, 300));
+        if (item.type === 'text' && item.text) parts.push('[Assistant] ' + item.text.substring(0, 500));
+        if (item.type === 'toolCall') {
+          const args = typeof item.arguments === 'object' ? JSON.stringify(item.arguments) : String(item.arguments || '');
+          parts.push('[ToolCall: ' + (item.name || '?') + '] ' + args.substring(0, 200));
+          if (item.name && !tools.includes(item.name)) tools.push(item.name);
+        }
+      }
+    } else if (msg.role === 'toolResult') {
+      parts.push('[ToolResult: ' + (msg.toolName || '?') + '] ' + (extractText(msg.content) || '').substring(0, 200));
+    }
+  }
+  if (!parts.length) return;
+
+  showEvaluating();
+  fetch('/evaluate', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ trajectory: parts.join('\n'), tool_list: tools, session_path: sessionPath }),
+  })
+    .then(r => r.json())
+    .then(result => { addEvaluation(result); loadSessions(); })
+    .catch(err => addEvaluation({ prediction: -1, label: 'error', reason: 'Auto-evaluate failed: ' + err.message, model: '?', error: err.message }));
+}
+
+/* ═══════════════════════════════════════════════════════
+   Event rendering (stream rows)
+   ═══════════════════════════════════════════════════════ */
+function eventKey(ev) {
+  const msg = ev.message || {};
+  return `${ev.timestamp || ''}|${msg.role || ''}|${JSON.stringify(msg.content || '').substring(0, 100)}`;
+}
+
+function addEvent(ev) {
+  if (ev.type !== 'message') return;
+  const key = eventKey(ev);
+  if (seenEventKeys.has(key)) return;
+  seenEventKeys.add(key);
+
+  const stream = document.getElementById('stream');
+  const empty = document.getElementById('stream-empty');
+  if (empty) empty.remove();
+  const msg = ev.message;
+  if (!msg) return;
+
+  const ts = ev.timestamp || '';
+  const t = ts ? new Date(ts).toLocaleTimeString('en', {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}) : '';
+
+  if (msg.role === 'user') {
+    const fullText = extractText(msg.content);
+    addRow(t, 'LLM', 'llm', '<span class="k">User</span> ' + esc(fullText).substring(0, 120), '', false, fullText);
+    eventCount++;
+  } else if (msg.role === 'assistant') {
+    const items = msg.content || [];
+    const thinkings = items.filter(i => i.type === 'thinking' && i.thinking);
+    const texts = items.filter(i => i.type === 'text' && i.text);
+    const toolCalls = items.filter(i => i.type === 'toolCall');
+
+    if (thinkings.length) {
+      const fullThink = thinkings.map(i => i.thinking).join('\n');
+      addRow(t, 'LLM', 'llm', '<span class="arg">Thinking: ' + esc(thinkings[0].thinking).substring(0, 100) + '</span>', '', false, fullThink);
+      eventCount++;
+    }
+    if (texts.length) {
+      const full = texts.map(i => i.text).join('\n');
+      if (full.includes('[GUARDRAIL]')) {
+        addRow(t, 'LLM', 'llm', '<span class="block-badge">⚠ BLOCKED</span> ' + esc(full.substring(0, 100)), 'blocked', true, full);
+      } else {
+        addRow(t, 'LLM', 'llm', '<span class="k">Reply</span> ' + esc(full).substring(0, 120), '', false, full);
+      }
+      eventCount++;
+    }
+    toolCalls.forEach(tc => {
+      const tag = toolTag(tc.name);
+      const args = typeof tc.arguments === 'object' ? JSON.stringify(tc.arguments) : String(tc.arguments || '');
+      const fullArgs = typeof tc.arguments === 'object' ? JSON.stringify(tc.arguments, null, 2) : String(tc.arguments || '');
+      addRow(t, tag, tag.toLowerCase(), '<span class="k">' + esc(tc.name || '?') + '</span> <span class="arg">' + esc(args).substring(0, 80) + '</span>', '', false, (tc.name || '') + '\n' + fullArgs);
+      toolCount++;
+      eventCount++;
+    });
+  } else if (msg.role === 'toolResult') {
+    const text = extractText(msg.content);
+    const tag = toolTag(msg.toolName);
+    const status = msg.isError ? 'blocked' : '';
+    addRow(t, tag, tag.toLowerCase(), '<span class="arg">→ ' + esc(msg.toolName || '?') + ':</span> ' + esc(text || '').substring(0, 100), status, false, (msg.toolName || '') + '\n' + (text || ''));
+    eventCount++;
+  }
+  updateStats();
+  const wrap = document.getElementById('stream-wrap');
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function addRow(time, tagLabel, kindClass, msgHtml, status, isBlocked, fullContent) {
+  const stream = document.getElementById('stream');
+  const row = document.createElement('div');
+  const state = isBlocked || status === 'blocked' ? 'blocked' : status === 'allow' ? 'allow' : 'allow';
+  const stateClass = state === 'blocked' ? 's-blocked' : state === 'allow' ? 's-allow' : 's-info';
+  row.className = `row k-${kindClass} ${stateClass}`.trim();
+  row.dataset.kind = tagLabel;
+  row.dataset.state = state;
+
+  const statusLabel = state === 'blocked' ? '✗ 已拦截' : '放行';
+  const statusHtml = `<span class="status">${statusLabel}</span>`;
+
+  row.innerHTML = `
+    <span class="t">${esc(time)}</span>
+    <span class="tag">${esc(tagLabel)}</span>
+    <span class="msg">${msgHtml}</span>
+    ${statusHtml}
+  `;
+
+  if (fullContent) {
+    row.dataset.fullContent = fullContent;
+  }
+
+  stream.appendChild(row);
+
+  filterCounts[tagLabel] = (filterCounts[tagLabel] || 0) + 1;
+  filterCounts.ALL++;
+  applyRowFilters(row);
+  updateFilterCounts();
+}
+
+document.getElementById('stream').addEventListener('click', (e) => {
+  const row = e.target.closest('.row[data-full-content]');
+  if (!row) return;
+  const existing = row.querySelector('.detail');
+  if (existing) { existing.remove(); row.classList.remove('expanded'); return; }
+  row.classList.add('expanded');
+  const detail = document.createElement('div');
+  detail.className = 'detail';
+  detail.innerHTML = `<pre>${esc(row.dataset.fullContent)}</pre>`;
+  row.appendChild(detail);
+});
+
+function applyRowFilters(row) {
+  const kindMatch = activeFilter === 'ALL' || row.dataset.kind === activeFilter;
+  const stateMatch = activeStateFilter === 'all' || row.dataset.state === activeStateFilter;
+  const searchMatch = !searchQuery || row.textContent.toLowerCase().includes(searchQuery);
+  row.classList.toggle('hidden', !(kindMatch && stateMatch && searchMatch));
+}
+
+function applyAllFilters() {
+  document.querySelectorAll('#stream .row').forEach(applyRowFilters);
+}
+
+function updateFilterCounts() {
+  document.getElementById('fc-all').textContent = filterCounts.ALL;
+  document.getElementById('fc-llm').textContent = filterCounts.LLM || 0;
+  document.getElementById('fc-file').textContent = filterCounts.FILE || 0;
+  document.getElementById('fc-exec').textContent = filterCounts.EXEC || 0;
+  document.getElementById('fc-net').textContent = filterCounts.NET || 0;
+}
+
+function clearBlockToast() {
+  if (blockToastTimer) {
+    clearTimeout(blockToastTimer);
+    blockToastTimer = null;
+  }
+  document.querySelector('.block-toast-overlay')?.remove();
+  document.querySelector('.block-toast')?.remove();
+}
+
+function scheduleBlockToast(result) {
+  clearBlockToast();
+  blockToastTimer = setTimeout(() => {
+    blockToastTimer = null;
+    showBlockToast(result);
+  }, BLOCK_TOAST_DELAY_MS);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Guardrail evaluation
+   ═══════════════════════════════════════════════════════ */
+function addEvaluation(result, options = {}) {
+  evalCount++;
+  const isBlocked = result.prediction === 1;
+  const isError = result.prediction === -1;
+  if (isBlocked) blockedCount++;
+  updateStats();
+  pushSpark('a', evalCount);
+  pushSpark('b', blockedCount);
+
+  // Right-side status card (keep working)
+  const ring = document.getElementById('status-ring');
+  const label = document.getElementById('status-label');
+  const sub = document.getElementById('status-sub');
+  const reasonEl = document.getElementById('verdict-reason');
+  ring.classList.remove('ring-pulse');
+  const statusCard = document.getElementById('status-card');
+  const guardrailPanel = statusCard.closest('.panel');
+
+  if (result.prediction === 0) {
+    ring.className = 'status-ring';
+    label.textContent = '✓ 安全';
+    sub.textContent = `${result.model || '?'} · ${new Date().toLocaleTimeString()}`;
+    statusCard.classList.remove('is-blocked');
+    if (guardrailPanel) guardrailPanel.classList.remove('panel-blocked');
+  } else if (result.prediction === 1) {
+    ring.className = 'status-ring ring-warn';
+    label.textContent = '✗ 已拦截';
+    sub.textContent = `${result.model || '?'} · ${new Date().toLocaleTimeString()}`;
+    statusCard.classList.add('is-blocked');
+    if (guardrailPanel) guardrailPanel.classList.add('panel-blocked');
+  } else {
+    ring.className = 'status-ring ring-mute';
+    label.textContent = '评估失败';
+    sub.textContent = result.error || '评估失败';
+    statusCard.classList.remove('is-blocked');
+    if (guardrailPanel) guardrailPanel.classList.remove('panel-blocked');
+  }
+  reasonEl.textContent = result.reason || '';
+
+  // Guard bar big status
+  const guardBar = document.getElementById('guard-bar');
+  const guardIcon = document.getElementById('guard-icon');
+  const guardLabel = document.getElementById('guard-label');
+  const guardModel = document.getElementById('guard-model');
+  if (guardBar) {
+    if (isBlocked) {
+      guardBar.classList.add('is-blocked');
+      guardIcon.textContent = '✗';
+      guardLabel.textContent = '已拦截';
+      guardModel.textContent = `${result.model || '?'} · ${new Date().toLocaleTimeString()}`;
+    } else if (isError) {
+      guardBar.classList.remove('is-blocked');
+      guardIcon.textContent = '?';
+      guardLabel.textContent = '评估失败';
+      guardModel.textContent = result.error || '';
+    } else {
+      guardBar.classList.remove('is-blocked');
+      guardIcon.textContent = '✓';
+      guardLabel.textContent = '安全';
+      guardModel.textContent = `${result.model || '?'} · ${new Date().toLocaleTimeString()}`;
+    }
+  }
+
+  // Guard timeline card
+  if (!options.skipGuardTimelineCard) {
+    addGuardTimelineCard(result);
+  }
+  addGuardDeliveryCard(result);
+
+  // Update session dot color
+  const activeCard = document.querySelector('.session.is-active');
+  if (activeCard) {
+    activeCard.classList.remove('s-safe', 's-blocked');
+    activeCard.classList.add(isBlocked ? 's-blocked' : 's-safe');
+  }
+
+  // Timeline blocked row in stream
+  if (isBlocked) {
+    addRow(new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}),
+      'LLM', 'llm', '<span class="block-badge">⚠ 已拦截</span> ' + esc(result.reason || ''), 'blocked', true, result.reason || '');
+  }
+
+  // Alert
+  addAlertCard(result);
+
+  // Block warning popup
+  if (isBlocked) {
+    scheduleBlockToast(result);
+  } else {
+    clearBlockToast();
+  }
+}
+
+function showBlockToast(result) {
+  const existing = document.querySelector('.block-toast-overlay');
+  if (existing) existing.remove();
+  const prev = document.querySelector('.block-toast');
+  if (prev) prev.remove();
+
+  const src = activeSessionPath ? (sessionsCache.find(s => s.path === activeSessionPath) || {}).agent_id || '' : '';
+  const time = new Date().toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+
+  const overlay = document.createElement('div');
+  overlay.className = 'block-toast-overlay';
+
+  const toast = document.createElement('div');
+  toast.className = 'block-toast';
+  toast.innerHTML = `
+    <div class="bt-icon">✗</div>
+    <div class="bt-title">⚠ 危险回复已拦截</div>
+    <div class="bt-reason">${esc(result.reason || '检测到不安全内容')}</div>
+    <div class="bt-safe-note">用户侧看到的是安全替代回复，原始危险内容未送达。</div>
+    <div class="bt-meta">${esc(src)} · ${esc(result.model || '?')} · ${time}</div>
+    <button class="bt-close">确认</button>
+  `;
+
+  function dismiss() {
+    toast.style.animation = 'toast-in 0.2s ease-in reverse forwards';
+    overlay.style.animation = 'overlay-in 0.2s ease-in reverse forwards';
+    setTimeout(() => { toast.remove(); overlay.remove(); }, 200);
+  }
+
+  toast.querySelector('.bt-close').addEventListener('click', dismiss);
+  overlay.addEventListener('click', dismiss);
+
+  document.body.appendChild(overlay);
+  document.body.appendChild(toast);
+}
+
+function _appendToTrack(el) {
+  const track = document.getElementById('gt-track');
+  if (!track) return;
+  el.style.setProperty('--gt-col', String(track.querySelectorAll('.gt-item').length + 1));
+  track.appendChild(el);
+  requestAnimationFrame(() => {
+    const leftGutter = 16;
+    const rightGutter = 40;
+    const itemLeft = el.offsetLeft;
+    const itemRight = itemLeft + el.offsetWidth;
+    const visibleLeft = track.scrollLeft + leftGutter;
+    const visibleRight = track.scrollLeft + track.clientWidth - rightGutter;
+    let nextLeft = track.scrollLeft;
+
+    if (itemRight > visibleRight) nextLeft += itemRight - visibleRight;
+    if (itemLeft < visibleLeft) nextLeft -= visibleLeft - itemLeft;
+
+    track.scrollTo({ left: Math.max(0, nextLeft), behavior: 'auto' });
+  });
+}
+
+function appendGuardTimelineItem({ role, cls, icon, stage, title, time, desc, threat }) {
+  const threatHtml = threat ? `<div class="gt-threat-strip"><span class="gt-threat-pill">BLOCK</span><span class="gt-threat-text">${esc(threat)}</span></div>` : '';
+  const html = `
+    <div class="gt-item ${cls}" data-role="${role}">
+      <div class="gt-top">
+        <div class="gt-meta">
+          <div class="gt-ic">${esc(icon)}</div>
+          <div class="gt-stage">${esc(stage)}</div>
+        </div>
+        <div class="gt-when">${esc(time)}</div>
+      </div>
+      <div class="gt-body">
+        <div class="gt-title">${esc(title)}</div>
+        <div class="gt-desc">${esc(desc)}</div>
+      </div>
+      ${threatHtml}
+    </div>
+  `;
+  const tpl = document.createElement('template');
+  tpl.innerHTML = html.trim();
+  _appendToTrack(tpl.content.firstElementChild);
+}
+
+function addGuardTimelineCard(result) {
+  const isBlocked = result.prediction === 1;
+  const isError = result.prediction === -1;
+  const cls = isBlocked ? 'gt-blocked' : isError ? 'gt-error' : 'gt-safe';
+  const label = isBlocked ? 'Guardrail 拦截' : isError ? '评估异常' : 'Guardrail 放行';
+  const src = activeSessionPath ? (sessionsCache.find(s => s.path === activeSessionPath) || {}).agent_id || '' : '';
+  const time = new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit',hour12:false});
+
+  appendGuardTimelineItem({
+    role: 'guard',
+    cls,
+    icon: isBlocked ? '!' : isError ? '?' : 'G',
+    stage: 'PRE_REPLY Guard',
+    title: label,
+    time,
+    desc: `${src || 'agent'} · ${(result.reason || '').substring(0, 120)}`,
+    threat: isBlocked ? '原回复已被安全替换' : ''
+  });
+}
+
+function addGuardDeliveryCard(result) {
+  const isBlocked = result.prediction === 1;
+  const isError = result.prediction === -1;
+  const time = new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit',hour12:false});
+
+  appendGuardTimelineItem({
+    role: 'delivery',
+    cls: isBlocked ? 'gt-blocked' : isError ? 'gt-error' : 'gt-safe',
+    icon: isBlocked ? 'R' : isError ? '?' : '→',
+    stage: 'User Sees',
+    title: isBlocked ? '安全替代回复' : isError ? '等待人工复核' : '原回复送达',
+    time,
+    desc: isBlocked
+      ? '用户看到安全提示；Agent 原始危险回复没有发出。'
+      : isError
+        ? '评估失败时不展示高风险内容，等待复核。'
+        : 'Guardrail 放行后，Agent 回复送达用户侧。'
+  });
+}
+
+function addGuardChatCard(chat, ts) {
+  const isUser = chat.role === 'user';
+  const cls = isUser ? 'gt-user' : 'gt-agent';
+
+  appendGuardTimelineItem({
+    role: isUser ? 'user' : 'agent',
+    cls,
+    icon: isUser ? 'U' : 'A',
+    stage: isUser ? 'User Message' : 'Agent Draft',
+    title: isUser ? '用户请求' : 'Agent 回复草稿',
+    time: `t+${ts}s`,
+    desc: chat.text
+  });
+}
+
+function addAlertCard(result, overrideSrc, overrideChannel) {
+  const list = document.getElementById('alert-list');
+  const emptyState = list.querySelector('.empty-state');
+  if (emptyState) emptyState.remove();
+
+  const isBlocked = result.prediction === 1;
+  const isError = result.prediction === -1;
+  const sevClass = isBlocked ? 'sev-blocked' : isError ? 'sev-err' : 'sev-safe';
+  const icon = isBlocked ? '✗' : isError ? '?' : '✓';
+  const title = isBlocked ? '✗ 轨迹已拦截' : isError ? '评估异常' : '✓ 轨迹安全';
+
+  const src = overrideSrc || (activeSessionPath ? (sessionsCache.find(s => s.path === activeSessionPath) || {}).agent_id || '' : '');
+  const channel = overrideChannel || (activeSessionPath ? (sessionsCache.find(s => s.path === activeSessionPath) || {}).channel || '' : '');
+
+  const el = document.createElement('div');
+  el.className = `alert ${sevClass}`;
+  el.innerHTML = `
+    <div class="ic">${icon}</div>
+    <div class="body">
+      <div class="title">${esc(title)}</div>
+      <div class="ameta">${esc(src)}${channel ? ' · ' + esc(channel) : ''} · ${esc((result.reason || '').substring(0, 80))}</div>
+    </div>
+    <div class="when">${new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit',hour12:false})}</div>
+  `;
+  list.insertBefore(el, list.firstChild);
+
+  document.getElementById('alert-count').textContent = list.querySelectorAll('.alert').length;
+}
+
+function showEvaluating() {
+  const ring = document.getElementById('status-ring');
+  const label = document.getElementById('status-label');
+  ring.className = 'status-ring ring-mute ring-pulse';
+  label.textContent = '评估中…';
+  const guardLabel = document.getElementById('guard-label');
+  if (guardLabel) guardLabel.textContent = '评估中…';
+  const guardModel = document.getElementById('guard-model');
+  if (guardModel) guardModel.textContent = '正在分析轨迹…';
+}
+
+/* ═══════════════════════════════════════════════════════
+   Filter (segmented control)
+   ═══════════════════════════════════════════════════════ */
+document.getElementById('kind-seg').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  activeFilter = btn.dataset.k;
+  document.querySelectorAll('#kind-seg button').forEach(b => b.classList.toggle('is-on', b.dataset.k === activeFilter));
+  applyAllFilters();
+});
+
+document.getElementById('state-seg').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  activeStateFilter = btn.dataset.s;
+  document.querySelectorAll('#state-seg button').forEach(b => b.classList.toggle('is-on', b.dataset.s === activeStateFilter));
+  applyAllFilters();
+});
+
+document.getElementById('search-input').addEventListener('input', (e) => {
+  searchQuery = e.target.value.toLowerCase();
+  applyAllFilters();
+});
+
+/* ═══════════════════════════════════════════════════════
+   Stats
+   ═══════════════════════════════════════════════════════ */
+function updateStats() {
+  document.getElementById('kpi-audited').textContent = evalCount;
+  document.getElementById('kpi-blocked').textContent = blockedCount;
+  document.getElementById('kpi-tools').textContent = toolCount.toLocaleString();
+  document.getElementById('kpi-events').textContent = eventCount.toLocaleString();
+  pushSpark('c', toolCount);
+  pushSpark('d', eventCount);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Bundled replay events
+   ═══════════════════════════════════════════════════════ */
+const BUNDLED_EVENTS = {};
+
+let _replayTimer = null;
+let _replayUiTimers = [];
+
+function clearReplayTimers() {
+  if (_replayTimer) { clearTimeout(_replayTimer); _replayTimer = null; }
+  _replayUiTimers.forEach(timer => clearTimeout(timer));
+  _replayUiTimers = [];
+}
+
+function scheduleReplayUi(fn, delay) {
+  const timer = setTimeout(() => {
+    _replayUiTimers = _replayUiTimers.filter(t => t !== timer);
+    fn();
+  }, delay);
+  _replayUiTimers.push(timer);
+}
+
+function playSessionEvents(events, src, sessionPath, onComplete) {
+  clearReplayTimers();
+  let idx = 0;
+  document.getElementById('stream-status').textContent =
+    `自动播放 · ${src ? src.agent_id : '会话'} · 0/${events.length}`;
+
+  function playNext() {
+    if (activeSessionPath !== sessionPath) return;
+    if (idx >= events.length) {
+      document.getElementById('stream-status').textContent =
+        `自动播放完成 · ${src ? src.agent_id : '会话'} · ${eventCount} 个事件`;
+      if (onComplete) onComplete();
+      return;
+    }
+    addEvent(events[idx]);
+    idx++;
+    document.getElementById('stream-status').textContent =
+      `自动播放 · ${src ? src.agent_id : '会话'} · ${idx}/${events.length}`;
+    _replayTimer = setTimeout(playNext, idx > events.length - 5 ? 520 : 220);
+  }
+
+  _replayTimer = setTimeout(playNext, 450);
+}
+
+function _renderReplayEvent(ev) {
+  const time = ev.ts;
+  const isBlocked = ev.blocked || ev.guardrail;
+  const status = isBlocked ? 'blocked' : '';
+  let msgHtml;
+
+  if (isBlocked && ev.guardrail) {
+    msgHtml = `<span class="block-badge">⚠ BLOCKED</span> ${esc(ev.msg)}`;
+  } else if (isBlocked) {
+    msgHtml = `<span class="k">${esc(ev.msg.split(' → ')[0])}</span> <span class="block-badge">⚠ BLOCKED</span>`;
+  } else if (ev.role === 'user') {
+    msgHtml = `<span class="k">User</span> ${esc(ev.msg.replace('[User] ', ''))}`;
+  } else if (ev.msg.startsWith('Thinking:')) {
+    msgHtml = `<span class="arg">${esc(ev.msg)}</span>`;
+  } else if (ev.msg.startsWith('Reply:')) {
+    msgHtml = `<span class="k">Reply</span> ${esc(ev.msg.substring(7))}`;
+  } else if (ev.msg.startsWith('→')) {
+    msgHtml = `<span class="arg">${esc(ev.msg)}</span>`;
+  } else {
+    const parts = ev.msg.split(' ');
+    msgHtml = `<span class="k">${esc(parts[0])}</span> <span class="arg">${esc(parts.slice(1).join(' '))}</span>`;
+  }
+
+  const fullContent = ev.reason || ev.msg;
+  addRow(time, ev.tag, ev.kind, msgHtml, status, isBlocked, fullContent);
+
+  if (ev.tag !== 'SYS') {
+    eventCount++;
+    if (ev.tag === 'EXEC' || ev.tag === 'FILE' || ev.tag === 'NET') toolCount++;
+  }
+  updateStats();
+
+  const evalResult = ev._eval
+    ? { prediction: ev._eval.prediction, reason: ev._eval.reason, model: ev._eval.model, error: null }
+    : null;
+  const isEvaluatedAgentReply = ev._chat && ev._chat.role === 'agent' && evalResult;
+
+  if (ev._chat) {
+    addGuardChatCard(ev._chat, ev.ts);
+  }
+  if (evalResult) {
+    const showEvaluation = () => {
+      addEvaluation(evalResult, {
+        skipGuardTimelineCard: isEvaluatedAgentReply && evalResult.prediction === 0,
+      });
+    };
+    if (isEvaluatedAgentReply) scheduleReplayUi(showEvaluation, 700);
+    else showEvaluation();
+  }
+
+  const wrap = document.getElementById('stream-wrap');
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function loadReplayEvents(sessionPath, src) {
+  clearReplayTimers();
+
+  const events = BUNDLED_EVENTS[sessionPath] || [];
+  if (!events.length) {
+    document.getElementById('stream-status').textContent = '回放 · 无事件';
+    return;
+  }
+
+  const replaySession = sessionsCache.find(s => s.path === sessionPath);
+  const isLive = replaySession && replaySession._is_live_replay;
+  const shouldAutoplay = dashboardShouldAutoplay(sessionPath);
+  if (shouldAutoplay) dashboardAutoplayConsumed.add(sessionPath);
+
+  document.getElementById('stream-status').textContent =
+    isLive ? `实时回放 · ${src ? src.agent_id : '会话'} · 播放中…` : `回放 · ${src ? src.agent_id : '会话'}`;
+
+  if (isLive || shouldAutoplay) {
+    let idx = 0;
+    function playNext() {
+      if (idx >= events.length || activeSessionPath !== sessionPath) return;
+      _renderReplayEvent(events[idx]);
+      idx++;
+      document.getElementById('stream-status').textContent =
+        `实时回放 · ${src ? src.agent_id : '会话'} · ${idx}/${events.length}`;
+      if (idx < events.length) {
+        const delay = (events[idx].blocked || events[idx].guardrail) ? 2200 : (800 + Math.random() * 600);
+        _replayTimer = setTimeout(playNext, delay);
+      } else {
+        document.getElementById('stream-status').textContent =
+          `实时回放 · ${src ? src.agent_id : '会话'} · 播放完成 · ${eventCount} 个事件`;
+        if (!isLive && replaySession && replaySession.verdict_prediction != null) {
+          addEvaluation({
+            prediction: replaySession.verdict_prediction,
+            reason: replaySession.verdict_reason || '',
+            model: replaySession.verdict_model || '',
+            error: null,
+          });
+        }
+      }
+    }
+    _replayTimer = setTimeout(playNext, 600);
+    return;
+  }
+
+  for (const ev of events) { _renderReplayEvent(ev); }
+
+  if (replaySession && replaySession.verdict_prediction != null) {
+    addEvaluation({
+      prediction: replaySession.verdict_prediction,
+      reason: replaySession.verdict_reason || '',
+      model: replaySession.verdict_model || '',
+      error: null,
+    });
+  }
+
+  document.getElementById('stream-status').textContent =
+    `回放 · ${src ? src.agent_id : '会话'} · ${eventCount} 个事件`;
+  const wrap = document.getElementById('stream-wrap');
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Gantt timeline
+   ═══════════════════════════════════════════════════════ */
+const GANTT_WINDOW = 30; // minutes
+
+function renderGantt() {
+  const sessions = sessionsCache;
+  if (!sessions.length) return;
+
+  const now = Date.now() / 1000;
+  const windowSec = GANTT_WINDOW * 60;
+
+  const ganttSessions = sessions.map(s => {
+    const startAgo = (now - s.mtime) / 60;
+    const evCount = s.event_count || 0;
+    const duration = Math.max(evCount * 0.08, 1);
+    const totalStartAgo = startAgo + duration;
+
+    let state = 'idle';
+    if (s.verdict === 'unsafe') state = 'blocked';
+    else if (s.verdict === 'safe') state = 'safe';
+    else if (startAgo < 10) state = 'safe';
+
+    const hits = [];
+    const history = s.eval_history || [];
+    for (const h of history) {
+      if (h.prediction === 1 && h.ts) {
+        const hitAgo = (now - h.ts) / 60;
+        if (hitAgo >= 0 && hitAgo <= GANTT_WINDOW) hits.push(hitAgo);
+      }
+    }
+    if (hits.length > 0) state = 'blocked';
+
+    return {
+      id: s.name ? s.name.substring(0, 8) : '?',
+      path: s.path,
+      agent: s.agent_id || '',
+      state,
+      start: Math.min(totalStartAgo, GANTT_WINDOW),
+      len: Math.min(duration, GANTT_WINDOW),
+      hits,
+    };
+  }).filter(s => s.start <= GANTT_WINDOW + 5);
+
+  const concurrent = ganttSessions.filter(s => s.start - s.len <= 0.5).length;
+  document.getElementById('gantt-meta').textContent =
+    `最近 ${GANTT_WINDOW} 分钟 · ${concurrent} 并发`;
+
+  // Axis
+  const axis = document.getElementById('gantt-axis');
+  const ticks = [30, 25, 20, 15, 10, 5, 0];
+  axis.innerHTML = ticks.map(m => {
+    const pct = ((GANTT_WINDOW - m) / GANTT_WINDOW * 100).toFixed(1);
+    const label = m === 0 ? 'now' : m + 'm';
+    const cls = m === 0 ? 'tick tick-now' : 'tick';
+    return `<span class="${cls}" style="left:${pct}%">${label}</span>`;
+  }).join('');
+
+  // Rows
+  const rows = document.getElementById('gantt-rows');
+  const frag = document.createDocumentFragment();
+  for (const s of ganttSessions) {
+    const row = document.createElement('div');
+    row.className = 'gantt-row' + (s.path === activeSessionPath ? ' is-active' : '');
+    row.addEventListener('click', () => selectSession(s.path));
+
+    const dotColor = s.state === 'safe' ? 'var(--accent)' : s.state === 'blocked' ? '#dc2626' : 'var(--mute-2)';
+    const barLeft = ((GANTT_WINDOW - s.start) / GANTT_WINDOW * 100).toFixed(2);
+    const barWidth = (s.len / GANTT_WINDOW * 100).toFixed(2);
+
+    let hitsHtml = '';
+    for (const hitAgo of s.hits) {
+      const hitLocal = ((s.start - hitAgo) / s.len * 100).toFixed(1);
+      if (hitLocal >= 0 && hitLocal <= 100) {
+        hitsHtml += `<span class="gantt-hit" style="left:${hitLocal}%"></span>`;
+      }
+    }
+
+    row.innerHTML = `
+      <div class="gantt-label">
+        <span class="gdot" style="background:${dotColor}"></span>
+        ${esc(s.id)}
+      </div>
+      <div class="gantt-track">
+        <div class="gantt-bar gs-${s.state}" style="left:${barLeft}%;width:${barWidth}%">
+          ${hitsHtml}
+        </div>
+        <span class="now-line"></span>
+      </div>
+    `;
+    frag.appendChild(row);
+  }
+  rows.innerHTML = '';
+  rows.appendChild(frag);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Approvals queue
+   ═══════════════════════════════════════════════════════ */
+const PENDING_APPROVALS = [];
+
+let approvalTimers = {};
+
+function renderApprovals() {
+  const list = document.getElementById('approvals-list');
+  const countEl = document.getElementById('approvals-count');
+  list.innerHTML = '';
+  countEl.textContent = PENDING_APPROVALS.length;
+
+  for (const ap of PENDING_APPROVALS) {
+    const card = document.createElement('div');
+    card.className = `approval-card ap-${ap.level}`;
+    card.dataset.id = ap.id;
+    const icon = ap.level === 'urgent' ? '!' : 'i';
+    const mins = Math.floor(ap.expiresInSec / 60);
+    const secs = ap.expiresInSec % 60;
+    const timerStr = ap.expiresInSec <= 0 ? '已过期' : `${mins}:${String(secs).padStart(2,'0')}`;
+    card.innerHTML = `
+      <div class="ap-ic">${icon}</div>
+      <div>
+        <div class="ap-title">${ap.title}</div>
+        <div class="ap-meta">${esc(ap.sessionId)} · ${esc(ap.agent)} <span class="ap-timer">${timerStr}</span></div>
+        <div class="ap-actions">
+          <button class="ap-btn ap-btn-allow" data-id="${ap.id}">批准</button>
+          <button class="ap-btn ap-btn-deny" data-id="${ap.id}">拒绝</button>
+        </div>
+      </div>
+    `;
+    list.appendChild(card);
+  }
+
+  list.addEventListener('click', (e) => {
+    const btn = e.target.closest('.ap-btn');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    const idx = PENDING_APPROVALS.findIndex(a => a.id === id);
+    if (idx !== -1) {
+      PENDING_APPROVALS.splice(idx, 1);
+      renderApprovals();
+    }
+  });
+}
+
+setInterval(() => {
+  let changed = false;
+  for (const ap of PENDING_APPROVALS) {
+    if (ap.expiresInSec > 0) { ap.expiresInSec--; changed = true; }
+  }
+  if (changed) {
+    document.querySelectorAll('.approval-card').forEach(card => {
+      const id = card.dataset.id;
+      const ap = PENDING_APPROVALS.find(a => a.id === id);
+      if (!ap) return;
+      const timer = card.querySelector('.ap-timer');
+      if (!timer) return;
+      if (ap.expiresInSec <= 0) { timer.textContent = '已过期'; timer.style.color = '#dc2626'; }
+      else {
+        const m = Math.floor(ap.expiresInSec / 60);
+        const s = ap.expiresInSec % 60;
+        timer.textContent = `${m}:${String(s).padStart(2,'0')}`;
+      }
+    });
+  }
+}, 1000);
+
+renderApprovals();
+
+/* ═══════════════════════════════════════════════════════
+   Activity heatmap (real data from sessions)
+   ═══════════════════════════════════════════════════════ */
+function renderHeatmap() {
+  const grid = document.getElementById('heatmap-grid');
+  const axis = document.getElementById('heatmap-axis');
+
+  // Build 7-day × 24-hour buckets from real session data
+  const now = new Date();
+  const buckets = {}; // "dayIdx_hour" -> { events: N, blocks: N }
+  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const dayLabels = ['M','T','W','T','F','S','S']; // Mon-Sun display
+
+  // Init 7 days of buckets
+  for (let d = 0; d < 7; d++) {
+    for (let h = 0; h < 24; h++) {
+      buckets[`${d}_${h}`] = { events: 0, blocks: 0 };
+    }
+  }
+
+  // Map a timestamp to day/hour bucket
+  function tsToBucket(epochSec) {
+    const date = new Date(epochSec * 1000);
+    const diffDays = Math.floor((now - date) / (86400 * 1000));
+    if (diffDays < 0 || diffDays >= 7) return null;
+    const dayIdx = 6 - diffDays; // 0=oldest, 6=today
+    return { dayIdx, hour: date.getHours() };
+  }
+
+  // Accumulate real + bundled sessions
+  for (const s of sessionsCache) {
+    const b = tsToBucket(s.mtime);
+    if (b) {
+      buckets[`${b.dayIdx}_${b.hour}`].events += (s.event_count || 1);
+    }
+    // Block events from eval_history
+    for (const h of (s.eval_history || [])) {
+      if (h.ts) {
+        const hb = tsToBucket(h.ts);
+        if (hb) {
+          buckets[`${hb.dayIdx}_${hb.hour}`].events += 1;
+          if (h.prediction === 1) buckets[`${hb.dayIdx}_${hb.hour}`].blocks += 1;
+        }
+      }
+    }
+  }
+
+  // Find max for normalization
+  let maxEvents = 1;
+  for (const key in buckets) {
+    if (buckets[key].events > maxEvents) maxEvents = buckets[key].events;
+  }
+
+  // Build day labels (Mon-Sun for the actual 7 days)
+  const dayOrder = [];
+  for (let d = 0; d < 7; d++) {
+    const date = new Date(now.getTime() - (6 - d) * 86400 * 1000);
+    const dayOfWeek = date.getDay(); // 0=Sun
+    const label = dayLabels[(dayOfWeek + 6) % 7]; // convert to Mon=0
+    const name = dayNames[dayOfWeek];
+    dayOrder.push({ d, label, name });
+  }
+
+  let html = '';
+  for (const { d, label, name } of dayOrder) {
+    html += `<span class="hm-day">${label}</span>`;
+    for (let h = 0; h < 24; h++) {
+      const cell = buckets[`${d}_${h}`];
+      const v = Math.min(100, Math.round((cell.events / maxEvents) * 100));
+      const hasBlock = cell.blocks > 0;
+      const dot = hasBlock ? '<span class="hm-dot"></span>' : '';
+      const blockStr = hasBlock ? ` · ${cell.blocks} block` : '';
+      const tip = `${name} ${String(h).padStart(2,'0')}:00 · ${cell.events} events${blockStr}`;
+      html += `<span class="hm-cell" style="--v:${v}" title="${tip}">${dot}</span>`;
+    }
+  }
+  grid.innerHTML = html;
+
+  let axisHtml = '<span></span>';
+  for (let h = 0; h < 24; h++) {
+    if (h === 0 || h === 6 || h === 12 || h === 18 || h === 23) {
+      axisHtml += `<span>${String(h === 23 ? 24 : h).padStart(2,'0')}</span>`;
+    } else {
+      axisHtml += '<span></span>';
+    }
+  }
+  axis.innerHTML = axisHtml;
+}
+
+renderHeatmap();
+
+/* ═══════════════════════════════════════════════════════
+   UI Scale — auto-adapt to viewport, manual +/- override
+   ═══════════════════════════════════════════════════════ */
+const SCALE_REF = 2560;
+const SCALE_MIN = 0.6;
+const SCALE_MAX = 1.6;
+const SCALE_STEP = 0.05;
+let manualScaleOffset = parseFloat(localStorage.getItem('agentdog-scale-offset') || '0');
+
+function computeScale() {
+  const auto = window.innerWidth / SCALE_REF;
+  const raw = auto + manualScaleOffset;
+  return Math.min(SCALE_MAX, Math.max(SCALE_MIN, raw));
+}
+function applyScale() {
+  const s = computeScale();
+  document.documentElement.style.setProperty('--ui-scale', s.toFixed(3));
+  document.getElementById('zoom-label').textContent = Math.round(s * 100) + '%';
+}
+document.getElementById('zoom-in').addEventListener('click', () => {
+  manualScaleOffset += SCALE_STEP;
+  localStorage.setItem('agentdog-scale-offset', manualScaleOffset.toFixed(3));
+  applyScale();
+});
+document.getElementById('zoom-out').addEventListener('click', () => {
+  manualScaleOffset -= SCALE_STEP;
+  localStorage.setItem('agentdog-scale-offset', manualScaleOffset.toFixed(3));
+  applyScale();
+});
+document.getElementById('zoom-label').addEventListener('dblclick', () => {
+  manualScaleOffset = 0;
+  localStorage.setItem('agentdog-scale-offset', '0');
+  applyScale();
+});
+window.addEventListener('resize', applyScale);
+applyScale();
+
+/* ═══════════════════════════════════════════════════════
+   Theme toggle
+   ═══════════════════════════════════════════════════════ */
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  const html = document.documentElement;
+  html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+});
+
+/* ═══════════════════════════════════════════════════════
+   Utilities
+   ═══════════════════════════════════════════════════════ */
+function extractText(content) {
+  if (typeof content === 'string') return content;
+  if (!Array.isArray(content)) return '';
+  return content.filter(c => c.type === 'text' && c.text).map(c => c.text).join('\n');
+}
+function esc(s) {
+  if (!s) return '';
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+/* ═══════════════════════════════════════════════════════
+   Init
+   ═══════════════════════════════════════════════════════ */
+fetch('/health').then(r => r.json()).then(d => {
+  document.getElementById('model-info').textContent = `护栏模型: ${d.model || '?'}`;
+}).catch(() => {});
+
+document.getElementById('refresh-btn').addEventListener('click', loadSessions);
+loadSessions();
+setInterval(loadSessions, 5000);
+</script>
+</body>
+</html>
