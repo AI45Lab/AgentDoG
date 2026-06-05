@@ -87,7 +87,7 @@ deepspeed: examples/deepspeed/ds_z2_config.json
 ### dataset
 dataset: agentic_safety_sft
 template: qwen3_5_nothink
-cutoff_len: 12288
+cutoff_len: 16384
 overwrite_cache: true
 preprocessing_num_workers: 32
 dataloader_num_workers: 8
