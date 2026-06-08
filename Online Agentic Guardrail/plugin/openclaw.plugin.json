@@ -1,0 +1,1 @@
+{"id":"guardrail-pre-reply","name":"Guardrail PRE_REPLY","enabledByDefault":true,"description":"PRE_REPLY safety guardrail","configSchema":{"type":"object","additionalProperties":false,"properties":{}}}

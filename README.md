@@ -289,7 +289,7 @@ This project is released under the **Apache 2.0 License**.
 
 <br>
 
-<a href="https://github.com/titanwings/colleague-skill"><img src="https://cdn.simpleicons.org/github/181717" height="16" alt="GitHub"/> GitHub</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+<a href="https://github.com/titanwings/colleague-skill">GitHub</a>&nbsp;&nbsp; | &nbsp;&nbsp;
 <a href="https://arxiv.org/pdf/2605.31264">📄 Technical Report</a>&nbsp;&nbsp; | &nbsp;&nbsp;
 <a href="https://titanwings.github.io/colleague-skill-site/">🌐 Project Page</a>
 
