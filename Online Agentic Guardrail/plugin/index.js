@@ -1,4 +1,4 @@
-import { t as definePluginEntry } from "../../plugin-entry-DhR2SXKx.js";
+import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
 
 const GUARDRAIL_URL = process.env.GUARDRAIL_URL || "http://127.0.0.1:8340";
 
