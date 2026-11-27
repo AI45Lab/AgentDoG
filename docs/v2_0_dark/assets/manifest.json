@@ -1,0 +1,98 @@
+{
+  "inherited_assets": {
+    "provenance": "Faithful raster conversions of individual source figures from the supplied AgentDoG 2.0 Overleaf archive. No complete manuscript included.",
+    "assets": [
+      {
+        "file": "family.webp",
+        "source": "figures/agentdog-2p0/AgentDoG-Family.pdf",
+        "source_reference": "sections/guard.tex:6",
+        "width": 2000,
+        "height": 914,
+        "bytes": 181970,
+        "description": "Overview of AgentDoG 2.0, AgentDoG-Jev and AgentDoG-Step, with faster full-trajectory detection and pre-execution interception.",
+        "notes": "Text remains readable at full width; use this figure to introduce all three guardrail variants."
+      },
+      {
+        "file": "taxonomy.webp",
+        "source": "figures/taxonomy.pdf",
+        "source_reference": "sections/safety_taxonomy.tex:18",
+        "width": 2000,
+        "height": 1260,
+        "bytes": 270754,
+        "description": "Expanded three-dimensional agent safety taxonomy: risk sources, failure modes, and real-world harms.",
+        "notes": "Dense source figure; offer an expandable full-size view on mobile."
+      },
+      {
+        "file": "jev-inference.webp",
+        "source": "figures/agentdog-jev-inference-flow.pdf",
+        "source_reference": "sections/guard.tex:483",
+        "width": 1958,
+        "height": 753,
+        "bytes": 126124,
+        "description": "AgentDoG-Jev processes a trajectory and structured decision schema in one forward pass, predicting fields and confidence scores.",
+        "notes": "Illustrative source example; percentages are example output confidences, not benchmark results."
+      },
+      {
+        "file": "jev-latency.webp",
+        "source": "figures/jev-latency.pdf",
+        "source_reference": "sections/guard.tex:648",
+        "width": 1924,
+        "height": 644,
+        "bytes": 66198,
+        "description": "Mean latency of AgentDoG-Jev versus the AgentDoG1.5 baseline for binary trajectory judgment and fine-grained diagnosis.",
+        "notes": "Source units are seconds. Chart labels round measurements; metric copy should use exact values from active guard.tex tables. Comparisons depend on benchmark and backbone."
+      },
+      {
+        "file": "step-performance.webp",
+        "source": "figures/agentdog-step/agentdog-step-main.pdf",
+        "source_reference": "sections/guard.tex:818",
+        "width": 1994,
+        "height": 857,
+        "bytes": 87786,
+        "description": "AgentDoG-Step pre-execution performance versus frontier language models and dedicated guardrails.",
+        "notes": "Axes show overall unsafe F1 and worst-class recall. Preserve benchmark-specific scope in accompanying captions."
+      },
+      {
+        "file": "duet-attacks.webp",
+        "source": "figures/red-team/red_blue_runtime_attack_generation.pdf",
+        "source_reference": "sections/agentdog_duet.tex:34",
+        "width": 1998,
+        "height": 997,
+        "bytes": 216662,
+        "description": "Two-phase AgentDoG-Duet attack generation: task analysis and offline blueprint followed by live grounded adversarial interaction.",
+        "notes": "Dense source illustration; offer a full-size view. Dashed paths represent future-driven blueprint revision."
+      },
+      {
+        "file": "harness-evolution.webp",
+        "source": "figures/evo_harness_aligned_v2.pdf",
+        "source_reference": "sections/agentdog_scenario_validation.tex:34",
+        "width": 1988,
+        "height": 1006,
+        "bytes": 167486,
+        "description": "Attribution-driven harness evolution: failure attribution, policy or code patch generation, paired safety and utility validation, and experience reflow.",
+        "notes": "Dense source figure. The ASR/utility acceptance thresholds in the diagram describe validation gates, not experimental performance gains."
+      },
+      {
+        "file": "logo.png",
+        "source": "AgentDoG/docs/figures/logo.png",
+        "width": 236,
+        "height": 256,
+        "bytes": 89626,
+        "description": "Existing AgentDoG brand logo preserved from the project repository.",
+        "notes": "Original image, no modification."
+      }
+    ]
+  },
+  "additional_assets": [
+    {
+      "file": "policy-evolution.webp",
+      "source": "figures/AgentDoG_Duet_Policy_Evolution_Editable_v3_cropped.pdf",
+      "active_source": "sections/agentdog_scenario_validation.tex:62-66",
+      "width": 2000,
+      "height": 1028,
+      "bytes": 198510,
+      "description": "Environment-free corrective trajectory synthesis and policy SFT.",
+      "caveat": "One SFT round is complete. The dashed feedback loop represents planned multi-round evolution; multi-round improvements remain unevaluated."
+    }
+  ]
+}
