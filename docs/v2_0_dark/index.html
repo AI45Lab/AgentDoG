@@ -1,0 +1,1823 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0c10" />
+    <title>AgentDoG 2.0 | Long-Horizon Agent Safety &amp; Security</title>
+    <meta
+      name="description"
+      content="AgentDoG 2.0: an expanded risk taxonomy, long-horizon benchmarks, single-pass guardrails, pre-execution protection, and adaptive defenses for AI agents."
+    />
+    <meta
+      property="og:title"
+      content="AgentDoG 2.0 | Long-Horizon Agent Safety & Security"
+    />
+    <meta
+      property="og:description"
+      content="Understand the risk. Guard the next action. Evolve the defense."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://mjc-ma-01.github.io/AgentDoG/v2_0_dark/assets/social-cover.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="examples.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="skip-link"
+      data-en="Skip to content"
+      data-zh="跳至正文"
+      >Skip to content</a
+    >
+    <svg
+      class="icon-sprite"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path d="m12 3 8 3v5c0 5-8 10-8 10S4 16 4 11V6l8-3Z" />
+        <path d="m8.5 12 2.3 2.3 4.7-4.8" />
+      </symbol>
+      <symbol id="i-code" viewBox="0 0 24 24">
+        <path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18" />
+      </symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24">
+        <path d="m13 2-9 12h7l-1 8 10-13h-7l1-7Z" />
+      </symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24">
+        <path d="m12 3 10 5-10 5L2 8l10-5Zm-9 9 9 5 9-5m-18 5 9 5 9-5" />
+      </symbol>
+      <symbol id="i-stop" viewBox="0 0 24 24">
+        <path d="M8 3h8l5 5v8l-5 5H8l-5-5V8l5-5Z" />
+        <path d="M9 9h6v6H9z" />
+      </symbol>
+      <symbol id="i-expand" viewBox="0 0 24 24">
+        <path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6" />
+      </symbol>
+      <symbol id="i-cycle" viewBox="0 0 24 24">
+        <path
+          d="M20 8a8 8 0 0 0-14-3L3 8m0-5v5h5m-4 8a8 8 0 0 0 14 3l3-3m0 5v-5h-5"
+        />
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 24 24">
+        <path d="m8 5 12 7-12 7V5Z" />
+      </symbol>
+      <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="10.5" cy="10.5" r="6.5" />
+        <path d="m16 16 5 5" />
+      </symbol>
+    </svg>
+    <header class="site-header">
+      <nav class="nav wrap" aria-label="Main navigation">
+        <details class="version-picker" id="version-picker">
+          <summary>
+            <span class="brand-word">AgentDoG</span
+            ><span class="version-badge">2.0</span
+            ><span class="chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="version-menu">
+            <span
+              class="menu-label"
+              data-en="PROJECT EDITIONS"
+              data-zh="项目版本"
+              >PROJECT EDITIONS</span
+            >
+            <a
+              href="https://mjc-ma-01.github.io/AgentDoG/v2_0_dark/"
+              aria-current="page"
+              >2.0
+              <span data-en="Dark edition" data-zh="深色版"
+                >Dark edition</span
+              ></a
+            >
+            <a href="https://mjc-ma-01.github.io/AgentDoG/v2_0/"
+              >2.0
+              <span data-en="Light edition" data-zh="浅色版"
+                >Light edition</span
+              ></a
+            >
+            <a href="https://ai45lab.github.io/AgentDoG/v1_5/"
+              >1.5
+              <span data-en="Previous release" data-zh="历史版本"
+                >Previous release</span
+              ></a
+            >
+            <a href="https://ai45lab.github.io/AgentDoG/v1/"
+              >1.0
+              <span data-en="Original release" data-zh="初始版本"
+                >Original release</span
+              ></a
+            >
+          </div>
+        </details>
+        <div class="nav-links" id="nav-links">
+          <a href="#overview" data-en="Overview" data-zh="概览">Overview</a
+          ><a href="#family" data-en="Guardrails" data-zh="护栏家族"
+            >Guardrails</a
+          ><a href="#performance" data-en="Performance" data-zh="性能"
+            >Performance</a
+          ><a href="#examples" data-en="Examples" data-zh="案例">Examples</a
+          ><a href="#evolution" data-en="Evolution" data-zh="演化">Evolution</a
+          ><a href="#resources" data-en="Resources" data-zh="资源">Resources</a>
+        </div>
+        <div class="nav-actions">
+          <button
+            id="language-toggle"
+            class="language-button"
+            aria-label="切换到中文"
+          >
+            中文</button
+          ><button
+            id="menu-toggle"
+            class="menu-button"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" id="home">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="wrap hero-inner">
+          <div class="hero-label">
+            <svg><use href="#i-shield" /></svg
+            ><span
+              data-en="LONG-HORIZON AGENT SAFETY & SECURITY"
+              data-zh="面向长程任务的智能体安全"
+              >LONG-HORIZON AGENT SAFETY & SECURITY</span
+            >
+          </div>
+          <div class="hero-brand">
+            <img
+              src="assets/logo.png"
+              width="88"
+              height="96"
+              alt="AgentDoG logo"
+            />
+            <h1>AgentDoG <span>2.0</span></h1>
+          </div>
+          <h2
+            data-en="Understand the risk. Guard the next action.<br><strong>Evolve the defense.</strong>"
+            data-zh="理解风险，守护下一步。<br><strong>让安全防御持续演进。</strong>"
+          >
+            Understand the risk. Guard the next action.<br /><strong
+              >Evolve the defense.</strong
+            >
+          </h2>
+          <p
+            class="hero-description"
+            data-en="A unified framework for characterizing, evaluating, and mitigating<br>the risks of agents that plan, use tools, and retain state."
+            data-zh="连接风险刻画、对抗评测、高效护栏与自适应防御，<br>守护会规划、会调用工具、会保留状态的智能体。"
+          >
+            A unified framework for characterizing, evaluating, and
+            mitigating<br />the risks of agents that plan, use tools, and retain
+            state.
+          </p>
+          <a
+            class="hero-institution"
+            href="https://www.shlab.org.cn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-en="Shanghai Artificial Intelligence Laboratory"
+            data-zh="上海人工智能实验室"
+            >Shanghai Artificial Intelligence Laboratory</a
+          >
+          <div class="hero-buttons">
+            <a class="button button-primary" href="#family"
+              ><svg><use href="#i-layers" /></svg
+              ><span data-en="Explore 2.0" data-zh="探索 2.0"
+                >Explore 2.0</span
+              ></a
+            ><a
+              class="button"
+              href="https://github.com/AI45Lab/AgentDoG"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><svg><use href="#i-code" /></svg>GitHub</a
+            ><a
+              class="button"
+              href="https://huggingface.co/AI45Research"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><img
+                src="assets/huggingface.svg"
+                width="23"
+                height="23"
+                alt=""
+              />Hugging Face</a
+            >
+          </div>
+          <div class="hero-stats">
+            <article>
+              <span
+                class="stat-context"
+                data-en="JEV · ATBENCH"
+                data-zh="JEV · ATBENCH"
+                >JEV · ATBENCH</span
+              >
+              <div class="stat-value">59.8<span>ms</span></div>
+              <h3
+                data-en="Single-pass binary judgment"
+                data-zh="单次前向二元判断"
+              >
+                Single-pass binary judgment
+              </h3>
+              <p
+                data-en="Unified-4B · mean decision latency"
+                data-zh="Unified-4B · 平均决策延迟"
+              >
+                Unified-4B · mean decision latency
+              </p>
+            </article>
+            <article>
+              <span
+                class="stat-context"
+                data-en="JEV · BINARY JUDGMENT"
+                data-zh="JEV · 二元判断"
+                >JEV · BINARY JUDGMENT</span
+              >
+              <div class="stat-value">
+                <small data-en="up to" data-zh="最高">up to</small>184.9<span
+                  >×</span
+                >
+              </div>
+              <h3 data-en="Lower decision latency" data-zh="决策延迟加速">
+                Lower decision latency
+              </h3>
+              <p
+                data-en="vs. corresponding AgentDoG 1.5 variants"
+                data-zh="对比对应的 AgentDoG 1.5 模型"
+              >
+                vs. corresponding AgentDoG 1.5 variants
+              </p>
+            </article>
+            <article>
+              <span
+                class="stat-context"
+                data-en="STEP 4B · THREE BENCHMARKS"
+                data-zh="STEP 4B · 三个基准"
+                >STEP 4B · THREE BENCHMARKS</span
+              >
+              <div class="stat-value">94.0<span>%</span></div>
+              <h3
+                data-en="Mean worst-class recall"
+                data-zh="平均最差类别召回率"
+              >
+                Mean worst-class recall
+              </h3>
+              <p
+                data-en="Pre-execution safety · unweighted mean"
+                data-zh="执行前安全 · 非加权平均"
+              >
+                Pre-execution safety · unweighted mean
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section wrap" id="overview">
+        <div class="section-head">
+          <p class="eyebrow" data-en="THE 2.0 UPGRADE" data-zh="2.0 的关键升级">
+            THE 2.0 UPGRADE
+          </p>
+          <h2
+            data-en="Safety across the entire trajectory"
+            data-zh="让安全覆盖完整任务轨迹"
+          >
+            Safety across the entire trajectory
+          </h2>
+          <p
+            data-en="Risks unfold across tools, memory, permissions, and time.<br>AgentDoG 2.0 connects the pieces into a shared diagnostic and defense framework."
+            data-zh="风险会沿工具、记忆、权限和时间逐渐积累。<br>AgentDoG 2.0 将这些环节连接成统一的诊断与防御框架。"
+          >
+            Risks unfold across tools, memory, permissions, and time.<br />AgentDoG
+            2.0 connects the pieces into a shared diagnostic and defense
+            framework.
+          </p>
+        </div>
+        <div class="system-map" aria-label="AgentDoG 2.0 research framework">
+          <article>
+            <svg><use href="#i-layers" /></svg>
+            <h3 data-en="Characterize" data-zh="刻画风险">Characterize</h3>
+            <p data-en="Expanded taxonomy" data-zh="扩展安全分类体系">
+              Expanded taxonomy
+            </p>
+            <span>18 / 21 / 11</span>
+          </article>
+          <div class="map-link" aria-hidden="true"></div>
+          <article>
+            <svg><use href="#i-search" /></svg>
+            <h3 data-en="Evaluate" data-zh="系统评测">Evaluate</h3>
+            <p>ATBench-Pro<br />ManipulationArena</p>
+          </article>
+          <div class="map-link" aria-hidden="true"></div>
+          <article>
+            <svg><use href="#i-shield" /></svg>
+            <h3 data-en="Guard" data-zh="高效防护">Guard</h3>
+            <p>2.0 / Jev / Step</p>
+            <span data-en="Diagnose & intercept" data-zh="诊断与拦截"
+              >Diagnose & intercept</span
+            >
+          </article>
+          <div class="map-link" aria-hidden="true"></div>
+          <article>
+            <svg><use href="#i-cycle" /></svg>
+            <h3 data-en="Evolve" data-zh="持续演化">Evolve</h3>
+            <p>Harness + Policy</p>
+            <span data-en="Failure-driven adaptation" data-zh="以失效驱动改进"
+              >Failure-driven adaptation</span
+            >
+          </article>
+        </div>
+        <div class="upgrade-notes">
+          <p>
+            <svg><use href="#i-bolt" /></svg
+            ><span data-en="Faster trajectory checks" data-zh="更快的轨迹检查"
+              >Faster trajectory checks</span
+            >
+          </p>
+          <p>
+            <svg><use href="#i-stop" /></svg
+            ><span
+              data-en="Earlier action-level intervention"
+              data-zh="更早的动作级干预"
+              >Earlier action-level intervention</span
+            >
+          </p>
+          <p>
+            <svg><use href="#i-cycle" /></svg
+            ><span
+              data-en="Stronger execution and model defenses"
+              data-zh="更强的执行框架与模型防御"
+              >Stronger execution and model defenses</span
+            >
+          </p>
+        </div>
+      </section>
+      <section class="section section-alt" id="family">
+        <div class="wrap">
+          <div class="section-head">
+            <p
+              class="eyebrow"
+              data-en="AGENTDOG FAMILY"
+              data-zh="AGENTDOG 护栏家族"
+            >
+              AGENTDOG FAMILY
+            </p>
+            <h2
+              data-en="Three complementary guardrails"
+              data-zh="三种互补护栏，覆盖不同防护需求"
+            >
+              Three complementary guardrails
+            </h2>
+            <p
+              data-en="Structured diagnosis, single-pass decisions, and checks before execution."
+              data-zh="结构化诊断、单次前向判断，以及执行前的风险检查。"
+            >
+              Structured diagnosis, single-pass decisions, and checks before
+              execution.
+            </p>
+          </div>
+          <figure class="research-figure">
+            <div class="figure-toolbar">
+              <span
+                data-en="TRAINING & INFERENCE ARCHITECTURE"
+                data-zh="训练与推理架构"
+                >TRAINING & INFERENCE ARCHITECTURE</span
+              ><button
+                class="expand-button"
+                data-figure="assets/family.webp"
+                data-figure-title="AgentDoG family architecture"
+              >
+                <svg><use href="#i-expand" /></svg
+                ><span data-en="Expand" data-zh="放大">Expand</span>
+              </button>
+            </div>
+            <button
+              class="figure-image"
+              data-figure="assets/family.webp"
+              data-figure-title="AgentDoG family architecture"
+            >
+              <img
+                src="assets/family.webp"
+                alt="Original architecture of AgentDoG 2.0, AgentDoG-Jev, and AgentDoG-Step"
+                width="2000"
+                height="914"
+                loading="lazy"
+              />
+            </button>
+            <figcaption
+              data-en="Three guardrail variants built for different inference and intervention requirements. Source: AgentDoG 2.0 technical manuscript."
+              data-zh="三种护栏分别对应不同的推理方式与干预时点。图源：AgentDoG 2.0 技术文稿。"
+            >
+              Three guardrail variants built for different inference and
+              intervention requirements. Source: AgentDoG 2.0 technical
+              manuscript.
+            </figcaption>
+          </figure>
+          <div class="family-grid">
+            <article class="family-card core-card">
+              <span class="family-symbol">{ }</span>
+              <div>
+                <p
+                  class="small-label"
+                  data-en="STRUCTURED DIAGNOSIS"
+                  data-zh="结构化诊断"
+                >
+                  STRUCTURED DIAGNOSIS
+                </p>
+                <h3>AgentDoG 2.0</h3>
+              </div>
+              <p
+                data-en="Directly generates a structured trajectory-level judgment using the expanded risk taxonomy, without generating a Chain of Thought."
+                data-zh="内化扩展后的风险分类体系，无需生成思维链，直接输出结构化的轨迹级判断。"
+              >
+                Directly generates a structured trajectory-level judgment using
+                the expanded risk taxonomy, without generating a Chain of
+                Thought.
+              </p>
+              <div class="family-tags">
+                <span data-en="CoT-free" data-zh="无需思维链">CoT-free</span
+                ><span data-en="Fine-grained diagnosis" data-zh="细粒度诊断"
+                  >Fine-grained diagnosis</span
+                >
+              </div>
+            </article>
+            <article class="family-card jev-card">
+              <span class="family-symbol"
+                ><svg><use href="#i-bolt" /></svg
+              ></span>
+              <div>
+                <p
+                  class="small-label"
+                  data-en="SINGLE-PASS DECISIONS"
+                  data-zh="单次前向决策"
+                >
+                  SINGLE-PASS DECISIONS
+                </p>
+                <h3>AgentDoG-Jev</h3>
+              </div>
+              <p
+                data-en="Reads the trajectory and decision schema in one forward pass to predict structured safety fields and normalized confidence scores."
+                data-zh="一次前向计算读取轨迹与决策模板，预测结构化安全字段及归一化置信度。"
+              >
+                Reads the trajectory and decision schema in one forward pass to
+                predict structured safety fields and normalized confidence
+                scores.
+              </p>
+              <div class="family-tags">
+                <span
+                  data-en="No autoregressive decoding"
+                  data-zh="无需自回归解码"
+                  >No autoregressive decoding</span
+                ><span data-en="Low decision latency" data-zh="低决策延迟"
+                  >Low decision latency</span
+                >
+              </div>
+            </article>
+            <article class="family-card step-card">
+              <span class="family-symbol"
+                ><svg><use href="#i-stop" /></svg
+              ></span>
+              <div>
+                <p
+                  class="small-label"
+                  data-en="PRE-EXECUTION PROTECTION"
+                  data-zh="执行前保护"
+                >
+                  PRE-EXECUTION PROTECTION
+                </p>
+                <h3>AgentDoG-Step</h3>
+              </div>
+              <p
+                data-en="Assesses the proposed action against visible interaction history. A short rationale and structured diagnosis support preventive risk interception."
+                data-zh="结合可见交互历史评估候选动作，以简短理由和结构化诊断支持预防性风险拦截。"
+              >
+                Assesses the proposed action against visible interaction
+                history. A short rationale and structured diagnosis support
+                preventive risk interception.
+              </p>
+              <div class="family-tags">
+                <span data-en="Action-level checks" data-zh="动作级检查"
+                  >Action-level checks</span
+                ><span data-en="Before execution" data-zh="执行之前"
+                  >Before execution</span
+                >
+              </div>
+            </article>
+          </div>
+          <div class="table-heading">
+            <h3
+              data-en="Which guard fits which decision?"
+              data-zh="不同护栏，分别适合什么决策？"
+            >
+              Which guard fits which decision?
+            </h3>
+            <span
+              class="table-label"
+              data-en="CAPABILITY COMPARISON"
+              data-zh="能力对照"
+              >CAPABILITY COMPARISON</span
+            >
+          </div>
+          <div
+            class="table-scroll"
+            role="region"
+            aria-label="Guardrail comparison"
+            tabindex="0"
+          >
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th scope="col" data-en="Variant" data-zh="护栏类型">
+                    Variant
+                  </th>
+                  <th scope="col" data-en="Input" data-zh="输入">Input</th>
+                  <th
+                    scope="col"
+                    data-en="Decision mechanism"
+                    data-zh="决策机制"
+                  >
+                    Decision mechanism
+                  </th>
+                  <th scope="col" data-en="Use case" data-zh="适用场景">
+                    Use case
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">AgentDoG 2.0</th>
+                  <td data-en="Agent trajectory" data-zh="智能体交互轨迹">
+                    Agent trajectory
+                  </td>
+                  <td
+                    data-en="Direct structured generation"
+                    data-zh="直接生成结构化判断"
+                  >
+                    Direct structured generation
+                  </td>
+                  <td
+                    data-en="Taxonomy-aware safety diagnosis"
+                    data-zh="分类体系引导的安全诊断"
+                  >
+                    Taxonomy-aware safety diagnosis
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">AgentDoG-Jev</th>
+                  <td
+                    data-en="Trajectory + decision schema"
+                    data-zh="轨迹 + 决策模板"
+                  >
+                    Trajectory + decision schema
+                  </td>
+                  <td
+                    data-en="Single-pass field readout"
+                    data-zh="单次前向字段读出"
+                  >
+                    Single-pass field readout
+                  </td>
+                  <td
+                    data-en="Frequent trajectory checks"
+                    data-zh="高频轨迹检查"
+                  >
+                    Frequent trajectory checks
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">AgentDoG-Step</th>
+                  <td
+                    data-en="History + candidate action"
+                    data-zh="历史 + 候选动作"
+                  >
+                    History + candidate action
+                  </td>
+                  <td data-en="Pre-execution judgment" data-zh="执行前安全判断">
+                    Pre-execution judgment
+                  </td>
+                  <td data-en="Preventive intervention" data-zh="预防性干预">
+                    Preventive intervention
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section class="section wrap" id="performance">
+        <div class="section-head">
+          <p class="eyebrow" data-en="PERFORMANCE" data-zh="实验结果">
+            PERFORMANCE
+          </p>
+          <h2
+            data-en="Efficiency you can measure.<br>Protection before execution."
+            data-zh="以实验衡量效率，<br>在执行之前提供保护。"
+          >
+            Efficiency you can measure.<br />Protection before execution.
+          </h2>
+          <p
+            data-en="Reported results from the active technical manuscript.<br>Binary judgment, fine-grained diagnosis, and pre-execution safety are evaluated separately."
+            data-zh="以下结果来自技术文稿实际生效的实验部分。<br>二元判断、细粒度诊断与执行前安全分别进行评测。"
+          >
+            Reported results from the active technical manuscript.<br />Binary
+            judgment, fine-grained diagnosis, and pre-execution safety are
+            evaluated separately.
+          </p>
+        </div>
+        <div class="experiment-block" id="jev">
+          <div class="experiment-head">
+            <div>
+              <span class="experiment-tag cyan">AgentDoG-Jev</span>
+              <h3
+                data-en="A decision in one forward pass"
+                data-zh="一次前向，完成安全决策"
+              >
+                A decision in one forward pass
+              </h3>
+              <p
+                data-en="Read structured decisions directly, instead of decoding a full answer token by token."
+                data-zh="直接读出结构化决策，省去逐 token 生成完整回答的过程。"
+              >
+                Read structured decisions directly, instead of decoding a full
+                answer token by token.
+              </p>
+            </div>
+            <div class="experiment-highlight">
+              <strong>103.9–184.9<span>×</span></strong
+              ><span
+                data-en="binary latency speedup vs. corresponding 1.5 variants"
+                data-zh="对比对应 1.5 模型的二元判断延迟加速"
+                >binary latency speedup vs. corresponding 1.5 variants</span
+              >
+            </div>
+          </div>
+          <div class="jev-results">
+            <div class="speed-panel">
+              <div class="panel-top">
+                <span
+                  data-en="ATBENCH · UNIFIED-4B"
+                  data-zh="ATBENCH · UNIFIED-4B"
+                  >ATBENCH · UNIFIED-4B</span
+                ><span data-en="Lower latency is better" data-zh="延迟越低越好"
+                  >Lower latency is better</span
+                >
+              </div>
+              <div class="latency-row">
+                <div><span>AgentDoG 1.5</span><b>6.52 s</b></div>
+                <div class="latency-track">
+                  <span class="baseline-bar"></span>
+                </div>
+              </div>
+              <div class="latency-row">
+                <div><span>AgentDoG-Jev</span><b>0.060 s</b></div>
+                <div class="latency-track"><span class="jev-bar"></span></div>
+              </div>
+              <div class="speed-highlight">
+                <b>109.0×</b
+                ><span
+                  data-en="lower latency<br>for this model pair"
+                  data-zh="该组模型对的<br>延迟加速"
+                  >lower latency<br />for this model pair</span
+                >
+              </div>
+              <p
+                class="note"
+                data-en="The source figure rounds 59.8 ms to 0.060 s. This is guard decision latency, not full agent runtime."
+                data-zh="原图将 59.8 ms 四舍五入为 0.060 s。该值为护栏决策延迟，不是完整智能体运行耗时。"
+              >
+                The source figure rounds 59.8 ms to 0.060 s. This is guard
+                decision latency, not full agent runtime.
+              </p>
+            </div>
+            <div class="jev-table-panel">
+              <h4 data-en="Binary safety judgment" data-zh="二元安全判断">
+                Binary safety judgment
+              </h4>
+              <div
+                class="table-scroll"
+                role="region"
+                aria-label="Jev binary judgment results"
+                tabindex="0"
+              >
+                <table class="numeric-table">
+                  <thead>
+                    <tr>
+                      <th
+                        scope="col"
+                        data-en="Model / Benchmark"
+                        data-zh="模型 / 基准"
+                      >
+                        Model / Benchmark
+                      </th>
+                      <th scope="col" data-en="Latency" data-zh="延迟">
+                        Latency
+                      </th>
+                      <th scope="col">Unsafe F1</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Jev Unified-4B<small>ATBench</small></th>
+                      <td class="cyan-text">59.8 ms</td>
+                      <td>77.90%</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Jev Qwen3.5-4B<small>R-Judge</small></th>
+                      <td class="cyan-text">58.9 ms</td>
+                      <td>87.64%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tradeoff-note">
+                <svg><use href="#i-layers" /></svg>
+                <p
+                  data-en="Fine-grained diagnosis: <strong>4.4–13.4×</strong> lower latency, with a separate speed–accuracy trade-off."
+                  data-zh="细粒度诊断：延迟加速 <strong>4.4–13.4×</strong>，存在独立的速度与精度权衡。"
+                >
+                  Fine-grained diagnosis: <strong>4.4–13.4×</strong> lower
+                  latency, with a separate speed–accuracy trade-off.
+                </p>
+              </div>
+            </div>
+          </div>
+          <figure class="research-figure">
+            <div class="figure-toolbar">
+              <span data-en="JEV · MEASURED LATENCY" data-zh="JEV · 实测延迟"
+                >JEV · MEASURED LATENCY</span
+              ><button
+                class="expand-button"
+                data-figure="assets/jev-latency.webp"
+                data-figure-title="Jev latency comparison"
+              >
+                <svg><use href="#i-expand" /></svg
+                ><span data-en="Expand" data-zh="放大">Expand</span>
+              </button>
+            </div>
+            <button
+              class="figure-image"
+              data-figure="assets/jev-latency.webp"
+              data-figure-title="Jev latency comparison"
+            >
+              <img
+                src="assets/jev-latency.webp"
+                alt="Original latency comparison for Jev binary judgment and fine-grained diagnosis, in seconds"
+                width="1924"
+                height="644"
+                loading="lazy"
+              />
+            </button>
+            <figcaption
+              data-en="Binary judgment and fine-grained diagnosis have different latency profiles. Each comparison uses the corresponding generative 1.5 checkpoint."
+              data-zh="二元判断与细粒度诊断分别报告延迟，对比对象为各自对应的生成式 1.5 模型。"
+            >
+              Binary judgment and fine-grained diagnosis have different latency
+              profiles. Each comparison uses the corresponding generative 1.5
+              checkpoint.
+            </figcaption>
+          </figure>
+          <details class="technical-detail">
+            <summary>
+              <span
+                data-en="How single-pass structured inference works"
+                data-zh="单次前向如何实现结构化推理"
+                >How single-pass structured inference works</span
+              ><span class="plus" aria-hidden="true">+</span>
+            </summary>
+            <figure class="research-figure">
+              <button
+                class="figure-image"
+                data-figure="assets/jev-inference.webp"
+                data-figure-title="Jev single-pass inference"
+              >
+                <img
+                  src="assets/jev-inference.webp"
+                  alt="Jev readout at decision positions after one forward pass"
+                  width="1958"
+                  height="753"
+                  loading="lazy"
+                />
+              </button>
+              <figcaption
+                data-en="The confidence values in this architectural example illustrate the output format; they are not benchmark measurements."
+                data-zh="架构示例中的置信度用于解释输出形式，不是基准实验结果。"
+              >
+                The confidence values in this architectural example illustrate
+                the output format; they are not benchmark measurements.
+              </figcaption>
+            </figure>
+          </details>
+        </div>
+        <div class="experiment-block" id="step">
+          <div class="experiment-head">
+            <div>
+              <span class="experiment-tag violet">AgentDoG-Step</span>
+              <h3
+                data-en="Catch the risk before the tool call"
+                data-zh="在工具调用之前，发现风险"
+              >
+                Catch the risk before the tool call
+              </h3>
+              <p
+                data-en="Evaluate the candidate action using the interaction history, before it changes the environment."
+                data-zh="在候选动作改变环境之前，结合交互历史评估其安全性。"
+              >
+                Evaluate the candidate action using the interaction history,
+                before it changes the environment.
+              </p>
+            </div>
+            <div class="experiment-highlight violet-text">
+              <strong>94.0<span>%</span></strong
+              ><span
+                data-en="mean worst-class recall · Step 4B"
+                data-zh="平均最差类别召回率 · Step 4B"
+                >mean worst-class recall · Step 4B</span
+              >
+            </div>
+          </div>
+          <div class="step-summary">
+            <div>
+              <b>94.7<span>%</span></b
+              ><span data-en="Mean accuracy" data-zh="平均准确率"
+                >Mean accuracy</span
+              >
+            </div>
+            <div>
+              <b>87.5<span>%</span></b
+              ><span data-en="Mean unsafe F1" data-zh="平均不安全类 F1"
+                >Mean unsafe F1</span
+              >
+            </div>
+            <p
+              data-en="Worst-class recall takes the lower of safe recall and unsafe recall, so both safe behavior and risk interception matter."
+              data-zh="最差类别召回率取安全与不安全召回率的较低值，同时关注安全行为的放行与风险行为的拦截。"
+            >
+              Worst-class recall takes the lower of safe recall and unsafe
+              recall, so both safe behavior and risk interception matter.
+            </p>
+          </div>
+          <div class="table-heading">
+            <h4
+              data-en="Pre-execution safety comparison"
+              data-zh="执行前安全性能对照"
+            >
+              Pre-execution safety comparison
+            </h4>
+            <div
+              class="table-filter"
+              role="group"
+              aria-label="Filter Step comparison"
+            >
+              <button
+                type="button"
+                class="active"
+                data-model-filter="all"
+                aria-pressed="true"
+                data-en="All models"
+                data-zh="全部模型"
+              >
+                All models</button
+              ><button
+                type="button"
+                data-model-filter="agentdog"
+                aria-pressed="false"
+              >
+                AgentDoG</button
+              ><button
+                type="button"
+                data-model-filter="reference"
+                aria-pressed="false"
+                data-en="References"
+                data-zh="对比模型"
+              >
+                References
+              </button>
+            </div>
+          </div>
+          <div
+            class="table-scroll"
+            role="region"
+            aria-label="Step performance comparison"
+            tabindex="0"
+          >
+            <table class="numeric-table performance-table">
+              <thead>
+                <tr>
+                  <th scope="col" data-en="Model" data-zh="模型">Model</th>
+                  <th scope="col" data-en="Accuracy (%)" data-zh="准确率 (%)">
+                    Accuracy (%)
+                  </th>
+                  <th
+                    scope="col"
+                    data-en="Unsafe F1 (%)"
+                    data-zh="不安全类 F1 (%)"
+                  >
+                    Unsafe F1 (%)
+                  </th>
+                  <th
+                    scope="col"
+                    data-en="Worst-class recall (%)"
+                    data-zh="最差类别召回率 (%)"
+                  >
+                    Worst-class recall (%)
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="best-row" data-model-group="agentdog">
+                  <th scope="row">
+                    AgentDoG-Step 4B
+                    <span class="row-tag" data-en="HIGHLIGHT" data-zh="重点"
+                      >HIGHLIGHT</span
+                    >
+                  </th>
+                  <td>94.7</td>
+                  <td>87.5</td>
+                  <td><strong>94.0</strong></td>
+                </tr>
+                <tr data-model-group="reference">
+                  <th scope="row">Gemini3.8 Flash</th>
+                  <td>94.9</td>
+                  <td>85.4</td>
+                  <td>93.3</td>
+                </tr>
+                <tr data-model-group="reference">
+                  <th scope="row">GLM5.3</th>
+                  <td>91.8</td>
+                  <td>76.3</td>
+                  <td>90.9</td>
+                </tr>
+                <tr data-model-group="agentdog">
+                  <th scope="row">AgentDoG-Step 9B</th>
+                  <td>92.9</td>
+                  <td>84.5</td>
+                  <td>90.2</td>
+                </tr>
+                <tr data-model-group="reference">
+                  <th scope="row">DeepSeekV4.1-Flash</th>
+                  <td>90.3</td>
+                  <td>71.8</td>
+                  <td>89.8</td>
+                </tr>
+                <tr data-model-group="agentdog">
+                  <th scope="row">AgentDoG-Step 8B</th>
+                  <td>93.7</td>
+                  <td>80.8</td>
+                  <td>88.4</td>
+                </tr>
+                <tr data-model-group="agentdog">
+                  <th scope="row">AgentDoG-Step 2B</th>
+                  <td>93.4</td>
+                  <td>82.2</td>
+                  <td>86.2</td>
+                </tr>
+                <tr data-model-group="reference">
+                  <th scope="row">StepGuard4B</th>
+                  <td>93.4</td>
+                  <td>83.3</td>
+                  <td>81.8</td>
+                </tr>
+                <tr data-model-group="agentdog">
+                  <th scope="row">AgentDoG-Step 0.8B</th>
+                  <td>88.3</td>
+                  <td>71.1</td>
+                  <td>77.8</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p
+            class="note"
+            data-en="Unweighted means across TS-Bench-Dojo, TS-Bench-ASB, and StepShield. Model names and values follow the manuscript. Worst-class recall is calculated per benchmark before averaging."
+            data-zh="表中为 TS-Bench-Dojo、TS-Bench-ASB、StepShield 的非加权平均；模型名称与数值遵循原文。最差类别召回率先按各基准计算，再取平均。"
+          >
+            Unweighted means across TS-Bench-Dojo, TS-Bench-ASB, and StepShield.
+            Model names and values follow the manuscript. Worst-class recall is
+            calculated per benchmark before averaging.
+          </p>
+          <figure class="research-figure">
+            <div class="figure-toolbar">
+              <span
+                data-en="STEP · BENCHMARK RESULTS"
+                data-zh="STEP · 基准实验结果"
+                >STEP · BENCHMARK RESULTS</span
+              ><button
+                class="expand-button"
+                data-figure="assets/step-performance.webp"
+                data-figure-title="Step performance across benchmarks"
+              >
+                <svg><use href="#i-expand" /></svg
+                ><span data-en="Expand" data-zh="放大">Expand</span>
+              </button>
+            </div>
+            <button
+              class="figure-image"
+              data-figure="assets/step-performance.webp"
+              data-figure-title="Step performance across benchmarks"
+            >
+              <img
+                src="assets/step-performance.webp"
+                alt="Step performance plot comparing dedicated guardrails and frontier models across three benchmarks"
+                width="1994"
+                height="857"
+                loading="lazy"
+              />
+            </button>
+            <figcaption
+              data-en="Original pre-execution safety evaluation. These results use a different task and protocol from Jev's full-trajectory evaluation."
+              data-zh="原始执行前安全评测图，任务与协议独立于 Jev 的完整轨迹评测。"
+            >
+              Original pre-execution safety evaluation. These results use a
+              different task and protocol from Jev's full-trajectory evaluation.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="section section-alt" id="taxonomy">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow" data-en="SAFETY TAXONOMY" data-zh="安全分类体系">
+              SAFETY TAXONOMY
+            </p>
+            <h2
+              data-en="Trace the source. Explain the failure.<br>Understand the harm."
+              data-zh="追溯来源，解释失效，<br>理解现实危害。"
+            >
+              Trace the source. Explain the failure.<br />Understand the harm.
+            </h2>
+            <p
+              data-en="Three diagnostic dimensions connect what enters a workflow to what the agent does and what may follow."
+              data-zh="三个诊断维度，将风险如何进入工作流、智能体如何失效与可能造成的后果连接起来。"
+            >
+              Three diagnostic dimensions connect what enters a workflow to what
+              the agent does and what may follow.
+            </p>
+          </div>
+          <div class="taxonomy-counts">
+            <article>
+              <b>18</b>
+              <div>
+                <h3 data-en="Risk sources" data-zh="风险来源">Risk sources</h3>
+                <p data-en="Where the risk comes from" data-zh="风险从何而来">
+                  Where the risk comes from
+                </p>
+              </div>
+            </article>
+            <article>
+              <b>21</b>
+              <div>
+                <h3 data-en="Failure modes" data-zh="失效模式">
+                  Failure modes
+                </h3>
+                <p data-en="How the agent fails" data-zh="智能体如何失效">
+                  How the agent fails
+                </p>
+              </div>
+            </article>
+            <article>
+              <b>11</b>
+              <div>
+                <h3 data-en="Real-world harms" data-zh="现实危害">
+                  Real-world harms
+                </h3>
+                <p
+                  data-en="What consequences may follow"
+                  data-zh="可能造成什么后果"
+                >
+                  What consequences may follow
+                </p>
+              </div>
+            </article>
+          </div>
+          <figure class="research-figure">
+            <div class="figure-toolbar">
+              <span
+                data-en="EXPANDED THREE-DIMENSIONAL TAXONOMY"
+                data-zh="扩展后的三维安全分类体系"
+                >EXPANDED THREE-DIMENSIONAL TAXONOMY</span
+              ><button
+                class="expand-button"
+                data-figure="assets/taxonomy.webp"
+                data-figure-title="AgentDoG 2.0 safety taxonomy"
+              >
+                <svg><use href="#i-expand" /></svg
+                ><span data-en="Expand" data-zh="放大">Expand</span>
+              </button>
+            </div>
+            <button
+              class="figure-image"
+              data-figure="assets/taxonomy.webp"
+              data-figure-title="AgentDoG 2.0 safety taxonomy"
+            >
+              <img
+                src="assets/taxonomy.webp"
+                alt="Complete 18-source, 21-failure-mode, 11-harm AgentDoG 2.0 safety taxonomy"
+                width="2000"
+                height="1260"
+                loading="lazy"
+              />
+            </button>
+            <figcaption
+              data-en="A shared diagnostic scaffold for long-horizon, stateful agent workflows. Click the figure to inspect individual categories."
+              data-zh="面向长程、有状态智能体工作流的统一诊断框架；点击图片可放大查看具体分类。"
+            >
+              A shared diagnostic scaffold for long-horizon, stateful agent
+              workflows. Click the figure to inspect individual categories.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="section wrap" id="examples">
+        <div class="section-head">
+          <p
+            class="eyebrow"
+            data-en="RISK IN CONTEXT"
+            data-zh="通过案例理解风险"
+          >
+            RISK IN CONTEXT
+          </p>
+          <h2
+            data-en="See how a workflow becomes unsafe"
+            data-zh="看见风险如何在工作流中发生"
+          >
+            See how a workflow becomes unsafe
+          </h2>
+          <p
+            data-en="Explore three illustrative scenarios, from the user's original goal to the guard's intervention point."
+            data-zh="从用户的原始目标出发，透过三个示意场景，理解风险演化与护栏介入的时点。"
+          >
+            Explore three illustrative scenarios, from the user's original goal
+            to the guard's intervention point.
+          </p>
+        </div>
+        <div class="case-tabs" role="tablist" aria-label="Risk scenarios">
+          <button
+            class="active"
+            role="tab"
+            id="case-tab-goal"
+            data-case="goal"
+            aria-selected="true"
+            aria-controls="case-panel"
+          >
+            <span>CGM</span
+            ><b data-en="Covert goal manipulation" data-zh="隐蔽目标操纵"
+              >Covert goal manipulation</b
+            ></button
+          ><button
+            role="tab"
+            id="case-tab-authority"
+            data-case="authority"
+            aria-selected="false"
+            aria-controls="case-panel"
+            tabindex="-1"
+          >
+            <span>AOV</span
+            ><b
+              data-en="Authority & obligation violations"
+              data-zh="权限与义务违反"
+              >Authority & obligation violations</b
+            ></button
+          ><button
+            role="tab"
+            id="case-tab-control"
+            data-case="control"
+            aria-selected="false"
+            aria-controls="case-panel"
+            tabindex="-1"
+          >
+            <span>LoC</span
+            ><b data-en="Loss of control" data-zh="失控风险">Loss of control</b>
+          </button>
+        </div>
+        <div
+          class="case-panel"
+          id="case-panel"
+          role="tabpanel"
+          aria-labelledby="case-tab-goal"
+          tabindex="0"
+        >
+          <div class="case-heading">
+            <div>
+              <span
+                class="small-label"
+                data-en="ILLUSTRATIVE WALKTHROUGH"
+                data-zh="概念示意案例"
+                >ILLUSTRATIVE WALKTHROUGH</span
+              >
+              <h3 id="case-title"></h3>
+            </div>
+            <button class="button button-small" id="replay-case">
+              <svg><use href="#i-play" /></svg
+              ><span data-en="Play walkthrough" data-zh="播放演示"
+                >Play walkthrough</span
+              >
+            </button>
+          </div>
+          <div class="case-task">
+            <span data-en="USER GOAL" data-zh="用户目标">USER GOAL</span>
+            <p id="case-task"></p>
+          </div>
+          <div
+            class="case-timeline"
+            id="case-timeline"
+            role="group"
+            aria-label="Walkthrough stages"
+          ></div>
+          <div class="case-stage-reading" aria-live="polite">
+            <span
+              class="small-label"
+              data-en="SELECTED STAGE"
+              data-zh="当前阶段"
+              >SELECTED STAGE</span
+            >
+            <p id="case-stage"></p>
+          </div>
+          <div class="case-diagnostics">
+            <div class="case-action">
+              <div class="terminal-head">
+                <span class="mono">candidate_action</span
+                ><span
+                  class="terminal-tag"
+                  data-en="BEFORE EXECUTION"
+                  data-zh="实际执行之前"
+                  >BEFORE EXECUTION</span
+                >
+              </div>
+              <p id="case-action"></p>
+              <div class="case-verdict">
+                <svg><use href="#i-stop" /></svg>
+                <div>
+                  <span data-en="GUARD DECISION" data-zh="护栏决策"
+                    >GUARD DECISION</span
+                  >
+                  <p id="case-decision"></p>
+                </div>
+              </div>
+            </div>
+            <div class="case-diagnosis">
+              <h4 data-en="Structured risk diagnosis" data-zh="结构化风险诊断">
+                Structured risk diagnosis
+              </h4>
+              <dl>
+                <div>
+                  <dt data-en="Source" data-zh="风险来源">Source</dt>
+                  <dd id="case-source"></dd>
+                </div>
+                <div>
+                  <dt data-en="Failure" data-zh="失效模式">Failure</dt>
+                  <dd id="case-failure"></dd>
+                </div>
+                <div>
+                  <dt data-en="Harm" data-zh="潜在危害">Harm</dt>
+                  <dd id="case-harm"></dd>
+                </div>
+              </dl>
+              <div class="safe-alternative">
+                <span data-en="SAFE CONTINUATION" data-zh="安全的后续行为"
+                  >SAFE CONTINUATION</span
+                >
+                <p id="case-alternative"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="note" id="case-disclaimer"></p>
+      </section>
+      <section class="section section-alt" id="benchmarks">
+        <div class="wrap">
+          <div class="section-head">
+            <p
+              class="eyebrow"
+              data-en="BENCHMARKS & ADVERSARIAL DISCOVERY"
+              data-zh="基准评测与对抗风险发现"
+            >
+              BENCHMARKS & ADVERSARIAL DISCOVERY
+            </p>
+            <h2
+              data-en="Test the risks that emerge over time"
+              data-zh="评测随时间演化的风险"
+            >
+              Test the risks that emerge over time
+            </h2>
+            <p
+              data-en="From broad trajectory diagnosis to covert goal manipulation in live agent interaction."
+              data-zh="从广泛的轨迹级诊断，到真实交互中的隐蔽目标操纵。"
+            >
+              From broad trajectory diagnosis to covert goal manipulation in
+              live agent interaction.
+            </p>
+          </div>
+          <div class="arena-banner">
+            <div>
+              <span class="small-label">MANIPULATIONARENA</span>
+              <h3
+                data-en="A compositional attack space"
+                data-zh="可组合的攻击空间"
+              >
+                A compositional attack space
+              </h3>
+            </div>
+            <div class="arena-formula">
+              <span
+                ><b>7</b
+                ><small data-en="strategies" data-zh="策略"
+                  >strategies</small
+                ></span
+              ><i>×</i
+              ><span
+                ><b>6</b
+                ><small data-en="channels" data-zh="通道">channels</small></span
+              ><i>×</i
+              ><span
+                ><b>7</b
+                ><small data-en="failure modes" data-zh="失效模式"
+                  >failure modes</small
+                ></span
+              ><i>=</i
+              ><span class="formula-total"
+                ><b>294</b
+                ><small data-en="configurations" data-zh="组合配置"
+                  >configurations</small
+                ></span
+              >
+            </div>
+          </div>
+          <div
+            class="table-scroll"
+            role="region"
+            aria-label="Benchmark comparison"
+            tabindex="0"
+          >
+            <table class="comparison-table benchmark-table">
+              <thead>
+                <tr>
+                  <th scope="col" data-en="Benchmark" data-zh="基准">
+                    Benchmark
+                  </th>
+                  <th scope="col" data-en="Focus" data-zh="核心关注">Focus</th>
+                  <th scope="col" data-en="What it examines" data-zh="评测内容">
+                    What it examines
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">ATBench-Pro</th>
+                  <td
+                    data-en="Long-horizon safety diagnosis"
+                    data-zh="长程任务安全诊断"
+                  >
+                    Long-horizon safety diagnosis
+                  </td>
+                  <td
+                    data-en="Delayed triggers, evolving authority, and accumulating errors in stateful workflows"
+                    data-zh="有状态工作流中的延迟触发、权限变化与错误积累"
+                  >
+                    Delayed triggers, evolving authority, and accumulating
+                    errors in stateful workflows
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">ManipulationArena</th>
+                  <td data-en="Covert goal manipulation" data-zh="隐蔽目标操纵">
+                    Covert goal manipulation
+                  </td>
+                  <td
+                    data-en="Execution-grounded outcomes across 7 strategies, 6 channels, and 7 targeted failure modes"
+                    data-zh="覆盖 7 类策略、6 类通道与 7 类目标失效模式，基于实际执行判定结果"
+                  >
+                    Execution-grounded outcomes across 7 strategies, 6 channels,
+                    and 7 targeted failure modes
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="attack-flow">
+            <article>
+              <span
+                class="process-label"
+                data-en="OFFLINE PLANNING"
+                data-zh="离线规划"
+                >OFFLINE PLANNING</span
+              >
+              <h3 data-en="Build an attack blueprint" data-zh="构建攻击蓝图">
+                Build an attack blueprint
+              </h3>
+              <p
+                data-en="Analyze the legitimate task and locate candidate intervention points in task-native information carriers."
+                data-zh="分析合法任务，在任务原生的信息载体中寻找可介入的位置。"
+              >
+                Analyze the legitimate task and locate candidate intervention
+                points in task-native information carriers.
+              </p>
+            </article>
+            <div class="attack-connector" aria-hidden="true"><span></span></div>
+            <article>
+              <span
+                class="process-label"
+                data-en="LIVE GROUNDING"
+                data-zh="实时落地"
+                >LIVE GROUNDING</span
+              >
+              <h3
+                data-en="Adapt to the actual trajectory"
+                data-zh="适应实际执行轨迹"
+              >
+                Adapt to the actual trajectory
+              </h3>
+              <p
+                data-en="Adjust the carrier, timing, and payload form as the agent's real interaction unfolds."
+                data-zh="根据智能体的真实交互过程，调整攻击载体、触发时机与形式。"
+              >
+                Adjust the carrier, timing, and payload form as the agent's real
+                interaction unfolds.
+              </p>
+            </article>
+          </div>
+          <figure class="research-figure">
+            <div class="figure-toolbar">
+              <span
+                data-en="TWO-PHASE ATTACK GENERATION"
+                data-zh="两阶段攻击生成流程"
+                >TWO-PHASE ATTACK GENERATION</span
+              ><button
+                class="expand-button"
+                data-figure="assets/duet-attacks.webp"
+                data-figure-title="Adaptive attack discovery"
+              >
+                <svg><use href="#i-expand" /></svg
+                ><span data-en="Expand" data-zh="放大">Expand</span>
+              </button>
+            </div>
+            <button
+              class="figure-image"
+              data-figure="assets/duet-attacks.webp"
+              data-figure-title="Adaptive attack discovery"
+            >
+              <img
+                src="assets/duet-attacks.webp"
+                alt="Original two-phase attack discovery pipeline: offline task analysis and online trajectory grounding"
+                width="1998"
+                height="997"
+                loading="lazy"
+              />
+            </button>
+            <figcaption
+              data-en="Offline blueprints are grounded against the live trajectory; unsuccessful attempts inform blueprint revision."
+              data-zh="将离线蓝图与实时轨迹对齐，失败尝试用于反馈修订攻击蓝图。"
+            >
+              Offline blueprints are grounded against the live trajectory;
+              unsuccessful attempts inform blueprint revision.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="section wrap" id="evolution">
+        <div class="section-head">
+          <p
+            class="eyebrow"
+            data-en="SAFE AGENTIC SELF-IMPROVEMENT"
+            data-zh="安全的智能体自我改进"
+          >
+            SAFE AGENTIC SELF-IMPROVEMENT
+          </p>
+          <h2
+            data-en="Learn from failures.<br>Strengthen the next defense."
+            data-zh="从失效中学习，<br>强化下一轮防御。"
+          >
+            Learn from failures.<br />Strengthen the next defense.
+          </h2>
+          <p
+            data-en="Combine external AgentDoG protection with improvements to the execution harness and policy model."
+            data-zh="将外部 AgentDoG 防护与执行框架、策略模型的改进相结合。"
+          >
+            Combine external AgentDoG protection with improvements to the
+            execution harness and policy model.
+          </p>
+        </div>
+        <div class="evolution-cycle">
+          <div>
+            <svg><use href="#i-search" /></svg>
+            <h3 data-en="Discover" data-zh="风险发现">Discover</h3>
+            <p data-en="Adaptive adversarial testing" data-zh="自适应对抗测试">
+              Adaptive adversarial testing
+            </p>
+          </div>
+          <span aria-hidden="true"></span>
+          <div>
+            <svg><use href="#i-layers" /></svg>
+            <h3 data-en="Attribute" data-zh="失效归因">Attribute</h3>
+            <p
+              data-en="Structural or semantic gaps"
+              data-zh="结构缺口或语义失效"
+            >
+              Structural or semantic gaps
+            </p>
+          </div>
+          <span aria-hidden="true"></span>
+          <div>
+            <svg><use href="#i-cycle" /></svg>
+            <h3 data-en="Improve" data-zh="防御改进">Improve</h3>
+            <p
+              data-en="Harness and policy updates"
+              data-zh="执行框架与策略更新"
+            >
+              Harness and policy updates
+            </p>
+          </div>
+          <span aria-hidden="true"></span>
+          <div>
+            <svg><use href="#i-shield" /></svg>
+            <h3 data-en="Validate" data-zh="验证效果">Validate</h3>
+            <p data-en="Safety and task utility" data-zh="安全性与任务效用">
+              Safety and task utility
+            </p>
+          </div>
+        </div>
+        <div class="evolution-section">
+          <div class="evolution-copy">
+            <span class="experiment-tag cyan">HARNESS EVOLUTION</span>
+            <h3
+              data-en="Make execution boundaries enforceable"
+              data-zh="让执行边界得到实际约束"
+            >
+              Make execution boundaries enforceable
+            </h3>
+            <p
+              data-en="Attribute observed failures, group shared principles, and produce natural-language policies or deterministic guards. Validate candidates on paired safety and utility tasks before adoption."
+              data-zh="对已有失效进行归因、归纳共同原则，生成自然语言策略或确定性护栏；在采纳前，通过成对的安全与效用任务验证候选方案。"
+            >
+              Attribute observed failures, group shared principles, and produce
+              natural-language policies or deterministic guards. Validate
+              candidates on paired safety and utility tasks before adoption.
+            </p>
+          </div>
+          <figure class="research-figure">
+            <div class="figure-toolbar">
+              <span
+                data-en="ATTRIBUTION · PATCHES · VALIDATION"
+                data-zh="归因 · 补丁 · 验证"
+                >ATTRIBUTION · PATCHES · VALIDATION</span
+              ><button
+                class="expand-button"
+                data-figure="assets/harness-evolution.webp"
+                data-figure-title="Harness evolution"
+              >
+                <svg><use href="#i-expand" /></svg
+                ><span data-en="Expand" data-zh="放大">Expand</span>
+              </button>
+            </div>
+            <button
+              class="figure-image"
+              data-figure="assets/harness-evolution.webp"
+              data-figure-title="Harness evolution"
+            >
+              <img
+                src="assets/harness-evolution.webp"
+                alt="Attribution-driven harness evolution: analyzer, patch generation, admission checks, and validation"
+                width="1988"
+                height="1006"
+                loading="lazy"
+              />
+            </button>
+            <figcaption
+              data-en="Numerical thresholds shown in this diagram are validation gates, not measured performance improvements."
+              data-zh="图中数值阈值属于验证门槛，不是实测性能提升。"
+            >
+              Numerical thresholds shown in this diagram are validation gates,
+              not measured performance improvements.
+            </figcaption>
+          </figure>
+        </div>
+        <div class="evolution-section">
+          <div class="evolution-copy">
+            <span class="experiment-tag violet">POLICY EVOLUTION</span>
+            <h3
+              data-en="Learn a safer way to complete the task"
+              data-zh="学会更安全地完成任务"
+            >
+              Learn a safer way to complete the task
+            </h3>
+            <p
+              data-en="Convert recorded failures into corrective continuations, review them in text space, and fine-tune the policy to preserve the legitimate goal while respecting safety constraints."
+              data-zh="将已有失效记录转化为纠正性的后续行为，在文本空间审查，再通过微调，让策略在遵守安全约束的同时保持合法任务目标。"
+            >
+              Convert recorded failures into corrective continuations, review
+              them in text space, and fine-tune the policy to preserve the
+              legitimate goal while respecting safety constraints.
+            </p>
+          </div>
+          <figure class="research-figure">
+            <div class="figure-toolbar">
+              <span
+                data-en="FAILURE-DERIVED CORRECTIVE TRAINING"
+                data-zh="基于失效记录的纠正性训练"
+                >FAILURE-DERIVED CORRECTIVE TRAINING</span
+              ><button
+                class="expand-button"
+                data-figure="assets/policy-evolution.webp"
+                data-figure-title="Policy evolution"
+              >
+                <svg><use href="#i-expand" /></svg
+                ><span data-en="Expand" data-zh="放大">Expand</span>
+              </button>
+            </div>
+            <button
+              class="figure-image"
+              data-figure="assets/policy-evolution.webp"
+              data-figure-title="Policy evolution"
+            >
+              <img
+                src="assets/policy-evolution.webp"
+                alt="Policy evolution through failure analysis, environment-free trajectory synthesis, critique, and supervised fine-tuning"
+                width="2000"
+                height="1028"
+                loading="lazy"
+              />
+            </button>
+            <figcaption
+              data-en="One policy SFT round has been completed. Dashed multi-round feedback is planned; further policy-evolution gains remain to be evaluated."
+              data-zh="已完成一轮策略 SFT。虚线表示计划中的多轮反馈，进一步的策略演化效果仍待评估。"
+            >
+              One policy SFT round has been completed. Dashed multi-round
+              feedback is planned; further policy-evolution gains remain to be
+              evaluated.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="section section-alt" id="resources">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow" data-en="PROJECT RESOURCES" data-zh="项目资源">
+              PROJECT RESOURCES
+            </p>
+            <h2
+              data-en="Explore the AgentDoG ecosystem"
+              data-zh="探索 AgentDoG 生态"
+            >
+              Explore the AgentDoG ecosystem
+            </h2>
+            <p
+              data-en="Project code, published resources, and earlier releases."
+              data-zh="项目代码、已公开资源与历史版本。"
+            >
+              Project code, published resources, and earlier releases.
+            </p>
+          </div>
+          <div class="resources-grid">
+            <a
+              href="https://github.com/AI45Lab/AgentDoG"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><svg><use href="#i-code" /></svg>
+              <div>
+                <h3>GitHub</h3>
+                <p
+                  data-en="Project repository & available code"
+                  data-zh="项目仓库与已公开代码"
+                >
+                  Project repository & available code
+                </p>
+              </div>
+              <span data-en="REPOSITORY" data-zh="项目仓库">REPOSITORY</span></a
+            ><a
+              href="https://huggingface.co/AI45Research"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><img
+                src="assets/huggingface.svg"
+                width="32"
+                height="32"
+                alt=""
+              />
+              <div>
+                <h3>Hugging Face</h3>
+                <p
+                  data-en="AI45Research models & datasets"
+                  data-zh="AI45Research 模型与数据集"
+                >
+                  AI45Research models & datasets
+                </p>
+              </div>
+              <span data-en="ORGANIZATION" data-zh="组织主页"
+                >ORGANIZATION</span
+              ></a
+            ><a
+              href="https://huggingface.co/datasets/AI45Research/ATBench"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><svg><use href="#i-layers" /></svg>
+              <div>
+                <h3>ATBench</h3>
+                <p
+                  data-en="Original trajectory-level benchmark"
+                  data-zh="原始轨迹级安全评测基准"
+                >
+                  Original trajectory-level benchmark
+                </p>
+              </div>
+              <span data-en="EXISTING DATASET" data-zh="已有数据集"
+                >EXISTING DATASET</span
+              ></a
+            >
+          </div>
+          <p
+            class="resource-note"
+            data-en="Dedicated 2.0 checkpoints, benchmark downloads, and a public technical-report link are not yet listed. Existing Hugging Face resources include earlier releases."
+            data-zh="目前尚未列出独立的 2.0 权重、基准下载和公开技术报告链接。已有 Hugging Face 资源中包含历史版本。"
+          >
+            Dedicated 2.0 checkpoints, benchmark downloads, and a public
+            technical-report link are not yet listed. Existing Hugging Face
+            resources include earlier releases.
+          </p>
+          <div class="edition-links">
+            <span data-en="ALSO EXPLORE" data-zh="更多版本">ALSO EXPLORE</span
+            ><a
+              href="https://mjc-ma-01.github.io/AgentDoG/v2_0/"
+              data-en="2.0 Light edition"
+              data-zh="2.0 浅色版"
+              >2.0 Light edition</a
+            ><a href="https://ai45lab.github.io/AgentDoG/v1_5/">AgentDoG 1.5</a
+            ><a href="https://ai45lab.github.io/AgentDoG/v1/">AgentDoG 1.0</a
+            ><a
+              href="https://huggingface.co/collections/AI45Research/agentdog15"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-en="1.5 model collection"
+              data-zh="1.5 模型集合"
+              >1.5 model collection</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap footer-inner">
+        <a href="#home" class="footer-brand"
+          ><img src="assets/logo.png" width="30" height="33" alt="" />AgentDoG
+          <span>2.0</span></a
+        >
+        <p
+          data-en="Understand the risk. Protect the trajectory."
+          data-zh="理解风险，守护完整轨迹。"
+        >
+          Understand the risk. Protect the trajectory.
+        </p>
+        <a
+          href="https://www.shlab.org.cn/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-en="Shanghai AI Laboratory"
+          data-zh="上海人工智能实验室"
+          >Shanghai AI Laboratory</a
+        >
+      </div>
+    </footer>
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      aria-label="Back to top"
+      hidden
+    >
+      <svg viewBox="0 0 24 24"><path d="m6 14 6-6 6 6" /></svg>
+    </button>
+    <dialog
+      class="figure-dialog"
+      id="figure-dialog"
+      aria-labelledby="dialog-title"
+    >
+      <div class="dialog-toolbar">
+        <h2 id="dialog-title"></h2>
+        <div>
+          <button id="dialog-zoom" data-en="Actual size" data-zh="原始尺寸">
+            Actual size</button
+          ><button id="dialog-close" aria-label="Close figure">×</button>
+        </div>
+      </div>
+      <div class="dialog-canvas"><img id="dialog-image" alt="" /></div>
+      <p
+        data-en="Scroll to inspect the figure · Press Esc to close"
+        data-zh="滚动查看图片 · 按 Esc 关闭"
+      >
+        Scroll to inspect the figure · Press Esc to close
+      </p>
+    </dialog>
+  </body>
+</html>
