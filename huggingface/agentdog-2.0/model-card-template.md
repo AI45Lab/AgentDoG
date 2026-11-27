@@ -36,5 +36,7 @@ Use this checkpoint to support safety assessment in the documented agent setting
 
 ## Resources
 
+- [AgentDoG2.0 Collection](https://huggingface.co/collections/AI45Research/agentdog20-6b09556a028a2ce10c53f2fe) — public entry; model artifacts are in preparation.
+- [AgentDoG 2.0 project page](https://mjc-ma-01.github.io/AgentDoG/v2_0_dark/)
 - [AgentDoG source repository](https://github.com/AI45Lab/AgentDoG)
 - Add the verified 2.0 technical-report URL and checkpoint-specific citation when available.

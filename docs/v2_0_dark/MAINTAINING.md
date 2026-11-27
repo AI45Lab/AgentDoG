@@ -1,6 +1,6 @@
 # AgentDoG 2.0 — dark edition
 
-This edition follows the original AgentDoG 1.5 visual system: nearly black surfaces, cyan/violet gradients, a centered brand hero, glass navigation, and research figures presented inline. The previous light edition remains at `docs/v2_0/`.
+This project page follows the original AgentDoG 1.5 visual system: nearly black surfaces, cyan/violet gradients, a centered brand hero, glass navigation, and research figures presented inline.
 
 The page is buildless. Serve `docs/` using `python3 -m http.server 8775 --directory docs` from the repository root, then open `http://localhost:8775/v2_0_dark/`.
 
@@ -12,11 +12,22 @@ The page is buildless. Serve `docs/` using `python3 -m http.server 8775 --direct
 - `app.js`: language selection, model-table filters, case playback, accessible navigation, and figure expansion with actual-size viewing.
 - `assets/`: eight faithfully converted manuscript figures, the original logo, local fonts with licenses, and the dark social preview.
 
-The root README and the light edition are unchanged by this edition. Dedicated 2.0 checkpoint and paper URLs remain pending; resource links describe the existing published ecosystem accurately. Hugging Face release drafts are retained at `huggingface/agentdog-2.0/`.
+The root README remains unchanged. The live project page is `https://mjc-ma-01.github.io/AgentDoG/v2_0_dark/`. The public [AgentDoG2.0 Collection](https://huggingface.co/collections/AI45Research/agentdog20-6b09556a028a2ce10c53f2fe) provides the HF entry point and currently has no items while dedicated 2.0 models and datasets are in preparation. Dedicated checkpoint and paper URLs remain pending. Published Collection copy and draft model/dataset cards are retained at `huggingface/agentdog-2.0/`.
 
 ## Content and provenance
 
-Use the active sources selected by the supplied Overleaf `main.tex`. Main results are in `sections/guard.tex`, not the older standalone Jev/Step section drafts. Further provenance is recorded in `docs/v2_0/MAINTAINING.md` and this edition's `assets/manifest.json`.
+Use the active sources selected by the supplied Overleaf `main.tex`. Main results are in `sections/guard.tex`, not the older standalone Jev/Step section drafts. Individual figure provenance is recorded in `assets/manifest.json`.
+
+| Content | Active manuscript source |
+| --- | --- |
+| Taxonomy: 18 risk sources, 21 failure modes, 11 harms; CGM/AOV/LoC; ATBench-Pro | `sections/safety_taxonomy.tex`, lines 11–80 |
+| Base 2.0 structured guard | `sections/guard.tex`, lines 198–244 |
+| Jev single-pass inference | `sections/guard.tex`, lines 473–522 |
+| Jev 59.8 ms and 77.90% unsafe F1 on ATBench; binary and fine-grained latency ranges | `sections/guard.tex`, lines 664–688 |
+| 109.0× Unified-4B speedup; rounded 0.060 s versus 6.52 s | `figures/jev-latency.pdf`, left panel |
+| Step inference and three-benchmark results | `sections/guard.tex`, lines 694–805 |
+| ManipulationArena: 7 strategies × 6 channels × 7 failure modes | `sections/agentdog_duet.tex`, lines 27–50 |
+| Harness and policy evolution; one completed policy SFT round | `sections/agentdog_scenario_validation.tex`, lines 17–76 |
 
 Key scopes to preserve when editing:
 

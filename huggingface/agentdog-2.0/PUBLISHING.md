@@ -1,23 +1,25 @@
 # Publishing AgentDoG 2.0 on Hugging Face
 
-These files prepare a new 2.0 collection and resource cards. No Hugging Face resource has been created or updated by this change. The repository's root README is outside this change.
+The public [AgentDoG2.0 Collection](https://huggingface.co/collections/AI45Research/agentdog20-6b09556a028a2ce10c53f2fe) was created under `AI45Research` on 2026-11-27. The entry intentionally has no items while the 2.0 models and datasets are in preparation. Model and dataset cards in this directory remain local release drafts. The repository's root README is outside this change.
 
 ## What is ready
 
-- `collection-description.md`: collection introduction grounded in the active Overleaf manuscript.
+- `collection-description.md`: the published short plain-text description and an optional longer introduction for external documentation.
 - `model-card-template.md`: YAML-front-matter template for a specific guard, Jev, or Step checkpoint.
 - `dataset-card-template.md`: YAML-front-matter template for a specific ATBench-Pro or ManipulationArena release.
 
-The proposed project-page address is `https://ai45lab.github.io/AgentDoG/v2_0/`; deployment is pending. Add it to the collection and cards only after confirming it serves the new page. The manuscript provides no verified 2.0 arXiv URL or Hugging Face resource IDs.
+The live [AgentDoG 2.0 project page](https://mjc-ma-01.github.io/AgentDoG/v2_0_dark/) uses the dark visual style of the original project. The manuscript provides no verified 2.0 arXiv URL or model/dataset repository IDs.
 
-## Required before publishing
+The Collection slug is `AI45Research/agentdog20-6b09556a028a2ce10c53f2fe`. Reuse this entry when adding ready artifacts. HF Collections accept a plain-text description of at most 150 characters; the current description is 142 characters. The longer Markdown introduction in `collection-description.md` is for external documentation rather than the Collection description field.
+
+## Required before publishing model or dataset artifacts
 
 1. **Hugging Face authentication:** sign in to the intended HF account with permission to write to the destination namespace. A GitHub personal access token does not provide Hugging Face access. Use HF's normal login or a suitably scoped HF token; keep credentials outside cards, source files, and Git history.
-2. **Confirmed destination:** obtain the exact collection owner and visibility, model repository IDs, and dataset repository IDs. `AI45Research` hosts earlier releases, but do not assume this grants the current account write access or invent 2.0 IDs.
+2. **Confirmed destination:** the Collection is public under `AI45Research`. Confirm the exact model and dataset repository IDs and their visibility before uploading; do not invent 2.0 artifact IDs.
 3. **Actual release artifacts:** identify the exact weights, tokenizer/configuration, base-model revision, and supported loader for each checkpoint; identify the actual dataset files, schemas, splits, annotations, and evaluation code. The Overleaf archive is a manuscript source, not a checkpoint or dataset release package.
 4. **Release metadata:** confirm each resource's license, access conditions, intended use, limitations, citation, and any required base-model attribution. Complete the relevant template and save it as `README.md` in that HF resource's checkout.
 
-Create the collection only after the destination and access conditions are confirmed. Add verified 2.0 resources to it; publish each completed card with its corresponding files. Review the rendered cards and test a real download/loading path before adding the new collection URL to project-page links.
+Publish each completed card with its corresponding files, then add verified 2.0 resources to the existing Collection. Review rendered cards and test a real download/loading path before describing an attached model or dataset as available. The public Collection itself can already serve as the project's HF entry point.
 
 ## Claims that need care
 
@@ -32,7 +34,7 @@ Source anchors in the supplied Overleaf project: `main.tex:272–283` selects th
 
 ## Earlier resources remain separate
 
-Public HF API inspection on 2026-11-27 found AgentDoG 1.0 and 1.5 resources, but no public AgentDoG 2.0 models, datasets, collection, or Space under `AI45Research`. Recheck before publication, including private resources visible to the authenticated account.
+The AgentDoG2.0 Collection is public; dedicated 2.0 model and dataset artifacts remain in preparation. Earlier 1.0 and 1.5 resources remain in their own collections. Recheck artifact availability before adding download links, including private resources visible to the authenticated account.
 
 - [AgentDoG 1.5 collection](https://huggingface.co/collections/AI45Research/agentdog15)
 - [AgentDoG 1.0 collection](https://huggingface.co/collections/AI45Research/agentdog)
